@@ -1,0 +1,3 @@
+D:/KPIYAP/Lab1_reverse_text/cmake-build-debug/CMakeFiles/Lab1_reverse_text.dir
+D:/KPIYAP/Lab1_reverse_text/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/KPIYAP/Lab1_reverse_text/cmake-build-debug/CMakeFiles/rebuild_cache.dir

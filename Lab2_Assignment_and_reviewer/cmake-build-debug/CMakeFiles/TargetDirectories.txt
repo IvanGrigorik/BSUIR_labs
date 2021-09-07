@@ -1,0 +1,3 @@
+D:/KPIYAP/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir
+D:/KPIYAP/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/KPIYAP/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
