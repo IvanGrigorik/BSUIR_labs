@@ -19,9 +19,7 @@ int main() {
     show_info(task1);
     show_info(task3);
 
-    Task Tasks_arr[ARR_SIZE];
-
-    std::array<Task, ARR_SIZE> new_arr {("Name", 13), };
+    std::array<Task, ARR_SIZE> Tasks_arr {("Name", 13), };
 
     for (int i = 0; i < ARR_SIZE; i++) {
         Tasks_arr[i] = {"Name", 10 * i};
