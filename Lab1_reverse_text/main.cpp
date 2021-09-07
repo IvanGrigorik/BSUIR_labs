@@ -83,7 +83,7 @@ void reverse(char str[]){
         str[size - i - 1] = temp;
     }
 }
-void reverse_string() {
+void reverse_string(){
     const int MAX_SIZE = 80;
     char *str_to_reverse;
     int choose;

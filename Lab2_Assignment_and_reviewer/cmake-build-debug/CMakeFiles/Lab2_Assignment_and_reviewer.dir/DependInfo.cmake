@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/KPIYAP/Lab2_Assignment_and_reviewer/main.cpp" "D:/KPIYAP/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Task.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Verifier.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

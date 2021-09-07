@@ -1,4 +1,4 @@
-# Install script for directory: D:/KPIYAP/Lab2_Assignment_and_reviewer
+# Install script for directory: D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/KPIYAP/Lab2_Assignment_and_reviewer/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

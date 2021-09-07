@@ -66,10 +66,10 @@ RM = "D:\CLion 2021.1.3\bin\cmake\win\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\KPIYAP\Lab2_Assignment_and_reviewer
+CMAKE_SOURCE_DIR = D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\KPIYAP\Lab2_Assignment_and_reviewer\cmake-build-debug
+CMAKE_BINARY_DIR = D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -98,9 +98,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles D:\KPIYAP\Lab2_Assignment_and_reviewer\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -141,6 +141,60 @@ Lab2_Assignment_and_reviewer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab2_Assignment_and_reviewer.dir\build.make CMakeFiles/Lab2_Assignment_and_reviewer.dir/build
 .PHONY : Lab2_Assignment_and_reviewer/fast
 
+Task.obj: Task.cpp.obj
+
+.PHONY : Task.obj
+
+# target to build an object file
+Task.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab2_Assignment_and_reviewer.dir\build.make CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj
+.PHONY : Task.cpp.obj
+
+Task.i: Task.cpp.i
+
+.PHONY : Task.i
+
+# target to preprocess a source file
+Task.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab2_Assignment_and_reviewer.dir\build.make CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.i
+.PHONY : Task.cpp.i
+
+Task.s: Task.cpp.s
+
+.PHONY : Task.s
+
+# target to generate assembly for a file
+Task.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab2_Assignment_and_reviewer.dir\build.make CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.s
+.PHONY : Task.cpp.s
+
+Verifier.obj: Verifier.cpp.obj
+
+.PHONY : Verifier.obj
+
+# target to build an object file
+Verifier.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab2_Assignment_and_reviewer.dir\build.make CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj
+.PHONY : Verifier.cpp.obj
+
+Verifier.i: Verifier.cpp.i
+
+.PHONY : Verifier.i
+
+# target to preprocess a source file
+Verifier.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab2_Assignment_and_reviewer.dir\build.make CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.i
+.PHONY : Verifier.cpp.i
+
+Verifier.s: Verifier.cpp.s
+
+.PHONY : Verifier.s
+
+# target to generate assembly for a file
+Verifier.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab2_Assignment_and_reviewer.dir\build.make CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.s
+.PHONY : Verifier.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -177,6 +231,12 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Lab2_Assignment_and_reviewer
+	@echo ... Task.obj
+	@echo ... Task.i
+	@echo ... Task.s
+	@echo ... Verifier.obj
+	@echo ... Verifier.i
+	@echo ... Verifier.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

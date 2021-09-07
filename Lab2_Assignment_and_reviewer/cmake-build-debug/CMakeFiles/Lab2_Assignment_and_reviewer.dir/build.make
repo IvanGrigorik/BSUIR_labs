@@ -61,10 +61,10 @@ RM = "D:\CLion 2021.1.3\bin\cmake\win\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\KPIYAP\Lab2_Assignment_and_reviewer
+CMAKE_SOURCE_DIR = D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\KPIYAP\Lab2_Assignment_and_reviewer\cmake-build-debug
+CMAKE_BINARY_DIR = D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Lab2_Assignment_and_reviewer.dir/depend.make
@@ -77,30 +77,60 @@ include CMakeFiles/Lab2_Assignment_and_reviewer.dir/flags.make
 
 CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj: CMakeFiles/Lab2_Assignment_and_reviewer.dir/flags.make
 CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\main.cpp.obj -c D:\KPIYAP\Lab2_Assignment_and_reviewer\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\main.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\main.cpp
 
 CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\Lab2_Assignment_and_reviewer\main.cpp > CMakeFiles\Lab2_Assignment_and_reviewer.dir\main.cpp.i
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\main.cpp > CMakeFiles\Lab2_Assignment_and_reviewer.dir\main.cpp.i
 
 CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\Lab2_Assignment_and_reviewer\main.cpp -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\main.cpp.s
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\main.cpp -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\main.cpp.s
+
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj: CMakeFiles/Lab2_Assignment_and_reviewer.dir/flags.make
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj: ../Task.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\Task.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\Task.cpp
+
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\Task.cpp > CMakeFiles\Lab2_Assignment_and_reviewer.dir\Task.cpp.i
+
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\Task.cpp -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\Task.cpp.s
+
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj: CMakeFiles/Lab2_Assignment_and_reviewer.dir/flags.make
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj: ../Verifier.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\Verifier.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\Verifier.cpp
+
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\Verifier.cpp > CMakeFiles\Lab2_Assignment_and_reviewer.dir\Verifier.cpp.i
+
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\Verifier.cpp -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\Verifier.cpp.s
 
 # Object files for target Lab2_Assignment_and_reviewer
 Lab2_Assignment_and_reviewer_OBJECTS = \
-"CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj"
+"CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj" \
+"CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj" \
+"CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj"
 
 # External object files for target Lab2_Assignment_and_reviewer
 Lab2_Assignment_and_reviewer_EXTERNAL_OBJECTS =
 
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj
+Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj
+Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/build.make
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/linklibs.rsp
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/objects1.rsp
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\KPIYAP\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Lab2_Assignment_and_reviewer.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Lab2_Assignment_and_reviewer.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Lab2_Assignment_and_reviewer.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -113,6 +143,6 @@ CMakeFiles/Lab2_Assignment_and_reviewer.dir/clean:
 .PHONY : CMakeFiles/Lab2_Assignment_and_reviewer.dir/clean
 
 CMakeFiles/Lab2_Assignment_and_reviewer.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\KPIYAP\Lab2_Assignment_and_reviewer D:\KPIYAP\Lab2_Assignment_and_reviewer D:\KPIYAP\Lab2_Assignment_and_reviewer\cmake-build-debug D:\KPIYAP\Lab2_Assignment_and_reviewer\cmake-build-debug D:\KPIYAP\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles\Lab2_Assignment_and_reviewer.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles\Lab2_Assignment_and_reviewer.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Lab2_Assignment_and_reviewer.dir/depend
 

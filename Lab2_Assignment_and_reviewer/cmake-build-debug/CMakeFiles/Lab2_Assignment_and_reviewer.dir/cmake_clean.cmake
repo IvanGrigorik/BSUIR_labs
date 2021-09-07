@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj"
+  "CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj"
   "CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj"
   "Lab2_Assignment_and_reviewer.exe"
   "Lab2_Assignment_and_reviewer.exe.manifest"
