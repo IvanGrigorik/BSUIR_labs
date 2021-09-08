@@ -26,7 +26,7 @@ Task::~Task() {
     --total_id;
 }
 
-
+// Test
 // Getters and setters (for realize encapsulation method)
 void Task::set_name(const Name &new_name) {
     name = new_name;
