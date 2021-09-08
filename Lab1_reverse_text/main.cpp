@@ -71,7 +71,6 @@ bool get_digits(char *string, int number_size){
         return false;
     }
     return true;
-
 }
 void reverse(char str[]){
     unsigned int size = strlen(str);
