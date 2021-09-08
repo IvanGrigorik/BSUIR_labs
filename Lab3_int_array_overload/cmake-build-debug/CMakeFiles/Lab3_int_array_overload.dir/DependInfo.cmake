@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/Array.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

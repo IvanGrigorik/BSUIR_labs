@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.obj"
   "CMakeFiles/Lab3_int_array_overload.dir/main.cpp.obj"
   "Lab3_int_array_overload.exe"
   "Lab3_int_array_overload.exe.manifest"
