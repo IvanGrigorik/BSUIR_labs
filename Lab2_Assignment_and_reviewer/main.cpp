@@ -36,6 +36,5 @@ int main() {
     for (const auto & i : Tasks_arr){
         show_info(i);
     }
-
     return 0;
 }
