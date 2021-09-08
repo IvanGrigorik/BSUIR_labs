@@ -15,7 +15,8 @@ Task::Task() {
 }
 
 Task::Task(const Name &new_name, Result new_result) {
-    id = ++total_id;
+    if (id == 0)
+        id = ++total_id;
     set_name(new_name);
     set_result(new_result);
 }

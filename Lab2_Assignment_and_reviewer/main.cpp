@@ -15,15 +15,15 @@ int main() {
     Verifier::get_result(task1, 99);
     Verifier::get_result(task3, 13);
 
-    std::cout << "After the change: " << std::endl;
+    std::cout << "After the change: " << std::endl << std::endl;
     show_info(task1);
     show_info(task3);
 
-    std::array<Task, ARR_SIZE> Tasks_arr {("Name", 13), };
-
-    for (int i = 0; i < ARR_SIZE; i++) {
-        Tasks_arr[i] = {"Name", 10 * i};
-    }
+    std::array<Task, ARR_SIZE> Tasks_arr {{
+                                        {"Name", 31},
+                                        {"Name2", 32},
+                                        {"Name3", 33},
+                                        {"Name4", 34}}};
 
     for (const auto & i : Tasks_arr){
         show_info(i);
