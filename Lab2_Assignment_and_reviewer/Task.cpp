@@ -15,8 +15,9 @@ Task::Task() {
 }
 
 Task::Task(const Name &new_name, Result new_result) {
-    if (id == 0)
+    if(!id){
         id = ++total_id;
+    }
     set_name(new_name);
     set_result(new_result);
 }
@@ -31,13 +32,13 @@ void Task::set_name(const Name &new_name) {
     name = new_name;
 }
 
-// Первый Task показывает, что такое "Name", второй - что такое "get_name"
+// Первый Task показывает - что такое "Name", второй - что такое "get_name"
 Task::Name Task::get_name() const {
     return name;
 }
 
 void Task::set_result(Task::Result new_result) {
-    assert((new_result > 0 || new_result < 100) && "Invalid result size!");
+    assert((new_result > 0 && new_result < 100) && "Invalid result size!");
     result = new_result;
 }
 
