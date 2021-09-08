@@ -11,7 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dcf032b-73b0-4b6c-bfd6-d4818cb08f97" name="Default Changelist" comment="" />
+    <list default="true" id="8dcf032b-73b0-4b6c-bfd6-d4818cb08f97" name="Default Changelist" comment="Absolutely finished lab" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +71,7 @@
       <updated>1631035199900</updated>
       <workItem from="1631035201723" duration="10641000" />
       <workItem from="1631078443951" duration="4000" />
-      <workItem from="1631108174167" duration="4003000" />
+      <workItem from="1631108174167" duration="4219000" />
     </task>
     <task id="LOCAL-00001" summary="Array error">
       <created>1631045885677</created>
@@ -101,7 +101,21 @@
       <option name="project" value="LOCAL" />
       <updated>1631112329863</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="test commit">
+      <created>1631112617261</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1631112617261</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Absolutely finished lab">
+      <created>1631112739912</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1631112739912</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,6 +124,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Array error" />
     <MESSAGE value="Finished lab" />
+    <MESSAGE value="test commit" />
     <MESSAGE value="Absolutely finished lab" />
     <option name="LAST_COMMIT_MESSAGE" value="Absolutely finished lab" />
   </component>
