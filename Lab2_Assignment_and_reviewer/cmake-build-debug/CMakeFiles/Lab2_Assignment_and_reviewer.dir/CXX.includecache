@@ -6,11 +6,21 @@
 
 #IncludeRegexTransform: 
 
+D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Task.cpp
+Task.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Task.h
+cassert
+-
+
 D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Task.h
 iostream
 -
 string
 -
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Verifier.cpp
+Verifier.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Verifier.h
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Verifier.h
 Task.h

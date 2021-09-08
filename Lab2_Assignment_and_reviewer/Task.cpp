@@ -15,9 +15,7 @@ Task::Task() {
 }
 
 Task::Task(const Name &new_name, Result new_result) {
-    if(!id){
-        id = ++total_id;
-    }
+    id = (id == 0) ? ++total_id : id;
     set_name(new_name);
     set_result(new_result);
 }
@@ -51,7 +49,7 @@ Task::Id Task::get_id() const {
 
 
 void show_info(const Task &task_to_show) {
-    std::cout << "Id: " << task_to_show.get_id() <<
-              std::endl << "Name: " << task_to_show.get_name() <<
-              std::endl << "Result: " << task_to_show.get_result() << "%" << std::endl;
+    cout << "Id: " << task_to_show.get_id() <<
+              endl << "Name: " << task_to_show.get_name() <<
+              endl << "Result: " << task_to_show.get_result() << "%" << endl;
 }

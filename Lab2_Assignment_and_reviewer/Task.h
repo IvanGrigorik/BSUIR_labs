@@ -8,10 +8,12 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 class Task {
 public:
     using Id = int;
-    using Name = std::string;
+    using Name = string;
     using Result = int;
 
 private:
