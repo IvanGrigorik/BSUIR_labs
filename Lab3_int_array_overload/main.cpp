@@ -16,7 +16,6 @@ int main() {
     Array arr1;
     arr1({1, 2, 3});
     cout << arr1;
-    arr1 + 4;
     cout << arr1;
     --arr1;
     cout << arr1;
@@ -25,6 +24,9 @@ int main() {
     cout << arr1;
 
     Array arr2;
+
+    arr1 = arr1 + arr2;
+
     arr2({5, 6, 7});
     arr1 + arr2;
     cout << arr1;

@@ -82,12 +82,28 @@ bool Array::operator< (const Array& arr_to_comparison) const {
     return arr_size < arr_to_comparison.arr_size;
 }
 
-void Array::operator+ (const Array& arr_to_add) {
+Array *Array::operator+ (const Array& arr_to_add) const {
+    assert(arr_size == arr_to_add.arr_size && "Invalid input!");
 
-    arr_size += arr_to_add.arr_size;
-    arr = (int *) realloc(arr, arr_size);
+    auto *temp = new Array[arr_size];
+    temp->arr = arr;
 
-    for (int i = 0; i < arr_to_add.arr_size; i++){
-        arr[arr_size - arr_to_add.arr_size + i] = arr_to_add.arr[i];
+    for (int i = 0; i < arr_size; i++) {
+        temp->arr[i] += arr_to_add.arr[i];
     }
+    return temp;
+}
+
+Array &Array::operator= (Array const &arr_to_add) {
+
+    if(this == &arr_to_add)
+        exit(0);
+
+    delete [] arr;
+    arr_size = arr_to_add.arr_size;
+    arr = new int [arr_size];
+    arr = arr_to_add.arr;
+    for(int i = 0; i < arr_size; i++)
+        arr[i] = arr_to_add.arr[i];
+    return *this;
 }
