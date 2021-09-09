@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Task.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Verifier.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/func.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

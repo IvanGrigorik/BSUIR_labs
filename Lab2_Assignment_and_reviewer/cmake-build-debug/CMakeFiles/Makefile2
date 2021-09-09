@@ -92,12 +92,12 @@ clean: CMakeFiles/Lab2_Assignment_and_reviewer.dir/clean
 CMakeFiles/Lab2_Assignment_and_reviewer.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab2_Assignment_and_reviewer.dir\build.make CMakeFiles/Lab2_Assignment_and_reviewer.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab2_Assignment_and_reviewer.dir\build.make CMakeFiles/Lab2_Assignment_and_reviewer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4 "Built target Lab2_Assignment_and_reviewer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5 "Built target Lab2_Assignment_and_reviewer"
 .PHONY : CMakeFiles/Lab2_Assignment_and_reviewer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Lab2_Assignment_and_reviewer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Lab2_Assignment_and_reviewer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/Lab2_Assignment_and_reviewer.dir/rule

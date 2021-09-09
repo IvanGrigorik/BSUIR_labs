@@ -14,21 +14,24 @@ int main() {
 //    cout << arr1[0] << " "<< arr1[1] << " " << arr1[2];
 
     Array arr1;
+//    arr1({1, 2, 3});
+//    cout << arr1;
+//    cout << arr1;
+//    --arr1;
+//    cout << arr1;
+//    cout << (arr1 < 1 ? "true" : "false") << endl;
+//    arr1++;
+//    cout << arr1;
+
+    Array arr2, arr3;
     arr1({1, 2, 3});
-    cout << arr1;
-    cout << arr1;
-    --arr1;
-    cout << arr1;
-    cout << (arr1 < 1 ? "true" : "false") << endl;
-    arr1++;
-    cout << arr1;
+    arr2({1, 2, 3});
 
-    Array arr2;
-
-    arr1 = arr1 + arr2;
-
-    arr2({5, 6, 7});
-    arr1 + arr2;
-    cout << arr1;
+    arr3 = arr1 + arr2;
+    cout << arr3;
+//
+//    arr2({5, 6, 7});
+//    arr1 + arr2;
+//    cout << arr1;
     return 0;
 }

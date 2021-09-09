@@ -34,7 +34,7 @@ public:
 
     bool operator< (const Array& arr_to_comparison) const;
 
-    Array *operator+ (const Array& arr_to_add) const;
+    Array operator+ (const Array& arr_to_add) const;
 
     Array &operator= (Array const& );
 

@@ -12,34 +12,23 @@ using namespace std;
 
 class Task {
 public:
-    using Id = int;
-    using Name = string;
-    using Result = int;
 
 private:
-    static Id total_id;
-    Id id{};
-    Name name;
-    Result result{};
+    static int total_id;
+    int id{};
+    string name;
+    int result{};
 
 public:
     // Constructor's and destructor
     Task();
 
-    Task(const Name &new_name, Result new_result);
+    Task(const string &new_name, int new_result);
 
     ~Task();
 
-    // Getter's and setter's
-    Id get_id() const;
-
-    Name get_name() const;
-
-    Result get_result() const;
-
-    void set_name(const Name &new_name);
-
-    void set_result(Result new_result);
+    // Getter
+    int get_result() const;
 
 
     friend void show_info(const Task &task_to_show);

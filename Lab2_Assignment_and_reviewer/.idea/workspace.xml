@@ -11,7 +11,32 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dcf032b-73b0-4b6c-bfd6-d4818cb08f97" name="Default Changelist" comment="" />
+    <list default="true" id="8dcf032b-73b0-4b6c-bfd6-d4818cb08f97" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/func.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/func.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Task.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task.h" beforeDir="false" afterPath="$PROJECT_DIR$/Task.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Verifier.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Verifier.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Verifier.h" beforeDir="false" afterPath="$PROJECT_DIR$/Verifier.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/objects1.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/objects1.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Lab2_Assignment_and_reviewer.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Lab2_Assignment_and_reviewer.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/Array.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/Array.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/Array.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/Array.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +64,9 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1xoxNAxtU2bQhcFEXjBwDRFz8sM" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -76,6 +103,8 @@
       <workItem from="1631113090260" duration="41000" />
       <workItem from="1631120778653" duration="280000" />
       <workItem from="1631121265414" duration="101000" />
+      <workItem from="1631187693317" duration="2293000" />
+      <workItem from="1631201239324" duration="538000" />
     </task>
     <task id="LOCAL-00001" summary="Array error">
       <created>1631045885677</created>

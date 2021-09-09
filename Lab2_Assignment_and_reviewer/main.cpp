@@ -1,31 +1,24 @@
 #include <iostream>
 #include "Task.h"
 #include "Verifier.h"
+#include "func.h"
 #include <array>
 
 int main() {
-    const int ARR_SIZE = 4;
-    Task task1("New_name_1", 51);
-    Task task3("Andrei", 41);
+    const int ARR_SIZE = 10;
 
-    cout << "Before the change: " << endl;
-    show_info(task1);
-    show_info(task3);
+    Task Tasks_arr[ARR_SIZE];
 
-    Verifier::get_result(task1, 99);
-    Verifier::get_result(task3, 13);
+    while(menu())
+    {
+        cout << "Enter what you want to do: ";
 
-    cout << "After the change: " << endl << endl;
-    show_info(task1);
-    show_info(task3);
 
-    array<Task, ARR_SIZE> Tasks_arr {{
-                                        {"Name", 1},
-                                        {"Name2", 2},
-                                        {"Name3", 3},
-                                        {"Name4", 4}}};
+        break;
 
-//    Task Tasks_arr[ARR_SIZE];
+    }
+
+
     for (const auto & i : Tasks_arr){
         show_info(i);
     }
@@ -36,5 +29,10 @@ int main() {
     for (const auto & i : Tasks_arr){
         show_info(i);
     }
+
+
     return 0;
 }
+
+// Всё, что монжо ввести с клавиатуры  - вводится
+// Запрос вывести все задания, у кого процентовка введённая с клавиатуры.

@@ -82,22 +82,22 @@ bool Array::operator< (const Array& arr_to_comparison) const {
     return arr_size < arr_to_comparison.arr_size;
 }
 
-Array *Array::operator+ (const Array& arr_to_add) const {
+Array Array::operator+ (const Array& arr_to_add) const {
     assert(arr_size == arr_to_add.arr_size && "Invalid input!");
 
     auto *temp = new Array[arr_size];
     temp->arr = arr;
+    temp->arr_size = arr_size;
 
     for (int i = 0; i < arr_size; i++) {
         temp->arr[i] += arr_to_add.arr[i];
     }
-    return temp;
+    return *temp;
 }
 
 Array &Array::operator= (Array const &arr_to_add) {
 
-    if(this == &arr_to_add)
-        exit(0);
+    assert(this != &arr_to_add && "Cant assign array to itself");
 
     delete [] arr;
     arr_size = arr_to_add.arr_size;
