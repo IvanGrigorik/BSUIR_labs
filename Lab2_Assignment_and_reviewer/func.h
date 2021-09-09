@@ -7,7 +7,10 @@
 
 #include "Task.h"
 
-int menu();
+int menu ();
+
 void check (int &y);
+
+Task *get_name (Task task_arr[]);
 
 #endif //MAIN_CPP_FUNC_H
