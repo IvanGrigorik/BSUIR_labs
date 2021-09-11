@@ -4,6 +4,6 @@
 
 #include "Verifier.h"
 
-void Verifier::get_result(Task &task, int new_result) {
+void Verifier::set_result (Task &task, int new_result) {
     task.result = new_result;
 }

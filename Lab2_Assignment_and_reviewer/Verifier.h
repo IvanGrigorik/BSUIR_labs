@@ -9,7 +9,7 @@
 
 class Verifier {
 public:
-    static void get_result(Task &task, int new_result);
+    static void set_result (Task &task, int new_result);
 };
 
 #endif //LAB2_ASSIGNMENT_AND_REVIEWER_VERIFIER_H

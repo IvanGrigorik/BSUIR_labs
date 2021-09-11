@@ -5,12 +5,18 @@
 #ifndef MAIN_CPP_FUNC_H
 #define MAIN_CPP_FUNC_H
 
+#include <list>
 #include "Task.h"
+#include "Verifier.h"
 
 int menu ();
 
-void check (int &y);
+void check (int &y, int max_size);
 
-Task *get_name (Task task_arr[]);
+void add_task (list<Task> &tasks);
+
+void show_tasks (const list<Task> &tasks);
+
+void show_specific_tasks (const list<Task> &tasks);
 
 #endif //MAIN_CPP_FUNC_H

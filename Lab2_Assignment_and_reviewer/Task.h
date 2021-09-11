@@ -11,29 +11,34 @@
 using namespace std;
 
 class Task {
-public:
-
 private:
-    static int total_id;
     int id{};
     string name;
     int result{};
+    static int total_id;
 
 public:
     // Constructor's and destructor
-    Task();
-
-    Task(const string &new_name, int new_result);
-
-    ~Task();
-
-    // Getter
-    int get_result() const;
 
 
-    friend void show_info(const Task &task_to_show);
+    explicit Task (const string &new_name = "none");
+
+    ~Task ();
+
+    // Getters and setters
+    int get_result () const;
+
+//
+//    static int get_total_id () ;
+//
+//    static void set_total_id(int add_total);
+//
+    void set_name (string new_name);
+
+    friend void show_info (const Task &task_to_show);
 
     friend class Verifier;
+
 
 };
 
