@@ -14,13 +14,9 @@ Task::Task (const string &new_name) {
     id = ++total_id;
     set_name(new_name);
     result = 0;
-    cout << endl << endl << "New object created, id: " << id;
-    system("pause > 0");
 }
 
 Task::~Task () {
-    cout << endl << "Object deleted, id: " << id;
-    system("pause > 0");
     total_id--;
 }
 

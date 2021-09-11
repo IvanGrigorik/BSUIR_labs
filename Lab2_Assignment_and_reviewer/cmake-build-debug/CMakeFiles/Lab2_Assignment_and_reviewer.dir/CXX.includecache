@@ -17,8 +17,6 @@ iostream
 -
 string
 -
-list
--
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Verifier.cpp
 Verifier.h
@@ -33,6 +31,8 @@ func.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/func.h
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/func.h
+list
+-
 Task.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Task.h
 Verifier.h
