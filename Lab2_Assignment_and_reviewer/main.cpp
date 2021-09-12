@@ -1,6 +1,6 @@
 #include "Task.h"
 #include "Verifier.h"
-#include "func.h"
+#include "menu_function.h"
 
 int main () {
 
@@ -18,9 +18,11 @@ int main () {
                 show_tasks(tasks);
                 break;
             case 0:
-                exit(0);
-            default:
                 return 0;
+            default:
+                cout << "Invalid input!";
+                system("cls");
+                break;
 
         }
         system("cls");

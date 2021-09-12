@@ -2,7 +2,7 @@
 // Created by Ivan on 09.09.2021.
 //
 
-#include "func.h"
+#include "menu_function.h"
 
 
 int menu () {
