@@ -21,7 +21,7 @@ public:
     // Constructor's and destructor
 
 
-    explicit Task (const string &new_name = "Andrei_-_best_code_reviewer");
+    explicit Task (const string &new_name = "Andrei_Sikorin_-_best_code_reviewer");
 
     ~Task ();
 
