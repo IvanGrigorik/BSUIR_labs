@@ -29,7 +29,7 @@ public:
 
     //Array operator= (Array arr_to_copy);
 
-    // for postfix form (remember to add 1 to all numbers in array with "arr++" form, not to use this "int")
+    // for postfix form (remember to add 1 to all numbers in array with postfix form, not to use this "int")
     int *operator++ (int);
 
     bool operator< (const Array& arr_to_comparison) const;

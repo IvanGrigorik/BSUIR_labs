@@ -26,7 +26,7 @@ void Array::operator() (const initializer_list<int> &list) {
     arr = new int[arr_size];
 
     int i = 0;
-    for (auto element : list) {
+    for (auto element: list) {
         arr[arr_size - list.size() + i] = element;
         i++;
     }
@@ -38,26 +38,24 @@ int &Array::operator[] (int index) {
     return arr[index];
 }
 
-// Operator to subtract last number from our array
+// Operator to subtract one from every number in array
 Array operator-- (Array &arr_to_subtract) {
     assert(arr_to_subtract.arr_size > 0 && "Invalid array index!");
-    --arr_to_subtract.arr_size;
-    arr_to_subtract.arr = (int *)realloc(arr_to_subtract.arr, arr_to_subtract.arr_size);
+    for (int i = 0; i < arr_to_subtract.arr_size; i++) {
+        arr_to_subtract[i]--;
+    }
     return arr_to_subtract;
 }
 
-// Operator to add new number to array
+// Operator to add number to every number from the array
 Array operator+ (Array &arr_to_add_number, int number) {
-    // Reallocation memory
-    arr_to_add_number.arr_size += 1;
-    arr_to_add_number.arr = (int *) realloc(arr_to_add_number.arr, arr_to_add_number.arr_size);
-
-    // Add number to next address
-    arr_to_add_number[arr_to_add_number.arr_size - 1] = number;
+    for (int i = 0; i < arr_to_add_number.arr_size; i++) {
+        arr_to_add_number[i] += number;
+    }
     return arr_to_add_number;
 }
 
-// In my opinion, that func should compare power of array with number (which should be also power of array)
+// In my opinion, that func should compare power (size) of array with number (which should be also power of array)
 bool operator< (const Array &arr_to_compare, int number) {
     return arr_to_compare.arr_size < number;
 }
@@ -71,18 +69,30 @@ ostream &operator<< (ostream &out, Array &arr_to_show) {
 }
 
 int *Array::operator++ (int) {
-    for(int i = 0; i < arr_size; i++){
+    for (int i = 0; i < arr_size; i++) {
         arr[i]++;
     }
     return arr;
 }
 
-// In my opinion, that func should compare power of array with power of another array
-bool Array::operator< (const Array& arr_to_comparison) const {
-    return arr_size < arr_to_comparison.arr_size;
+// In my opinion, that func should compare one array with another, and if power of arrays
+// are not same - they should return false
+
+// Realization is shitty
+bool Array::operator< (const Array &arr_to_comparison) const {
+    if (arr_size < arr_to_comparison.arr_size)
+        return false;
+    bool is_more = false;
+    for (int i = 0; i < arr_size; i++) {
+        if(arr[i] < arr_to_comparison.arr[i])
+            is_more = true;
+        else
+            is_more = false;
+    }
+    return is_more;
 }
 
-Array Array::operator+ (const Array& arr_to_add) const {
+Array Array::operator+ (const Array &arr_to_add) const {
     assert(arr_size == arr_to_add.arr_size && "Invalid input!");
 
     auto *temp = new Array[arr_size];
@@ -99,11 +109,11 @@ Array &Array::operator= (Array const &arr_to_add) {
 
     assert(this != &arr_to_add && "Cant assign array to itself");
 
-    delete [] arr;
+    delete[] arr;
     arr_size = arr_to_add.arr_size;
-    arr = new int [arr_size];
+    arr = new int[arr_size];
     arr = arr_to_add.arr;
-    for(int i = 0; i < arr_size; i++)
+    for (int i = 0; i < arr_size; i++)
         arr[i] = arr_to_add.arr[i];
     return *this;
 }

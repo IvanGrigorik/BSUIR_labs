@@ -9,13 +9,13 @@ CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj: \
  ../Task.h \
  ../Verifier.cpp \
  ../Verifier.h
-CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.obj: \
- ../Task.h \
- ../Verifier.h \
- ../func.cpp \
- ../func.h
 CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj: \
  ../Task.h \
  ../Verifier.h \
- ../func.h \
- ../main.cpp
+ ../main.cpp \
+ ../menu_function.h
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.obj: \
+ ../Task.h \
+ ../Verifier.h \
+ ../menu_function.cpp \
+ ../menu_function.h
