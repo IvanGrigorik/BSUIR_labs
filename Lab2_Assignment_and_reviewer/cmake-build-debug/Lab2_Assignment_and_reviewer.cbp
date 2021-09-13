@@ -92,13 +92,13 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/Verifier.h">
 			<Option target="Lab2_Assignment_and_reviewer"/>
 		</Unit>
-		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/func.cpp">
-			<Option target="Lab2_Assignment_and_reviewer"/>
-		</Unit>
-		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/func.h">
-			<Option target="Lab2_Assignment_and_reviewer"/>
-		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/main.cpp">
+			<Option target="Lab2_Assignment_and_reviewer"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/menu_function.cpp">
+			<Option target="Lab2_Assignment_and_reviewer"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/menu_function.h">
 			<Option target="Lab2_Assignment_and_reviewer"/>
 		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab2_Assignment_and_reviewer/CMakeLists.txt">

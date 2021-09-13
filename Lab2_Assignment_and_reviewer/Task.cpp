@@ -20,22 +20,11 @@ Task::~Task () {
     total_id--;
 }
 
-// Getters and setters
-
-// Первый Task показывает - что такое "Name" (если захочу сделать, чтобы int был под видом "Name"),
-// второй - что такое "get_name"
+// Getter
 int Task::get_result () const {
     return result;
 }
 
-//
-//int Task::get_total_id () {
-//    return total_id;
-//}
-//
-//void Task::set_total_id (int add_total) {
-//    Task::total_id = add_total;
-//}
 void Task::set_name (string new_name) {
     name = std::move(new_name);
 }

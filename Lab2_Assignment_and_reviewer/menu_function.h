@@ -9,9 +9,9 @@
 #include "Task.h"
 #include "Verifier.h"
 
-int menu ();
+int get_menu_choice ();
 
-void check (int &y, int max_size);
+void get_int (int &y, int max_size);
 
 void add_task (list<Task> &tasks);
 

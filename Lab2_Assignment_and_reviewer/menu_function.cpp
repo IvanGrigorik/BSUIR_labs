@@ -5,7 +5,7 @@
 #include "menu_function.h"
 
 
-int menu () {
+int get_menu_choice () {
     system("cls");
     cout << "Enter what you want to enter: " <<
          endl << "1) Add new task " <<
@@ -15,27 +15,16 @@ int menu () {
          endl << ">> ";
 
     int choice;
-    check(choice, 3);
+    get_int(choice, 3);
     return choice;
 }
 
-// Change "codes"
-void check (int &y, int max_size) {
-    int16_t x;
+void get_int (int &y, int max_size) {
+    int x;
     while (true) {
         cin >> x;
 
-        if (cin.fail()) {
-            cout << "Invalid input, try again" << endl << ">>";
-            cin.clear();
-            cin.ignore(32768, '\n');
-        }
-        if (cin.peek() != '\n') {
-            cout << "Invalid input, try again" << endl << ">>";
-            cin.clear();
-            cin.ignore(32768, '\n');
-        }
-        if (x < 0 || x > max_size) {
+        if (cin.fail() || cin.peek() != '\n' || x < 0 || x > max_size) {
             cout << "Invalid input, try again" << endl << ">>";
             cin.clear();
             cin.ignore(32768, '\n');
@@ -50,12 +39,13 @@ void add_task (list<Task> &tasks) {
     cout << "Enter name: ";
     string new_name;
     cin >> new_name;
+    tasks.emplace_back(new_name);
+
     cout << "Enter new result: ";
     int new_result;
-    check(new_result, 100);
-
-    tasks.emplace_back(new_name);
-    Verifier::set_result(tasks.back(), new_result);
+    do{
+        get_int(new_result, 100);
+    }while(Verifier::set_result(tasks.back(), new_result));
 }
 
 void show_tasks (const list<Task> &tasks) {

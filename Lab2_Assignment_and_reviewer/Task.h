@@ -28,11 +28,6 @@ public:
     // Getters and setters
     int get_result () const;
 
-//
-//    static int get_total_id () ;
-//
-//    static void set_total_id(int add_total);
-//
     void set_name (string new_name);
 
     friend void show_info (const Task &task_to_show);

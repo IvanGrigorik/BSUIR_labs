@@ -104,25 +104,25 @@ CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.s"
 	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\Verifier.cpp -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\Verifier.cpp.s
 
-CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.obj: CMakeFiles/Lab2_Assignment_and_reviewer.dir/flags.make
-CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.obj: ../func.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\func.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\func.cpp
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.obj: CMakeFiles/Lab2_Assignment_and_reviewer.dir/flags.make
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.obj: ../menu_function.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\menu_function.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\menu_function.cpp
 
-CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\func.cpp > CMakeFiles\Lab2_Assignment_and_reviewer.dir\func.cpp.i
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\menu_function.cpp > CMakeFiles\Lab2_Assignment_and_reviewer.dir\menu_function.cpp.i
 
-CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\func.cpp -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\func.cpp.s
+CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab2_Assignment_and_reviewer\menu_function.cpp -o CMakeFiles\Lab2_Assignment_and_reviewer.dir\menu_function.cpp.s
 
 # Object files for target Lab2_Assignment_and_reviewer
 Lab2_Assignment_and_reviewer_OBJECTS = \
 "CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj" \
 "CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj" \
 "CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj" \
-"CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.obj"
+"CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.obj"
 
 # External object files for target Lab2_Assignment_and_reviewer
 Lab2_Assignment_and_reviewer_EXTERNAL_OBJECTS =
@@ -130,7 +130,7 @@ Lab2_Assignment_and_reviewer_EXTERNAL_OBJECTS =
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj
-Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/func.cpp.obj
+Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.obj
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/build.make
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/linklibs.rsp
 Lab2_Assignment_and_reviewer.exe: CMakeFiles/Lab2_Assignment_and_reviewer.dir/objects1.rsp

@@ -7,7 +7,7 @@ int main () {
     list<Task> tasks;
 
     while (true) {
-        switch (menu()) {
+        switch (get_menu_choice()) {
             case 1:
                 add_task(tasks);
                 break;
