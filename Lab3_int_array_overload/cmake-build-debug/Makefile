@@ -152,6 +152,30 @@ Array.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab3_int_array_overload.dir\build.make CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.s
 .PHONY : Array.cpp.s
 
+Array_size.obj: Array_size.cpp.obj
+.PHONY : Array_size.obj
+
+# target to build an object file
+Array_size.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab3_int_array_overload.dir\build.make CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.obj
+.PHONY : Array_size.cpp.obj
+
+Array_size.i: Array_size.cpp.i
+.PHONY : Array_size.i
+
+# target to preprocess a source file
+Array_size.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab3_int_array_overload.dir\build.make CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.i
+.PHONY : Array_size.cpp.i
+
+Array_size.s: Array_size.cpp.s
+.PHONY : Array_size.s
+
+# target to generate assembly for a file
+Array_size.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab3_int_array_overload.dir\build.make CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.s
+.PHONY : Array_size.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -188,6 +212,9 @@ help:
 	@echo ... Array.obj
 	@echo ... Array.i
 	@echo ... Array.s
+	@echo ... Array_size.obj
+	@echo ... Array_size.i
+	@echo ... Array_size.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

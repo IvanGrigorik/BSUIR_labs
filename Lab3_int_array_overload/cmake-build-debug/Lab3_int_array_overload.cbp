@@ -86,6 +86,12 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/Array.h">
 			<Option target="Lab3_int_array_overload"/>
 		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/Array_size.cpp">
+			<Option target="Lab3_int_array_overload"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/Array_size.h">
+			<Option target="Lab3_int_array_overload"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/main.cpp">
 			<Option target="Lab3_int_array_overload"/>
 		</Unit>

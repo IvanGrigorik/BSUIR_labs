@@ -5,9 +5,8 @@
 #ifndef LAB3_INT_ARRAY_OVERLOAD_ARRAY_H
 #define LAB3_INT_ARRAY_OVERLOAD_ARRAY_H
 
-#include <fstream>
-#include <iostream>
-#include <cassert>
+#include "Array_size.h"
+
 #include <initializer_list>
 
 using namespace std;
@@ -19,33 +18,58 @@ private:
     int *arr{};
     int arr_size{};
 public:
+
+    // Constructor and destructor
     Array ();
 
     ~Array ();
 
+    // Overloaded operators
+
+    // Initialize
     void operator() (const initializer_list<int> &new_arr);
 
+    // Indexing
+    // Get array index
     int &operator[] (int index);
 
-    //Array operator= (Array arr_to_copy);
-
-    // for postfix form (remember to add 1 to all numbers in array with postfix form, not to use this "int")
+    // Increase all digits by 1
     int *operator++ (int);
 
-    bool operator< (const Array& arr_to_comparison) const;
+    // Compare two arrays
+    // P. S. If the sizes are different, return true/false
+    bool operator< (const Array &arr_to_comparison) const;
 
-    Array operator+ (const Array& arr_to_add) const;
+    // Adds another of the same size to one array
+    Array operator+ (const Array &arr_to_add) const;
 
-    Array &operator= (Array const& );
+    // Assigning arrays
+    Array &operator= (Array const &);
 
 
+    // Friend overloaded operators
+
+    // Decrease all digits by 1
     friend Array operator-- (Array &arr_to_subtract);
 
+    // Add one array to another
+    // P. S. array should have same size
     friend Array operator+ (Array &arr_to_add_number, int number);
 
-    friend bool operator< (const Array& arr_to_compare, int number);
+    // Compare power of the array with int number
+    friend bool operator> (const Array &arr_to_compare, int number);
 
-    friend ostream &operator<< (ostream &out, Array& arr_to_show);
+    // Overloaded array output
+    friend ostream &operator<< (ostream &out, Array &arr_to_show);
+
+
+    // Overloaded conversion operators
+
+    // Return average value in array
+    explicit operator double ();
+
+    // Convert to array size
+    explicit operator Array_size() const;
 };
 
 

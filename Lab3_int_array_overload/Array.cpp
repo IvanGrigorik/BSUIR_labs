@@ -4,6 +4,9 @@
 
 #include "Array.h"
 
+#include <iostream>
+#include <cassert>
+
 // Some constructors
 Array::Array () {
     arr_size = 0;
@@ -56,8 +59,8 @@ Array operator+ (Array &arr_to_add_number, int number) {
 }
 
 // In my opinion, that func should compare power (size) of array with number (which should be also power of array)
-bool operator< (const Array &arr_to_compare, int number) {
-    return arr_to_compare.arr_size < number;
+bool operator> (const Array &arr_to_compare, int number) {
+    return arr_to_compare.arr_size > number;
 }
 
 // Operator to show array
@@ -82,6 +85,9 @@ int *Array::operator++ (int) {
 bool Array::operator< (const Array &arr_to_comparison) const {
     if (arr_size < arr_to_comparison.arr_size)
         return false;
+    else if(arr_size > arr_to_comparison.arr_size)
+        return true;
+
     bool is_more = false;
     for (int i = 0; i < arr_size; i++) {
         if(arr[i] < arr_to_comparison.arr[i])
@@ -112,8 +118,22 @@ Array &Array::operator= (Array const &arr_to_add) {
     delete[] arr;
     arr_size = arr_to_add.arr_size;
     arr = new int[arr_size];
-    arr = arr_to_add.arr;
     for (int i = 0; i < arr_size; i++)
         arr[i] = arr_to_add.arr[i];
     return *this;
+}
+
+Array::operator double () {
+    double average_value = 0;
+
+    for(int i = 0; i < arr_size; i++){
+        average_value += arr[i];
+    }
+    average_value /= arr_size;
+    return average_value;
+}
+
+Array::operator Array_size () const {
+    Array_size size{arr_size};
+    return size;
 }
