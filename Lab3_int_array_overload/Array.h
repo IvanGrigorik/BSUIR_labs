@@ -11,16 +11,16 @@
 
 using namespace std;
 
-const int ARR_SIZE = 100;
-
 class Array {
 private:
     int *arr{};
     int arr_size{};
+    static const int ARR_SIZE = 100;
 public:
 
     // Constructor and destructor
     Array ();
+    Array (Array const &);
 
     ~Array ();
 
@@ -34,7 +34,8 @@ public:
     int &operator[] (int index);
 
     // Increase all digits by 1
-    int *operator++ (int);
+    Array operator++ (int);
+    Array &operator++ ();
 
     // Compare two arrays
     // P. S. If the sizes are different, return true/false
@@ -51,6 +52,7 @@ public:
 
     // Decrease all digits by 1
     friend Array operator-- (Array &arr_to_subtract);
+    friend Array operator-- (Array &arr_to_subtract, int);
 
     // Add one array to another
     // P. S. array should have same size

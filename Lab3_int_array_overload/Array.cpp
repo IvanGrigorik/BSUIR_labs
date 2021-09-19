@@ -9,22 +9,19 @@
 
 // Some constructors
 Array::Array () {
-    arr_size = 0;
+}
+
+Array::Array (const Array &arr1) {
+    arr = arr1.arr;
+    arr_size = arr1.arr_size;
 }
 
 Array::~Array () {
-    --arr_size;
+    delete[] arr;
 }
 
 // Some methods
-
 void Array::operator() (const initializer_list<int> &list) {
-
-//    // Reallocation memory (bad way)
-//    int *arr_temp = arr;
-//    arr = new int[temp_size];
-//    arr = arr_temp;
-
     arr_size += static_cast<int>(list.size());
     arr = new int[arr_size];
 
@@ -50,6 +47,13 @@ Array operator-- (Array &arr_to_subtract) {
     return arr_to_subtract;
 }
 
+Array operator-- (Array &arr_to_subtract, int) {
+    assert(arr_to_subtract.arr_size > 0 && "Invalid array index!");
+    Array arr_before_subtracting(arr_to_subtract);
+    --arr_to_subtract;
+    return arr_before_subtracting;
+}
+
 // Operator to add number to every number from the array
 Array operator+ (Array &arr_to_add_number, int number) {
     for (int i = 0; i < arr_to_add_number.arr_size; i++) {
@@ -65,17 +69,31 @@ bool operator> (const Array &arr_to_compare, int number) {
 
 // Operator to show array
 ostream &operator<< (ostream &out, Array &arr_to_show) {
-    for (int i = 0; i < arr_to_show.arr_size; i++)
+    for (int i = 0; i < arr_to_show.arr_size; i++) {
+        if (i == arr_to_show.arr_size - 1) {
+            out << arr_to_show[i];
+            break;
+        }
         out << arr_to_show[i] << " ";
-    out << endl;
+    }
     return out;
 }
 
-int *Array::operator++ (int) {
+// Prefix form
+Array &Array::operator++ () {
+    assert((*this).arr_size > 0 && "Invalid array index!");
     for (int i = 0; i < arr_size; i++) {
         arr[i]++;
     }
-    return arr;
+    return *this;
+}
+
+//Postfix form
+Array Array::operator++ (int) {
+    assert((*this).arr_size > 0 && "Invalid array index!");
+    Array arr_before_incrementing(*this);
+    ++(*this);
+    return arr_before_incrementing;
 }
 
 // In my opinion, that func should compare one array with another, and if power of arrays
@@ -85,12 +103,12 @@ int *Array::operator++ (int) {
 bool Array::operator< (const Array &arr_to_comparison) const {
     if (arr_size < arr_to_comparison.arr_size)
         return false;
-    else if(arr_size > arr_to_comparison.arr_size)
+    else if (arr_size > arr_to_comparison.arr_size)
         return true;
 
     bool is_more = false;
     for (int i = 0; i < arr_size; i++) {
-        if(arr[i] < arr_to_comparison.arr[i])
+        if (arr[i] < arr_to_comparison.arr[i])
             is_more = true;
         else
             is_more = false;
@@ -112,8 +130,8 @@ Array Array::operator+ (const Array &arr_to_add) const {
 }
 
 Array &Array::operator= (Array const &arr_to_add) {
-
-    assert(this != &arr_to_add && "Cant assign array to itself");
+    if (this == &arr_to_add)
+        return *this;
 
     delete[] arr;
     arr_size = arr_to_add.arr_size;
@@ -126,7 +144,7 @@ Array &Array::operator= (Array const &arr_to_add) {
 Array::operator double () {
     double average_value = 0;
 
-    for(int i = 0; i < arr_size; i++){
+    for (int i = 0; i < arr_size; i++) {
         average_value += arr[i];
     }
     average_value /= arr_size;
