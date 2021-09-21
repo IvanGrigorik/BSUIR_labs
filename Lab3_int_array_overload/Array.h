@@ -20,6 +20,7 @@ public:
 
     // Constructor and destructor
     Array ();
+
     Array (Array const &);
 
     ~Array ();
@@ -34,7 +35,8 @@ public:
     int &operator[] (int index);
 
     // Increase all digits by 1
-    Array operator++ (int);
+    Array &operator++ (int);
+
     Array &operator++ ();
 
     // Compare two arrays
@@ -44,15 +46,20 @@ public:
     // Adds another of the same size to one array
     Array operator+ (const Array &arr_to_add) const;
 
+
     // Assigning arrays
     Array &operator= (Array const &);
+
+    Array &operator- (Array const &);
 
 
     // Friend overloaded operators
 
     // Decrease all digits by 1
-    friend Array operator-- (Array &arr_to_subtract);
-    friend Array operator-- (Array &arr_to_subtract, int);
+    friend Array &operator-- (Array &arr_to_subtract);
+
+    friend Array &operator-- (Array &arr_to_subtract, int);
+
 
     // Add one array to another
     // P. S. array should have same size
@@ -71,8 +78,9 @@ public:
     explicit operator double ();
 
     // Convert to array size
-    explicit operator Array_size() const;
+    explicit operator Array_size () const;
 };
+
 
 
 #endif //LAB3_INT_ARRAY_OVERLOAD_ARRAY_H

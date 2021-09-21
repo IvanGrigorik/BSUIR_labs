@@ -12,8 +12,11 @@ Array::Array () {
 }
 
 Array::Array (const Array &arr1) {
-    arr = arr1.arr;
+    delete [] arr;
+    arr = new int [arr1.arr_size];
     arr_size = arr1.arr_size;
+    for(int i = 0; i < arr_size; i++)
+        arr[i] = arr1.arr[i];
 }
 
 Array::~Array () {
@@ -22,7 +25,7 @@ Array::~Array () {
 
 // Some methods
 void Array::operator() (const initializer_list<int> &list) {
-    arr_size += static_cast<int>(list.size());
+    arr_size = static_cast<int>(list.size());
     arr = new int[arr_size];
 
     int i = 0;
@@ -39,7 +42,7 @@ int &Array::operator[] (int index) {
 }
 
 // Operator to subtract one from every number in array
-Array operator-- (Array &arr_to_subtract) {
+Array &operator-- (Array &arr_to_subtract) {
     assert(arr_to_subtract.arr_size > 0 && "Invalid array index!");
     for (int i = 0; i < arr_to_subtract.arr_size; i++) {
         arr_to_subtract[i]--;
@@ -47,11 +50,11 @@ Array operator-- (Array &arr_to_subtract) {
     return arr_to_subtract;
 }
 
-Array operator-- (Array &arr_to_subtract, int) {
+Array &operator-- (Array &arr_to_subtract, int) {
     assert(arr_to_subtract.arr_size > 0 && "Invalid array index!");
-    Array arr_before_subtracting(arr_to_subtract);
+    Array *arr_before_subtracting = new Array(arr_to_subtract);
     --arr_to_subtract;
-    return arr_before_subtracting;
+    return *arr_before_subtracting;
 }
 
 // Operator to add number to every number from the array
@@ -89,11 +92,11 @@ Array &Array::operator++ () {
 }
 
 //Postfix form
-Array Array::operator++ (int) {
+Array &Array::operator++ (int) {
     assert((*this).arr_size > 0 && "Invalid array index!");
-    Array arr_before_incrementing(*this);
+    Array *arr_before_incrementing = new Array(*this);
     ++(*this);
-    return arr_before_incrementing;
+    return *arr_before_incrementing;
 }
 
 // In my opinion, that func should compare one array with another, and if power of arrays
@@ -154,4 +157,16 @@ Array::operator double () {
 Array::operator Array_size () const {
     Array_size size{arr_size};
     return size;
+}
+
+
+Array &Array::operator- (const Array &arr2) {
+    --(*this);
+    assert(arr_size == arr2.arr_size && "Invalid array's size");
+
+    Array *array = new Array{(*this)};
+    for(int i = 0; i < arr_size; i++){
+        array->arr[i] = arr[i] / arr2.arr[i];
+    }
+    return *array;
 }

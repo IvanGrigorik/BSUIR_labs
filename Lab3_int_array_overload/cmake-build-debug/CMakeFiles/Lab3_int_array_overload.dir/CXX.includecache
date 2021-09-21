@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/Array.h
+Array_size.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/Array_size.h
+initializer_list
+-
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/Array_size.h
+ostream
+-
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/main.cpp
+iostream
+-
+Array.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/Array.h
+

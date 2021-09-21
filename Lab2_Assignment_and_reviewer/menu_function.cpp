@@ -43,9 +43,9 @@ void add_task (list<Task> &tasks) {
 
     cout << "Enter new result: ";
     int new_result;
-    do{
-        get_int(new_result, 100);
-    }while(Verifier::set_result(tasks.back(), new_result));
+
+    get_int(new_result, 100);
+    Verifier::set_result(tasks.back(), new_result);
 }
 
 void show_tasks (const list<Task> &tasks) {

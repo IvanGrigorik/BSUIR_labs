@@ -5,7 +5,7 @@
 #include "Verifier.h"
 
 bool Verifier::set_result (Task &task, int new_result) {
-    if(new_result > 100) {
+    if (new_result > 100) {
         cout << "Invalid input of the new result!";
         return false;
     }

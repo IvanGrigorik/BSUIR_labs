@@ -34,6 +34,3 @@ void show_info (const Task &task_to_show) {
          endl << "Name: " << task_to_show.name <<
          endl << "Result: " << task_to_show.result << "%" << endl;
 }
-
-
-
