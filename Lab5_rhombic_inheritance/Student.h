@@ -14,12 +14,11 @@ protected:
 public:
     Student () : Man(), GPA() { cout << "Student created" << endl; };
 
-    Student (string new_name, int new_GPA) : Man(std::move(new_name)), GPA(new_GPA) {};
+    Student (const string &new_name, int new_GPA) : Man(new_name), GPA(new_GPA) {};
 
     ~Student () = default;
 
     void show () const override  {
-        Man::show();
         cout << "GPA: " << GPA << endl;
     }
 };

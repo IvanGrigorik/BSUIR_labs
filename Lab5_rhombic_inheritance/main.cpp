@@ -1,6 +1,8 @@
-#include <iostream>
+#include "Student_Programmer.h"
 
 int main () {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    Student_Programmer test("Name", 12, "C++", 10, 2, "C++");
+
+    test.show();
+
 }

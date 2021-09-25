@@ -14,8 +14,8 @@ protected:
 public:
     University_Student () : Student(), term() {};
 
-    University_Student (string new_name, int new_GPA, int new_term) :
-            Student(std::move(new_name), new_GPA), term(new_term) {};
+    University_Student (const string &new_name, int new_GPA, int new_term) :
+            Student(new_name, new_GPA), term(new_term) {};
 
     ~University_Student () = default;
 

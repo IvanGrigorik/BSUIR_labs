@@ -14,8 +14,8 @@ protected:
 public:
     Programmer () : Employee(), programming_language() { cout << "Programmer created" << endl; };
 
-    Programmer (string new_name, int new_salary, string new_programming_language) :
-            Employee(std::move(new_name), new_salary), programming_language(std::move(new_programming_language)) {};
+    Programmer (const string &new_name, int new_salary, string new_programming_language) :
+            Employee(new_name, new_salary), programming_language(std::move(new_programming_language)) {};
 
     ~Programmer () = default;
 
