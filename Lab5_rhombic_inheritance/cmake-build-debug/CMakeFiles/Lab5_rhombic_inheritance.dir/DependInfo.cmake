@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Man.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/Man.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Programmer.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/Student_Programmer.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/University_Student.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/main.cpp.obj"
   )

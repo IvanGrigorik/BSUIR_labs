@@ -18,7 +18,7 @@ public:
 
     ~Student () = default;
 
-    void show () const override {
+    void show () const override  {
         Man::show();
         cout << "GPA: " << GPA << endl;
     }

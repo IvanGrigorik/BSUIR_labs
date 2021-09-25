@@ -21,7 +21,7 @@ public:
 
     void show () const override {
         Student::show();
-        cout << "Term: " << term;
+        cout << "Term: " << term << endl;
     }
 };
 

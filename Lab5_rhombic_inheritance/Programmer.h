@@ -11,7 +11,7 @@ class Programmer : public virtual Employee {
 protected:
     string programming_language{};
 
-private:
+public:
     Programmer () : Employee(), programming_language() { cout << "Programmer created" << endl; };
 
     Programmer (string new_name, int new_salary, string new_programming_language) :

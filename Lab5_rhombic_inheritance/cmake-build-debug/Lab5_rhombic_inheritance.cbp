@@ -104,6 +104,12 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student.h">
 			<Option target="Lab5_rhombic_inheritance"/>
 		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.cpp">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.h">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/University_Student.cpp">
 			<Option target="Lab5_rhombic_inheritance"/>
 		</Unit>

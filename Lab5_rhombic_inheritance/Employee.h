@@ -19,7 +19,7 @@ public:
 
     ~Employee () = default;
 
-    void show () const override {
+    void show () const override  {
         Man::show();
         cout << "Salary: " << salary << endl;
     }

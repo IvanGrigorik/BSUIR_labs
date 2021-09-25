@@ -224,6 +224,30 @@ Student.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.s
 .PHONY : Student.cpp.s
 
+Student_Programmer.obj: Student_Programmer.cpp.obj
+.PHONY : Student_Programmer.obj
+
+# target to build an object file
+Student_Programmer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Student_Programmer.cpp.obj
+.PHONY : Student_Programmer.cpp.obj
+
+Student_Programmer.i: Student_Programmer.cpp.i
+.PHONY : Student_Programmer.i
+
+# target to preprocess a source file
+Student_Programmer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Student_Programmer.cpp.i
+.PHONY : Student_Programmer.cpp.i
+
+Student_Programmer.s: Student_Programmer.cpp.s
+.PHONY : Student_Programmer.s
+
+# target to generate assembly for a file
+Student_Programmer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Student_Programmer.cpp.s
+.PHONY : Student_Programmer.cpp.s
+
 University_Student.obj: University_Student.cpp.obj
 .PHONY : University_Student.obj
 
@@ -293,6 +317,9 @@ help:
 	@echo ... Student.obj
 	@echo ... Student.i
 	@echo ... Student.s
+	@echo ... Student_Programmer.obj
+	@echo ... Student_Programmer.i
+	@echo ... Student_Programmer.s
 	@echo ... University_Student.obj
 	@echo ... University_Student.i
 	@echo ... University_Student.s
