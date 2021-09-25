@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Employee.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/Employee.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Man.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/Man.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/main.cpp.obj"
   )

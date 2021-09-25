@@ -128,6 +128,30 @@ Lab5_rhombic_inheritance/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/build
 .PHONY : Lab5_rhombic_inheritance/fast
 
+Employee.obj: Employee.cpp.obj
+.PHONY : Employee.obj
+
+# target to build an object file
+Employee.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Employee.cpp.obj
+.PHONY : Employee.cpp.obj
+
+Employee.i: Employee.cpp.i
+.PHONY : Employee.i
+
+# target to preprocess a source file
+Employee.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Employee.cpp.i
+.PHONY : Employee.cpp.i
+
+Employee.s: Employee.cpp.s
+.PHONY : Employee.s
+
+# target to generate assembly for a file
+Employee.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Employee.cpp.s
+.PHONY : Employee.cpp.s
+
 Man.obj: Man.cpp.obj
 .PHONY : Man.obj
 
@@ -185,6 +209,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Lab5_rhombic_inheritance
+	@echo ... Employee.obj
+	@echo ... Employee.i
+	@echo ... Employee.s
 	@echo ... Man.obj
 	@echo ... Man.i
 	@echo ... Man.s

@@ -80,12 +80,12 @@ clean: CMakeFiles/Lab5_rhombic_inheritance.dir/clean
 CMakeFiles/Lab5_rhombic_inheritance.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target Lab5_rhombic_inheritance"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4 "Built target Lab5_rhombic_inheritance"
 .PHONY : CMakeFiles/Lab5_rhombic_inheritance.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Lab5_rhombic_inheritance.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\cmake-build-debug\CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\cmake-build-debug\CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Lab5_rhombic_inheritance.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/Lab5_rhombic_inheritance.dir/rule

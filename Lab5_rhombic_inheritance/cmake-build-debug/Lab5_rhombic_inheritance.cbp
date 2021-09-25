@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Employee.cpp">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Employee.h">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Man.cpp">
 			<Option target="Lab5_rhombic_inheritance"/>
 		</Unit>
