@@ -5,24 +5,22 @@
 #ifndef LAB5_RHOMBIC_INHERITANCE_PROGRAMMER_H
 #define LAB5_RHOMBIC_INHERITANCE_PROGRAMMER_H
 
+#include <ostream>
 #include "Employee.h"
 
-class Programmer : public virtual Employee {
+class Programmer : public /*virtual*/ Employee {
 protected:
     string programming_language{};
 
 public:
-    Programmer () : Employee(), programming_language() { cout << "Programmer created" << endl; };
-
     Programmer (const string &new_name, int new_salary, string new_programming_language) :
             Employee(new_name, new_salary), programming_language(std::move(new_programming_language)) {};
 
     ~Programmer () = default;
 
-    // Maybe I should write "virtual void" rather than "override"??
-    void show () const override {
-        Employee::show();
-        cout << "Programmer language: " << programming_language << endl;
+    friend ostream &operator<< (ostream &os, const Programmer &programmer) {
+        os << static_cast<const Employee &>(programmer) << endl << "Programming_language: " << programmer.programming_language;
+        return os;
     }
 };
 

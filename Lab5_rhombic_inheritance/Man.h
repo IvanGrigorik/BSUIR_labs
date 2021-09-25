@@ -14,15 +14,15 @@ protected:
     string name{};
 
 public:
-    Man () : name() { cout << "Man created" << endl; };
-
     explicit Man (string new_name) : name(std::move(new_name)) {};
 
     ~Man () = default;
 
-    virtual void show () const {
-        cout << "Name: " << name << endl;
-    };
+    friend ostream &operator<< (ostream &os, const Man &man) {
+        os << "Name: " << man.name;
+        return os;
+    }
+
 };
 
 
