@@ -25,11 +25,12 @@ public:
             university_program_language(std::move(new_university_program_language)) {};
 
     friend ostream &operator<< (ostream &os, const Student_Programmer &programmer) {
-        os << static_cast<const University_Student &>(programmer) << ' ' << static_cast<const Programmer &>(programmer)
-           << endl << " University program language: " << programmer.university_program_language;
+        os << static_cast<const University_Student &>(programmer) << ' ' << endl
+           << "Salary: " << programmer.salary << endl
+           << "Programming language: " << programmer.programming_language << endl
+           << " University program language: " << programmer.university_program_language;
         return os;
     }
-
 };
 
 
