@@ -104,11 +104,53 @@ CMakeFiles/Lab5_rhombic_inheritance.dir/Employee.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab5_rhombic_inheritance.dir/Employee.cpp.s"
 	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\Employee.cpp -o CMakeFiles\Lab5_rhombic_inheritance.dir\Employee.cpp.s
 
+CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.obj: CMakeFiles/Lab5_rhombic_inheritance.dir/flags.make
+CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.obj: ../Programmer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab5_rhombic_inheritance.dir\Programmer.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\Programmer.cpp
+
+CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\Programmer.cpp > CMakeFiles\Lab5_rhombic_inheritance.dir\Programmer.cpp.i
+
+CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\Programmer.cpp -o CMakeFiles\Lab5_rhombic_inheritance.dir\Programmer.cpp.s
+
+CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.obj: CMakeFiles/Lab5_rhombic_inheritance.dir/flags.make
+CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.obj: ../Student.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab5_rhombic_inheritance.dir\Student.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\Student.cpp
+
+CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\Student.cpp > CMakeFiles\Lab5_rhombic_inheritance.dir\Student.cpp.i
+
+CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\Student.cpp -o CMakeFiles\Lab5_rhombic_inheritance.dir\Student.cpp.s
+
+CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.obj: CMakeFiles/Lab5_rhombic_inheritance.dir/flags.make
+CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.obj: ../University_Student.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab5_rhombic_inheritance.dir\University_Student.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\University_Student.cpp
+
+CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\University_Student.cpp > CMakeFiles\Lab5_rhombic_inheritance.dir\University_Student.cpp.i
+
+CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\University_Student.cpp -o CMakeFiles\Lab5_rhombic_inheritance.dir\University_Student.cpp.s
+
 # Object files for target Lab5_rhombic_inheritance
 Lab5_rhombic_inheritance_OBJECTS = \
 "CMakeFiles/Lab5_rhombic_inheritance.dir/main.cpp.obj" \
 "CMakeFiles/Lab5_rhombic_inheritance.dir/Man.cpp.obj" \
-"CMakeFiles/Lab5_rhombic_inheritance.dir/Employee.cpp.obj"
+"CMakeFiles/Lab5_rhombic_inheritance.dir/Employee.cpp.obj" \
+"CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.obj" \
+"CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.obj" \
+"CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.obj"
 
 # External object files for target Lab5_rhombic_inheritance
 Lab5_rhombic_inheritance_EXTERNAL_OBJECTS =
@@ -116,11 +158,14 @@ Lab5_rhombic_inheritance_EXTERNAL_OBJECTS =
 Lab5_rhombic_inheritance.exe: CMakeFiles/Lab5_rhombic_inheritance.dir/main.cpp.obj
 Lab5_rhombic_inheritance.exe: CMakeFiles/Lab5_rhombic_inheritance.dir/Man.cpp.obj
 Lab5_rhombic_inheritance.exe: CMakeFiles/Lab5_rhombic_inheritance.dir/Employee.cpp.obj
+Lab5_rhombic_inheritance.exe: CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.obj
+Lab5_rhombic_inheritance.exe: CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.obj
+Lab5_rhombic_inheritance.exe: CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.obj
 Lab5_rhombic_inheritance.exe: CMakeFiles/Lab5_rhombic_inheritance.dir/build.make
 Lab5_rhombic_inheritance.exe: CMakeFiles/Lab5_rhombic_inheritance.dir/linklibs.rsp
 Lab5_rhombic_inheritance.exe: CMakeFiles/Lab5_rhombic_inheritance.dir/objects1.rsp
 Lab5_rhombic_inheritance.exe: CMakeFiles/Lab5_rhombic_inheritance.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Lab5_rhombic_inheritance.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab5_rhombic_inheritance\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Lab5_rhombic_inheritance.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Lab5_rhombic_inheritance.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -1,6 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Lab5_rhombic_inheritance.dir/Employee.cpp.obj"
   "CMakeFiles/Lab5_rhombic_inheritance.dir/Man.cpp.obj"
+  "CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.obj"
+  "CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.obj"
+  "CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.obj"
   "CMakeFiles/Lab5_rhombic_inheritance.dir/main.cpp.obj"
   "Lab5_rhombic_inheritance.exe"
   "Lab5_rhombic_inheritance.exe.manifest"

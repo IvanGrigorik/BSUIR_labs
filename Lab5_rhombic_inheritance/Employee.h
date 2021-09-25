@@ -5,9 +5,24 @@
 #ifndef LAB5_RHOMBIC_INHERITANCE_EMPLOYEE_H
 #define LAB5_RHOMBIC_INHERITANCE_EMPLOYEE_H
 
+#include "Man.h"
 
-class Employee {
+class Employee : public virtual Man {
+protected:
+    int salary{};
 
+public:
+    Employee () : Man(), salary() { cout << "Employee created" << endl; };
+
+    Employee (string new_name, int new_salary) :
+            Man(std::move(new_name)), salary(new_salary) {};
+
+    ~Employee () = default;
+
+    void show () const override {
+        Man::show();
+        cout << "Salary: " << salary << endl;
+    }
 };
 
 

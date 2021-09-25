@@ -176,6 +176,78 @@ Man.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Man.cpp.s
 .PHONY : Man.cpp.s
 
+Programmer.obj: Programmer.cpp.obj
+.PHONY : Programmer.obj
+
+# target to build an object file
+Programmer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.obj
+.PHONY : Programmer.cpp.obj
+
+Programmer.i: Programmer.cpp.i
+.PHONY : Programmer.i
+
+# target to preprocess a source file
+Programmer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.i
+.PHONY : Programmer.cpp.i
+
+Programmer.s: Programmer.cpp.s
+.PHONY : Programmer.s
+
+# target to generate assembly for a file
+Programmer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Programmer.cpp.s
+.PHONY : Programmer.cpp.s
+
+Student.obj: Student.cpp.obj
+.PHONY : Student.obj
+
+# target to build an object file
+Student.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.obj
+.PHONY : Student.cpp.obj
+
+Student.i: Student.cpp.i
+.PHONY : Student.i
+
+# target to preprocess a source file
+Student.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.i
+.PHONY : Student.cpp.i
+
+Student.s: Student.cpp.s
+.PHONY : Student.s
+
+# target to generate assembly for a file
+Student.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/Student.cpp.s
+.PHONY : Student.cpp.s
+
+University_Student.obj: University_Student.cpp.obj
+.PHONY : University_Student.obj
+
+# target to build an object file
+University_Student.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.obj
+.PHONY : University_Student.cpp.obj
+
+University_Student.i: University_Student.cpp.i
+.PHONY : University_Student.i
+
+# target to preprocess a source file
+University_Student.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.i
+.PHONY : University_Student.cpp.i
+
+University_Student.s: University_Student.cpp.s
+.PHONY : University_Student.s
+
+# target to generate assembly for a file
+University_Student.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.s
+.PHONY : University_Student.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -215,6 +287,15 @@ help:
 	@echo ... Man.obj
 	@echo ... Man.i
 	@echo ... Man.s
+	@echo ... Programmer.obj
+	@echo ... Programmer.i
+	@echo ... Programmer.s
+	@echo ... Student.obj
+	@echo ... Student.i
+	@echo ... Student.s
+	@echo ... University_Student.obj
+	@echo ... University_Student.i
+	@echo ... University_Student.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

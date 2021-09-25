@@ -92,6 +92,24 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Man.h">
 			<Option target="Lab5_rhombic_inheritance"/>
 		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Programmer.cpp">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Programmer.h">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student.cpp">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student.h">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/University_Student.cpp">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/University_Student.h">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/main.cpp">
 			<Option target="Lab5_rhombic_inheritance"/>
 		</Unit>

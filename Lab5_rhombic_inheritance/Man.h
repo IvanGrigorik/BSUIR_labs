@@ -14,14 +14,14 @@ protected:
     string name{};
 
 public:
-    Man () : name() {};
+    Man () : name() { cout << "Man created" << endl; };
 
-    Man (string new_name) : name(std::move(new_name)) {};
+    explicit Man (string new_name) : name(std::move(new_name)) {};
 
     ~Man () = default;
 
-    void show_name() {
-        cout << name;
+    virtual void show () const {
+        cout << "Name: " << name << endl;
     };
 };
 
