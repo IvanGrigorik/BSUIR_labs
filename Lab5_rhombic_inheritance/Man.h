@@ -14,14 +14,11 @@ protected:
     string name{};
 
 public:
-    explicit Man (string new_name) : name(std::move(new_name)) {};
+    explicit Man (string new_name);
 
-    ~Man () = default;
+    virtual ~Man ();
 
-    friend ostream &operator<< (ostream &os, const Man &man) {
-        os << "Name: " << man.name;
-        return os;
-    }
+    friend ostream &operator<< (ostream &os, const Man &man);
 
 };
 

@@ -10,27 +10,22 @@
 #include "University_Student.h"
 #include "Programmer.h"
 
-class Student_Programmer : public /*virtual*/ University_Student, public /*virtual*/ Programmer {
+class Student_Programmer : public virtual University_Student, public virtual Programmer {
 protected:
     string university_program_language{};
 
 public:
 
-    Student_Programmer (const string &new_name,
-                        int new_salary, string new_programming_language,
-                        int new_GPA, int new_term,
-                        string new_university_program_language) :
-            Programmer(new_name, new_salary, std::move(new_programming_language)),
-            University_Student(new_name, new_GPA, new_term),
-            university_program_language(std::move(new_university_program_language)) {};
+    Student_Programmer (const string &name,
+                        int salary,
+                        string programming_language,
+                        int GPA,
+                        int term,
+                        string new_university_programming_language);
 
-    friend ostream &operator<< (ostream &os, const Student_Programmer &programmer) {
-        os << static_cast<const University_Student &>(programmer) << ' ' << endl
-           << "Salary: " << programmer.salary << endl
-           << "Programming language: " << programmer.programming_language << endl
-           << " University program language: " << programmer.university_program_language;
-        return os;
-    }
+    ~Student_Programmer () override;
+
+    friend ostream &operator<< (ostream &os, const Student_Programmer &programmer);
 };
 
 

@@ -8,20 +8,16 @@
 #include <ostream>
 #include "Employee.h"
 
-class Programmer : public /*virtual*/ Employee {
+class Programmer : public virtual Employee {
 protected:
     string programming_language{};
 
 public:
-    Programmer (const string &new_name, int new_salary, string new_programming_language) :
-            Employee(new_name, new_salary), programming_language(std::move(new_programming_language)) {};
+    Programmer (const string &name, int salary, string new_programming_language);
 
-    ~Programmer () = default;
+    ~Programmer () override;
 
-    friend ostream &operator<< (ostream &os, const Programmer &programmer) {
-        os << static_cast<const Employee &>(programmer) << endl << "Programming_language: " << programmer.programming_language;
-        return os;
-    }
+    friend ostream &operator<< (ostream &os, const Programmer &programmer);
 };
 
 

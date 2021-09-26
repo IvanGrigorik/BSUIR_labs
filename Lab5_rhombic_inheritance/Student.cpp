@@ -3,3 +3,14 @@
 //
 
 #include "Student.h"
+
+Student::Student (const string &new_name, int new_GPA) : Man(new_name), GPA(new_GPA) {}
+
+Student::~Student () {
+    cout << "Student destructor called" << endl;
+}
+
+ostream &operator<< (ostream &os, const Student &student) {
+    os << static_cast<const Man &>(student) << endl << "GPA: " << student.GPA;
+    return os;
+}
