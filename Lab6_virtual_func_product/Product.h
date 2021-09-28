@@ -7,6 +7,9 @@
 
 
 class Product {
+protected:
+    int cost;
+
 
 };
 
