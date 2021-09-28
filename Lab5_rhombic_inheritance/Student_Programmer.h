@@ -10,7 +10,7 @@
 #include "University_Student.h"
 #include "Programmer.h"
 
-class Student_Programmer : public virtual University_Student, public virtual Programmer {
+class Student_Programmer : public University_Student, public Programmer {
 protected:
     string university_program_language{};
 

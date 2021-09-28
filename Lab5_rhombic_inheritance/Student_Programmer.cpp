@@ -8,9 +8,7 @@
 Student_Programmer::Student_Programmer (const string &name, int salary, string programming_language,
                                         int GPA, int term, string new_university_programming_language) :
         Man(name),
-        Employee(name, salary),
         Programmer(name, salary, std::move(programming_language)),
-        Student(name, GPA),
         University_Student(name, GPA, term) {
     university_program_language = std::move(new_university_programming_language);
 }

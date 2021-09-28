@@ -8,7 +8,7 @@
 #include <ostream>
 #include "Employee.h"
 
-class Programmer : public virtual Employee {
+class Programmer : public Employee {
 protected:
     string programming_language{};
 

@@ -8,7 +8,7 @@
 #include <ostream>
 #include "Student.h"
 
-class University_Student : public virtual Student {
+class University_Student : public Student {
 protected:
     int term{};
 
