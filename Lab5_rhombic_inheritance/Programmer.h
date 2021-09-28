@@ -5,7 +5,6 @@
 #ifndef LAB5_RHOMBIC_INHERITANCE_PROGRAMMER_H
 #define LAB5_RHOMBIC_INHERITANCE_PROGRAMMER_H
 
-#include <ostream>
 #include "Employee.h"
 
 class Programmer : public Employee {
@@ -16,6 +15,8 @@ public:
     Programmer (const string &name, int salary, string new_programming_language);
 
     ~Programmer () override;
+
+    void set_programming_language (string new_programming_language);
 
     friend ostream &operator<< (ostream &os, const Programmer &programmer);
 };

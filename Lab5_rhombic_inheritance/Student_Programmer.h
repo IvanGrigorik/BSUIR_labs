@@ -5,8 +5,6 @@
 #ifndef LAB5_RHOMBIC_INHERITANCE_STUDENT_PROGRAMMER_H
 #define LAB5_RHOMBIC_INHERITANCE_STUDENT_PROGRAMMER_H
 
-#include <ostream>
-#include <utility>
 #include "University_Student.h"
 #include "Programmer.h"
 
@@ -24,6 +22,8 @@ public:
                         string new_university_programming_language);
 
     ~Student_Programmer () override;
+
+    void set_university_program_language(string new_university_program_language);
 
     friend ostream &operator<< (ostream &os, const Student_Programmer &programmer);
 };

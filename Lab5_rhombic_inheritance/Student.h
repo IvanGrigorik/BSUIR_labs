@@ -5,7 +5,6 @@
 #ifndef LAB5_RHOMBIC_INHERITANCE_STUDENT_H
 #define LAB5_RHOMBIC_INHERITANCE_STUDENT_H
 
-#include <ostream>
 #include "Man.h"
 
 class Student : public virtual Man {
@@ -17,6 +16,9 @@ public:
     Student (const string &new_name, int new_GPA);
 
     ~Student () override;
+
+
+    void set_GPA (int new_GPA);
 
     friend ostream &operator<< (ostream &os, const Student &student);
 };

@@ -4,7 +4,10 @@
 
 #include "Man.h"
 
-Man::Man (string new_name) : name(std::move(new_name)) {}
+Man::Man (string new_name) {
+    cout << "Man constructor called" << endl;
+    set_name(std::move(new_name));
+}
 
 Man::~Man () {
     cout << "Man destructor called";
@@ -14,3 +17,8 @@ ostream &operator<< (ostream &os, const Man &man) {
     os << "Name: " << man.name;
     return os;
 }
+
+void Man::set_name (string new_name) {
+    this->name = std::move(new_name);
+}
+

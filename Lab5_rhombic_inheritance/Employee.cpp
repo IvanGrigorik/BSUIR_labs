@@ -5,7 +5,10 @@
 #include "Employee.h"
 
 Employee::Employee (const string &name, int new_salary) :
-        Man(name), salary(new_salary) {}
+        Man(name) {
+    cout << "Employee constructor called" << endl;
+    set_salary(new_salary);
+}
 
 Employee::~Employee () {
     cout << "Employee destructor called" << endl;
@@ -14,4 +17,8 @@ Employee::~Employee () {
 ostream &operator<< (ostream &os, const Employee &employee) {
     os << static_cast<const Man &>(employee) << endl << "Salary: " << employee.salary;
     return os;
+}
+
+void Employee::set_salary (int new_salary) {
+    this->salary = new_salary;
 }
