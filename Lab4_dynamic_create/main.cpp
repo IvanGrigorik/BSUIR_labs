@@ -19,7 +19,7 @@ int main () {
     cout << "Matrix m2 after m1 sort: " << endl << (*m2);
 }
 
-/*
+/* Another way
    Matrix m1{
             {
                     {9, 8, 7},
