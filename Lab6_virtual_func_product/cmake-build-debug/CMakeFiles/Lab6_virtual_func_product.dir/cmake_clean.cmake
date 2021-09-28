@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.obj"
   "CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.obj"
   "Lab6_virtual_func_product.exe"
   "Lab6_virtual_func_product.exe.manifest"

@@ -128,6 +128,30 @@ Lab6_virtual_func_product/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/build
 .PHONY : Lab6_virtual_func_product/fast
 
+Product.obj: Product.cpp.obj
+.PHONY : Product.obj
+
+# target to build an object file
+Product.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.obj
+.PHONY : Product.cpp.obj
+
+Product.i: Product.cpp.i
+.PHONY : Product.i
+
+# target to preprocess a source file
+Product.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.i
+.PHONY : Product.cpp.i
+
+Product.s: Product.cpp.s
+.PHONY : Product.s
+
+# target to generate assembly for a file
+Product.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.s
+.PHONY : Product.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -161,6 +185,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Lab6_virtual_func_product
+	@echo ... Product.obj
+	@echo ... Product.i
+	@echo ... Product.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

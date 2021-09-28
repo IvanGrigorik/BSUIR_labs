@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/Product.cpp">
+			<Option target="Lab6_virtual_func_product"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/Product.h">
+			<Option target="Lab6_virtual_func_product"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/main.cpp">
 			<Option target="Lab6_virtual_func_product"/>
 		</Unit>
