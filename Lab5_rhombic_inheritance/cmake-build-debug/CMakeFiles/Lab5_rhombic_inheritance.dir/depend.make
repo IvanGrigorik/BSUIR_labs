@@ -37,4 +37,14 @@ CMakeFiles/Lab5_rhombic_inheritance.dir/main.cpp.obj: \
  ../Student.h \
  ../Student_Programmer.h \
  ../University_Student.h \
- ../main.cpp
+ ../main.cpp \
+ ../menu_functions.h
+CMakeFiles/Lab5_rhombic_inheritance.dir/menu_functions.cpp.obj: \
+ ../Employee.h \
+ ../Man.h \
+ ../Programmer.h \
+ ../Student.h \
+ ../Student_Programmer.h \
+ ../University_Student.h \
+ ../menu_functions.cpp \
+ ../menu_functions.h

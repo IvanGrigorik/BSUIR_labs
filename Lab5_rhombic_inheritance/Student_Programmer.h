@@ -25,6 +25,8 @@ public:
 
     void set_university_program_language(string new_university_program_language);
 
+    void re_university_programming_language();
+
     friend ostream &operator<< (ostream &os, const Student_Programmer &programmer);
 };
 

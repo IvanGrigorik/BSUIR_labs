@@ -28,3 +28,10 @@ Student_Programmer::~Student_Programmer () {
 void Student_Programmer::set_university_program_language (string new_university_program_language) {
     this->university_program_language = std::move(new_university_program_language);
 }
+
+void Student_Programmer::re_university_programming_language () {
+    cout << "Enter new university programming language: ";
+    string new_university_programming_language{};
+    cin >> new_university_programming_language;
+    set_university_program_language(new_university_programming_language);
+}

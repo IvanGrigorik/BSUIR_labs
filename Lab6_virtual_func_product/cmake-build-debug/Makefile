@@ -128,6 +128,78 @@ Lab6_virtual_func_product/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/build
 .PHONY : Lab6_virtual_func_product/fast
 
+Ceramic_products.obj: Ceramic_products.cpp.obj
+.PHONY : Ceramic_products.obj
+
+# target to build an object file
+Ceramic_products.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.obj
+.PHONY : Ceramic_products.cpp.obj
+
+Ceramic_products.i: Ceramic_products.cpp.i
+.PHONY : Ceramic_products.i
+
+# target to preprocess a source file
+Ceramic_products.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.i
+.PHONY : Ceramic_products.cpp.i
+
+Ceramic_products.s: Ceramic_products.cpp.s
+.PHONY : Ceramic_products.s
+
+# target to generate assembly for a file
+Ceramic_products.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.s
+.PHONY : Ceramic_products.cpp.s
+
+Cheese.obj: Cheese.cpp.obj
+.PHONY : Cheese.obj
+
+# target to build an object file
+Cheese.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.obj
+.PHONY : Cheese.cpp.obj
+
+Cheese.i: Cheese.cpp.i
+.PHONY : Cheese.i
+
+# target to preprocess a source file
+Cheese.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.i
+.PHONY : Cheese.cpp.i
+
+Cheese.s: Cheese.cpp.s
+.PHONY : Cheese.s
+
+# target to generate assembly for a file
+Cheese.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.s
+.PHONY : Cheese.cpp.s
+
+Dairy_products.obj: Dairy_products.cpp.obj
+.PHONY : Dairy_products.obj
+
+# target to build an object file
+Dairy_products.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.obj
+.PHONY : Dairy_products.cpp.obj
+
+Dairy_products.i: Dairy_products.cpp.i
+.PHONY : Dairy_products.i
+
+# target to preprocess a source file
+Dairy_products.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.i
+.PHONY : Dairy_products.cpp.i
+
+Dairy_products.s: Dairy_products.cpp.s
+.PHONY : Dairy_products.s
+
+# target to generate assembly for a file
+Dairy_products.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab6_virtual_func_product.dir\build.make CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.s
+.PHONY : Dairy_products.cpp.s
+
 Product.obj: Product.cpp.obj
 .PHONY : Product.obj
 
@@ -185,6 +257,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Lab6_virtual_func_product
+	@echo ... Ceramic_products.obj
+	@echo ... Ceramic_products.i
+	@echo ... Ceramic_products.s
+	@echo ... Cheese.obj
+	@echo ... Cheese.i
+	@echo ... Cheese.s
+	@echo ... Dairy_products.obj
+	@echo ... Dairy_products.i
+	@echo ... Dairy_products.s
 	@echo ... Product.obj
 	@echo ... Product.i
 	@echo ... Product.s

@@ -22,3 +22,10 @@ University_Student::~University_Student () {
 void University_Student::set_term (int new_term) {
     this->term = new_term;
 }
+
+void University_Student::re_term () {
+    cout << "Enter new term: ";
+    int new_term{};
+    get_int(new_term, 4);
+    set_term(new_term);
+}

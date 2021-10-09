@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Employee.cpp
-Employee.h
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Employee.h
-
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Employee.h
 Man.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Man.h
@@ -17,44 +13,34 @@ D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Man.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Man.h
 iostream
 -
-utility
--
-
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Programmer.cpp
-Programmer.h
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Programmer.h
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Programmer.h
 Employee.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Employee.h
 
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student.cpp
-Student.h
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student.h
-
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student.h
 Man.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Man.h
-
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.cpp
-Student_Programmer.h
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.h
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.h
 University_Student.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/University_Student.h
 Programmer.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Programmer.h
-
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/University_Student.cpp
-University_Student.h
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/University_Student.h
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/University_Student.h
 Student.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student.h
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/main.cpp
+Student_Programmer.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.h
+menu_functions.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/menu_functions.h
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/menu_functions.h
+iostream
+-
 Student_Programmer.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.h
 

@@ -18,6 +18,7 @@ public:
 
     void set_salary (int new_salary);
 
+    void re_salary();
 
     friend ostream &operator<< (ostream &os, const Employee &employee);
 };

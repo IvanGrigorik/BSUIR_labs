@@ -75,7 +75,7 @@ int main () {
     // Show "-" work (At first decrements arr1, then divides decremented arr1 by arr2)
 
     arr1({5, 5, 5});
-    arr2({26, 26, 26});
+    arr2({126, 126, 126});
     cout << "Arr1: " << arr1 << endl;
     cout << "Arr2: " << arr2 << endl;
     cout << "Arr2 - Arr1: " << arr2 - arr1;

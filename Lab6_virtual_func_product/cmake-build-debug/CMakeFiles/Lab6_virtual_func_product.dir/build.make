@@ -68,44 +68,89 @@ include CMakeFiles/Lab6_virtual_func_product.dir/flags.make
 CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.obj: CMakeFiles/Lab6_virtual_func_product.dir/flags.make
 CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.obj: ../main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab6_virtual_func_product.dir\main.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\main.cpp
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab6_virtual_func_product.dir\main.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\main.cpp
 
 CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\main.cpp > CMakeFiles\Lab6_virtual_func_product.dir\main.cpp.i
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\main.cpp > CMakeFiles\Lab6_virtual_func_product.dir\main.cpp.i
 
 CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\main.cpp -o CMakeFiles\Lab6_virtual_func_product.dir\main.cpp.s
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\main.cpp -o CMakeFiles\Lab6_virtual_func_product.dir\main.cpp.s
 
 CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.obj: CMakeFiles/Lab6_virtual_func_product.dir/flags.make
 CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.obj: ../Product.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab6_virtual_func_product.dir\Product.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Product.cpp
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab6_virtual_func_product.dir\Product.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Product.cpp
 
 CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Product.cpp > CMakeFiles\Lab6_virtual_func_product.dir\Product.cpp.i
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Product.cpp > CMakeFiles\Lab6_virtual_func_product.dir\Product.cpp.i
 
 CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Product.cpp -o CMakeFiles\Lab6_virtual_func_product.dir\Product.cpp.s
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Product.cpp -o CMakeFiles\Lab6_virtual_func_product.dir\Product.cpp.s
+
+CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.obj: CMakeFiles/Lab6_virtual_func_product.dir/flags.make
+CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.obj: ../Dairy_products.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab6_virtual_func_product.dir\Dairy_products.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Dairy_products.cpp
+
+CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Dairy_products.cpp > CMakeFiles\Lab6_virtual_func_product.dir\Dairy_products.cpp.i
+
+CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Dairy_products.cpp -o CMakeFiles\Lab6_virtual_func_product.dir\Dairy_products.cpp.s
+
+CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.obj: CMakeFiles/Lab6_virtual_func_product.dir/flags.make
+CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.obj: ../Cheese.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab6_virtual_func_product.dir\Cheese.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Cheese.cpp
+
+CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Cheese.cpp > CMakeFiles\Lab6_virtual_func_product.dir\Cheese.cpp.i
+
+CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Cheese.cpp -o CMakeFiles\Lab6_virtual_func_product.dir\Cheese.cpp.s
+
+CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.obj: CMakeFiles/Lab6_virtual_func_product.dir/flags.make
+CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.obj: ../Ceramic_products.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab6_virtual_func_product.dir\Ceramic_products.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Ceramic_products.cpp
+
+CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Ceramic_products.cpp > CMakeFiles\Lab6_virtual_func_product.dir\Ceramic_products.cpp.i
+
+CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\Ceramic_products.cpp -o CMakeFiles\Lab6_virtual_func_product.dir\Ceramic_products.cpp.s
 
 # Object files for target Lab6_virtual_func_product
 Lab6_virtual_func_product_OBJECTS = \
 "CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.obj" \
-"CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.obj"
+"CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.obj" \
+"CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.obj" \
+"CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.obj" \
+"CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.obj"
 
 # External object files for target Lab6_virtual_func_product
 Lab6_virtual_func_product_EXTERNAL_OBJECTS =
 
 Lab6_virtual_func_product.exe: CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.obj
 Lab6_virtual_func_product.exe: CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.obj
+Lab6_virtual_func_product.exe: CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.obj
+Lab6_virtual_func_product.exe: CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.obj
+Lab6_virtual_func_product.exe: CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.obj
 Lab6_virtual_func_product.exe: CMakeFiles/Lab6_virtual_func_product.dir/build.make
 Lab6_virtual_func_product.exe: CMakeFiles/Lab6_virtual_func_product.dir/linklibs.rsp
 Lab6_virtual_func_product.exe: CMakeFiles/Lab6_virtual_func_product.dir/objects1.rsp
 Lab6_virtual_func_product.exe: CMakeFiles/Lab6_virtual_func_product.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Lab6_virtual_func_product.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab6_virtual_func_product\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable Lab6_virtual_func_product.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Lab6_virtual_func_product.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

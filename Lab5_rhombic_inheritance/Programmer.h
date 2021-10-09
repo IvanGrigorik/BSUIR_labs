@@ -18,6 +18,8 @@ public:
 
     void set_programming_language (string new_programming_language);
 
+    void re_programming_language();
+
     friend ostream &operator<< (ostream &os, const Programmer &programmer);
 };
 

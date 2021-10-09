@@ -25,4 +25,11 @@ void Programmer::set_programming_language (string new_programming_language) {
     this->programming_language = std::move(new_programming_language);
 }
 
+void Programmer::re_programming_language () {
+    cout << "Enter new programming language: ";
+    string new_programming_language;
+    cin >> new_programming_language;
+    set_programming_language(new_programming_language);
+}
+
 

@@ -119,6 +119,12 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/main.cpp">
 			<Option target="Lab5_rhombic_inheritance"/>
 		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/menu_functions.cpp">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/menu_functions.h">
+			<Option target="Lab5_rhombic_inheritance"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

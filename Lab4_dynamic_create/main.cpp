@@ -6,7 +6,7 @@ int main () {
             {
                     {9, 43, 7},
                     {6, 12, 4},
-                    {3, 23, 1}
+                    {3, 28, 1}
             }
     };
 
@@ -17,6 +17,22 @@ int main () {
     m1->sort_selection();
     cout << "Matrix m1 after sort: " << endl << (*m1);
     cout << "Matrix m2 after m1 sort: " << endl << (*m2);
+
+    cout  << endl << "Matrix m1 bin output: " << endl;
+    m1->bin_output();
+
+    cout << endl << "Matrix m2 hex output: " << endl;
+    m2->hex_output();
+
+    cout << endl << "m1 + m2 dec output: " << endl;
+    cout << (*m1) + (*m2);
+
+    cout << endl << "m1 + m2 oct output: " << endl;
+
+
+    ((*m1) + (*m2)).oct_output();
+    system("pause > 0");
+
 }
 
 /* Another way
@@ -36,3 +52,10 @@ int main () {
     cout << "Matrix m1 after sort: " << endl << m1;
     cout << "Matrix m2 after m1 sort: " << endl << m2;
 */
+/*
+ * Программа первую матрицу после сортировки выводит в двоичном коде
+ * Вторую в шестнадцатеричной (после сортировки первой матрицы)
+ *
+ * И выводит их сумму в восьмеричной
+ *
+ */

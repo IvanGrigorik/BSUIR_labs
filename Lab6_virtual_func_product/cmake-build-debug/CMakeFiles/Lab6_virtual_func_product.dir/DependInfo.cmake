@@ -8,6 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/Ceramic_products.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/cmake-build-debug/CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/Cheese.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/cmake-build-debug/CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/Dairy_products.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/cmake-build-debug/CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/Product.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/cmake-build-debug/CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab6_virtual_func_product/cmake-build-debug/CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.obj"
   )

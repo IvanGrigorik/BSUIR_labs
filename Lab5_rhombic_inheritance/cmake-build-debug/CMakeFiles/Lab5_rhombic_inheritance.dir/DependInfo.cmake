@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/Student_Programmer.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/University_Student.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/main.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/menu_functions.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir/menu_functions.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

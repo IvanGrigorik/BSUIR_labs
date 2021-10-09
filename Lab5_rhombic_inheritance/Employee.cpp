@@ -15,10 +15,17 @@ Employee::~Employee () {
 }
 
 ostream &operator<< (ostream &os, const Employee &employee) {
-    os << static_cast<const Man &>(employee) << endl << "Salary: " << employee.salary;
+    os << static_cast<const Man &>(employee) << endl << "Salary: " << employee.salary << "$";
     return os;
 }
 
 void Employee::set_salary (int new_salary) {
     this->salary = new_salary;
+}
+
+void Employee::re_salary () {
+    cout << "Enter new salary: ";
+    int new_salary{};
+    get_int(new_salary, 5000);
+    set_salary(new_salary);
 }

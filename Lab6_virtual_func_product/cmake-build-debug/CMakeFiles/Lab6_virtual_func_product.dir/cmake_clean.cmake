@@ -1,4 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Lab6_virtual_func_product.dir/Ceramic_products.cpp.obj"
+  "CMakeFiles/Lab6_virtual_func_product.dir/Cheese.cpp.obj"
+  "CMakeFiles/Lab6_virtual_func_product.dir/Dairy_products.cpp.obj"
   "CMakeFiles/Lab6_virtual_func_product.dir/Product.cpp.obj"
   "CMakeFiles/Lab6_virtual_func_product.dir/main.cpp.obj"
   "Lab6_virtual_func_product.exe"

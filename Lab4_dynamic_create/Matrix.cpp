@@ -4,6 +4,8 @@
 
 #include "Matrix.h"
 #include <cassert>
+#include <iomanip>
+#include <bitset>
 
 // Constructors and destructor
 Matrix::Matrix (initializer_list<initializer_list<int>> list_2D) {
@@ -129,3 +131,49 @@ void Matrix::deallocation_memory () {
         delete[] matrix[i];
     delete[] matrix;
 }
+
+
+void Matrix::oct_output () const {
+    for (int i = 0; i < sizes.height; i++) {
+        for (int j = 0; j < sizes.width; j++)
+            cout << setbase(8) << matrix[i][j] << ' ';
+        cout << endl;
+    }
+
+}
+
+void Matrix::hex_output () const {
+    cout << setbase(16);
+    for (int i = 0; i < sizes.height; i++) {
+        for (int j = 0; j < sizes.width; j++)
+            cout << matrix[i][j] << ' ';
+        cout << endl;
+    }
+}
+
+void Matrix::bin_output () const {
+    for (int i = 0; i < sizes.height; i++) {
+        for (int j = 0; j < sizes.width; j++) {
+            bitset<8> element_in_bin(matrix[i][j]);
+            cout << element_in_bin << ' ';
+        }
+        cout << endl;
+    }
+}
+
+Matrix operator+ (const Matrix& m1, const Matrix& m2) {
+    assert(m1.sizes.width == m2.sizes.width);
+    assert(m1.sizes.height == m2.sizes.height);
+
+    Matrix m3;
+    m3.sizes = m1.sizes;
+    m3.allocation_memory();
+    cout << setbase(0);
+    for (int i = 0; i < m1.sizes.height; i++) {
+        for (int j = 0; j < m1.sizes.width; j++) {
+            m3.matrix[i][j] = m1.matrix[i][j] + m2.matrix[i][j];
+        }
+    }
+    return m3;
+}
+

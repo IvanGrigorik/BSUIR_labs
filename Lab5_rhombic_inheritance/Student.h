@@ -17,8 +17,9 @@ public:
 
     ~Student () override;
 
-
     void set_GPA (int new_GPA);
+
+    void re_GPA();
 
     friend ostream &operator<< (ostream &os, const Student &student);
 };

@@ -33,6 +33,17 @@ public:
 
     ~Matrix ();
 
+    // Methods
+    // Output in 2-nd system
+    void bin_output() const;
+
+    // Output in 8-nd system
+    void oct_output () const;
+
+    // Output in 16-nd system
+    void hex_output () const;
+
+
     // Overloads
 
     void *operator new (size_t size);
@@ -48,6 +59,8 @@ public:
     const int &operator[] (const Size &index) const;
 
     friend ostream &operator<< (ostream &out, const Matrix &show_matrix);
+
+    friend Matrix operator + (const Matrix& m1, const Matrix& m2);
 
     // Methods
     void allocation_memory ();
