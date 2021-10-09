@@ -30,36 +30,3 @@ int main () {
 
     return 0;
 }
-
-// String input check (code mean what we want to enter)
-//string input_string (const string &code) {
-//    string new_string;
-//    while (true) {
-//        cin >> new_string;
-//        if (cin.fail() || cin.bad()) {
-//            cout << "Invalid input" << endl;
-//            cin.clear();
-//            cin.ignore(10000, '\n');
-//        } else if (cin.peek() != '\n') {
-//            cout << "Enter single word" << endl;
-//            cin.ignore(10000, '\n');
-//        } else {
-//            bool isGood = true;
-//            if (code == "name") {
-//                for (auto &item: new_string) {
-//                    if (!islower(item) && !isupper(item)) {
-//                        cout << "Use only letters!" << endl;
-//                        cin.ignore(10000, '\n');
-//                        isGood = false;
-//                        break;
-//                    }
-//                }
-//            }
-//            if (isGood) {
-//                break;
-//            }
-//        }
-//
-//    }
-//    return new_string;
-//}
