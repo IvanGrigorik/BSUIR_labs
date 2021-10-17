@@ -13,6 +13,7 @@ protected:
     string university_program_language{};
 
 public:
+    Student_Programmer () = default;
 
     Student_Programmer (const string &name,
                         int salary,
@@ -23,9 +24,9 @@ public:
 
     ~Student_Programmer () override;
 
-    void set_university_program_language(string new_university_program_language);
+    void set_university_program_language (string new_university_program_language);
 
-    void re_university_programming_language();
+    void re_university_programming_language ();
 
     friend ostream &operator<< (ostream &os, const Student_Programmer &programmer);
 };

@@ -6,16 +6,17 @@
 #define LAB_5_RHOMBIC_INHERITANCE_MAN_H
 
 #include <iostream>
+#include "getters.h"
 
 using namespace std;
-
-void get_int (int &y, int max_size);
 
 class Man {
 protected:
     string name{};
 
 public:
+    Man () = default;
+
     explicit Man (string new_name);
 
     virtual ~Man ();

@@ -24,7 +24,5 @@ void Student::set_GPA (int new_GPA) {
 
 void Student::re_GPA () {
     cout << "Enter new GPA: ";
-    int new_GPA{};
-    get_int(new_GPA, 10);
-    set_GPA(new_GPA);
+    set_GPA(get_int(10));
 }

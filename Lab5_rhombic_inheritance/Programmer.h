@@ -12,6 +12,8 @@ protected:
     string programming_language{};
 
 public:
+    Programmer() = default;
+
     Programmer (const string &name, int salary, string new_programming_language);
 
     ~Programmer () override;

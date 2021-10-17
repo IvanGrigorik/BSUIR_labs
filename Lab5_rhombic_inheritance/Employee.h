@@ -12,6 +12,9 @@ protected:
     int salary{};
 
 public:
+
+    Employee() = default;
+
     Employee (const string &name, int new_salary);
 
     ~Employee () override;

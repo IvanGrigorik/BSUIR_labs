@@ -12,6 +12,7 @@ protected:
     int GPA{};
 
 public:
+    Student() = default;
 
     Student (const string &new_name, int new_GPA);
 

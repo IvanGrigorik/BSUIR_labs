@@ -13,6 +13,8 @@ D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Man.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Man.h
 iostream
 -
+getters.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/getters.h
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Programmer.h
 Employee.h
@@ -32,9 +34,11 @@ D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/University_Student.h
 Student.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student.h
 
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/main.cpp
-Student_Programmer.h
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/getters.h
+iostream
+-
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/menu_functions.cpp
 menu_functions.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/menu_functions.h
 
@@ -43,4 +47,6 @@ iostream
 -
 Student_Programmer.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/Student_Programmer.h
+getters.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/getters.h
 

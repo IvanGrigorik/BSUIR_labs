@@ -1,3 +1,3 @@
 "D:\CLion 2021.1.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Lab4_dynamic_create.dir/objects.a
-C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\ar.exe cr CMakeFiles\Lab4_dynamic_create.dir/objects.a @CMakeFiles\Lab4_dynamic_create.dir\objects1.rsp
-C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\Lab4_dynamic_create.dir/objects.a -Wl,--no-whole-archive -o Lab4_dynamic_create.exe -Wl,--out-implib,libLab4_dynamic_create.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Lab4_dynamic_create.dir\linklibs.rsp
+C:\mingw64\bin\ar.exe cr CMakeFiles\Lab4_dynamic_create.dir/objects.a @CMakeFiles\Lab4_dynamic_create.dir\objects1.rsp
+C:\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\Lab4_dynamic_create.dir/objects.a -Wl,--no-whole-archive -o Lab4_dynamic_create.exe -Wl,--out-implib,libLab4_dynamic_create.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Lab4_dynamic_create.dir\linklibs.rsp

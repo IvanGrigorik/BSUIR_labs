@@ -25,7 +25,5 @@ void Employee::set_salary (int new_salary) {
 
 void Employee::re_salary () {
     cout << "Enter new salary: ";
-    int new_salary{};
-    get_int(new_salary, 5000);
-    set_salary(new_salary);
+    set_salary(get_int(5000));
 }

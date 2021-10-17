@@ -12,13 +12,15 @@ protected:
     int term{};
 
 public:
+    University_Student () = default;
+
     University_Student (const string &name, int GPA, int new_term);
 
     ~University_Student () override;
 
     void set_term (int new_term);
 
-    void re_term();
+    void re_term ();
 
     friend ostream &operator<< (ostream &os, const University_Student &student);
 };

@@ -28,19 +28,3 @@ void Man::re_name () {
     cin >> new_name;
     set_name(new_name);
 }
-
-void get_int (int &y, int max_size) {
-    int x;
-    while (true) {
-        cin >> x;
-
-        if (cin.fail() || cin.peek() != '\n' || x < 0 || x > max_size) {
-            cout << "Invalid input, try again" << endl << ">>";
-            cin.clear();
-            cin.ignore(32768, '\n');
-        } else {
-            y = x;
-            return;
-        }
-    }
-}

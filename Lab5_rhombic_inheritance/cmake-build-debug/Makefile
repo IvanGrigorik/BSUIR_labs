@@ -272,6 +272,30 @@ University_Student.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/University_Student.cpp.s
 .PHONY : University_Student.cpp.s
 
+getters.obj: getters.cpp.obj
+.PHONY : getters.obj
+
+# target to build an object file
+getters.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/getters.cpp.obj
+.PHONY : getters.cpp.obj
+
+getters.i: getters.cpp.i
+.PHONY : getters.i
+
+# target to preprocess a source file
+getters.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/getters.cpp.i
+.PHONY : getters.cpp.i
+
+getters.s: getters.cpp.s
+.PHONY : getters.s
+
+# target to generate assembly for a file
+getters.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab5_rhombic_inheritance.dir\build.make CMakeFiles/Lab5_rhombic_inheritance.dir/getters.cpp.s
+.PHONY : getters.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -347,6 +371,9 @@ help:
 	@echo ... University_Student.obj
 	@echo ... University_Student.i
 	@echo ... University_Student.s
+	@echo ... getters.obj
+	@echo ... getters.i
+	@echo ... getters.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

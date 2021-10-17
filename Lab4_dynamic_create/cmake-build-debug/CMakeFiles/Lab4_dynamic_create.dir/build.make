@@ -68,28 +68,28 @@ include CMakeFiles/Lab4_dynamic_create.dir/flags.make
 CMakeFiles/Lab4_dynamic_create.dir/main.cpp.obj: CMakeFiles/Lab4_dynamic_create.dir/flags.make
 CMakeFiles/Lab4_dynamic_create.dir/main.cpp.obj: ../main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Lab4_dynamic_create.dir/main.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab4_dynamic_create.dir\main.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\main.cpp
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab4_dynamic_create.dir\main.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\main.cpp
 
 CMakeFiles/Lab4_dynamic_create.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab4_dynamic_create.dir/main.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\main.cpp > CMakeFiles\Lab4_dynamic_create.dir\main.cpp.i
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\main.cpp > CMakeFiles\Lab4_dynamic_create.dir\main.cpp.i
 
 CMakeFiles/Lab4_dynamic_create.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab4_dynamic_create.dir/main.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\main.cpp -o CMakeFiles\Lab4_dynamic_create.dir\main.cpp.s
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\main.cpp -o CMakeFiles\Lab4_dynamic_create.dir\main.cpp.s
 
 CMakeFiles/Lab4_dynamic_create.dir/Matrix.cpp.obj: CMakeFiles/Lab4_dynamic_create.dir/flags.make
 CMakeFiles/Lab4_dynamic_create.dir/Matrix.cpp.obj: ../Matrix.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Lab4_dynamic_create.dir/Matrix.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab4_dynamic_create.dir\Matrix.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\Matrix.cpp
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab4_dynamic_create.dir\Matrix.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\Matrix.cpp
 
 CMakeFiles/Lab4_dynamic_create.dir/Matrix.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab4_dynamic_create.dir/Matrix.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\Matrix.cpp > CMakeFiles\Lab4_dynamic_create.dir\Matrix.cpp.i
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\Matrix.cpp > CMakeFiles\Lab4_dynamic_create.dir\Matrix.cpp.i
 
 CMakeFiles/Lab4_dynamic_create.dir/Matrix.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab4_dynamic_create.dir/Matrix.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\Matrix.cpp -o CMakeFiles\Lab4_dynamic_create.dir\Matrix.cpp.s
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab4_dynamic_create\Matrix.cpp -o CMakeFiles\Lab4_dynamic_create.dir\Matrix.cpp.s
 
 # Object files for target Lab4_dynamic_create
 Lab4_dynamic_create_OBJECTS = \
