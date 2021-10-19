@@ -11,7 +11,7 @@
 using namespace std;
 
 template<typename T, int len>
-void bin_find (const T *array, T key) {
+void bin_find(const T *array, T key) {
     if (array[0] == key) {
         cout << "Index of \"" << key << "\" in array is " << 0 << endl;
         return;
@@ -37,8 +37,8 @@ void bin_find (const T *array, T key) {
 }
 
 template<int len>
-void bin_find (char **str, const char *key) {
-    if (strcmp(str[0], key) == 0) {
+void bin_find(char **str, const char *key) {
+    if (strcmp (str[0], key) == 0) {
         cout << "Index of \"" << key << "\" in array is 0";
         return;
     }
@@ -49,9 +49,9 @@ void bin_find (char **str, const char *key) {
     while (left <= right) {
         int mid = (left + right) / 2;
 
-        if (strcmp(str[mid], key) < 0) {
+        if (strcmp (str[mid], key) < 0) {
             left = mid + 1;
-        } else if (strcmp(str[mid], key) > 0) {
+        } else if (strcmp (str[mid], key) > 0) {
             right = mid - 1;
         } else {
             cout << "Index of \"" << key << "\" in array is " << mid << endl;
