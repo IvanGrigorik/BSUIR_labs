@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Lab8_multiplicity_exceptions.dir/Multiplicity.cpp.obj"
   "CMakeFiles/Lab8_multiplicity_exceptions.dir/main.cpp.obj"
   "Lab8_multiplicity_exceptions.exe"
   "Lab8_multiplicity_exceptions.exe.manifest"

@@ -80,10 +80,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/Multiplicity.cpp">
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/Set.h">
 			<Option target="Lab8_multiplicity_exceptions"/>
 		</Unit>
-		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/Multiplicity.h">
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/Set.inl">
 			<Option target="Lab8_multiplicity_exceptions"/>
 		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/main.cpp">

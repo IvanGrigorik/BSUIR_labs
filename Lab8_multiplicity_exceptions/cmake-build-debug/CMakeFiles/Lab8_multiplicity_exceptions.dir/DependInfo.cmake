@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/Multiplicity.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/cmake-build-debug/CMakeFiles/Lab8_multiplicity_exceptions.dir/Multiplicity.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/cmake-build-debug/CMakeFiles/Lab8_multiplicity_exceptions.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

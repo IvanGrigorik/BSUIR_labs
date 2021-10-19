@@ -128,30 +128,6 @@ Lab8_multiplicity_exceptions/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab8_multiplicity_exceptions.dir\build.make CMakeFiles/Lab8_multiplicity_exceptions.dir/build
 .PHONY : Lab8_multiplicity_exceptions/fast
 
-Multiplicity.obj: Multiplicity.cpp.obj
-.PHONY : Multiplicity.obj
-
-# target to build an object file
-Multiplicity.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab8_multiplicity_exceptions.dir\build.make CMakeFiles/Lab8_multiplicity_exceptions.dir/Multiplicity.cpp.obj
-.PHONY : Multiplicity.cpp.obj
-
-Multiplicity.i: Multiplicity.cpp.i
-.PHONY : Multiplicity.i
-
-# target to preprocess a source file
-Multiplicity.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab8_multiplicity_exceptions.dir\build.make CMakeFiles/Lab8_multiplicity_exceptions.dir/Multiplicity.cpp.i
-.PHONY : Multiplicity.cpp.i
-
-Multiplicity.s: Multiplicity.cpp.s
-.PHONY : Multiplicity.s
-
-# target to generate assembly for a file
-Multiplicity.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab8_multiplicity_exceptions.dir\build.make CMakeFiles/Lab8_multiplicity_exceptions.dir/Multiplicity.cpp.s
-.PHONY : Multiplicity.cpp.s
-
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -185,9 +161,6 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Lab8_multiplicity_exceptions
-	@echo ... Multiplicity.obj
-	@echo ... Multiplicity.i
-	@echo ... Multiplicity.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
