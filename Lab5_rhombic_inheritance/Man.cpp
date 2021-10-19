@@ -25,7 +25,6 @@ void Man::set_name (string new_name) {
 void Man::re_name () {
     cout << "Enter new name: ";
     string new_name{};
-    // cin >> new_name;
     new_name = get_string("");
     set_name(new_name);
 }
