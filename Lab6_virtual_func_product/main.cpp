@@ -27,6 +27,5 @@ int main () {
     delete ptr[1];
 
     system("pause>0");
-
     return 0;
 }
