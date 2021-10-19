@@ -42,7 +42,9 @@ void get_Student_programmer_data (Student_Programmer &person) {
     person.set_salary(get_int(5000));
 
     cout << "Enter programming language: ";
-    person.set_programming_language(get_string(""));
+    string PL;
+    cin >> PL;
+    person.set_programming_language(PL);
 
     cout << "Enter GPA: ";
     person.set_GPA(get_int(10));
@@ -51,7 +53,8 @@ void get_Student_programmer_data (Student_Programmer &person) {
     person.set_term(get_int(4));
 
     cout << "Enter university programming language: ";
-    person.set_university_program_language(get_string(""));
+    cin >> PL;
+    person.set_university_program_language(PL);
 }
 
 void change_Student_programmer_field (Student_Programmer &person) {
