@@ -152,6 +152,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab8_multiplicity_exceptions.dir\build.make CMakeFiles/Lab8_multiplicity_exceptions.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+menu_functions.obj: menu_functions.cpp.obj
+.PHONY : menu_functions.obj
+
+# target to build an object file
+menu_functions.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab8_multiplicity_exceptions.dir\build.make CMakeFiles/Lab8_multiplicity_exceptions.dir/menu_functions.cpp.obj
+.PHONY : menu_functions.cpp.obj
+
+menu_functions.i: menu_functions.cpp.i
+.PHONY : menu_functions.i
+
+# target to preprocess a source file
+menu_functions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab8_multiplicity_exceptions.dir\build.make CMakeFiles/Lab8_multiplicity_exceptions.dir/menu_functions.cpp.i
+.PHONY : menu_functions.cpp.i
+
+menu_functions.s: menu_functions.cpp.s
+.PHONY : menu_functions.s
+
+# target to generate assembly for a file
+menu_functions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab8_multiplicity_exceptions.dir\build.make CMakeFiles/Lab8_multiplicity_exceptions.dir/menu_functions.cpp.s
+.PHONY : menu_functions.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -164,6 +188,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... menu_functions.obj
+	@echo ... menu_functions.i
+	@echo ... menu_functions.s
 .PHONY : help
 
 

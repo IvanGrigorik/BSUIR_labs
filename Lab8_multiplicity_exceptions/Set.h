@@ -7,36 +7,38 @@
 
 #include <exception>
 #include <iostream>
-
-using namespace std;
+#include "menu_functions.h"
 
 template<class T>
 class Set {
 private:
-    static const int SIZE = 10;
+    static const int SIZE = 3;
     T info_array[SIZE];
-    int index{};
+    int max_index = -1;
 
 public:
 
     // Constructors and destructor
-    Set() : info_array (), index (0) {};
+    Set();
 
-    Set(const Set<T> const &to_copy);
+    Set(const Set<T> &to_copy);
 
-    ~Set() { delete[] info_array; };
-
+    void clear();
 
     // Methods
     void add(T new_obj);
 
     void show() const;
 
+    void search() const;
+
+    void delete_element();
+
     bool is_full() const;
 
     bool is_empty() const;
 
-    // Operations
+    // Overloads operators
     bool operator==(const Set<T> &another_set) const;
 
     bool operator!=(const Set<T> &another_set) const;
@@ -45,20 +47,17 @@ public:
     Set<T> operator+(const Set<T> &another_set) const;
 };
 
-
-
-class Set_ex : public exception {
+class Set_ex : public std::exception {
 private:
-    string error_message{};
+    std::string error_message{};
 
 public:
-    explicit Set_ex(string message) : error_message (move (message)) {};
+    explicit Set_ex(std::string message) : error_message (move (message)) {};
 
     const char *what() const noexcept override {
         return error_message.c_str ();
     }
 };
-
 
 #include "Set.inl"
 

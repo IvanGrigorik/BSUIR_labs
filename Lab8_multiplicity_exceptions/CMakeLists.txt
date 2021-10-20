@@ -3,4 +3,4 @@ project(Lab8_multiplicity_exceptions)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Lab8_multiplicity_exceptions main.cpp Set.inl Set.h)
+add_executable(Lab8_multiplicity_exceptions main.cpp Set.inl Set.h menu_functions.cpp menu_functions.h)

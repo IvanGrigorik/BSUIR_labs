@@ -89,6 +89,12 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/main.cpp">
 			<Option target="Lab8_multiplicity_exceptions"/>
 		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/menu_functions.cpp">
+			<Option target="Lab8_multiplicity_exceptions"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/menu_functions.h">
+			<Option target="Lab8_multiplicity_exceptions"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab8_multiplicity_exceptions/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
