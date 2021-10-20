@@ -34,8 +34,10 @@ void Set<T>::clear() {
 template<class T>
 void Set<T>::add(T new_obj) {
     max_index++;
-    if (is_full ())
+    if (is_full ()) {
+        max_index--;
         throw Set_ex ("Index error");
+    }
     info_array[max_index] = new_obj;
 }
 

@@ -13,6 +13,8 @@ void unexpected() {
     throw 123;
 }
 
+
+
 int main() {
 
     std::set_terminate (terminate);
