@@ -32,7 +32,6 @@ void bin_find(const T *array, T key) {
             return;
         }
     }
-
     cout << "The array does not have element " << key << endl;
 }
 

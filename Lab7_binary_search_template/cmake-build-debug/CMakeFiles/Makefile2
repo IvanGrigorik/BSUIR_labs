@@ -80,12 +80,12 @@ clean: CMakeFiles/Lab7_binary_search_template.dir/clean
 CMakeFiles/Lab7_binary_search_template.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab7_binary_search_template.dir\build.make CMakeFiles/Lab7_binary_search_template.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab7_binary_search_template.dir\build.make CMakeFiles/Lab7_binary_search_template.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab7_binary_search_template\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target Lab7_binary_search_template"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab7_binary_search_template\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target Lab7_binary_search_template"
 .PHONY : CMakeFiles/Lab7_binary_search_template.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Lab7_binary_search_template.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab7_binary_search_template\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab7_binary_search_template\cmake-build-debug\CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Lab7_binary_search_template.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab7_binary_search_template\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/Lab7_binary_search_template.dir/rule

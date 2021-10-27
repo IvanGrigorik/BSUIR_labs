@@ -152,6 +152,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab7_binary_search_template.dir\build.make CMakeFiles/Lab7_binary_search_template.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+menu_func.obj: menu_func.cpp.obj
+.PHONY : menu_func.obj
+
+# target to build an object file
+menu_func.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab7_binary_search_template.dir\build.make CMakeFiles/Lab7_binary_search_template.dir/menu_func.cpp.obj
+.PHONY : menu_func.cpp.obj
+
+menu_func.i: menu_func.cpp.i
+.PHONY : menu_func.i
+
+# target to preprocess a source file
+menu_func.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab7_binary_search_template.dir\build.make CMakeFiles/Lab7_binary_search_template.dir/menu_func.cpp.i
+.PHONY : menu_func.cpp.i
+
+menu_func.s: menu_func.cpp.s
+.PHONY : menu_func.s
+
+# target to generate assembly for a file
+menu_func.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab7_binary_search_template.dir\build.make CMakeFiles/Lab7_binary_search_template.dir/menu_func.cpp.s
+.PHONY : menu_func.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -164,6 +188,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... menu_func.obj
+	@echo ... menu_func.i
+	@echo ... menu_func.s
 .PHONY : help
 
 

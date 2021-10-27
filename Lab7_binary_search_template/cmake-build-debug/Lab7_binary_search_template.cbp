@@ -86,6 +86,12 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/main.cpp">
 			<Option target="Lab7_binary_search_template"/>
 		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/menu_func.cpp">
+			<Option target="Lab7_binary_search_template"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/menu_func.h">
+			<Option target="Lab7_binary_search_template"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

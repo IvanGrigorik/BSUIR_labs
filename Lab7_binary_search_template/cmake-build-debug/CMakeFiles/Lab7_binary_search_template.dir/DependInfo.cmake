@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/cmake-build-debug/CMakeFiles/Lab7_binary_search_template.dir/main.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/menu_func.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/cmake-build-debug/CMakeFiles/Lab7_binary_search_template.dir/menu_func.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
