@@ -11,17 +11,17 @@ using namespace std;
 
 class Product {
 public:
-    float cost {};
+    float cost{};
 
     int sell{};
 
-    explicit Product (float, int);
+    explicit Product(float, int);
 
-    virtual ~Product () = 0;
+    virtual ~Product() = 0;
 
-    void set_cost (const float &new_cost);
+    void set_cost(const float &new_cost);
 
-    float get_cost () const;
+    float get_cost() const;
 
     void set_sell(const int &new_sell);
 

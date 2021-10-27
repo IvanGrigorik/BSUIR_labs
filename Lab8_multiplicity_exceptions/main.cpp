@@ -1,19 +1,18 @@
 #include <iostream>
 #include "Set.h"
-#include "menu_functions.h"
 
 void terminate() {
-    std::cout << "terminate called";
+    std::cout << "Terminate called";
     abort ();
 }
 
 void unexpected() {
-    std::cout << "unexpected called" << std::endl;
-    std::cout << "throw 123" << std::endl;
-    throw 123;
+    std::cout << "Unexpected called" << std::endl;
+    std::cout << "throw \"Error\"" << std::endl;
+    throw "Error";
 }
 
-
+// При вводе посмотреть, чтобы не было одинакового значения(т.к. это множество).
 
 int main() {
 
@@ -21,8 +20,9 @@ int main() {
     std::set_unexpected (unexpected);
 
     Set<int> new_set;
+    Set<char> another_set;
 
-    while (true)
+    while (true) {
         switch (get_menu_choice ()) {
             case 1:
                 std::cout << "Enter number: ";
@@ -37,7 +37,6 @@ int main() {
 
             case 2:
                 new_set.show ();
-                system ("pause > 0");
                 system ("cls");
                 break;
 
@@ -45,14 +44,43 @@ int main() {
                 new_set.search ();
                 break;
 
+            case 4:
+                new_set.delete_element ();
+                break;
+
+            case 5:
+                new_set.clear ();
+                break;
+
+            case 6:
+                std::cout << "Enter number: ";
+                try {
+                    char new_obj;
+                    std::cin >> new_obj;
+                    another_set.add (new_obj);
+                } catch (Set_ex &error) {
+                    std::cout << "Error: " << error.what () << std::endl;
+                    system ("pause>0");
+                }
+                system ("cls");
+                break;
+
+            case 7:
+                try {
+                    Set<int> result;
+                    result = new_set + new_set;
+                    result.show ();
+
+                } catch (Set_ex &error) {
+                    std::cout << "Error: " << error.what () << std::endl;
+                    system ("pause>0");
+                }
+                break;
+
             case 0:
                 exit (EXIT_SUCCESS);
-
-
-            default:
-                exit (-1);
-
         }
+    }
 
     std::cout << "This line is never printed";
 }

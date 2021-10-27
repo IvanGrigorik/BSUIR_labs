@@ -12,10 +12,13 @@ int get_menu_choice() {
             << "1) Add new number to Set" << std::endl
             << "2) Show Set" << std::endl
             << "3) Search element in Set" << std::endl
+            << "4) Delete element in Set" << std::endl
+            << "5) To clear Set" << std::endl
+            << "6) Add new number to another set" << std::endl
+            << "7) Add one set to another" << std::endl
             << "0) Exit" << std::endl
             << ">> ";
-
-    int choice = get_int (0, 3);
+    int choice = get_int (0, 7);
     return choice;
 }
 
