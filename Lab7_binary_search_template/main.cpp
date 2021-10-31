@@ -30,8 +30,6 @@ int main() {
                 break;
             }
 
-                // Дописать сам бинарный поиск.
-
             case 0:
                 exit (EXIT_SUCCESS);
         }
