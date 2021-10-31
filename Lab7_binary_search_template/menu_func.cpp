@@ -39,30 +39,31 @@ int get_int(int min_size, int max_size) {
 
 void get_array_element(Array &arr_to_get) {
     std::cout << "Enter new element: ";
-    char new_element;
+    wchar_t new_element;
 
     while (true) {
-        std::cin >> new_element;
+        std::wcin >> new_element;
 
-        if (std::cin.fail () || std::cin.peek () != '\n') {
+        if (std::wcin.fail () || std::wcin.peek() != '\n') {
             std::cout << "Invalid input, try again" << std::endl << ">> ";
-            std::cin.clear ();
-            std::cin.ignore (32768, '\n');
+            std::wcin.clear ();
+            std::wcin.ignore (80000, '\n');
         } else {
             break;
         }
     }
 
-    if (!(arr_to_get.arr_c = (char *) realloc (arr_to_get.arr_c, arr_to_get.total + 1))) {
+    if (!(arr_to_get.array = (wchar_t *) realloc (arr_to_get.array, sizeof (wchar_t) * (arr_to_get.total + 1)))) {
         assert("Memory allocation fail");
     }
-    arr_to_get.arr_c[arr_to_get.total] = new_element;
+
+    arr_to_get.array[arr_to_get.total] = new_element;
     arr_to_get.total++;
 }
 
 void show_arr(Array arr_to_show) {
     for (int i = 0; i < arr_to_show.total; i++) {
-        std::cout << arr_to_show.arr_c[i] << ' ';
+        std::wcout << arr_to_show.array[i] << ' ';
     }
 
     std::cout << std::endl;
@@ -74,10 +75,10 @@ void sort(Array &arr_to_sort) {
     for (int i = 0; i < arr_to_sort.total; i++) {
         for (int j = 0; j < arr_to_sort.total - 1; j++) {
 
-            if (arr_to_sort.arr_c[j] > arr_to_sort.arr_c[j + 1]) {
-                char temp = arr_to_sort.arr_c[j];
-                arr_to_sort.arr_c[j] = arr_to_sort.arr_c[j + 1];
-                arr_to_sort.arr_c[j + 1] = temp;
+            if (arr_to_sort.array[j] > arr_to_sort.array[j + 1]) {
+                wchar_t temp = arr_to_sort.array[j];
+                arr_to_sort.array[j] = arr_to_sort.array[j + 1];
+                arr_to_sort.array[j + 1] = temp;
             }
 
         }

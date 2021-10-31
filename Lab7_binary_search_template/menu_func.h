@@ -4,11 +4,11 @@
 
 #ifndef LAB7_BINARY_SEARCH_TEMPLATE_MENU_FUNC_H
 #define LAB7_BINARY_SEARCH_TEMPLATE_MENU_FUNC_H
-
+#include <cwchar>
 
 struct Array {
-    char *arr_c{};
-    int total = 0;
+    wchar_t *array{};
+    int total{};
 };
 
 int get_menu_choice();

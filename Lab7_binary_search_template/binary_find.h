@@ -6,14 +6,12 @@
 #define LAB7_BINARY_SEARCH_TEMPLATE_BINARY_FIND_H
 
 #include <iostream>
-#include <cstring>
 
-using namespace std;
-
-template<typename T, int len>
-void bin_find(const T *array, T key) {
+template<typename T>
+void bin_find(const T *array, T key, int len) {
     if (array[0] == key) {
-        cout << "Index of \"" << key << "\" in array is " << 0 << endl;
+        std::cout << "Index of \"" << key << "\" in array is " << 0 << std::endl;
+        system ("pause > 0");
         return;
     }
 
@@ -28,17 +26,21 @@ void bin_find(const T *array, T key) {
         } else if (array[mid] > key) {
             right = mid - 1;
         } else {
-            cout << "Index of \"" << key << "\" in array is " << mid << endl;
+            std::cout << "Index of \"" << key << "\" in array is " << mid << std::endl;
+            system ("pause > 0");
             return;
         }
     }
-    cout << "The array does not have element " << key << endl;
+    std::cout << "The array does not have element " << key << std::endl;
+    system ("pause > 0");
 }
 
-template<int len>
-void bin_find(char **str, const char *key) {
-    if (strcmp (str[0], key) == 0) {
-        cout << "Index of \"" << key << "\" in array is 0";
+// Function to find wchar_t symbols
+template<typename>
+void bin_find(const wchar_t *str, const wchar_t key, int len) {
+    if (str[0] == key) {
+        std::wcout << "Index of \"" << key << "\" in array is 0";
+        system ("pause > 0");
         return;
     }
 
@@ -48,17 +50,19 @@ void bin_find(char **str, const char *key) {
     while (left <= right) {
         int mid = (left + right) / 2;
 
-        if (strcmp (str[mid], key) < 0) {
+        if (str[mid] < key) {
             left = mid + 1;
-        } else if (strcmp (str[mid], key) > 0) {
+        } else if (str[mid] > key) {
             right = mid - 1;
         } else {
-            cout << "Index of \"" << key << "\" in array is " << mid << endl;
+            std::wcout << "Index of \"" << key << "\" in array is " << mid << std::endl;
+            system ("pause > 0");
             return;
         }
     }
 
-    cout << "The array does not have element " << key << endl;
+    std::wcout << "The array does not have element " << key << std::endl;
+    system ("pause > 0");
 }
 
 #endif //LAB7_BINARY_SEARCH_TEMPLATE_BINARY_FIND_H
