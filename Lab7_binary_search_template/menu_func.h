@@ -4,11 +4,13 @@
 
 #ifndef LAB7_BINARY_SEARCH_TEMPLATE_MENU_FUNC_H
 #define LAB7_BINARY_SEARCH_TEMPLATE_MENU_FUNC_H
+
 #include <cwchar>
 
 struct Array {
     wchar_t *array{};
     int total{};
+    bool is_sorted{true};
 };
 
 int get_menu_choice();

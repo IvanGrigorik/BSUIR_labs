@@ -11,7 +11,6 @@ template<typename T>
 void bin_find(const T *array, T key, int len) {
     if (array[0] == key) {
         std::cout << "Index of \"" << key << "\" in array is " << 0 << std::endl;
-        system ("pause > 0");
         return;
     }
 
@@ -27,20 +26,17 @@ void bin_find(const T *array, T key, int len) {
             right = mid - 1;
         } else {
             std::cout << "Index of \"" << key << "\" in array is " << mid << std::endl;
-            system ("pause > 0");
             return;
         }
     }
     std::cout << "The array does not have element " << key << std::endl;
-    system ("pause > 0");
 }
 
 // Function to find wchar_t symbols
 template<typename>
-void bin_find(const wchar_t *str, const wchar_t key, int len) {
-    if (str[0] == key) {
+void bin_find(const wchar_t *array_c, const wchar_t key, int len) {
+    if (array_c[0] == key) {
         std::wcout << "Index of \"" << key << "\" in array is 0";
-        system ("pause > 0");
         return;
     }
 
@@ -50,19 +46,17 @@ void bin_find(const wchar_t *str, const wchar_t key, int len) {
     while (left <= right) {
         int mid = (left + right) / 2;
 
-        if (str[mid] < key) {
+        if (array_c[mid] < key) {
             left = mid + 1;
-        } else if (str[mid] > key) {
+        } else if (array_c[mid] > key) {
             right = mid - 1;
         } else {
             std::wcout << "Index of \"" << key << "\" in array is " << mid << std::endl;
-            system ("pause > 0");
             return;
         }
     }
 
     std::wcout << "The array does not have element " << key << std::endl;
-    system ("pause > 0");
 }
 
 #endif //LAB7_BINARY_SEARCH_TEMPLATE_BINARY_FIND_H

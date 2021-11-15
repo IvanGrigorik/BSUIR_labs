@@ -12,7 +12,7 @@
 template<class T>
 class Set {
 private:
-    static const int SIZE{3};
+    static const int SIZE{5};
     T info_array[SIZE]{};
     int max_index{-1};
 
@@ -23,6 +23,11 @@ public:
 
     void clear();
 
+    // Checkers is info_array in set full or empty
+    bool is_full() const;
+
+    bool is_empty() const;
+
     // Methods
     void add(T new_obj);
 
@@ -32,11 +37,11 @@ public:
 
     void delete_element();
 
-    bool is_full() const;
+    void shell_sort();
 
-    bool is_empty() const;
+    void avg() const;
 
-    //  void add(const Set<T> &another_set);
+    void change();
 
     // Overloads operators
     bool operator==(const Set<T> &another_set) const;

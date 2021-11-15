@@ -12,7 +12,7 @@ int get_menu_choice() {
               << "1) Add new element to array " << std::endl
               << "2) Show array" << std::endl
               << "3) Sort array" << std::endl
-              << "4) Find element in array" << std::endl
+              << "4) Find element in array (array must be sorted)" << std::endl
               << "0) Exit" << std::endl
               << ">> ";
 
@@ -44,7 +44,7 @@ void get_array_element(Array &arr_to_get) {
     while (true) {
         std::wcin >> new_element;
 
-        if (std::wcin.fail () || std::wcin.peek() != '\n') {
+        if (std::wcin.fail () || std::wcin.peek () != '\n' || new_element < 33 || new_element > 126) {
             std::cout << "Invalid input, try again" << std::endl << ">> ";
             std::wcin.clear ();
             std::wcin.ignore (80000, '\n');
@@ -57,17 +57,26 @@ void get_array_element(Array &arr_to_get) {
         assert("Memory allocation fail");
     }
 
+
     arr_to_get.array[arr_to_get.total] = new_element;
     arr_to_get.total++;
+
+    if (arr_to_get.total > 1 && (arr_to_get.array[arr_to_get.total - 1] < arr_to_get.array[arr_to_get.total - 2])) {
+        arr_to_get.is_sorted = false;
+    }
 }
 
 void show_arr(Array arr_to_show) {
+    if(!arr_to_show.total){
+        std::cout << "No elements in array!";
+        system("pause > 0");
+        return;
+    }
     for (int i = 0; i < arr_to_show.total; i++) {
         std::wcout << arr_to_show.array[i] << ' ';
     }
 
     std::cout << std::endl;
-    system ("pause > 0");
 }
 
 void sort(Array &arr_to_sort) {
@@ -85,5 +94,5 @@ void sort(Array &arr_to_sort) {
     }
 
     std::cout << "Sort success" << std::endl;
-    system ("pause > 0");
+    arr_to_sort.is_sorted = true;
 }

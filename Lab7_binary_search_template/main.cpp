@@ -16,17 +16,26 @@ int main() {
 
             case 2:
                 show_arr (new_arr);
+                system ("pause > 0");
                 break;
 
             case 3:
                 sort (new_arr);
+                system ("pause > 0");
                 break;
 
             case 4: {
+                if (!new_arr.is_sorted) {
+                    std::cout << "Array dont sorted! ";
+                    system ("pause > 0");
+                    break;
+                }
                 wchar_t to_find{};
                 std::cout << "Enter element to find" << std::endl << ">> ";
                 std::wcin >> to_find;
                 bin_find<wchar_t> (new_arr.array, to_find, new_arr.total);
+                show_arr (new_arr);
+                system ("pause > 0");
                 break;
             }
 

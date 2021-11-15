@@ -1,0 +1,3 @@
+D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir
+D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/cmake-build-debug/CMakeFiles/rebuild_cache.dir
