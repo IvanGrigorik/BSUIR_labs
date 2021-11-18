@@ -152,30 +152,6 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab10_container_class_circle.dir\build.make CMakeFiles/Lab10_container_class_circle.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/circle.obj: src/circle.cpp.obj
-.PHONY : src/circle.obj
-
-# target to build an object file
-src/circle.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab10_container_class_circle.dir\build.make CMakeFiles/Lab10_container_class_circle.dir/src/circle.cpp.obj
-.PHONY : src/circle.cpp.obj
-
-src/circle.i: src/circle.cpp.i
-.PHONY : src/circle.i
-
-# target to preprocess a source file
-src/circle.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab10_container_class_circle.dir\build.make CMakeFiles/Lab10_container_class_circle.dir/src/circle.cpp.i
-.PHONY : src/circle.cpp.i
-
-src/circle.s: src/circle.cpp.s
-.PHONY : src/circle.s
-
-# target to generate assembly for a file
-src/circle.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab10_container_class_circle.dir\build.make CMakeFiles/Lab10_container_class_circle.dir/src/circle.cpp.s
-.PHONY : src/circle.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -188,9 +164,6 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... src/circle.obj
-	@echo ... src/circle.i
-	@echo ... src/circle.s
 .PHONY : help
 
 

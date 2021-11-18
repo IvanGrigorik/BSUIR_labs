@@ -1,6 +1,11 @@
 #include <iostream>
+#include "src/Ring.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+/*    Ring<int> i_ring(4);
+    i_ring.add_front(5);
+    i_ring.print();*/
+
+
+
 }

@@ -83,10 +83,10 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/main.cpp">
 			<Option target="Lab10_container_class_circle"/>
 		</Unit>
-		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/circle.cpp">
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.h">
 			<Option target="Lab10_container_class_circle"/>
 		</Unit>
-		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/circle.h">
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.inl">
 			<Option target="Lab10_container_class_circle"/>
 		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/CMakeLists.txt">
