@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Lab9_file_notes.dir/main.cpp.obj"
-  "CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.obj"
+  "CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.obj"
+  "CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.obj"
   "Lab9_file_notes.exe"
   "Lab9_file_notes.exe.manifest"
   "Lab9_file_notes.pdb"

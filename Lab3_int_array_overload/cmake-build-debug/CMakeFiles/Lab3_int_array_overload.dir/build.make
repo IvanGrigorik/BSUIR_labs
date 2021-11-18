@@ -68,41 +68,41 @@ include CMakeFiles/Lab3_int_array_overload.dir/flags.make
 CMakeFiles/Lab3_int_array_overload.dir/main.cpp.obj: CMakeFiles/Lab3_int_array_overload.dir/flags.make
 CMakeFiles/Lab3_int_array_overload.dir/main.cpp.obj: ../main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Lab3_int_array_overload.dir/main.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab3_int_array_overload.dir\main.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\main.cpp
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab3_int_array_overload.dir\main.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\main.cpp
 
 CMakeFiles/Lab3_int_array_overload.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab3_int_array_overload.dir/main.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\main.cpp > CMakeFiles\Lab3_int_array_overload.dir\main.cpp.i
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\main.cpp > CMakeFiles\Lab3_int_array_overload.dir\main.cpp.i
 
 CMakeFiles/Lab3_int_array_overload.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab3_int_array_overload.dir/main.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\main.cpp -o CMakeFiles\Lab3_int_array_overload.dir\main.cpp.s
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\main.cpp -o CMakeFiles\Lab3_int_array_overload.dir\main.cpp.s
 
 CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.obj: CMakeFiles/Lab3_int_array_overload.dir/flags.make
 CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.obj: ../Array.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab3_int_array_overload.dir\Array.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array.cpp
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab3_int_array_overload.dir\Array.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array.cpp
 
 CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array.cpp > CMakeFiles\Lab3_int_array_overload.dir\Array.cpp.i
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array.cpp > CMakeFiles\Lab3_int_array_overload.dir\Array.cpp.i
 
 CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array.cpp -o CMakeFiles\Lab3_int_array_overload.dir\Array.cpp.s
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array.cpp -o CMakeFiles\Lab3_int_array_overload.dir\Array.cpp.s
 
 CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.obj: CMakeFiles/Lab3_int_array_overload.dir/flags.make
 CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.obj: ../Array_size.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab3_int_array_overload.dir\Array_size.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array_size.cpp
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab3_int_array_overload.dir\Array_size.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array_size.cpp
 
 CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array_size.cpp > CMakeFiles\Lab3_int_array_overload.dir\Array_size.cpp.i
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array_size.cpp > CMakeFiles\Lab3_int_array_overload.dir\Array_size.cpp.i
 
 CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array_size.cpp -o CMakeFiles\Lab3_int_array_overload.dir\Array_size.cpp.s
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab3_int_array_overload\Array_size.cpp -o CMakeFiles\Lab3_int_array_overload.dir\Array_size.cpp.s
 
 # Object files for target Lab3_int_array_overload
 Lab3_int_array_overload_OBJECTS = \

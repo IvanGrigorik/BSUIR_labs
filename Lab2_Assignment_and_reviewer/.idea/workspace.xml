@@ -12,83 +12,98 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dcf032b-73b0-4b6c-bfd6-d4818cb08f97" name="Default Changelist" comment="After best code review">
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeCXXCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeRCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeSystem.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeCXXCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeRCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeSystem.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/CXX.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/.idea/Lab4_dynamic_create.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/Matrix.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/Matrix.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/3.20.2/CMakeCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/3.20.2/CMakeCXXCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/3.20.2/CMakeRCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/3.20.2/CMakeSystem.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/CXX.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/linklibs.rsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/objects1.rsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/cmake.check_cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/Lab4_dynamic_create.cbp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/cmake_install.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/main.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/untitled.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/main.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab9_file_notes/src/file_work.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab9_file_notes/src/file_work.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Task.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Verifier.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Verifier.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.19.2/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.19.2/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.19.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.19.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.19.2/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.19.2/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.19.2/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.19.2/CompilerIdC/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.19.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.19.2/CompilerIdCXX/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeCXXCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeRCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeRCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeSystem.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeSystem.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/CXX.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/Task.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/Verifier.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/main.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/menu_function.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab2_Assignment_and_reviewer.dir/objects.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Lab2_Assignment_and_reviewer.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Lab2_Assignment_and_reviewer.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/menu_function.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/menu_function.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/Array.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/Array.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.19.2/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.19.2/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.19.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.19.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.19.2/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.19.2/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.19.2/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.19.2/CompilerIdC/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.19.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.19.2/CompilerIdCXX/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeCXXCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeRCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeRCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeSystem.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CMakeSystem.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/Array.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/Array_size.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/CXX.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/main.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir/objects.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/Lab3_int_array_overload.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/Lab3_int_array_overload.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab3_int_array_overload/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4_dynamic_create/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/objects1.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/objects1.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/Lab9_file_notes.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/Lab9_file_notes.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/src/notes.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/src/Notes.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab9_file_notes/src/notes.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab9_file_notes/src/Notes.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,18 +149,22 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Lab2_Assignment_and_reviewer" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Lab2_Assignment_and_reviewer" TARGET_NAME="Lab2_Assignment_and_reviewer" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Lab2_Assignment_and_reviewer" RUN_TARGET_NAME="Lab2_Assignment_and_reviewer">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -179,6 +198,7 @@
       <workItem from="1632131430859" duration="523000" />
       <workItem from="1632131970392" duration="2486000" />
       <workItem from="1632136406614" duration="294000" />
+      <workItem from="1636976707653" duration="321000" />
     </task>
     <task id="LOCAL-00001" summary="Array error">
       <created>1631045885677</created>

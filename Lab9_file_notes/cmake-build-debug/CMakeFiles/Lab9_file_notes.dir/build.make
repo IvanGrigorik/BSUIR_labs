@@ -78,34 +78,49 @@ CMakeFiles/Lab9_file_notes.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab9_file_notes.dir/main.cpp.s"
 	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\main.cpp -o CMakeFiles\Lab9_file_notes.dir\main.cpp.s
 
-CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.obj: CMakeFiles/Lab9_file_notes.dir/flags.make
-CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.obj: ../src/notes.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.obj"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab9_file_notes.dir\src\notes.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\src\notes.cpp
+CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.obj: CMakeFiles/Lab9_file_notes.dir/flags.make
+CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.obj: ../src/Notes.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab9_file_notes.dir\src\Notes.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\src\Notes.cpp
 
-CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\src\notes.cpp > CMakeFiles\Lab9_file_notes.dir\src\notes.cpp.i
+CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\src\Notes.cpp > CMakeFiles\Lab9_file_notes.dir\src\Notes.cpp.i
 
-CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\src\notes.cpp -o CMakeFiles\Lab9_file_notes.dir\src\notes.cpp.s
+CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\src\Notes.cpp -o CMakeFiles\Lab9_file_notes.dir\src\Notes.cpp.s
+
+CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.obj: CMakeFiles/Lab9_file_notes.dir/flags.make
+CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.obj: ../src/file_work.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab9_file_notes.dir\src\file_work.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\src\file_work.cpp
+
+CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\src\file_work.cpp > CMakeFiles\Lab9_file_notes.dir\src\file_work.cpp.i
+
+CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\src\file_work.cpp -o CMakeFiles\Lab9_file_notes.dir\src\file_work.cpp.s
 
 # Object files for target Lab9_file_notes
 Lab9_file_notes_OBJECTS = \
 "CMakeFiles/Lab9_file_notes.dir/main.cpp.obj" \
-"CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.obj"
+"CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.obj" \
+"CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.obj"
 
 # External object files for target Lab9_file_notes
 Lab9_file_notes_EXTERNAL_OBJECTS =
 
 Lab9_file_notes.exe: CMakeFiles/Lab9_file_notes.dir/main.cpp.obj
-Lab9_file_notes.exe: CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.obj
+Lab9_file_notes.exe: CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.obj
+Lab9_file_notes.exe: CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.obj
 Lab9_file_notes.exe: CMakeFiles/Lab9_file_notes.dir/build.make
 Lab9_file_notes.exe: CMakeFiles/Lab9_file_notes.dir/linklibs.rsp
 Lab9_file_notes.exe: CMakeFiles/Lab9_file_notes.dir/objects1.rsp
 Lab9_file_notes.exe: CMakeFiles/Lab9_file_notes.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Lab9_file_notes.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab9_file_notes\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Lab9_file_notes.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Lab9_file_notes.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

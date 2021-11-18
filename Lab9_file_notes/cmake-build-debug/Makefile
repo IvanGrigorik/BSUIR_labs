@@ -152,29 +152,53 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/notes.obj: src/notes.cpp.obj
-.PHONY : src/notes.obj
+src/Notes.obj: src/Notes.cpp.obj
+.PHONY : src/Notes.obj
 
 # target to build an object file
-src/notes.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.obj
-.PHONY : src/notes.cpp.obj
+src/Notes.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.obj
+.PHONY : src/Notes.cpp.obj
 
-src/notes.i: src/notes.cpp.i
-.PHONY : src/notes.i
+src/Notes.i: src/Notes.cpp.i
+.PHONY : src/Notes.i
 
 # target to preprocess a source file
-src/notes.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.i
-.PHONY : src/notes.cpp.i
+src/Notes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.i
+.PHONY : src/Notes.cpp.i
 
-src/notes.s: src/notes.cpp.s
-.PHONY : src/notes.s
+src/Notes.s: src/Notes.cpp.s
+.PHONY : src/Notes.s
 
 # target to generate assembly for a file
-src/notes.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/notes.cpp.s
-.PHONY : src/notes.cpp.s
+src/Notes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.s
+.PHONY : src/Notes.cpp.s
+
+src/file_work.obj: src/file_work.cpp.obj
+.PHONY : src/file_work.obj
+
+# target to build an object file
+src/file_work.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.obj
+.PHONY : src/file_work.cpp.obj
+
+src/file_work.i: src/file_work.cpp.i
+.PHONY : src/file_work.i
+
+# target to preprocess a source file
+src/file_work.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.i
+.PHONY : src/file_work.cpp.i
+
+src/file_work.s: src/file_work.cpp.s
+.PHONY : src/file_work.s
+
+# target to generate assembly for a file
+src/file_work.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.s
+.PHONY : src/file_work.cpp.s
 
 # Help Target
 help:
@@ -188,9 +212,12 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... src/notes.obj
-	@echo ... src/notes.i
-	@echo ... src/notes.s
+	@echo ... src/Notes.obj
+	@echo ... src/Notes.i
+	@echo ... src/Notes.s
+	@echo ... src/file_work.obj
+	@echo ... src/file_work.i
+	@echo ... src/file_work.s
 .PHONY : help
 
 
