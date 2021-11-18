@@ -19,6 +19,11 @@ private:
         Ring_node() = default;
 
         ~Ring_node() = default;
+
+        friend std::ostream &operator<<(std::ostream &os, const Ring_node &node){
+            os << node.value;
+            return os;
+        }
     };
 
 public:
@@ -29,7 +34,7 @@ public:
 
     public:
         // Constructors
-        iterator() = default;
+        iterator() : ring_node(nullptr) {};
 
         explicit iterator(Ring_node *new_ring_node);
 
@@ -44,13 +49,17 @@ public:
             return *this;
         }
 
-        iterator &operator==(const iterator &iterator_to_compare) {
+        bool operator==(const iterator &iterator_to_compare) {
             return iterator_to_compare.ring_node == ring_node;
         }
 
-        iterator &operator!=(const iterator &iterator_to_compare) {
+        bool operator!=(const iterator &iterator_to_compare) {
             return iterator_to_compare.ring_node != ring_node;
         }
+
+        Ring_node get_data(){
+            return *ring_node;
+        };
 
         iterator &operator++() {
             ring_node = ring_node->next;
@@ -63,8 +72,11 @@ public:
     };
 
 private:
-    Ring_node *enter;
-    bool is_begin_called{};
+    Ring_node *enter{nullptr};
+    bool is_ring_empty{};
+
+    iterator enter_iterator;
+    iterator pre_enter_iterator;
 
 
 public:
@@ -73,15 +85,7 @@ public:
 
     explicit Ring(T value);
 
-    ~Ring();
-
-/*    iterator iterator_head() {
-        return enter;
-    }
-
-    iterator iterator_tail() {
-        return pre_enter_iterator;
-    }*/
+    ~Ring() = default;
 
     bool is_empty() {
         return enter->next == enter;
@@ -93,9 +97,21 @@ public:
 
     void print();
 
-    void begin();
+    void find(T find_value);
 
-    void end();
+    iterator begin() {
+        return iterator(enter);
+    }
+
+    iterator end() {
+
+        Ring_node *temp = enter;
+        while (temp->next != enter) {
+            temp = temp->next;
+        }
+
+        return iterator(temp);
+    }
 };
 
 /*
@@ -105,4 +121,5 @@ public:
  *
  * В методе .end()
  */
+#include <ostream>
 #include "Ring.inl"
