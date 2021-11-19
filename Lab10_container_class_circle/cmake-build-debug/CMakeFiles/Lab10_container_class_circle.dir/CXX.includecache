@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/main.cpp
+iostream
+-
+src/Ring.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.h
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.h
+ostream
+-
+Ring.inl
+D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.inl
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.inl
+Ring.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.h
+

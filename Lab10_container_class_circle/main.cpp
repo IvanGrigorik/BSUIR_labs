@@ -2,19 +2,37 @@
 #include "src/Ring.h"
 
 int main() {
-
     Ring<int> i_ring;
 
-    i_ring.add_back(6);
-    i_ring.add_back(7);
-    i_ring.add_front(8);
+    try {
+        auto it = i_ring.begin();
 
-    i_ring.print();
+        i_ring.add_front(1);
+        i_ring.add_front(2);
+        i_ring.add_front(4);
 
-    Ring<std::string> s_ring;
-    s_ring.add_back("first");
-    s_ring.add_back("second");
-    s_ring.add_front("last");
+        i_ring.print();
 
-    s_ring.print();
+
+        std::cout << std::endl;
+
+        it = i_ring.find(1);
+        i_ring.delete_element(it);
+
+        it = i_ring.find(2);
+        i_ring.delete_element(it);
+
+        it = i_ring.find(4);
+        i_ring.delete_element(it);
+
+        i_ring.add_back(7);
+        i_ring.add_back(8);
+
+        std::cout << std::endl;
+
+
+        i_ring.print();
+    } catch (std::exception &ex) {
+        std::cout << std::endl << "Error: " << ex.what();
+    }
 }

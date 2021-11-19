@@ -5,14 +5,17 @@
 
 #pragma once
 
+
 template<class T>
 class Ring {
 
 private:
     class Ring_node {
     public:
+
         Ring_node *next;
         T value{};
+
 
         explicit Ring_node(T new_value);
 
@@ -20,7 +23,7 @@ private:
 
         ~Ring_node() = default;
 
-        friend std::ostream &operator<<(std::ostream &os, const Ring_node &node){
+        friend std::ostream &operator<<(std::ostream &os, const Ring_node &node) {
             os << node.value;
             return os;
         }
@@ -49,19 +52,20 @@ public:
             return *this;
         }
 
-        bool operator==(const iterator &iterator_to_compare) {
+        bool operator==(const iterator &iterator_to_compare) const {
             return iterator_to_compare.ring_node == ring_node;
         }
 
-        bool operator!=(const iterator &iterator_to_compare) {
+        bool operator!=(const iterator &iterator_to_compare) const {
             return iterator_to_compare.ring_node != ring_node;
         }
 
-        Ring_node get_data(){
+        Ring_node get_data() {
             return *ring_node;
         };
 
         iterator &operator++() {
+
             ring_node = ring_node->next;
             return *this;
         }
@@ -69,17 +73,24 @@ public:
         T &operator*() const {
             return ring_node->value;
         }
+
+        bool is_valid_iterator() const {
+            return ring_node != nullptr;
+        }
     };
 
 private:
-    Ring_node *enter{nullptr};
+
+    Ring_node *enter{};
+
     bool is_ring_empty{};
 
-    iterator enter_iterator;
-    iterator pre_enter_iterator;
+    iterator enter_iterator{};
+    iterator pre_enter_iterator{};
 
 
 public:
+
 
     Ring();
 
@@ -88,7 +99,7 @@ public:
     ~Ring() = default;
 
     bool is_empty() {
-        return enter->next == enter;
+        return is_ring_empty;
     };
 
     void add_front(T value);
@@ -97,20 +108,85 @@ public:
 
     void print();
 
-    void find(T find_value);
+    iterator find(T find_value) {
+        for (auto it = begin(); it != end(); ++it) {
+            if (it.ring_node->value == find_value) {
+                return it;
+            }
+        }
+
+        if (end().ring_node->value == find_value) {
+            return end();
+        } else {
+            std::cout << "No such element in ring";
+
+            return iterator(nullptr);
+        }
+    }
+
+    void delete_element(const iterator &it) {
+
+        if (!it.is_valid_iterator()) {
+            throw std::runtime_error("Invalid iterator");
+        }
+
+        // If we have one element in ring
+        if (it.ring_node->next == it.ring_node) {
+
+
+            delete enter;
+
+            enter_iterator.ring_node = nullptr;
+            pre_enter_iterator.ring_node = nullptr;
+
+            is_ring_empty = true;
+
+
+            return;
+        }
+
+        if (it.ring_node == enter) {
+
+            auto temp = enter;
+
+            enter = enter->next;
+
+            enter_iterator.ring_node = enter;
+            pre_enter_iterator.ring_node->next = enter;
+
+            delete temp;
+            return;
+        }
+
+        auto runner_it = enter_iterator;
+
+        for (; runner_it != end(); ++runner_it) {
+
+            if (runner_it.ring_node->next == it.ring_node) {
+
+                auto delete_ptr = it.ring_node;
+
+                runner_it.ring_node->next = it.ring_node->next;
+
+                if (it.ring_node == pre_enter_iterator.ring_node) {
+                    pre_enter_iterator = runner_it;
+                }
+
+                delete delete_ptr;
+                return;
+            }
+        }
+
+
+        std::cout << "No such element in ring";
+    }
 
     iterator begin() {
         return iterator(enter);
     }
 
     iterator end() {
-
-        Ring_node *temp = enter;
-        while (temp->next != enter) {
-            temp = temp->next;
-        }
-
-        return iterator(temp);
+        return pre_enter_iterator;
     }
 };
 
@@ -120,6 +196,16 @@ public:
  * После первого вызова .end() теперь возвращает итератор с нужным нам указателем.
  *
  * В методе .end()
+ *
+ * if(temp == tail){
+ *  temp = head->next;
+ * }
+ *
  */
+
+
+
+/* Создать две головы. Вторая замыкает кольцо. Указатель второй головы ссылается на nullptr. */
+
 #include <ostream>
 #include "Ring.inl"
