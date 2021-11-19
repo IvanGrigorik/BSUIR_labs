@@ -152,6 +152,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Car.obj: src/Car.cpp.obj
+.PHONY : src/Car.obj
+
+# target to build an object file
+src/Car.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.obj
+.PHONY : src/Car.cpp.obj
+
+src/Car.i: src/Car.cpp.i
+.PHONY : src/Car.i
+
+# target to preprocess a source file
+src/Car.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.i
+.PHONY : src/Car.cpp.i
+
+src/Car.s: src/Car.cpp.s
+.PHONY : src/Car.s
+
+# target to generate assembly for a file
+src/Car.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.s
+.PHONY : src/Car.cpp.s
+
 src/Engine.obj: src/Engine.cpp.obj
 .PHONY : src/Engine.obj
 
@@ -200,6 +224,54 @@ src/Engine_oil.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Engine_oil.cpp.s
 .PHONY : src/Engine_oil.cpp.s
 
+src/Headlight.obj: src/Headlight.cpp.obj
+.PHONY : src/Headlight.obj
+
+# target to build an object file
+src/Headlight.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.obj
+.PHONY : src/Headlight.cpp.obj
+
+src/Headlight.i: src/Headlight.cpp.i
+.PHONY : src/Headlight.i
+
+# target to preprocess a source file
+src/Headlight.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.i
+.PHONY : src/Headlight.cpp.i
+
+src/Headlight.s: src/Headlight.cpp.s
+.PHONY : src/Headlight.s
+
+# target to generate assembly for a file
+src/Headlight.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.s
+.PHONY : src/Headlight.cpp.s
+
+src/Lamp.obj: src/Lamp.cpp.obj
+.PHONY : src/Lamp.obj
+
+# target to build an object file
+src/Lamp.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.obj
+.PHONY : src/Lamp.cpp.obj
+
+src/Lamp.i: src/Lamp.cpp.i
+.PHONY : src/Lamp.i
+
+# target to preprocess a source file
+src/Lamp.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.i
+.PHONY : src/Lamp.cpp.i
+
+src/Lamp.s: src/Lamp.cpp.s
+.PHONY : src/Lamp.s
+
+# target to generate assembly for a file
+src/Lamp.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.s
+.PHONY : src/Lamp.cpp.s
+
 src/Transport.obj: src/Transport.cpp.obj
 .PHONY : src/Transport.obj
 
@@ -224,6 +296,30 @@ src/Transport.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Transport.cpp.s
 .PHONY : src/Transport.cpp.s
 
+src/Wheel.obj: src/Wheel.cpp.obj
+.PHONY : src/Wheel.obj
+
+# target to build an object file
+src/Wheel.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.obj
+.PHONY : src/Wheel.cpp.obj
+
+src/Wheel.i: src/Wheel.cpp.i
+.PHONY : src/Wheel.i
+
+# target to preprocess a source file
+src/Wheel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.i
+.PHONY : src/Wheel.cpp.i
+
+src/Wheel.s: src/Wheel.cpp.s
+.PHONY : src/Wheel.s
+
+# target to generate assembly for a file
+src/Wheel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.s
+.PHONY : src/Wheel.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -236,15 +332,27 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/Car.obj
+	@echo ... src/Car.i
+	@echo ... src/Car.s
 	@echo ... src/Engine.obj
 	@echo ... src/Engine.i
 	@echo ... src/Engine.s
 	@echo ... src/Engine_oil.obj
 	@echo ... src/Engine_oil.i
 	@echo ... src/Engine_oil.s
+	@echo ... src/Headlight.obj
+	@echo ... src/Headlight.i
+	@echo ... src/Headlight.s
+	@echo ... src/Lamp.obj
+	@echo ... src/Lamp.i
+	@echo ... src/Lamp.s
 	@echo ... src/Transport.obj
 	@echo ... src/Transport.i
 	@echo ... src/Transport.s
+	@echo ... src/Wheel.obj
+	@echo ... src/Wheel.i
+	@echo ... src/Wheel.s
 .PHONY : help
 
 

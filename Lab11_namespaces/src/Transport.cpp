@@ -6,18 +6,18 @@
 #include "Transport.h"
 
 // Constructor
-Transport::Transport(double new_weight) {
-    set_weight(new_weight);
+Transport::Transport(const std::string& new_fabric) {
+    set_fabric(new_fabric);
 }
 
-void Transport::set_weight(const double &new_weight) {
-    weight = new_weight;
+void Transport::set_fabric(const std::string &new_fabric) {
+    fabric = new_fabric;
 }
 
-double Transport::get_weight() const {
-    return weight;
+std::string Transport::get_fabric() const {
+    return fabric;
 }
 
 void Transport::display() const {
-    std::cout << get_weight();
+    std::cout << get_fabric();
 }

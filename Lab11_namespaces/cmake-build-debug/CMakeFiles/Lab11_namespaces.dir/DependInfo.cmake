@@ -9,9 +9,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/main.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Car.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Engine.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/src/Engine.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Engine_oil.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/src/Engine_oil.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Headlight.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Lamp.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Transport.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/src/Transport.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Wheel.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

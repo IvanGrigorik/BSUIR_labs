@@ -80,12 +80,12 @@ clean: CMakeFiles/Lab11_namespaces.dir/clean
 CMakeFiles/Lab11_namespaces.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5 "Built target Lab11_namespaces"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target Lab11_namespaces"
 .PHONY : CMakeFiles/Lab11_namespaces.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Lab11_namespaces.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Lab11_namespaces.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/Lab11_namespaces.dir/rule

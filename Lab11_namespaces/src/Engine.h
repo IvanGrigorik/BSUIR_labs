@@ -6,10 +6,11 @@
 #pragma once
 
 #include <iostream>
+#include "Engine_oil.h"
 
 /*
- * Parent-class to car
- * Would be aggregation (self-existing object) in car
+ * Self-existing-class.
+ * Would be inhered into class "car".
  */
 
 class Engine {
@@ -18,19 +19,21 @@ protected:
     int power{};
 
 public:
+    // Aggregation pointer
+    Engine_oil *engine_oil{};
+
+public:
 
     Engine() = default;
 
-    explicit Engine(int new_power);
+    explicit Engine(const int &new_power, Engine_oil *new_engine_oil);
 
-    ~Engine() = default;
+    virtual ~Engine() = default;
 
     virtual void display() const;
 
     int get_power() const;
 
     void set_power(const int &new_power);
-
-
 };
 

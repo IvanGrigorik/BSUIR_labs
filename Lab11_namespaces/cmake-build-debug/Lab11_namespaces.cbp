@@ -83,6 +83,12 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/main.cpp">
 			<Option target="Lab11_namespaces"/>
 		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Car.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Car.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Engine.cpp">
 			<Option target="Lab11_namespaces"/>
 		</Unit>
@@ -95,10 +101,28 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Engine_oil.h">
 			<Option target="Lab11_namespaces"/>
 		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Headlight.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Headlight.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Lamp.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Lamp.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Transport.cpp">
 			<Option target="Lab11_namespaces"/>
 		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Transport.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Wheel.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Wheel.h">
 			<Option target="Lab11_namespaces"/>
 		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/CMakeLists.txt">

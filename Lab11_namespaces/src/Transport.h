@@ -8,23 +8,23 @@
 #include <iostream>
 
 /*
- * Virtual parent-class to other classes
+ * Virtual parent-class to class "car"
  */
 class Transport {
 public:
 
-    double weight{};
+    std::string fabric{};
 
     Transport() = default;
 
-    explicit Transport(double new_weight);
+    explicit Transport(const std::string& new_fabric);
 
-    virtual ~Transport() = 0;
+    virtual ~Transport() = default;
 
     virtual void display() const;
 
-    double get_weight() const;
+    std::string get_fabric() const;
 
-    void set_weight(const double &new_weight);
+    void set_fabric(const std::string &new_fabric);
 };
 

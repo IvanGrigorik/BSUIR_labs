@@ -117,12 +117,68 @@ CMakeFiles/Lab11_namespaces.dir/src/Engine_oil.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab11_namespaces.dir/src/Engine_oil.cpp.s"
 	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Engine_oil.cpp -o CMakeFiles\Lab11_namespaces.dir\src\Engine_oil.cpp.s
 
+CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.obj: CMakeFiles/Lab11_namespaces.dir/flags.make
+CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.obj: ../src/Wheel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab11_namespaces.dir\src\Wheel.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Wheel.cpp
+
+CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Wheel.cpp > CMakeFiles\Lab11_namespaces.dir\src\Wheel.cpp.i
+
+CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Wheel.cpp -o CMakeFiles\Lab11_namespaces.dir\src\Wheel.cpp.s
+
+CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.obj: CMakeFiles/Lab11_namespaces.dir/flags.make
+CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.obj: ../src/Headlight.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab11_namespaces.dir\src\Headlight.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Headlight.cpp
+
+CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Headlight.cpp > CMakeFiles\Lab11_namespaces.dir\src\Headlight.cpp.i
+
+CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Headlight.cpp -o CMakeFiles\Lab11_namespaces.dir\src\Headlight.cpp.s
+
+CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.obj: CMakeFiles/Lab11_namespaces.dir/flags.make
+CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.obj: ../src/Lamp.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab11_namespaces.dir\src\Lamp.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Lamp.cpp
+
+CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Lamp.cpp > CMakeFiles\Lab11_namespaces.dir\src\Lamp.cpp.i
+
+CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Lamp.cpp -o CMakeFiles\Lab11_namespaces.dir\src\Lamp.cpp.s
+
+CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.obj: CMakeFiles/Lab11_namespaces.dir/flags.make
+CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.obj: ../src/Car.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Lab11_namespaces.dir\src\Car.cpp.obj -c D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Car.cpp
+
+CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Car.cpp > CMakeFiles\Lab11_namespaces.dir\src\Car.cpp.i
+
+CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\src\Car.cpp -o CMakeFiles\Lab11_namespaces.dir\src\Car.cpp.s
+
 # Object files for target Lab11_namespaces
 Lab11_namespaces_OBJECTS = \
 "CMakeFiles/Lab11_namespaces.dir/main.cpp.obj" \
 "CMakeFiles/Lab11_namespaces.dir/src/Transport.cpp.obj" \
 "CMakeFiles/Lab11_namespaces.dir/src/Engine.cpp.obj" \
-"CMakeFiles/Lab11_namespaces.dir/src/Engine_oil.cpp.obj"
+"CMakeFiles/Lab11_namespaces.dir/src/Engine_oil.cpp.obj" \
+"CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.obj" \
+"CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.obj" \
+"CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.obj" \
+"CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.obj"
 
 # External object files for target Lab11_namespaces
 Lab11_namespaces_EXTERNAL_OBJECTS =
@@ -131,11 +187,15 @@ Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/main.cpp.obj
 Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/src/Transport.cpp.obj
 Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/src/Engine.cpp.obj
 Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/src/Engine_oil.cpp.obj
+Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/src/Wheel.cpp.obj
+Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/src/Headlight.cpp.obj
+Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/src/Lamp.cpp.obj
+Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.obj
 Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/build.make
 Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/linklibs.rsp
 Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/objects1.rsp
 Lab11_namespaces.exe: CMakeFiles/Lab11_namespaces.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Lab11_namespaces.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab11_namespaces\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Lab11_namespaces.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Lab11_namespaces.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
