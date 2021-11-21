@@ -30,8 +30,6 @@ int main() {
     std::cout << "Enter symbol(s) to check: ";
     std::cin >> to_find;
 
-    // Flag to check single word (if we have 1 letter from "to_find" string, we break cycle and go to another word).
-    bool flag;
     // Counter to find words and for all words
     int find_words_number{};
     int words_number{};
@@ -41,24 +39,15 @@ int main() {
     // Cycle while words stream have words.
     for (std::string word; words_stream >> word;) {
 
-        // Flag to check, is word contain any symbol from given set.
-        flag = false;
-
         // Cycles to match each find string symbol to each word symbol.
         for (auto find_symbol: to_find) {
-            for (auto word_symbol: word) {
-                if (find_symbol == word_symbol) {
-                    flag = true;
-                    find_words_number++;
-                    break;
-                }
-            }
-            if (flag)
-                break;
-        }
 
-        if (!flag) {
-            std::cout << word << ' ';
+            // Use algorithm to find each symbol from given symbol set.
+            size_t found = word.find(find_symbol);
+            if (found != std::string::npos) {
+                find_words_number++;
+                break;
+            }
         }
         words_number++;
     }
