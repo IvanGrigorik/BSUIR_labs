@@ -10,12 +10,16 @@ void print_text(std::ifstream &file) {
     }
 
     Notes temp;
+    int counter{};
+
     while (true) {
         temp.read_text(file);
+
         if (file.eof())
             break;
 
-        std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+        counter++;
+        std::cout << counter << ") " << temp.get_note_title() << ' ' << temp.get_note_text();
         if (temp.get_is_complete()) {
             std::cout << " Complete" << std::endl;
         } else {
@@ -45,13 +49,16 @@ void reverse_print_text(std::ifstream &file) {
 
     file.clear();
     file.seekg(std::ios::beg);
+    int counter{};
 
     while (amount != 0) {
         for (int i = 0; i < amount; ++i) {
             temp.read_text(file);
         }
 
-        std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+
+        counter++;
+        std::cout << counter << ") " << temp.get_note_title() << ' ' << temp.get_note_text();
         if (temp.get_is_complete()) {
             std::cout << " Complete" << ' ' << std::endl;
         } else {
@@ -72,13 +79,15 @@ void print_binary(std::ifstream &file) {
 
     Notes temp;
 
+    int counter{};
     while (true) {
         temp.read_bin(file);
         if (file.eof()) {
             break;
         }
+        counter++;
 
-        std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+        std::cout << counter << ") " << temp.get_note_title() << ' ' << temp.get_note_text();
         if (temp.get_is_complete()) {
             std::cout << " Complete" << std::endl;
         } else {
@@ -95,7 +104,7 @@ void reverse_print_binary(std::ifstream &file) {
 
     Notes temp;
     std::size_t amount = 0;
-
+    int counter{};
     while (true) {
         temp.read_bin(file);
         if (file.eof()) {
@@ -112,7 +121,9 @@ void reverse_print_binary(std::ifstream &file) {
             temp.read_bin(file);
         }
 
-        std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+        counter++;
+
+        std::cout << counter << ") " << temp.get_note_title() << ' ' << temp.get_note_text();
         if (temp.get_is_complete()) {
             std::cout << " Complete" << std::endl;
         } else {
@@ -200,8 +211,7 @@ void file_searching(const std::string &file_type, std::ifstream &file,
     file.close();
 }
 
-void file_delete(const std::string &file_type, std::ifstream &file,
-                 const std::string &note_info_to_find, int field_to_delete) {
+void file_delete(const std::string &file_type, std::ifstream &file, int delete_number) {
 
     if (file_type == "text") {
         if (!file.is_open()) {
@@ -213,91 +223,86 @@ void file_delete(const std::string &file_type, std::ifstream &file,
         }
     }
 
-    Notes temp[10];
-    int amount{};
+    std::ofstream temp_o_file;
+    temp_o_file.open("temp.txt", std::ios::trunc);
 
-    for (int i = 0; true; i++) {
+    Notes temp;
+    int counter{};
 
+    while (true) {
         if (file_type == "text") {
-            temp[i].read_text(file);
-        } else if (file_type == "binary") {
-            temp[i].read_bin(file);
+            temp.read_text(file);
+        }
+        if (file_type == "binary") {
+            temp.read_bin(file);
+        }
+
+        counter++;
+
+        if (delete_number == counter) {
+            if (file_type == "text") {
+                temp.read_text(file);
+                if (file.eof()) {
+                    break;
+                }
+            }
+            if (file_type == "binary") {
+                temp.read_bin(file);
+                if (file.eof()) {
+                    break;
+                }
+            }
         }
 
         if (file.eof()) {
             break;
         }
-        amount++;
+
+        temp.write_text(temp_o_file);
     }
+
+    temp_o_file.close();
+    temp_o_file.clear();
 
     file.close();
-    file.clear();
 
-    std::ofstream out_file;
+    std::ofstream target;
     if (file_type == "text") {
-        out_file.open(text, std::ios::out | std::ios::trunc);
+        target.open(text, std::ios::trunc);
     } else if (file_type == "binary") {
-        out_file.open(binary, std::ios::in | std::ios::trunc);
+        target.open(binary, std::ios::binary | std::ios::in | std::ios::trunc);
     }
 
-    for (int i = 0; i < amount; i++) {
+    std::ifstream temp_i_file;
+    temp_i_file.open("delete_notes.txt");
 
-        switch (field_to_delete) {
-            case 1:
-                if (temp[i].get_note_title() != note_info_to_find) {
-                    if (file_type == "binary")
-                        temp[i].write_bin(out_file);
-                    else
-                        out_file << temp[i];
-                } else {
-                    std::cout << temp[i].get_note_title() << temp[i].get_note_text();
-                    if (temp[i].get_is_complete()) {
-                        std::cout << " Complete" << ' ' << std::endl;
-                    } else {
-                        std::cout << " Not complete" << std::endl;
-                    }
-                }
-                break;
+    while (true) {
 
-            case 2:
-                if (temp[i].get_note_text() != note_info_to_find) {
-                    if (file_type == "binary")
-                        temp[i].write_bin(out_file);
-                    else
-                        out_file << temp[i];
-                } else {
-                    std::cout << temp[i].get_note_title() << temp[i].get_note_text();
-                    if (temp[i].get_is_complete()) {
-                        std::cout << " Complete" << ' ' << std::endl;
-                    } else {
-                        std::cout << " Not complete" << std::endl;
-                    }
-                }
-                break;
 
-            case 3: {
-                std::string is_complete = temp[i].get_is_complete() ? "true" : "false";
-                if (is_complete != note_info_to_find) {
-                    if (file_type == "binary")
-                        temp[i].write_bin(out_file);
-                    else
-                        out_file << temp[i];
-                } else {
-                    std::cout << temp[i].get_note_title() << temp[i].get_note_text();
-                    if (temp[i].get_is_complete()) {
-                        std::cout << " Complete" << ' ' << std::endl;
-                    } else {
-                        std::cout << " Not complete" << std::endl;
-                    }
-                }
-                break;
-            }
+        temp.read_text(temp_i_file);
 
-            default:
-                break;
+        if (temp_i_file.eof()) {
+            break;
+        }
 
+        if (file_type == "text") {
+            temp.write_text(target);
+        } else if (file_type == "binary") {
+            temp.write_bin(target);
         }
     }
-    file.close();
-    file.clear();
+
+
+    temp_o_file.close();
+    target.close();
+}
+
+void delete_duplicated(){
+
+    std::ofstream target;
+    std::ifstream source;
+
+    // Text file deleting
+    source.open(text);
+
 }

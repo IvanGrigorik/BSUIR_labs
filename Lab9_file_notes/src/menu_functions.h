@@ -15,3 +15,7 @@ int get_int(int min_size, int max_size);
 void add_file(std::ofstream &file, const std::string &file_type);
 
 void search_file(std::ifstream &file, const std::string &file_type);
+
+void delete_file_func(std::ifstream &file, const std::string &file_type);
+
+;

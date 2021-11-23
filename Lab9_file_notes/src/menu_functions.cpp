@@ -49,9 +49,9 @@ void add_file(std::ofstream &file, const std::string &file_type) {
     int is_complete;
     std::cout << std::endl << "Enter note title: ";
     std::cin >> note_title;
-    std::cout << std::endl << "Enter note text: ";
+    std::cout << "Enter note text: ";
     std::cin >> note_text;
-    std::cout << std::endl << "Enter is note complete ( 0 - note complete, 1 - complete): ";
+    std::cout << "Enter is note complete ( 0 - note complete, 1 - complete): ";
     is_complete = get_int(0, 1);
 
     Notes temp(note_title, note_text, static_cast<bool>(is_complete));
@@ -105,3 +105,29 @@ void search_file(std::ifstream &file, const std::string &file_type) {
         }
     }
 }
+
+void delete_file_func(std::ifstream &file, const std::string &file_type) {
+
+    std::cout << std::endl << std::endl;
+
+
+    if (file_type == "text") {
+        file.open(text);
+        print_text(file);
+    } else if (file_type == "binary") {
+        file.open(binary , std::ios::in);
+        print_binary(file);
+    }
+
+    file.close();
+
+    std::cout << "Enter the number to be deleted: ";
+
+    int delete_number;
+    std::cin >> delete_number;
+
+    file_delete(file_type, file, delete_number);
+
+    file.close();
+}
+

@@ -22,5 +22,6 @@ void new_files(std::ofstream &file);
 void file_searching(const std::string &file_type, std::ifstream &file,
                     const std::string &note_info_to_find, int field_to_find);
 
-void file_delete(const std::string &file_type, std::ifstream &file,
-                 const std::string &note_info_to_find, int field_to_delete);
+void file_delete(const std::string &file_type, std::ifstream &file, int delete_number);
+
+void delete_duplicated();
