@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/main.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/src/Notes.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/src/file_work.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/src/menu_functions.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir/src/menu_functions.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

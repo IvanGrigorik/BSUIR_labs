@@ -4,7 +4,8 @@
 CMakeFiles/Lab9_file_notes.dir/main.cpp.obj: \
  ../main.cpp \
  ../src/Notes.h \
- ../src/file_work.h
+ ../src/file_work.h \
+ ../src/menu_functions.h
 CMakeFiles/Lab9_file_notes.dir/src/Notes.cpp.obj: \
  ../src/Notes.cpp \
  ../src/Notes.h
@@ -12,3 +13,8 @@ CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.obj: \
  ../src/Notes.h \
  ../src/file_work.cpp \
  ../src/file_work.h
+CMakeFiles/Lab9_file_notes.dir/src/menu_functions.cpp.obj: \
+ ../src/Notes.h \
+ ../src/file_work.h \
+ ../src/menu_functions.cpp \
+ ../src/menu_functions.h

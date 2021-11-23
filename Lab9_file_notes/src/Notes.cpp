@@ -47,8 +47,8 @@ void Notes::read_text(std::ifstream &file) {
     if (!file.is_open()) {
         throw (std::runtime_error("File is not open"));
     }
-
     file >> *this;
+
 }
 
 void Notes::write_bin(std::ofstream &file) {
@@ -57,7 +57,8 @@ void Notes::write_bin(std::ofstream &file) {
     }
 
 
-    try {// Write string sizes, to read string after
+    try {
+        // Write string sizes, to read string after
         std::size_t note_title_size = note_title.size();
         file.write(reinterpret_cast<char *>(&note_title_size), sizeof(note_title_size));
         file.write(note_title.c_str(), static_cast<std::streamsize>(note_title_size));

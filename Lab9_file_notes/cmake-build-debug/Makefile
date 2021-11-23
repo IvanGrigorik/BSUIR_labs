@@ -200,6 +200,30 @@ src/file_work.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/file_work.cpp.s
 .PHONY : src/file_work.cpp.s
 
+src/menu_functions.obj: src/menu_functions.cpp.obj
+.PHONY : src/menu_functions.obj
+
+# target to build an object file
+src/menu_functions.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/menu_functions.cpp.obj
+.PHONY : src/menu_functions.cpp.obj
+
+src/menu_functions.i: src/menu_functions.cpp.i
+.PHONY : src/menu_functions.i
+
+# target to preprocess a source file
+src/menu_functions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/menu_functions.cpp.i
+.PHONY : src/menu_functions.cpp.i
+
+src/menu_functions.s: src/menu_functions.cpp.s
+.PHONY : src/menu_functions.s
+
+# target to generate assembly for a file
+src/menu_functions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab9_file_notes.dir\build.make CMakeFiles/Lab9_file_notes.dir/src/menu_functions.cpp.s
+.PHONY : src/menu_functions.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -218,6 +242,9 @@ help:
 	@echo ... src/file_work.obj
 	@echo ... src/file_work.i
 	@echo ... src/file_work.s
+	@echo ... src/menu_functions.obj
+	@echo ... src/menu_functions.i
+	@echo ... src/menu_functions.s
 .PHONY : help
 
 

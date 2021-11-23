@@ -95,6 +95,12 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/src/file_work.h">
 			<Option target="Lab9_file_notes"/>
 		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/src/menu_functions.cpp">
+			<Option target="Lab9_file_notes"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/src/menu_functions.h">
+			<Option target="Lab9_file_notes"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab9_file_notes/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

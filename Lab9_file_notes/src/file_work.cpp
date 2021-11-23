@@ -15,7 +15,12 @@ void print_text(std::ifstream &file) {
         if (file.eof())
             break;
 
-        std::cout << temp;
+        std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+        if (temp.get_is_complete()) {
+            std::cout << " Complete" << std::endl;
+        } else {
+            std::cout << " Not complete" << std::endl;
+        }
     }
     file.close();
 }
@@ -46,7 +51,12 @@ void reverse_print_text(std::ifstream &file) {
             temp.read_text(file);
         }
 
-        std::cout << temp;
+        std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+        if (temp.get_is_complete()) {
+            std::cout << " Complete" << ' ' << std::endl;
+        } else {
+            std::cout << " Not complete" << std::endl;
+        }
 
         file.seekg(std::ios::beg);
         amount--;
@@ -67,7 +77,13 @@ void print_binary(std::ifstream &file) {
         if (file.eof()) {
             break;
         }
-        std::cout << temp;
+
+        std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+        if (temp.get_is_complete()) {
+            std::cout << " Complete" << std::endl;
+        } else {
+            std::cout << " Not complete" << std::endl;
+        }
     }
     file.close();
 }
@@ -96,7 +112,12 @@ void reverse_print_binary(std::ifstream &file) {
             temp.read_bin(file);
         }
 
-        std::cout << temp;
+        std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+        if (temp.get_is_complete()) {
+            std::cout << " Complete" << std::endl;
+        } else {
+            std::cout << " Not complete" << std::endl;
+        }
 
         file.seekg(std::ios::beg);
         amount--;
@@ -138,20 +159,36 @@ void file_searching(const std::string &file_type, std::ifstream &file,
         switch (field_to_find) {
             case 1:
                 if (temp.get_note_title() == note_info_to_find) {
-                    std::cout << temp;
+
+                    std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+                    if (temp.get_is_complete()) {
+                        std::cout << " Complete" << std::endl;
+                    } else {
+                        std::cout << " Not complete" << std::endl;
+                    }
                 }
                 break;
 
             case 2:
                 if (temp.get_note_text() == note_info_to_find) {
-                    std::cout << temp;
+                    std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+                    if (temp.get_is_complete()) {
+                        std::cout << " Complete" << std::endl;
+                    } else {
+                        std::cout << " Not complete" << std::endl;
+                    }
                 }
                 break;
 
             case 3: {
                 std::string is_complete = temp.get_is_complete() ? "true" : "false";
                 if (is_complete == note_info_to_find) {
-                    std::cout << temp;
+                    std::cout << temp.get_note_title() << ' ' << temp.get_note_text();
+                    if (temp.get_is_complete()) {
+                        std::cout << " Complete" << std::endl;
+                    } else {
+                        std::cout << " Not complete" << std::endl;
+                    }
                 }
                 break;
             }
@@ -208,26 +245,50 @@ void file_delete(const std::string &file_type, std::ifstream &file,
         switch (field_to_delete) {
             case 1:
                 if (temp[i].get_note_title() != note_info_to_find) {
-                    out_file << temp[i];
+                    if (file_type == "binary")
+                        temp[i].write_bin(out_file);
+                    else
+                        out_file << temp[i];
                 } else {
-                    std::cout << temp[i];
+                    std::cout << temp[i].get_note_title() << temp[i].get_note_text();
+                    if (temp[i].get_is_complete()) {
+                        std::cout << " Complete" << ' ' << std::endl;
+                    } else {
+                        std::cout << " Not complete" << std::endl;
+                    }
                 }
                 break;
 
             case 2:
                 if (temp[i].get_note_text() != note_info_to_find) {
-                    out_file << temp[i];
+                    if (file_type == "binary")
+                        temp[i].write_bin(out_file);
+                    else
+                        out_file << temp[i];
                 } else {
-                    std::cout << temp[i];
+                    std::cout << temp[i].get_note_title() << temp[i].get_note_text();
+                    if (temp[i].get_is_complete()) {
+                        std::cout << " Complete" << ' ' << std::endl;
+                    } else {
+                        std::cout << " Not complete" << std::endl;
+                    }
                 }
                 break;
 
             case 3: {
                 std::string is_complete = temp[i].get_is_complete() ? "true" : "false";
                 if (is_complete != note_info_to_find) {
-                    out_file << temp[i];
+                    if (file_type == "binary")
+                        temp[i].write_bin(out_file);
+                    else
+                        out_file << temp[i];
                 } else {
-                    std::cout << temp[i];
+                    std::cout << temp[i].get_note_title() << temp[i].get_note_text();
+                    if (temp[i].get_is_complete()) {
+                        std::cout << " Complete" << ' ' << std::endl;
+                    } else {
+                        std::cout << " Not complete" << std::endl;
+                    }
                 }
                 break;
             }
@@ -237,4 +298,6 @@ void file_delete(const std::string &file_type, std::ifstream &file,
 
         }
     }
+    file.close();
+    file.clear();
 }
