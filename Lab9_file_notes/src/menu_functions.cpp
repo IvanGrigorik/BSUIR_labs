@@ -110,16 +110,13 @@ void delete_file_func(std::ifstream &file, const std::string &file_type) {
 
     std::cout << std::endl << std::endl;
 
-
     if (file_type == "text") {
         file.open(text);
         print_text(file);
     } else if (file_type == "binary") {
-        file.open(binary , std::ios::in);
+        file.open(binary, std::ios::in);
         print_binary(file);
     }
-
-    file.close();
 
     std::cout << "Enter the number to be deleted: ";
 
@@ -131,3 +128,24 @@ void delete_file_func(std::ifstream &file, const std::string &file_type) {
     file.close();
 }
 
+void copy_strings_txt(std::ifstream &file) {
+    std::cout << std::endl;
+
+    if (!file.is_open()) {
+        file.open(text);
+    }
+
+    print_text(file);
+
+    int first_line, last_line, copy_location;
+    std::cout << "Enter first lane to copy: ";
+    std::cin >> first_line;
+
+    std::cout << std::endl << "Enter last lane to copy: ";
+    std::cin >> last_line;
+
+    std::cout << std::endl << "Enter copy location: ";
+    std::cin >> copy_location;
+
+    copy_txt(file, first_line, last_line, copy_location);
+}

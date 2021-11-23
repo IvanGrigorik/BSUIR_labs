@@ -25,3 +25,5 @@ void file_searching(const std::string &file_type, std::ifstream &file,
 void file_delete(const std::string &file_type, std::ifstream &file, int delete_number);
 
 void delete_duplicated();
+
+void copy_txt(std::ifstream &file, int first_line, int last_line, int position);

@@ -18,4 +18,4 @@ void search_file(std::ifstream &file, const std::string &file_type);
 
 void delete_file_func(std::ifstream &file, const std::string &file_type);
 
-;
+void copy_strings_txt(std::ifstream &file);

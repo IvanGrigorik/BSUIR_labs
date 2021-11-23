@@ -224,7 +224,7 @@ void file_delete(const std::string &file_type, std::ifstream &file, int delete_n
     }
 
     std::ofstream temp_o_file;
-    temp_o_file.open("temp.txt", std::ios::trunc);
+    temp_o_file.open("delete_notes.txt", std::ios::trunc);
 
     Notes temp;
     int counter{};
@@ -274,11 +274,9 @@ void file_delete(const std::string &file_type, std::ifstream &file, int delete_n
     }
 
     std::ifstream temp_i_file;
-    temp_i_file.open("delete_notes.txt");
+    temp_i_file.open("delete_notes.txt", std::ios::in | std::ios::out);
 
     while (true) {
-
-
         temp.read_text(temp_i_file);
 
         if (temp_i_file.eof()) {
@@ -294,15 +292,203 @@ void file_delete(const std::string &file_type, std::ifstream &file, int delete_n
 
 
     temp_o_file.close();
+    temp_i_file.close();
     target.close();
+
+    std::cout << "The removal process was successful" << std::endl;
 }
 
-void delete_duplicated(){
+void delete_duplicated() {
+
+    // Text remove duplicated
+    std::ifstream source;
+    source.open(text, std::ios::in);
+
+    std::fstream io_file;
+    io_file.open("un_duplicated.txt", std::ios::in | std::ios::out | std::ios::trunc);
+
+    Notes note_from_source;
+    Notes note_from_temp;
+
+    bool is_in_file;
+
+    while (true) {
+
+        note_from_source.read_text(source);
+
+        if (source.eof()) {
+            break;
+        }
+
+        io_file.seekg(0, std::ios::beg);
+        is_in_file = false;
+        while (true) {
+            io_file >> note_from_temp;
+
+            if (io_file.eof()) {
+                io_file.clear();
+                break;
+            }
+
+            if (note_from_temp.get_note_title() == note_from_source.get_note_title() &&
+                note_from_temp.get_note_text() == note_from_source.get_note_text() &&
+                note_from_temp.get_is_complete() == note_from_source.get_is_complete()) {
+                is_in_file = true;
+                break;
+            }
+        }
+
+        io_file.clear();
+        if (!is_in_file) {
+            io_file.seekp(0, std::ios::end);
+            io_file << note_from_source;
+        }
+    }
+
+    source.close();
+
+    io_file.seekg(0, std::ios::beg);
 
     std::ofstream target;
-    std::ifstream source;
+    target.open(text);
 
-    // Text file deleting
-    source.open(text);
+    while (true) {
+
+        io_file >> note_from_temp;
+
+        if (io_file.eof()) {
+            break;
+        }
+
+        target << note_from_temp;
+    }
+
+    target.close();
+
+
+    // Binary remove duplicated
+    io_file.close();
+    io_file.open("un_duplicated.txt", std::ios::in | std::ios::out | std::ios::trunc);
+    source.open(binary, std::ios::binary | std::ios::in);
+
+    while (true) {
+
+        note_from_source.read_bin(source);
+
+        if (source.eof()) {
+            break;
+        }
+
+        io_file.seekg(0, std::ios::beg);
+        is_in_file = false;
+
+        while (true) {
+            io_file >> note_from_temp;
+
+            if (io_file.eof()) {
+                io_file.clear();
+                break;
+            }
+
+            if (note_from_temp.get_note_title() == note_from_source.get_note_title() &&
+                note_from_temp.get_note_text() == note_from_source.get_note_text() &&
+                note_from_temp.get_is_complete() == note_from_source.get_is_complete()) {
+                is_in_file = true;
+                break;
+            }
+        }
+
+        io_file.clear();
+        if (!is_in_file) {
+            io_file.seekp(0, std::ios::end);
+            io_file << note_from_source;
+        }
+    }
+
+    target.open(binary, std::ios::trunc | std::ios::in);
+
+    io_file.seekg(0, std::ios::beg);
+    while (true) {
+
+        io_file >> note_from_temp;
+
+        if (io_file.eof()) {
+            break;
+        }
+
+        note_from_temp.write_bin(target);
+    }
+
+    target.close();
+    io_file.close();
+
+    std::cout << "The process of deleting duplicate notes was successful" << std::endl;
+}
+
+void copy_txt(std::ifstream &file, int first_line, int last_line, int position) {
+
+    if (!file.is_open()) {
+        file.open(text);
+    }
+
+    std::ofstream to_copy_lines_o;
+    to_copy_lines_o.open("to_copy_lines.txt", std::ios::in | std::ios::out | std::ios::trunc);
+
+    Notes temp;
+    int counter{};
+
+    while (true) {
+        counter++;
+
+        // Copy all notes to to_copy_lines_o file
+        if (counter >= first_line && counter <= last_line) {
+            temp.read_text(file);
+            temp.write_text(to_copy_lines_o);
+        } else {
+            temp.read_text(file);
+        }
+        if (file.eof() || counter > last_line) {
+            break;
+        }
+    }
+
+    file.clear();
+    file.close();
+    file.open(text);
+
+/*
+    to_copy_lines_o.close();
+    std::ifstream to_copy_lines_i;
+    to_copy_lines_i.open("to_copy_lines.txt", std::ios::in | std::ios::out);
+
+    std::ofstream to_copy_file_o;
+    to_copy_file_o.open("to_copy_file.txt", std::ios::trunc);
+
+    counter = 0;
+    while (true) {
+
+        counter++;
+        if (counter == position) {
+            while (true) {
+
+                temp.read_text(to_copy_lines_i);
+
+                if(to_copy_lines_i.eof()){
+                    break;
+                }
+
+                temp.write_text(to_copy_file_o);
+            }
+        }
+
+        temp.read_text(file);
+        temp.write_text(to_copy_file_o);
+
+        if (file.eof()) {
+            break;
+        }
+    }*/
+
+    to_copy_lines_o.close();
 
 }
