@@ -20,7 +20,7 @@ int main() {
                 }
 
                 case 2: {
-                    target.open(binary, std::ios::app | std::ios::in);
+                    target.open(binary, std::ios::binary | std::ios::app | std::ios::in);
                     add_file(target, "binary");
                     target.close();
                     break;
@@ -87,8 +87,14 @@ int main() {
                     break;
                 }
 
-                case 12:{
+                case 12: {
                     copy_strings_txt(source);
+                    system("pause > 0");
+                    break;
+                }
+
+                case 13:{
+                    copy_strings_bin(source);
                     system("pause > 0");
                     break;
                 }

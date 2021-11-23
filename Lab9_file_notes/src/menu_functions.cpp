@@ -21,10 +21,11 @@ int get_menu_choice() {
               << "10) Delete from .bin file" << std::endl
               << "11) Delete duplicated" << std::endl
               << "12) Copy set in .txt file" << std::endl
+              << "13) Copy set in .bin file" << std::endl
               << "0) Exit" << std::endl
               << ">> ";
 
-    int choice = get_int(0, 12);
+    int choice = get_int(0, 13);
     return choice;
 }
 
@@ -139,13 +140,38 @@ void copy_strings_txt(std::ifstream &file) {
 
     int first_line, last_line, copy_location;
     std::cout << "Enter first lane to copy: ";
-    std::cin >> first_line;
+    first_line = get_int(0, INT_MAX);
 
-    std::cout << std::endl << "Enter last lane to copy: ";
-    std::cin >> last_line;
+    std::cout  << "Enter last lane to copy: ";
+    last_line = get_int(0, INT_MAX);
 
-    std::cout << std::endl << "Enter copy location: ";
-    std::cin >> copy_location;
+    std::cout  << "Enter copy location: ";
+    copy_location = get_int(0, INT_MAX);
 
     copy_txt(file, first_line, last_line, copy_location);
+
+    file.close();
+}
+
+void copy_strings_bin(std::ifstream &file){
+    std::cout << std::endl;
+
+    if (!file.is_open()) {
+        file.open(binary, std::ios::binary | std::ios::in | std::ios::out);
+    }
+
+    print_binary(file);
+
+    int first_line, last_line, copy_location;
+    std::cout << "Enter first lane to copy: ";
+    first_line = get_int(0, INT_MAX);
+
+    std::cout  << "Enter last lane to copy: ";
+    last_line = get_int(0, INT_MAX);
+
+    std::cout  << "Enter copy location: ";
+    copy_location = get_int(0, INT_MAX);
+
+    copy_bin(file, first_line, last_line, copy_location);
+    file.close();
 }

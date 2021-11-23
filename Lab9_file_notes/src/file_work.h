@@ -27,3 +27,5 @@ void file_delete(const std::string &file_type, std::ifstream &file, int delete_n
 void delete_duplicated();
 
 void copy_txt(std::ifstream &file, int first_line, int last_line, int position);
+
+void copy_bin(std::ifstream &file, int first_line, int last_line, int position);

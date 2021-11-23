@@ -431,6 +431,8 @@ void copy_txt(std::ifstream &file, int first_line, int last_line, int position) 
         file.open(text);
     }
 
+    bool is_copied{};
+
     std::ofstream to_copy_lines_o;
     to_copy_lines_o.open("to_copy_lines.txt", std::ios::in | std::ios::out | std::ios::trunc);
 
@@ -456,8 +458,8 @@ void copy_txt(std::ifstream &file, int first_line, int last_line, int position) 
     file.close();
     file.open(text);
 
-/*
     to_copy_lines_o.close();
+
     std::ifstream to_copy_lines_i;
     to_copy_lines_i.open("to_copy_lines.txt", std::ios::in | std::ios::out);
 
@@ -473,22 +475,147 @@ void copy_txt(std::ifstream &file, int first_line, int last_line, int position) 
 
                 temp.read_text(to_copy_lines_i);
 
-                if(to_copy_lines_i.eof()){
+                if (to_copy_lines_i.eof()) {
                     break;
                 }
 
                 temp.write_text(to_copy_file_o);
             }
+            is_copied = true;
         }
 
         temp.read_text(file);
-        temp.write_text(to_copy_file_o);
 
         if (file.eof()) {
             break;
         }
-    }*/
+
+        temp.write_text(to_copy_file_o);
+    }
+
+    if (!is_copied) {
+        std::cout << "No such position! Enter [0 n+1] positions!";\
+        file.close();
+        return;
+    }
 
     to_copy_lines_o.close();
+
+    std::ifstream to_copy_file_i;
+    to_copy_file_i.open("to_copy_file.txt", std::ios::in | std::ios::out);
+
+    std::ofstream target;
+    target.open(text);
+
+    while (true) {
+        temp.read_text(to_copy_file_i);
+
+        if (to_copy_file_i.eof()) {
+            break;
+        }
+
+        temp.write_text(target);
+    }
+    target.close();
+
+    std::cout << "Copying was successful" << std::endl;
+    file.close();
+}
+
+void copy_bin(std::ifstream &file, int first_line, int last_line, int position) {
+    if (!file.is_open()) {
+        file.open(binary, std::ios::binary | std::ios::in);
+    }
+
+
+    bool is_copied{};
+
+    std::ofstream to_copy_lines_o;
+    to_copy_lines_o.open("to_copy_lines.txt", std::ios::in | std::ios::out | std::ios::trunc);
+
+    Notes temp;
+    int counter{};
+
+    while (true) {
+        counter++;
+
+        // Copy all notes to to_copy_lines_o file
+        if (counter >= first_line && counter <= last_line) {
+            temp.read_bin(file);
+            temp.write_text(to_copy_lines_o);
+        } else {
+            temp.read_bin(file);
+        }
+        if (file.eof() || counter > last_line) {
+            break;
+        }
+    }
+
+    file.clear();
+    file.close();
+    file.open(binary, std::ios::binary | std::ios::in | std::ios::out);
+
+    to_copy_lines_o.close();
+
+    std::ifstream to_copy_lines_i;
+    to_copy_lines_i.open("to_copy_lines.txt", std::ios::in | std::ios::out);
+
+    std::ofstream to_copy_file_o;
+    to_copy_file_o.open("to_copy_file.txt", std::ios::trunc);
+
+    counter = 0;
+    while (true) {
+
+        counter++;
+        if (counter == position) {
+            while (true) {
+
+                temp.read_text(to_copy_lines_i);
+
+                if (to_copy_lines_i.eof()) {
+                    break;
+                }
+
+                temp.write_text(to_copy_file_o);
+            }
+            is_copied = true;
+        }
+
+        temp.read_bin(file);
+
+        if (file.eof()) {
+            break;
+        }
+
+        temp.write_text(to_copy_file_o);
+    }
+
+    if (!is_copied) {
+        std::cout << "No such position! Enter [0 n+1] positions!";\
+        file.close();
+        return;
+    }
+
+    to_copy_lines_o.close();
+
+    std::ifstream to_copy_file_i;
+    to_copy_file_i.open("to_copy_file.txt", std::ios::in | std::ios::out);
+
+    std::ofstream target;
+    target.open(binary, std::ios::in | std::ios::out);
+
+    while (true) {
+        temp.read_text(to_copy_file_i);
+
+        if (to_copy_file_i.eof()) {
+            break;
+        }
+
+        temp.write_bin(target);
+    }
+    target.close();
+
+    std::cout << "Copying was successful" << std::endl;
+    file.close();
 
 }
