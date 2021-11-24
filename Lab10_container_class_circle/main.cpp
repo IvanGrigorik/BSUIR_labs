@@ -1,7 +1,12 @@
-#include <iostream>
 #include "src/Ring.h"
+#include "src/menu_functions.h"
 
 int main() {
+
+/*
+    program();
+*/
+
     Ring<int> i_ring;
 
     try {

@@ -12,6 +12,7 @@
 
 namespace car {
     class Car final : public Transport {
+
     protected:
 
         std::string model{};

@@ -4,7 +4,7 @@
  */
 
 #pragma once
-
+#include <iostream>
 
 template<class T>
 class Ring {
@@ -15,7 +15,6 @@ private:
 
         Ring_node *next;
         T value{};
-
 
         explicit Ring_node(T new_value);
 
@@ -207,5 +206,4 @@ public:
 
 /* Создать две головы. Вторая замыкает кольцо. Указатель второй головы ссылается на nullptr. */
 
-#include <ostream>
 #include "Ring.inl"

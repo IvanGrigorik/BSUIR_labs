@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/cmake-build-debug/CMakeFiles/Lab10_container_class_circle.dir/main.cpp.obj"
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/menu_functions.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/cmake-build-debug/CMakeFiles/Lab10_container_class_circle.dir/src/menu_functions.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

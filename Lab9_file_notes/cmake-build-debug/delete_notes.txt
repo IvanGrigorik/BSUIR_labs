@@ -1,3 +1,4 @@
-1 1 1
-1 1 1
-0 1 1
+zxc zxc 1
+zxc cxz 0
+qwe qwe 0
+qwe qwe 1

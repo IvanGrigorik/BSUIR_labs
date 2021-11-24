@@ -4,4 +4,10 @@
 CMakeFiles/Lab10_container_class_circle.dir/main.cpp.obj: \
  ../main.cpp \
  ../src/Ring.h \
- ../src/Ring.inl
+ ../src/Ring.inl \
+ ../src/menu_functions.h
+CMakeFiles/Lab10_container_class_circle.dir/src/menu_functions.cpp.obj: \
+ ../src/Ring.h \
+ ../src/Ring.inl \
+ ../src/menu_functions.cpp \
+ ../src/menu_functions.h

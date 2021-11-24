@@ -7,18 +7,26 @@
 #IncludeRegexTransform: 
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/main.cpp
-iostream
--
 src/Ring.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.h
+src/menu_functions.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/menu_functions.h
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.h
-ostream
+iostream
 -
 Ring.inl
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.inl
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.inl
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/menu_functions.cpp
+menu_functions.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/menu_functions.h
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/menu_functions.h
+iostream
+-
 Ring.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.h
 

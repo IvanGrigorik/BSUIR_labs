@@ -1,9 +1,7 @@
 /*
- * Created by SiFi on 18.11.2021.
+ * Created by SiFfi on 18.11.2021.
  * BSUiR, 2021
  */
-
-#include "Ring.h"
 
 // Constructor for Ring node in circle class
 
@@ -111,9 +109,9 @@ void Ring<T>::print() {
     }
 
     for (auto temp = enter_iterator; temp != end(); ++temp) {
-        std::cout << temp.ring_node->value << ' ';
+        std::cout << temp.ring_node->value << ' ' << std::endl;
     }
 
-    std::cout << pre_enter_iterator.ring_node->value;
+    std::cout << pre_enter_iterator.ring_node->value << std::endl;
 
 }

@@ -142,18 +142,22 @@ void copy_strings_txt(std::ifstream &file) {
     std::cout << "Enter first lane to copy: ";
     first_line = get_int(0, INT_MAX);
 
-    std::cout  << "Enter last lane to copy: ";
+    std::cout << "Enter last lane to copy: ";
     last_line = get_int(0, INT_MAX);
 
-    std::cout  << "Enter copy location: ";
+    std::cout << "Enter copy location: ";
     copy_location = get_int(0, INT_MAX);
+
+    if (first_line > last_line) {
+        std::swap(first_line, last_line);
+    }
 
     copy_txt(file, first_line, last_line, copy_location);
 
     file.close();
 }
 
-void copy_strings_bin(std::ifstream &file){
+void copy_strings_bin(std::ifstream &file) {
     std::cout << std::endl;
 
     if (!file.is_open()) {
@@ -166,11 +170,15 @@ void copy_strings_bin(std::ifstream &file){
     std::cout << "Enter first lane to copy: ";
     first_line = get_int(0, INT_MAX);
 
-    std::cout  << "Enter last lane to copy: ";
+    std::cout << "Enter last lane to copy: ";
     last_line = get_int(0, INT_MAX);
 
-    std::cout  << "Enter copy location: ";
+    std::cout << "Enter copy location: ";
     copy_location = get_int(0, INT_MAX);
+
+    if (first_line > last_line) {
+        std::swap(first_line, last_line);
+    }
 
     copy_bin(file, first_line, last_line, copy_location);
     file.close();
