@@ -104,7 +104,7 @@ template<class T>
 void Ring<T>::print() {
 
     if (is_ring_empty) {
-        std::cout << "Ring empty";
+        std::cout << "Ring empty" << std::endl;
         return;
     }
 

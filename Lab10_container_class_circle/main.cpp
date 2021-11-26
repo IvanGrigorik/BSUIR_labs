@@ -1,43 +1,63 @@
-#include "src/Ring.h"
 #include "src/menu_functions.h"
+
 
 int main() {
 
-/*
-    program();
-*/
+    Ring<std::string> s_ring;
 
-    Ring<int> i_ring;
-
-    try {
-        auto it = i_ring.begin();
-
-        i_ring.add_front(1);
-        i_ring.add_front(2);
-        i_ring.add_front(4);
-
-        i_ring.print();
+    std::vector<Ring<std::string> > s_ring_vec;
 
 
-        std::cout << std::endl;
+    while (true) {
+        try {
+            switch (get_menu_choice()) {
 
-        it = i_ring.find(1);
-        i_ring.delete_element(it);
+                case 1: {
+                    add_element(s_ring_vec);
+                    break;
+                }
 
-        it = i_ring.find(2);
-        i_ring.delete_element(it);
+                case 2: {
+                    rings_show(s_ring_vec);
+                    system("pause > 0");
+                    break;
+                }
 
-        it = i_ring.find(4);
-        i_ring.delete_element(it);
+                case 3: {
+                    rings_search(s_ring_vec);
+                    system("pause > 0");
+                    break;
+                }
 
-        i_ring.add_back(7);
-        i_ring.add_back(8);
+                case 4: {
+                    rings_delete(s_ring_vec);
+                    system("pause > 0");
+                    break;
+                }
 
-        std::cout << std::endl;
+                case 5: {
+                    rings_compare(s_ring_vec);
+                    system("pause > 0");
+                    break;
+                }
+                case 0:
+                    exit(EXIT_SUCCESS);
+            }
+        } catch (std::exception &ex) {
+            std::cout << std::endl << "Error: " << ex.what() << std::endl;
+            system("pause > 0");
+        }
 
-
-        i_ring.print();
-    } catch (std::exception &ex) {
-        std::cout << std::endl << "Error: " << ex.what();
+        system("cls");
     }
 }
+
+/*
+ * Ввод с клавиатуры.
+ * Может быть несколько колец (вводится с клавиатуры).
+ *
+ * Сравниваю кольца (вывод большего или меньшего).
+ *
+ * Найти наибольшее кольцо, найти наименьшее кольцо.
+ * Удаление дубликатов (Если два полностью совпадающих кольца - то удаляю).
+ */

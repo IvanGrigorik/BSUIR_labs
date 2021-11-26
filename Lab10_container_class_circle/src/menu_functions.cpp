@@ -4,19 +4,21 @@
  */
 
 #include "menu_functions.h"
+#include <algorithm>
 
 int get_menu_choice() {
     system("cls");
     std::cout << "Enter what you want to enter: " << std::endl
               << "1) Add new element to ring" << std::endl
               << "2) Show ring" << std::endl
-              << "3) "
+              << "3) Search in rings" << std::endl
+              << "4) Delete from file" << std::endl
+              << "5) Compare rings" << std::endl
               << "0) Exit" << std::endl
               << ">> ";
     int choice = get_int(0, 9);
     return choice;
 }
-
 
 int get_int(int min_size, int max_size) {
     int x;
@@ -33,40 +35,185 @@ int get_int(int min_size, int max_size) {
     }
 }
 
-void program() {
-    Ring<std::string> s_ring;
+void add_element(std::vector<Ring<std::string> > &s_ring_vec) {
 
-    while (true) {
-        try {
-            switch (get_menu_choice()) {
+    std::cout << std::endl;
+    std::cout << "1) Add item to existing ring" << std::endl
+              << "2) Add element to new ring" << std::endl << ">> ";
+    int choice;
+    choice = get_int(1, 2);
 
-                case 1: {
-                    std::cout << "Enter element to add: ";
-                    std::string element_to_add;
-                    std::cin >> element_to_add;
-
-                    s_ring.add_back(element_to_add);
-                    break;
-                }
-
-                case 2: {
-                    std::cout << "Ring content: " << std::endl;
-                    s_ring.print();
-                    system("pause > 0");
-                    break;
-                }
-
-                case 3: {
-
-                }
-
-                case 0:
-                    exit(EXIT_SUCCESS);
-            }
-        } catch (std::exception &ex) {
-            std::cout << "Error: " << ex.what() << std::endl;
+    switch (choice) {
+        case 1: {
+            add_exist(s_ring_vec);
+            break;
         }
 
-        system("cls");
+        case 2: {
+            std::cout << std::endl << "Enter new value: ";
+            std::string value;
+            std::cin >> value;
+            Ring<std::string> new_ring(value);
+            s_ring_vec.push_back(new_ring);
+        }
+
+        default:
+            break;
+    }
+}
+
+void add_exist(std::vector<Ring<std::string> > &s_ring_vec) {
+
+    if (s_ring_vec.empty()) {
+        throw std::runtime_error("Not a single ring is created");
+    }
+
+    std::cout << "Enter ring number to add info: ";
+
+    int ring_number = get_int(1, static_cast<int>(s_ring_vec.size()));
+
+    if (ring_number > s_ring_vec.size()) {
+        throw std::runtime_error("Invalid ring number!");
+    }
+
+    std::cout << std::endl << "Enter new value: ";
+    std::string value;
+    std::cin >> value;
+
+    s_ring_vec[--ring_number].add_back(value);
+}
+
+void rings_show(std::vector<Ring<std::string> > &s_ring_vec) {
+
+    if (s_ring_vec.empty()) {
+        throw std::runtime_error("Not a single ring is created");
+    }
+    std::cout << "Rings content: " << std::endl;
+
+    for (int i = 0; i < s_ring_vec.size(); i++) {
+        std::cout << std::endl << "Ring " << i + 1 << ":" << std::endl;
+        s_ring_vec[i].print();
+    }
+
+}
+
+void rings_search(std::vector<Ring<std::string> > &s_ring_vec) {
+    std::cout << "Enter value to rings_search: ";
+    std::string value_to_search;
+    std::cin >> value_to_search;
+
+
+    for (int i = 0; i < s_ring_vec.size(); i++) {
+        std::cout << std::endl << "Ring " << i + 1 << ":" << std::endl;
+
+        auto it = s_ring_vec[i].begin();
+
+        s_ring_vec[i].find(value_to_search);
+    }
+
+    std::cout << std::endl;
+    rings_show(s_ring_vec);
+}
+
+void rings_delete(std::vector<Ring<std::string> > &s_ring_vec) {
+    rings_show(s_ring_vec);
+
+    if (s_ring_vec.empty()) {
+        throw std::runtime_error("Not a single ring is created");
+    }
+
+    std::cout << std::endl << "Enter ring number to delete info: ";
+    int ring_number = get_int(1, static_cast<int>(s_ring_vec.size()));
+
+
+    std::cout << std::endl << "Enter value to delete: ";
+    std::string delete_value;
+    std::cin >> delete_value;
+
+    auto it = s_ring_vec[ring_number - 1].find(delete_value);
+
+    if (it.is_valid_iterator()) {
+        s_ring_vec[ring_number - 1].delete_element(it);
+    }
+
+    delete_ring(s_ring_vec, ring_number);
+
+
+    std::cout << std::endl << "Value \"" << delete_value << "\" deleted from ring " << ring_number << std::endl;
+}
+
+void rings_compare(std::vector<Ring<std::string> > &s_ring_vec) {
+    rings_show(s_ring_vec);
+
+    if (s_ring_vec.empty()) {
+        throw std::runtime_error("Not a single ring is created");
+    }
+
+    std::cout << std::endl << "Enter first ring number to compare: ";
+    int ring_number1 = get_int(1, static_cast<int>(s_ring_vec.size()));
+    std::cout << std::endl << "Enter second ring number to compare: ";
+    int ring_number2 = get_int(1, static_cast<int>(s_ring_vec.size()));
+
+    int compare = compare_elements(s_ring_vec[ring_number1 - 1], s_ring_vec[ring_number2 - 1]);
+
+    std::cout << compare;
+}
+
+// If rings not equal - return 0
+template<class T>
+int compare_elements(Ring<T> ring_1_to_compare, Ring<T> ring_2_to_compare) {
+
+    bool is_equal = true;
+
+    auto it2 = ring_2_to_compare.begin();
+    auto it1 = ring_1_to_compare.begin();
+
+    while (true) {
+        if (it1 == ring_1_to_compare.end() || it2 == ring_2_to_compare.end()) {
+            break;
+        }
+
+        if (it1.get_data().value == it2.get_data().value) {
+            ++it1;
+            ++it2;
+            continue;
+        } else {
+            is_equal = false;
+            break;
+        }
+    }
+
+    if (!is_equal) {
+        return 0;
+    }
+
+    // If one ring is over and the other is not
+    if (it1 == ring_1_to_compare.end() && it2 != ring_2_to_compare.end() ||
+        it2 == ring_2_to_compare.end() && it1 != ring_1_to_compare.end()) {
+        return 0;
+    }
+
+    ++it1;
+    ++it2;
+
+    if (it1.get_data().value == it2.get_data().value) {
+        return 1;
+    }
+
+    return 1;
+}
+
+void delete_ring(std::vector<Ring<std::string> > &s_ring_vec, int ring_number) {
+    if (s_ring_vec.size() > 1) {
+        if (s_ring_vec[ring_number - 1].is_empty()) {
+            for (int i = ring_number - 1; i < s_ring_vec.size(); i++) {
+                std::swap(s_ring_vec[i], s_ring_vec[i + 1]);
+            }
+            s_ring_vec.pop_back();
+        }
+    } else {
+        if (s_ring_vec[ring_number - 1].is_empty()) {
+            s_ring_vec.pop_back();
+        }
     }
 }

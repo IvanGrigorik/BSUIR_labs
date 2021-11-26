@@ -6,14 +6,10 @@
 
 #IncludeRegexTransform: 
 
-D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/main.cpp
-src/Ring.h
-D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.h
-src/menu_functions.h
-D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/menu_functions.h
-
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.h
 iostream
+-
+vector
 -
 Ring.inl
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.inl
@@ -23,10 +19,10 @@ D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.inl
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/menu_functions.cpp
 menu_functions.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/menu_functions.h
+algorithm
+-
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/menu_functions.h
-iostream
--
 Ring.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab10_container_class_circle/src/Ring.h
 

@@ -4,12 +4,14 @@
  */
 
 #pragma once
+
 #include <iostream>
+#include <vector>
 
 template<class T>
 class Ring {
 
-private:
+public:
     class Ring_node {
     public:
 
@@ -25,6 +27,10 @@ private:
         friend std::ostream &operator<<(std::ostream &os, const Ring_node &node) {
             os << node.value;
             return os;
+        }
+
+        T get_value() {
+            return value;
         }
     };
 
@@ -78,7 +84,7 @@ public:
         }
     };
 
-private:
+public:
 
     Ring_node *enter{};
 
@@ -110,11 +116,14 @@ public:
     iterator find(T find_value) {
         for (auto it = begin(); it != end(); ++it) {
             if (it.ring_node->value == find_value) {
+                std::cout << find_value << " contained in ring: " << it.ring_node->value;
                 return it;
             }
         }
 
         if (end().ring_node->value == find_value) {
+
+            std::cout << find_value << " contained in ring: " << end().ring_node->value;
             return end();
         } else {
             std::cout << "No such element in ring";
