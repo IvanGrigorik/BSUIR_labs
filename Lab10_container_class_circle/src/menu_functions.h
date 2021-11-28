@@ -27,3 +27,5 @@ void delete_ring(std::vector<Ring<std::string> > &s_ring_vec, int ring_number);
 
 template<class T>
 int compare_elements(Ring<T> ring_1_to_compare, Ring<T> ring_2_to_compare);
+
+void delete_duplicated(std::vector<Ring<std::string> > &s_ring_vec);

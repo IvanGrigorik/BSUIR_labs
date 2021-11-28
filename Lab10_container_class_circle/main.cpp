@@ -40,6 +40,12 @@ int main() {
                     system("pause > 0");
                     break;
                 }
+
+                case 6:{
+                    delete_duplicated(s_ring_vec);
+                    system("pause > 0");
+                    break;
+                }
                 case 0:
                     exit(EXIT_SUCCESS);
             }

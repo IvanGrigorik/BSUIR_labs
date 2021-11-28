@@ -14,9 +14,10 @@ int get_menu_choice() {
               << "3) Search in rings" << std::endl
               << "4) Delete from file" << std::endl
               << "5) Compare rings" << std::endl
+              << "6) Delete duplicated rings" << std::endl
               << "0) Exit" << std::endl
               << ">> ";
-    int choice = get_int(0, 9);
+    int choice = get_int(0, 6);
     return choice;
 }
 
@@ -106,7 +107,7 @@ void rings_search(std::vector<Ring<std::string> > &s_ring_vec) {
     for (int i = 0; i < s_ring_vec.size(); i++) {
         std::cout << std::endl << "Ring " << i + 1 << ":" << std::endl;
 
-        auto it = s_ring_vec[i].begin();
+//        auto it = s_ring_vec[i].begin();
 
         s_ring_vec[i].find(value_to_search);
     }
@@ -156,14 +157,24 @@ void rings_compare(std::vector<Ring<std::string> > &s_ring_vec) {
 
     int compare = compare_elements(s_ring_vec[ring_number1 - 1], s_ring_vec[ring_number2 - 1]);
 
-    std::cout << compare;
+    if (compare > 0) {
+        std::cout << "Ring " << ring_number2 << " bigger than ring " << ring_number1;
+    } else if (compare < 0) {
+        std::cout << "Ring " << ring_number1 << " bigger than ring " << ring_number2;
+    } else if (compare == 0) {
+        std::cout << "Rings equal";
+    }
+
 }
 
-// If rings not equal - return 0
+/* return 1 - if 2nd bigger than 1st
+ * return 0 - is rings equal
+ * return -1 - if 1st ring bigger than 2nd
+ */
 template<class T>
 int compare_elements(Ring<T> ring_1_to_compare, Ring<T> ring_2_to_compare) {
 
-    bool is_equal = true;
+    int more1 = 0, more2 = 0;
 
     auto it2 = ring_2_to_compare.begin();
     auto it1 = ring_1_to_compare.begin();
@@ -172,41 +183,56 @@ int compare_elements(Ring<T> ring_1_to_compare, Ring<T> ring_2_to_compare) {
         if (it1 == ring_1_to_compare.end() || it2 == ring_2_to_compare.end()) {
             break;
         }
-
         if (it1.get_data().value == it2.get_data().value) {
             ++it1;
             ++it2;
             continue;
+        } else if (it1.get_data().value > it2.get_data().value) {
+            ++it1;
+            ++it2;
+            more1++;
+        } else if (it2.get_data().value > it1.get_data().value) {
+            ++it1;
+            ++it2;
+            more2++;
         } else {
-            is_equal = false;
             break;
         }
+
     }
 
-    if (!is_equal) {
-        return 0;
-    }
 
     // If one ring is over and the other is not
-    if (it1 == ring_1_to_compare.end() && it2 != ring_2_to_compare.end() ||
-        it2 == ring_2_to_compare.end() && it1 != ring_1_to_compare.end()) {
-        return 0;
+    if (it1 == ring_1_to_compare.end() && it2 != ring_2_to_compare.end()) {
+        return 1;
+    }
+    if (it2 == ring_2_to_compare.end() && it1 != ring_1_to_compare.end()) {
+        return -1;
     }
 
-    ++it1;
-    ++it2;
 
-    if (it1.get_data().value == it2.get_data().value) {
+    if (more1 > more2 + 1) {
+        return -1;
+    } else if (more2 > more1 + 1) {
         return 1;
     }
 
-    return 1;
+    if (it1.get_data().value > it2.get_data().value) {
+        return -1;
+    } else if (it1.get_data().value < it2.get_data().value) {
+        return 1;
+    } else if (it1.get_data().value == it2.get_data().value) {
+        return 0;
+    }
+
+    throw std::runtime_error("Error in compare function");
 }
 
 void delete_ring(std::vector<Ring<std::string> > &s_ring_vec, int ring_number) {
+
     if (s_ring_vec.size() > 1) {
         if (s_ring_vec[ring_number - 1].is_empty()) {
-            for (int i = ring_number - 1; i < s_ring_vec.size(); i++) {
+            for (int i = ring_number - 1; i < s_ring_vec.size() - 1; i++) {
                 std::swap(s_ring_vec[i], s_ring_vec[i + 1]);
             }
             s_ring_vec.pop_back();
@@ -217,3 +243,27 @@ void delete_ring(std::vector<Ring<std::string> > &s_ring_vec, int ring_number) {
         }
     }
 }
+
+void delete_duplicated(std::vector<Ring<std::string> > &s_ring_vec) {
+
+    rings_show(s_ring_vec);
+
+    for (int i = 0; i < s_ring_vec.size(); i++) {
+
+        for (int j = i + 1; j < s_ring_vec.size(); j++) {
+
+            if (compare_elements(s_ring_vec[i], s_ring_vec[j]) == 0) {
+                std::cout << "Ring " << i + 1 << " and " << j + 1 << " duplicated" << std::endl;
+
+                for (int k = j; k < s_ring_vec.size() - 1; k++) {
+                    std::swap(s_ring_vec[k], s_ring_vec[k + 1]);
+                }
+
+                s_ring_vec.pop_back();
+                --j;
+            }
+        }
+    }
+    std::cout << std::endl << "Duplicated rings deleted" << std::endl;
+}
+
