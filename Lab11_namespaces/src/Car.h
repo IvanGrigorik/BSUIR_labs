@@ -13,15 +13,15 @@
 namespace car {
     class Car final : public Transport {
 
-    protected:
+    public:
 
         std::string model{};
         Headlight headlight;
-        Engine engine;
         Wheel wheel;
 
 
     public:
+        Engine engine;
 
         Car() = default;
 

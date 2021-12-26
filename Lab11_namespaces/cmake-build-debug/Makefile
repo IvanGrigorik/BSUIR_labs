@@ -128,6 +128,30 @@ Lab11_namespaces/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/build
 .PHONY : Lab11_namespaces/fast
 
+Menu_functions/Menu_functions.obj: Menu_functions/Menu_functions.cpp.obj
+.PHONY : Menu_functions/Menu_functions.obj
+
+# target to build an object file
+Menu_functions/Menu_functions.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/Menu_functions/Menu_functions.cpp.obj
+.PHONY : Menu_functions/Menu_functions.cpp.obj
+
+Menu_functions/Menu_functions.i: Menu_functions/Menu_functions.cpp.i
+.PHONY : Menu_functions/Menu_functions.i
+
+# target to preprocess a source file
+Menu_functions/Menu_functions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/Menu_functions/Menu_functions.cpp.i
+.PHONY : Menu_functions/Menu_functions.cpp.i
+
+Menu_functions/Menu_functions.s: Menu_functions/Menu_functions.cpp.s
+.PHONY : Menu_functions/Menu_functions.s
+
+# target to generate assembly for a file
+Menu_functions/Menu_functions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab11_namespaces.dir\build.make CMakeFiles/Lab11_namespaces.dir/Menu_functions/Menu_functions.cpp.s
+.PHONY : Menu_functions/Menu_functions.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -329,6 +353,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Lab11_namespaces
+	@echo ... Menu_functions/Menu_functions.obj
+	@echo ... Menu_functions/Menu_functions.i
+	@echo ... Menu_functions/Menu_functions.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

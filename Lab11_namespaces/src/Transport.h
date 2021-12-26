@@ -8,7 +8,7 @@
 #include <iostream>
 
 /*
- * Virtual parent-class to class "car"
+ * Virtual abstract parent-class to class "car"
  */
 class Transport {
 public:
@@ -21,9 +21,9 @@ public:
 
     virtual ~Transport() = default;
 
-    virtual void display() const;
+    virtual void display() const = 0;
 
-    std::string get_fabric() const;
+    std::string get_car_fabric() const;
 
     void set_fabric(const std::string &new_fabric);
 };

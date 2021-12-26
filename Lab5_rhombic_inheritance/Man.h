@@ -25,7 +25,6 @@ public:
     void re_name ();
 
     friend ostream &operator<< (ostream &os, const Man &man);
-
 };
 
 

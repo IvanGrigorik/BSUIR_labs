@@ -80,12 +80,12 @@ clean: CMakeFiles/Lab12_STL.dir/clean
 CMakeFiles/Lab12_STL.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab12_STL.dir\build.make CMakeFiles/Lab12_STL.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab12_STL.dir\build.make CMakeFiles/Lab12_STL.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab12_STL\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target Lab12_STL"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\KPIYAP\BSUiR_labs_Ivan\Lab12_STL\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target Lab12_STL"
 .PHONY : CMakeFiles/Lab12_STL.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Lab12_STL.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab12_STL\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab12_STL\cmake-build-debug\CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Lab12_STL.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\KPIYAP\BSUiR_labs_Ivan\Lab12_STL\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/Lab12_STL.dir/rule

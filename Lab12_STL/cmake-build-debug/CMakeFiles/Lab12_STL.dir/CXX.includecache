@@ -6,12 +6,16 @@
 
 #IncludeRegexTransform: 
 
-D:/KPIYAP/BSUiR_labs_Ivan/Lab12_STL/main.cpp
+D:/KPIYAP/BSUiR_labs_Ivan/Lab12_STL/src/menu_functions.cpp
+menu_functions.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab12_STL/src/menu_functions.h
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab12_STL/src/menu_functions.h
 iostream
 -
 fstream
 -
-list
+vector
 -
 sstream
 -

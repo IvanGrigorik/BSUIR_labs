@@ -35,5 +35,7 @@ public:
     int get_power() const;
 
     void set_power(const int &new_power);
+
+
 };
 

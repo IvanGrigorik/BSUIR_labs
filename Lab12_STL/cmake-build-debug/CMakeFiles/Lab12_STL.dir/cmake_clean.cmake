@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Lab12_STL.dir/main.cpp.obj"
+  "CMakeFiles/Lab12_STL.dir/src/menu_functions.cpp.obj"
   "Lab12_STL.exe"
   "Lab12_STL.exe.manifest"
   "Lab12_STL.pdb"

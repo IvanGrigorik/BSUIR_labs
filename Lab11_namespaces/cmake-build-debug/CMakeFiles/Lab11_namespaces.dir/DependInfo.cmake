@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/Menu functions/Menu_functions.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/Menu_functions/Menu_functions.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/main.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/main.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Car.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.obj"
   "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Engine.cpp" "D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/CMakeFiles/Lab11_namespaces.dir/src/Engine.cpp.obj"

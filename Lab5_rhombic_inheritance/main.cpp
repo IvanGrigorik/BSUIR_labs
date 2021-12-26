@@ -1,8 +1,10 @@
 #include "menu_functions.h"
 
-int main () {
+int main() {
 
     Student_Programmer person;
+
+    Man *man = new Student_Programmer;
 
     get_Student_programmer_data(person);
 

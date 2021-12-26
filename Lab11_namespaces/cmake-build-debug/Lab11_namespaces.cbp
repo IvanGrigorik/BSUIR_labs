@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/Menu functions/Menu_functions.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/Menu functions/Menu_functions.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/main.cpp">
 			<Option target="Lab11_namespaces"/>
 		</Unit>

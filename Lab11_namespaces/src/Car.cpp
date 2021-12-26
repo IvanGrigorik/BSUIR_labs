@@ -22,7 +22,7 @@ car::Car::Car(const std::string &new_fabric, const std::string &new_model, int n
 }
 
 void car::Car::display() const {
-    std::cout << "Fabric: " << get_fabric() << std::endl
+    std::cout << "Fabric: " << get_car_fabric() << std::endl
               << "Model: " << get_model() << std::endl
               << "Engine power: " << engine.get_power() << std::endl
               << "Engine oil fabric: " << engine.engine_oil->get_fabric() << std::endl

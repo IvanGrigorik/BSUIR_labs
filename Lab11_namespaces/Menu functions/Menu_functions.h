@@ -3,7 +3,28 @@
  * BSUiR, 2021
  */
 
-#ifndef LAB11_NAMESPACES_MENU_FUNCTIONS_H
-#define LAB11_NAMESPACES_MENU_FUNCTIONS_H
+#pragma once
 
-#endif //LAB11_NAMESPACES_MENU_FUNCTIONS_H
+#include <iostream>
+#include <vector>
+#include "../src/Car.h"
+
+int get_menu_choice();
+
+int get_int(int min_size, int max_size);
+
+void add_car(std::vector<car::Car> &car_v);
+
+void show_cars(std::vector<car::Car> &car_v);
+
+void sort_cars(std::vector<car::Car> &car_v);
+
+void sort_string(std::vector<car::Car> &car_v, int choice);
+
+void sort_num(std::vector<car::Car> &car_v, int choice);
+
+void delete_duplicated(std::vector<car::Car> &car_v);
+
+int compare_cars(car::Car &car1, car::Car &car2);
+
+void copy_cars(std::vector<car::Car> &car_v);

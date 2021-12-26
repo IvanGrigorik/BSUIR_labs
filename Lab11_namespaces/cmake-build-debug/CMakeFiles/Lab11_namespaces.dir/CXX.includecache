@@ -6,8 +6,16 @@
 
 #IncludeRegexTransform: 
 
-D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Car.cpp
-Car.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/Menu functions/Menu_functions.cpp
+Menu_functions.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/Menu functions/Menu_functions.h
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/Menu functions/Menu_functions.h
+iostream
+-
+vector
+-
+../src/Car.h
 D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Car.h
 
 D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Car.h

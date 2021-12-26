@@ -3,4 +3,4 @@ project(Lab12_STL)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Lab12_STL main.cpp)
+add_executable(Lab12_STL main.cpp src/menu_functions.cpp src/menu_functions.h)

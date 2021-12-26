@@ -152,6 +152,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab12_STL.dir\build.make CMakeFiles/Lab12_STL.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/menu_functions.obj: src/menu_functions.cpp.obj
+.PHONY : src/menu_functions.obj
+
+# target to build an object file
+src/menu_functions.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab12_STL.dir\build.make CMakeFiles/Lab12_STL.dir/src/menu_functions.cpp.obj
+.PHONY : src/menu_functions.cpp.obj
+
+src/menu_functions.i: src/menu_functions.cpp.i
+.PHONY : src/menu_functions.i
+
+# target to preprocess a source file
+src/menu_functions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab12_STL.dir\build.make CMakeFiles/Lab12_STL.dir/src/menu_functions.cpp.i
+.PHONY : src/menu_functions.cpp.i
+
+src/menu_functions.s: src/menu_functions.cpp.s
+.PHONY : src/menu_functions.s
+
+# target to generate assembly for a file
+src/menu_functions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Lab12_STL.dir\build.make CMakeFiles/Lab12_STL.dir/src/menu_functions.cpp.s
+.PHONY : src/menu_functions.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -164,6 +188,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/menu_functions.obj
+	@echo ... src/menu_functions.i
+	@echo ... src/menu_functions.s
 .PHONY : help
 
 

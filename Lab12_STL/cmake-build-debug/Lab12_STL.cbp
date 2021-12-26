@@ -83,6 +83,12 @@
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab12_STL/main.cpp">
 			<Option target="Lab12_STL"/>
 		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab12_STL/src/menu_functions.cpp">
+			<Option target="Lab12_STL"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab12_STL/src/menu_functions.h">
+			<Option target="Lab12_STL"/>
+		</Unit>
 		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab12_STL/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

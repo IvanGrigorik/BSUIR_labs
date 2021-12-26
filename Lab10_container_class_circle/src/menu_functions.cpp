@@ -95,25 +95,21 @@ void rings_show(std::vector<Ring<std::string> > &s_ring_vec) {
         std::cout << std::endl << "Ring " << i + 1 << ":" << std::endl;
         s_ring_vec[i].print();
     }
-
 }
 
 void rings_search(std::vector<Ring<std::string> > &s_ring_vec) {
-    std::cout << "Enter value to rings_search: ";
+    rings_show(s_ring_vec);
+    std::cout << "Enter value to rings search: ";
     std::string value_to_search;
     std::cin >> value_to_search;
 
-
     for (int i = 0; i < s_ring_vec.size(); i++) {
         std::cout << std::endl << "Ring " << i + 1 << ":" << std::endl;
-
-//        auto it = s_ring_vec[i].begin();
 
         s_ring_vec[i].find(value_to_search);
     }
 
     std::cout << std::endl;
-    rings_show(s_ring_vec);
 }
 
 void rings_delete(std::vector<Ring<std::string> > &s_ring_vec) {

@@ -15,6 +15,7 @@
 class Lamp {
 protected:
 
+
     double luminosity{};
 
 public:

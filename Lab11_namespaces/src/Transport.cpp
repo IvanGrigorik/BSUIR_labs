@@ -14,10 +14,10 @@ void Transport::set_fabric(const std::string &new_fabric) {
     fabric = new_fabric;
 }
 
-std::string Transport::get_fabric() const {
+std::string Transport::get_car_fabric() const {
     return fabric;
 }
 
 void Transport::display() const {
-    std::cout << get_fabric();
+    std::cout << get_car_fabric();
 }

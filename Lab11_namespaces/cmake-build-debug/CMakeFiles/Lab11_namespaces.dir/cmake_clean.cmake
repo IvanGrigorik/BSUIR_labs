@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Lab11_namespaces.dir/Menu_functions/Menu_functions.cpp.obj"
   "CMakeFiles/Lab11_namespaces.dir/main.cpp.obj"
   "CMakeFiles/Lab11_namespaces.dir/src/Car.cpp.obj"
   "CMakeFiles/Lab11_namespaces.dir/src/Engine.cpp.obj"
