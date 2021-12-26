@@ -1,0 +1,9 @@
+/*
+ * Created by Ivan on 29.11.2021.
+ * BSUiR, 2021
+ */
+
+#ifndef LAB12_STL_MENU_FUNCTIONS_H
+#define LAB12_STL_MENU_FUNCTIONS_H
+
+#endif //LAB12_STL_MENU_FUNCTIONS_H
