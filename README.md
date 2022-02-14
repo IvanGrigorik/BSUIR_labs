@@ -1,2 +1,2 @@
-# BSUiR_labs_Ivan
-My labs and course work.
+# BSUiR_labs by Ivan Grigorik
+My labs and course works.
