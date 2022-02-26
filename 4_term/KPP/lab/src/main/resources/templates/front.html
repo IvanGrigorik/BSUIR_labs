@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Random numbers</title>
+</head>
+
+
+<form th:action="@{/random}" method="get">
+
+
+    <label for="num">Enter number: </label><br>
+    <input type = "number" id = "num" name = "num" value="50"><br>
+
+
+    <label for="md">Enter mode (0 - more, 1 - less) : </label><br>
+    <input type = "number" id = "md" name = "md" value="1"><br>
+
+    <input type="submit" value="Random">
+
+</form>
+</html>
