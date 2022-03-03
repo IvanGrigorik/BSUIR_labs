@@ -10,8 +10,8 @@ public class HomeController {
     private final AtomicLong counter = new AtomicLong();
 
     @GetMapping("/random")
-    public HomeJSONController controllerGet(@RequestParam(value = "num", defaultValue = "50") long number,
-                                            @RequestParam(value = "md", defaultValue = "3") int random_mode) {
+    public ResponseDTO controllerGet(@RequestParam(value = "num", defaultValue = "50") long number,
+                                     @RequestParam(value = "md", defaultValue = "3") int random_mode) {
 
 
         // If random_mode == 0 - random less, 1 - random more
@@ -28,7 +28,8 @@ public class HomeController {
             new_number = rand.nextLong(0, 100);
         }
 
-        return new HomeJSONController(counter.incrementAndGet(), new_number);
+        return new ResponseDTO(counter.incrementAndGet(), new_number);
+        // DTO - Data transfer object
     }
 
   /*

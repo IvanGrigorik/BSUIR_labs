@@ -1,6 +1,6 @@
 package com.crossplatform.lab1.Controllers;
 
-public record HomeJSONController(long id, long result) {
+public record ResponseDTO(long id, long result) {
 
     public long getId() {
         return id;
