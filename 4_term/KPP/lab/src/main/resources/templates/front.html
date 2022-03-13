@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <title>Random numbers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 
@@ -16,7 +17,13 @@
     <button id="random_more" name="md" type="submit" value="0">Random less</button>
     <button id="random_less" name="md" type="submit" value="1">Random more</button>
 
+    <br>
+
+
 </form>
 
+<body>
+<p th:text="'Your number: ' + ${rnum} + '!'"></p>
+</body>
 
 </html>

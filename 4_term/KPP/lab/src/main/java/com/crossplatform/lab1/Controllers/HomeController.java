@@ -1,48 +1,41 @@
 package com.crossplatform.lab1.Controllers;
 
-import org.springframework.web.bind.annotation.*;
+import com.crossplatform.lab1.Entities.RandomableEntities;
+import com.crossplatform.lab1.Logic.RandomLogic;
 
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import com.crossplatform.lab1.MyLogger;
+import org.apache.logging.log4j.Level;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@RestController
+//import java.util.concurrent.atomic.AtomicLong;
+
+@Controller
 public class HomeController {
-    private final AtomicLong counter = new AtomicLong();
+//    private final AtomicLong counter = new AtomicLong();
+
+    @Autowired
+    RandomLogic randomLogic;
 
     @GetMapping("/random")
-    public ResponseDTO controllerGet(@RequestParam(value = "num", defaultValue = "50") long number,
-                                     @RequestParam(value = "md", defaultValue = "3") int random_mode) {
-
+    public String controllerGet(@RequestParam(value = "num", defaultValue = "50") long number,
+                                @RequestParam(value = "md", defaultValue = "3") int random_mode, @NotNull Model model) {
 
         // If random_mode == 0 - random less, 1 - random more
-        Random rand = new Random();
-        long new_number = 0;
+        RandomableEntities newEntity = new RandomableEntities(number, random_mode);
+        Long result = randomLogic.randomNew(newEntity);
 
-        if (random_mode == 0) {
-            new_number = rand.nextLong(number - 50, number);
-        }
-        if (random_mode == 1) {
-            new_number = rand.nextLong(number, number + 50);
-        }
-        if (random_mode == 3) {
-            new_number = rand.nextLong(0, 100);
-        }
+        model.addAttribute("num", number);
+        model.addAttribute("md", random_mode);
+        model.addAttribute("rnum", result);
 
-        return new ResponseDTO(counter.incrementAndGet(), new_number);
-        // DTO - Data transfer object
+        MyLogger.setLog(Level.INFO, "Successful get mapping");
+
+        return "front";
     }
-
-  /*
-    @PostMapping( "/random")
-    public ResponseEntity<?> controllerPost(@RequestBody List<Integer> bodyList){
-
-
-        Random rand = new Random();
-        long new_number = 0;
-
-
-        return new ResponseEntity<>(new_number);
-    }
-*/
-
+    // DTO - Data transfer object
 }
