@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Lab11_namespaces"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Lab11_namespaces">
+				<Option output="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Lab11_namespaces.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include"/>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 Lab11_namespaces"/>
+					<CompileFile command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Lab11_namespaces/fast">
+				<Option output="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Lab11_namespaces.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include"/>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 Lab11_namespaces/fast"/>
+					<CompileFile command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw64/bin/mingw32-make.exe -f &quot;D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/Menu functions/Menu_functions.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/Menu functions/Menu_functions.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/main.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Car.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Car.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Engine.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Engine.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Engine_oil.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Engine_oil.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Headlight.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Headlight.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Lamp.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Lamp.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Transport.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Transport.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Wheel.cpp">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/src/Wheel.h">
+			<Option target="Lab11_namespaces"/>
+		</Unit>
+		<Unit filename="D:/KPIYAP/BSUiR_labs_Ivan/Lab11_namespaces/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

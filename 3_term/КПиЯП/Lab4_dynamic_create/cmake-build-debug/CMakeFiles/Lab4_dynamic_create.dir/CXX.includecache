@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab4_dynamic_create/Matrix.cpp
+Matrix.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab4_dynamic_create/Matrix.h
+cassert
+-
+iomanip
+-
+bitset
+-
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab4_dynamic_create/Matrix.h
+iostream
+-
+initializer_list
+-
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab4_dynamic_create/main.cpp
+iostream
+-
+Matrix.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab4_dynamic_create/Matrix.h
+

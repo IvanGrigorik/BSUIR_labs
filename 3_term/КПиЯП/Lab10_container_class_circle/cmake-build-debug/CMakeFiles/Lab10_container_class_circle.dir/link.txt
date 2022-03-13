@@ -1,0 +1,3 @@
+"D:\CLion 2021.1.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Lab10_container_class_circle.dir/objects.a
+C:\mingw64\bin\ar.exe cr CMakeFiles\Lab10_container_class_circle.dir/objects.a @CMakeFiles\Lab10_container_class_circle.dir\objects1.rsp
+C:\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\Lab10_container_class_circle.dir/objects.a -Wl,--no-whole-archive -o Lab10_container_class_circle.exe -Wl,--out-implib,libLab10_container_class_circle.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Lab10_container_class_circle.dir\linklibs.rsp

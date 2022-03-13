@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/binary_find.h
+iostream
+-
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/main.cpp
+binary_find.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/binary_find.h
+menu_func.h
+D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/menu_func.h
+
+D:/KPIYAP/BSUiR_labs_Ivan/Lab7_binary_search_template/menu_func.h
+cwchar
+-
+
