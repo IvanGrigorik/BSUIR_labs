@@ -33,7 +33,7 @@ public class HomeController {
         model.addAttribute("md", random_mode);
         model.addAttribute("rnum", result);
 
-        MyLogger.setLog(Level.INFO, "Successful get mapping");
+        MyLogger.setLog(Level.INFO, "Successful mapping");
 
         return "front";
     }
