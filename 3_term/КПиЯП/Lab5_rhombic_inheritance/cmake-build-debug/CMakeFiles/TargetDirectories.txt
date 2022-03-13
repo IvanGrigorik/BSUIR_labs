@@ -1,3 +1,0 @@
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/Lab5_rhombic_inheritance.dir
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/KPIYAP/BSUiR_labs_Ivan/Lab5_rhombic_inheritance/cmake-build-debug/CMakeFiles/rebuild_cache.dir

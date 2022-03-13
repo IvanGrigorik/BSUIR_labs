@@ -1,3 +1,0 @@
-D:/KPIYAP/BSUiR_labs_Ivan/Lab4_dynamic_create/cmake-build-debug/CMakeFiles/Lab4_dynamic_create.dir
-D:/KPIYAP/BSUiR_labs_Ivan/Lab4_dynamic_create/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/KPIYAP/BSUiR_labs_Ivan/Lab4_dynamic_create/cmake-build-debug/CMakeFiles/rebuild_cache.dir
