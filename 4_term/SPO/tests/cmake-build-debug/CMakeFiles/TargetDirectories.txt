@@ -1,3 +1,0 @@
-/home/sifi/BSUiR_labs/4_term/SPO/tests/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/sifi/BSUiR_labs/4_term/SPO/tests/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/sifi/BSUiR_labs/4_term/SPO/tests/cmake-build-debug/CMakeFiles/tests.dir
