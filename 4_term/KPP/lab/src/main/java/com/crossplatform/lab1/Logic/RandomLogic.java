@@ -31,7 +31,10 @@ public class RandomLogic {
                 case 0 -> result = randomLess(randomRequest.getNumber());
                 case 1 -> result = randomMore(randomRequest.getNumber());
                 case 2 -> result = random();
-                default -> throw new IllegalArgumentException("Exception in RandomLogic. Invalid random mode parameters");
+                default -> {
+                    MyLogger.setLog(Level.WARN, "ERROR IN RANDOM LOGIC: UNKNOWN RANDOM MODE PARAMETER");
+                    throw new IllegalArgumentException("Exception in RandomLogic. Invalid random mode parameters");
+                }
             }
             hashMap.addHash(randomRequest, result);
             MyLogger.setLog(Level.INFO, randomRequest.getNumber() + " added to the hash map");

@@ -7,12 +7,8 @@ public class RandomableEntities {
     private final int mode;
 
     public RandomableEntities(long num, int md) {
-        try {
             this.number = num;
             this.mode = md;
-        } catch (Exception ex) {
-            throw new IllegalArgumentException("Illegal arguments in RandomableEntities");
-        }
     }
 
     @Override
