@@ -22,7 +22,7 @@ public class HomeController {
 
     @GetMapping("/random")
     public String controllerGet(@RequestParam(value = "num", defaultValue = "50") long number,
-                                @RequestParam(value = "md", defaultValue = "3") int random_mode, @NotNull Model model) {
+                                @RequestParam(value = "md", defaultValue = "2") int random_mode, @NotNull Model model) {
 
         // If random_mode == 0 - random less, 1 - random more
         RandomableEntities newEntity = new RandomableEntities(number, random_mode);
