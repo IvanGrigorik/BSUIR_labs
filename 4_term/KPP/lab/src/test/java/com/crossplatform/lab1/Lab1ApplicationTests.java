@@ -17,20 +17,20 @@ class Lab1ApplicationTests {
 
     @Test
     void RandomEntityTest() {
-        RandomableEntities entity_test = new RandomableEntities(100, 1);
-        RandomableEntities entity_test2 = new RandomableEntities(100, 1);
+        RandomableEntities entity_test = new RandomableEntities(100, RandomableEntities.MODES.RANDOM);
+        RandomableEntities entity_test2 = new RandomableEntities(100, RandomableEntities.MODES.RANDOM);
         assertEquals(entity_test.getNumber(), entity_test2.getNumber());
     }
 
     @Test
     void RandomMore() {
-        long logic_test = new RandomLogic().randomNew(new RandomableEntities(50, 1));
+        long logic_test = new RandomLogic().randomNew(new RandomableEntities(50, RandomableEntities.MODES.MORE));
         assert (logic_test <= 100 && logic_test >= 50);
     }
 
     @Test
     void RandomLess() {
-        long logic_test = new RandomLogic().randomNew(new RandomableEntities(50, 0));
+        long logic_test = new RandomLogic().randomNew(new RandomableEntities(50, RandomableEntities.MODES.LESS));
         assert (logic_test >= 0 && logic_test <= 50);
     }
 

@@ -3,12 +3,22 @@ package com.crossplatform.lab1.Entities;
 import java.util.Objects;
 
 public class RandomableEntities {
-    private final long number;
-    private final int mode;
+    public enum MODES{LESS, MORE, RANDOM}
 
-    public RandomableEntities(long num, int md) {
-            this.number = num;
-            this.mode = md;
+    private final long number;
+    private final MODES mode;
+
+    public RandomableEntities(long number, MODES mode) {
+        this.number = number;
+        this.mode = mode;
+    }
+
+    public long getNumber() {
+        return number;
+    }
+
+    public MODES getMode() {
+        return mode;
     }
 
     @Override
@@ -22,13 +32,5 @@ public class RandomableEntities {
     @Override
     public int hashCode() {
         return Objects.hash(number, mode);
-    }
-
-    public long getNumber() {
-        return number;
-    }
-
-    public int getMode() {
-        return mode;
     }
 }

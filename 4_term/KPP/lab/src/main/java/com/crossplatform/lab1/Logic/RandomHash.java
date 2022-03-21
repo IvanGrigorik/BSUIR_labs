@@ -9,15 +9,15 @@ import java.util.HashMap;
 public class RandomHash {
     private final HashMap<RandomableEntities, Long> hashMap = new HashMap<>();
 
-    public boolean isInMap(RandomableEntities key){
+    public boolean isInMap(RandomableEntities key) {
         return hashMap.containsKey(key);
     }
 
-    public void addHash(RandomableEntities key, Long randomizedNumber){
+    public void addHash(RandomableEntities key, Long randomizedNumber) {
         hashMap.put(key, randomizedNumber);
     }
 
-    public Long getResult(RandomableEntities key){
+    public Long getResult(RandomableEntities key) {
         return hashMap.get(key);
     }
 }
