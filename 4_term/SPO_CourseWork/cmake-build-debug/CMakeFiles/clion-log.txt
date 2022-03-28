@@ -1,4 +1,4 @@
-/snap/clion/184/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/184/bin/ninja/linux/ninja -G Ninja /home/sifi/BSUiR_labs/4_term/SPO_CourseWork
+/snap/clion/184/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/sifi/BSUIR_labs/4_term/SPO_CourseWork
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/sifi/BSUiR_labs/4_term/SPO_CourseWork/cmake-build-debug
+-- Build files have been written to: /home/sifi/BSUIR_labs/4_term/SPO_CourseWork/cmake-build-debug

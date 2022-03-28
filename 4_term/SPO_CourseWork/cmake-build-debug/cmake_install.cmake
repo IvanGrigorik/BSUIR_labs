@@ -1,4 +1,4 @@
-# Install script for directory: /home/sifi/BSUiR_labs/4_term/SPO_CourseWork
+# Install script for directory: /home/sifi/BSUIR_labs/4_term/SPO_CourseWork
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/sifi/BSUiR_labs/4_term/SPO_CourseWork/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/sifi/BSUIR_labs/4_term/SPO_CourseWork/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
