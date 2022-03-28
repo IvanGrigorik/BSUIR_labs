@@ -4,6 +4,7 @@ import com.crossplatform.lab1.Entities.RandomableEntities;
 import com.crossplatform.lab1.Logic.RandomLogic;
 
 import com.crossplatform.lab1.MyLogger;
+import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class HomeController {
 
     @Autowired
     RandomLogic randomLogic;
+
+    Counter counter;
 
     @GetMapping("/random")
     public String controllerGet(@RequestParam(value = "num") long number,
