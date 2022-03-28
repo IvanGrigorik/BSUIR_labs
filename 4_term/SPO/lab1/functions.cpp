@@ -90,7 +90,6 @@ Flags parse_flags(int argc, char *argv[]) {
     return flags;
 }
 
-
 File::File(int type, const std::string &name) {
     this->name = name;
 

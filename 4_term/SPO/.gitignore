@@ -33,7 +33,5 @@
 *.out
 *.app
 
-# Ignore any folder
-/lab*/*/
 # Except labs and src folders
 !src/
