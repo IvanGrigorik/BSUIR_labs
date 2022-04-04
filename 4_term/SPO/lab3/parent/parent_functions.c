@@ -52,7 +52,7 @@ void kill_last_proc(processes_info **proc_list, int *pid_count) {
     }
 
     (*pid_count)--;
-    *proc_list = (processes_info *) realloc(proc_list, *(pid_count) * sizeof(processes_info));
+    *proc_list = (processes_info *) realloc(*proc_list, *(pid_count) * sizeof(processes_info));
 }
 
 void kill_all_processes(processes_info **proc_list, int *pid_count) {
