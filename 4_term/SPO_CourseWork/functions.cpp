@@ -5,7 +5,6 @@
 
 #include "functions.h"
 
-int layer = 0;
 int num = 0;
 unsigned long all_files_size = 0;
 
@@ -27,7 +26,8 @@ std::string md5_to_string(unsigned char *md) {
 */
 void collect_files(const std::string &current_dir,
                    std::vector<file_data_t> &unique_files,
-                   std::vector<file_to_delete_t> &duplicated_files, char flag) {
+                   std::vector<file_to_delete_t> &duplicated_files,
+                   flags_t flags) {
     unsigned char result[MD5_DIGEST_LENGTH];
 
     DIR *dir = opendir((current_dir + "/").c_str());
@@ -52,7 +52,7 @@ void collect_files(const std::string &current_dir,
         }
 
         if (file->d_type == DT_DIR) {
-            collect_files(current_dir + '/' + filename, unique_files, duplicated_files, flag);
+            collect_files(current_dir + '/' + filename, unique_files, duplicated_files, flags);
             continue;
         }
         // If it not directory:
@@ -82,11 +82,12 @@ void collect_files(const std::string &current_dir,
 
         std::string hash = md5_to_string(result);
 
-        all_files_size += file_size;
-        std::cout << "All files size: " << all_files_size << std::endl;
-        std::cout << ++num << std::endl;
-        std::cout << "File descript: " << file_descript << std::endl;
-
+        if (flags.stats) {
+            all_files_size += file_size;
+            std::cout << "All files size: " << all_files_size << std::endl;
+            std::cout << ++num << std::endl;
+            std::cout << "File descript: " << file_descript << std::endl;
+        }
 
         if (unique_files.empty()) {
             unique_files.emplace_back(filename, hash);
@@ -98,10 +99,11 @@ void collect_files(const std::string &current_dir,
             if (unique_files[i].file_hash == hash) {
 
                 // If we collect files with same hash, but different names
-                if (flag == 'n') {
+                if (flags.name_flag) {
                     // If names equal - skip
                     if (unique_files[i].file_name == filename) {
                         duplicated_files.emplace_back(file_to_delete_t(filename, (current_dir + '/' + filename)));
+                        is_in_files = true;
                         break;
                     } else {
                         unique_files.emplace_back(filename, hash);
@@ -113,7 +115,8 @@ void collect_files(const std::string &current_dir,
                 is_in_files = true;
             }
         }
-        if (!is_in_files && flag != 'n') {
+
+        if (!is_in_files) {
             unique_files.emplace_back(filename, hash);
         }
 
@@ -122,6 +125,33 @@ void collect_files(const std::string &current_dir,
     closedir(dir);
 }
 
+flags_t parse_flags(int argc, char *argv[]) {
+    flags_t flags;
+
+    int opt;
+
+    while ((opt = getopt(argc, argv, "dns")) != -1) {
+
+        switch (opt) {
+            case 'd':
+                flags.delete_flag = true;
+                break;
+
+            case 'n':
+                flags.name_flag = true;
+                break;
+
+            case 's':
+                flags.stats = true;
+                break;
+
+            default:
+                throw (std::runtime_error("Parse flags error"));
+        }
+    }
+
+    return flags;
+}
 
 // Get the size of the file by its file descriptor
 unsigned long get_size_by_fd(int fd) {
@@ -130,4 +160,50 @@ unsigned long get_size_by_fd(int fd) {
         exit(-1);
     }
     return statbuf.st_size;
+}
+
+
+void files_output(const std::vector<file_data_t> &unique_files,
+                  const std::vector<file_to_delete_t> &duplicated_files,
+                  flags_t flags) {
+
+    std::cout << "Unique files: " << std::endl;
+    for (auto &i: unique_files) {
+        std::cout << "File name: " << i.file_name << std::endl
+                  << "File hash: " << i.file_hash << std::endl << std::endl;
+    }
+
+    std::cout << "Duplicated files: " << std::endl;
+    for (auto &i: duplicated_files) {
+        std::cout << "File name: " << i.file_name << std::endl
+                  << "File directory: " << i.file_path << std::endl;
+    }
+
+    if (flags.stats) {
+        std::cout << std::endl
+                  << "Total unique flags: " << unique_files.size() << std::endl
+                  << "Total duplicated files: " << duplicated_files.size() << std::endl;
+    }
+}
+
+void delete_files(std::vector<file_to_delete_t> &duplicated_files) {
+    std::cout << "Do you really want to delete all duplicated files (Y/N)" << std::endl
+              << "(it can be fatal to delete from root or home directory)" << std::endl
+              << "> ";
+
+    int choice = getchar();
+
+    switch (choice) {
+        case 'Y':
+            for (auto &i: duplicated_files)
+                std::remove(i.file_path.c_str());
+            break;
+
+        case 'N':
+            std::cout << "Total duplicated files: " << duplicated_files.size();
+            break;
+
+        default:
+            break;
+    }
 }

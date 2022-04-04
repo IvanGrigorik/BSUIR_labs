@@ -43,12 +43,26 @@ typedef struct file_to_delete {
     }
 } file_to_delete_t;
 
+typedef struct flags {
+    bool stats{};
+    bool name_flag{};
+    bool delete_flag{};
+    bool all_files{};
+} flags_t;
+
 void collect_files(const std::string &current_dir,
                    std::vector<file_data_t> &unique_files,
-                   std::vector<file_to_delete_t> &duplicated_files, char flag);
+                   std::vector<file_to_delete_t> &duplicated_files,
+                   flags_t flags);
 
 unsigned long get_size_by_fd(int fd);
 
-void parent_handler(__attribute__((unused)) int sig_number, siginfo_t *sig_info, __attribute__((unused)) void *none);
+flags_t parse_flags(int argc, char *argv[]);
+
+void files_output(const std::vector<file_data_t> &unique_files,
+                  const std::vector<file_to_delete_t> &duplicated_files,
+                  flags_t flags);
+
+void delete_files(std::vector<file_to_delete_t> &duplicated_files);
 
 #endif //SPO_COURSEWORK_FUNCTIONS_H
