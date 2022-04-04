@@ -21,7 +21,7 @@ int main([[maybe_unused]] int argc, char *argv[]) {
         std::cout << "Duplicated files: " << std::endl;
         for (auto &i: duplicated_files) {
             std::cout << "File name: " << i.file_name << std::endl
-                      << "File directory: " <<  i.file_path << std2::endl;
+                      << "File directory: " <<  i.file_path << std::endl;
         }
 
     } catch (std::exception &e) {
