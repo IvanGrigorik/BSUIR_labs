@@ -167,28 +167,43 @@ void files_output(const std::vector<file_data_t> &unique_files,
                   const std::vector<file_to_delete_t> &duplicated_files,
                   flags_t flags) {
 
-    std::cout << "Unique files: " << std::endl;
-    for (auto &i: unique_files) {
-        std::cout << "File name: " << i.file_name << std::endl
-                  << "File hash: " << i.file_hash << std::endl << std::endl;
+    if (unique_files.empty() && duplicated_files.empty()) {
+        std::cout << RED << "Empty directory" << WHITE << std::endl;
+        return;
     }
 
-    std::cout << "Duplicated files: " << std::endl;
-    for (auto &i: duplicated_files) {
-        std::cout << "File name: " << i.file_name << std::endl
-                  << "File directory: " << i.file_path << std::endl;
+    if (unique_files.empty()) {
+        std::cout << RED << "No unique files!" << WHITE << std::endl;
+    } else {
+        std::cout << GREEN << "Unique files: " << std::endl;
+        for (auto &i: unique_files) {
+            std::cout << "File name: " << i.file_name << std::endl
+                      << "File hash: " << i.file_hash << std::endl << std::endl;
+        }
+        std::cout << WHITE;
+    }
+
+    if (duplicated_files.empty()) {
+        std::cout << RED << "No duplicated files!" << WHITE << std::endl;
+    } else {
+        std::cout << YELLOW << "Duplicated files: " << std::endl;
+        for (auto &i: duplicated_files) {
+            std::cout << "File name: " << i.file_name << std::endl
+                      << "File directory: " << i.file_path << std::endl;
+        }
+        std::cout << WHITE;
     }
 
     if (flags.stats) {
-        std::cout << std::endl
+        std::cout << CYAN << std::endl
                   << "Total unique flags: " << unique_files.size() << std::endl
-                  << "Total duplicated files: " << duplicated_files.size() << std::endl;
+                  << "Total duplicated files: " << duplicated_files.size() << std::endl << WHITE;
     }
 }
 
-void delete_files(std::vector<file_to_delete_t> &duplicated_files) {
-    std::cout << "Do you really want to delete all duplicated files (Y/N)" << std::endl
-              << "(it can be fatal to delete from root or home directory)" << std::endl
+void delete_files(std::vector<file_to_delete_t> &duplicated_files, flags_t flags) {
+    std::cout << RED << "Do you really want to delete all duplicated files (Y/N)" << std::endl
+              << "(it can be fatal to delete from root or home directory)" << std::endl << WHITE
               << "> ";
 
     int choice = getchar();
@@ -200,7 +215,9 @@ void delete_files(std::vector<file_to_delete_t> &duplicated_files) {
             break;
 
         case 'N':
-            std::cout << "Total duplicated files: " << duplicated_files.size();
+            if (!flags.stats) {
+                std::cout << CYAN << "Total duplicated files: " << duplicated_files.size() << std::endl << WHITE;
+            }
             break;
 
         default:
