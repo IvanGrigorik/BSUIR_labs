@@ -13,23 +13,25 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @RestControllerAdvice
 public class ExceptionAdvice {
 
-    @ExceptionHandler(value = MissingServletRequestParameterException.class)
-    public ResponseEntity<String> handleArgumentException(@NotNull MissingServletRequestParameterException e) {
-        String message = "Status 400: Invalid params" + e.getParameterName() + " of type " + e.getParameterType();
-        MyLogger.setLog(Level.WARN, "WARN in argument");
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<Object> handleIllegalArgumentException(@NotNull MissingServletRequestParameterException e) {
+        var message = "Status 400: \"" + e.getParameterName() + "\" of type \"" + e.getParameterType() + "\"";
+        MyLogger.setLog(Level.WARN, message);
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Object> handleTypeMismatchException(@NotNull MethodArgumentTypeMismatchException e) {
-        String message = "Status 400: Invalid params: \"" + e.getName() + "\" must be \"" + e.getRequiredType() + "\"";
+        var message = "Status 400: \"" + e.getName() + "=" + e.getValue() + "\" but type must be \"" + e.getRequiredType() + "\"";
         MyLogger.setLog(Level.WARN, message);
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleException(@NotNull Exception e) {
-        MyLogger.setLog(Level.ERROR, "WARN in number format");
-        return new ResponseEntity<>("Status 500: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Object> handleServerException() {
+        var message = "Status 500: ";
+        MyLogger.setLog(Level.ERROR, message);
+        return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 }

@@ -14,8 +14,8 @@
     <input type = "number" id = "num" name = "num" value="50">
     <br>
     <br>
-    <button id="random_more" name="md" type="submit" value="0">Random less</button>
-    <button id="random_less" name="md" type="submit" value="1">Random more</button>
+    <button id="random_more" name="md" type="submit" value=LESS>Random less</button>
+    <button id="random_less" name="md" type="submit" value=MORE>Random more</button>
 
     <br>
 
@@ -23,7 +23,7 @@
 </form>
 
 <body>
-<p th:text="'Your number: ' + ${rnum} + '!'"></p>
+<p th:text="'Your number: ' + ${rnum}"></p>
 </body>
 
 </html>

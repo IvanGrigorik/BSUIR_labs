@@ -4,6 +4,7 @@ import com.crossplatform.lab1.Entities.RandomableEntities;
 import com.crossplatform.lab1.Logic.RandomLogic;
 
 import com.crossplatform.lab1.MyLogger;
+import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
 public class HomeController {
@@ -20,9 +20,11 @@ public class HomeController {
     @Autowired
     RandomLogic randomLogic;
 
+    Counter counter;
+
     @GetMapping("/random")
-    public String controllerGet(@RequestParam(value = "num", defaultValue = "50") long number,
-                                @RequestParam(value = "md", defaultValue = "2") int random_mode, @NotNull Model model) {
+    public String controllerGet(@RequestParam(value = "num") long number,
+                                @RequestParam(value = "md") RandomableEntities.MODES random_mode, @NotNull Model model) {
 
         // If random_mode == 0 - random less, 1 - random more
         RandomableEntities newEntity = new RandomableEntities(number, random_mode);

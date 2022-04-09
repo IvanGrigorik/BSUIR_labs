@@ -28,9 +28,9 @@ public class RandomLogic {
             MyLogger.setLog(Level.INFO, randomRequest.getNumber() + " obtained from the hash map");
         } else {
             switch (randomRequest.getMode()) {
-                case 0 -> result = randomLess(randomRequest.getNumber());
-                case 1 -> result = randomMore(randomRequest.getNumber());
-                case 2 -> result = random();
+                case LESS -> result = randomLess(randomRequest.getNumber());
+                case MORE -> result = randomMore(randomRequest.getNumber());
+                case RANDOM -> result = random();
                 default -> {
                     MyLogger.setLog(Level.WARN, "ERROR IN RANDOM LOGIC: UNKNOWN RANDOM MODE PARAMETER");
                     throw new IllegalArgumentException("Invalid random mode parameters");
