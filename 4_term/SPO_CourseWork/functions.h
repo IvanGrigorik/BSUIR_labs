@@ -59,6 +59,8 @@ typedef struct flags {
     bool all_files{};
 } flags_t;
 
+
+// Main functions to collect/compare flags
 void collect_files(const std::string &current_dir,
                    std::vector<file_data_t> &unique_files,
                    std::vector<file_to_delete_t> &duplicated_files,
@@ -66,6 +68,9 @@ void collect_files(const std::string &current_dir,
 
 unsigned long get_size_by_fd(int fd);
 
+std::string md5_to_string(unsigned char *md);
+
+// Functions to work with user
 flags_t parse_flags(int argc, char *argv[]);
 
 void files_output(const std::vector<file_data_t> &unique_files,
@@ -73,5 +78,7 @@ void files_output(const std::vector<file_data_t> &unique_files,
                   flags_t flags);
 
 void delete_files(std::vector<file_to_delete_t> &duplicated_files, flags_t flags);
+
+std::string get_dir_to_find(int argc, char *argv[]);
 
 #endif //SPO_COURSEWORK_FUNCTIONS_H

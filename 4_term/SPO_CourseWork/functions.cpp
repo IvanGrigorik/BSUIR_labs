@@ -8,17 +8,46 @@
 int num = 0;
 unsigned long all_files_size = 0;
 
-std::string md5_to_string(unsigned char *md) {
 
-    std::stringstream s_stream{};
-
-    for (int i = 0; i < MD5_DIGEST_LENGTH; i++) {
-        s_stream << std::hex << static_cast<int>(md[i]);
+std::string get_dir_to_find(int argc, char *argv[]){
+    std::string dir_to_find = (argc == 1 || argv[1][0] == '-') ? "." : argv[1];
+    if (dir_to_find.back() == '/') {
+        dir_to_find.pop_back();
     }
-
-    return s_stream.str();
+    return dir_to_find;
 }
 
+flags_t parse_flags(int argc, char *argv[]) {
+    flags_t flags;
+
+    int opt;
+
+    while ((opt = getopt(argc, argv, "dns")) != -1) {
+
+        switch (opt) {
+            case 'd':
+                flags.delete_flag = true;
+                break;
+
+            case 'A':
+                flags.all_files = true;
+                break;
+
+            case 'n':
+                flags.name_flag = true;
+                break;
+
+            case 's':
+                flags.stats = true;
+                break;
+
+            default:
+                throw (std::runtime_error("Parse flags error"));
+        }
+    }
+
+    return flags;
+}
 
 /* Function to collect files hash to files_vector
  * if the flag is 'n' (names) - we collect files with the same hash, but different names.
@@ -48,6 +77,9 @@ void collect_files(const std::string &current_dir,
     while ((file = readdir(dir))) {
         std::string filename = file->d_name;
         if ((filename == "." || filename == "..")) {
+            continue;
+        }
+        if (filename[0] == '.' && !flags.all_files) {
             continue;
         }
 
@@ -125,32 +157,15 @@ void collect_files(const std::string &current_dir,
     closedir(dir);
 }
 
-flags_t parse_flags(int argc, char *argv[]) {
-    flags_t flags;
+std::string md5_to_string(unsigned char *md) {
 
-    int opt;
+    std::stringstream s_stream{};
 
-    while ((opt = getopt(argc, argv, "dns")) != -1) {
-
-        switch (opt) {
-            case 'd':
-                flags.delete_flag = true;
-                break;
-
-            case 'n':
-                flags.name_flag = true;
-                break;
-
-            case 's':
-                flags.stats = true;
-                break;
-
-            default:
-                throw (std::runtime_error("Parse flags error"));
-        }
+    for (int i = 0; i < MD5_DIGEST_LENGTH; i++) {
+        s_stream << std::hex << static_cast<int>(md[i]);
     }
 
-    return flags;
+    return s_stream.str();
 }
 
 // Get the size of the file by its file descriptor

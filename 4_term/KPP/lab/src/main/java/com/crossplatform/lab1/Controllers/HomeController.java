@@ -20,7 +20,7 @@ public class HomeController {
     @Autowired
     RandomLogic randomLogic;
 
-    Counter counter;
+    static Counter counter = new Counter(0);
 
     @GetMapping("/random")
     public String controllerGet(@RequestParam(value = "num") long number,
@@ -34,9 +34,17 @@ public class HomeController {
         model.addAttribute("md", random_mode);
         model.addAttribute("rnum", result);
 
+        counter.incrementCount();
+
         MyLogger.setLog(Level.INFO, "Successful mapping");
 
         return "front";
+    }
+
+    @GetMapping("/count")
+    public String controllerCount(Model model) {
+        model.addAttribute("count", counter.getCount());
+        return "count";
     }
     // DTO - Data transfer object
 }

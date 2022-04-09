@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 
 <head>
     <title>Random numbers</title>
@@ -16,9 +16,14 @@
     <br>
     <button id="random_more" name="md" type="submit" value=LESS>Random less</button>
     <button id="random_less" name="md" type="submit" value=MORE>Random more</button>
+    <br>
+</form>
+
+<form style="text-align: center" th:action="@{/count}">
 
     <br>
-
+    <button id="count" type="submit" value=count>Get counter</button>
+    <br>
 
 </form>
 

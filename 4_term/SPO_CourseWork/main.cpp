@@ -4,9 +4,9 @@ int main(int argc, char *argv[]) {
 
 
     try {
-        std::string dir_to_find = (argc == 1 || argv[1][0] == '-') ? "." : argv[1];
-        flags_t flags;
-        flags = parse_flags(argc, argv);
+        std::string dir_to_find = get_dir_to_find(argc, argv);
+
+        flags_t flags = parse_flags(argc, argv);
 
         std::cout << "Directory to find duplicate files: " << dir_to_find << std::endl << std::endl;
 
