@@ -1,4 +1,4 @@
-
+/.idea/
 # Prerequisites
 *.d
 
@@ -36,5 +36,4 @@
 *.idea/
 *cmake-build-debug/
 # Except labs and src folders
-*.out
-*.log
+!src/
