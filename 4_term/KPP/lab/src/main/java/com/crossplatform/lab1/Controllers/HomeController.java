@@ -20,7 +20,8 @@ public class HomeController {
     @Autowired
     RandomLogic randomLogic;
 
-    static Counter counter = new Counter(0);
+    @Autowired
+    Counter counter;
 
     @GetMapping("/random")
     public String controllerGet(@RequestParam(value = "num") long number,
