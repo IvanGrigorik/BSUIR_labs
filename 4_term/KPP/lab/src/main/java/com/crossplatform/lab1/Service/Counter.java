@@ -1,9 +1,8 @@
-package com.crossplatform.lab1.Controllers;
+package com.crossplatform.lab1.Service;
 
 import com.crossplatform.lab1.MyLogger;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.Level;
-import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 public class Counter {

@@ -4,7 +4,7 @@ import com.crossplatform.lab1.Entities.RandomableEntities;
 import com.crossplatform.lab1.Logic.RandomLogic;
 
 import com.crossplatform.lab1.MyLogger;
-import lombok.AllArgsConstructor;
+import com.crossplatform.lab1.Service.Counter;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
