@@ -2,13 +2,11 @@ package com.crossplatform.lab1.Controllers;
 
 import com.crossplatform.lab1.Entities.RandomableEntities;
 import com.crossplatform.lab1.Logic.RandomLogic;
-
 import com.crossplatform.lab1.MyLogger;
 import com.crossplatform.lab1.Service.Counter;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
