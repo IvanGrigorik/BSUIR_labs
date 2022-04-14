@@ -3,6 +3,14 @@
 
 int main() {
 
+
+    printf("Enter: \n");
+    printf("'p' - create producer\n");
+    printf("'c' - create consumer\n");
+    printf("'P' - delete producer\n");
+    printf("'C' - delete consumer\n");
+    printf("'q' - quit\n");
+
     // Unlink semaphores, that I need in the future
     sem_unlink("producer_sem");
     sem_unlink("consumer_sem");
