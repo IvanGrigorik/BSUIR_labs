@@ -2,4 +2,4 @@
 SHITTY DESCRIPTION. 
 HAVE NOTHING TO SAY
 <br>
-Later would be normal description.
+Later there will be a normal description.
