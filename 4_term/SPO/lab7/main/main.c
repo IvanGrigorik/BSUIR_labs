@@ -2,8 +2,6 @@
 #include "../circle.h"
 
 int main() {
-
-
     printf("Enter: \n");
     printf("'p' - create producer\n");
     printf("'c' - create consumer\n");
@@ -48,9 +46,6 @@ int main() {
     char *shm_id_c = (char *) malloc(10 * sizeof(char));
     sprintf(shm_id_c, "%d", shm_id);
     char *const args[] = {shm_id_c, NULL};
-
-
-    printf("%s", shm_id_c);
 
     int choice;
 

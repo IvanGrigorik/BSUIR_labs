@@ -34,12 +34,6 @@ typedef struct message {
 
 typedef struct circle {
     message_t message[10];
-    // we can have 10 messages with 256-bytes data, where:
-    // message[i][0] - message type
-    // message[i][1]/[2] - message hash
-    // message[i][3] - message length
-    // message[i][4 - 254] - message data
-
     short added;
     short deleted;
     int head;

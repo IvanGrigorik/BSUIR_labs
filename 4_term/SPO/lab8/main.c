@@ -87,7 +87,6 @@ _Noreturn void *consumer_routine(__attribute__((unused)) void *arg) {
 
 
 int main() {
-
     printf("Enter: \n");
     printf("'p' - create producer\n");
     printf("'c' - create consumer\n");
