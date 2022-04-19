@@ -34,7 +34,7 @@ void add_new_process(processes_info **proc_list, int *pid_count) {
         // Child process
         char argv[5];
         sprintf(argv, "C_%d", (*pid_count));
-        execl("/home/sifi/BSUIR_labs/4_term/SPO/lab3/child/cmake-build-debug/child", argv, NULL);
+        execl("/home/sifi/BSUIR_labs/4_term/SPO/lab4/child/cmake-build-debug/child", argv, NULL);
     }
 }
 

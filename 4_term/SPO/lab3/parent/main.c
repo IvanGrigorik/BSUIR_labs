@@ -1,119 +1,77 @@
-#include <sys/time.h>
-#include "parent_functions.h"
+#include "functions/functions.h"
 
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
-processes_info *processes_list;
-int pid_count = 0;
+extern char **environ;
 
-int main() {
-    char numbers[10];
+int main(int argc, char *argv[], char *envp[]) {
+    show_env(environ);
+
+    char env_file_path[] = "/home/sifi/BSUiR_labs/4_term/SPO/lab3/env";
+    char **child_environment = get_child_env(env_file_path);
+
     int choice;
+    int child_amount = 0;
 
-    processes_list = (processes_info *) malloc(sizeof(processes_info));
-    menu();
+    while ((choice = getchar()) != 'q') {
 
-    struct sigaction parent_action;
-    parent_action.sa_flags = SA_SIGINFO;
-    parent_action.sa_sigaction = parent_handler;
-    sigaction(SIGUSR1, &parent_action, NULL);
-
-    // Timer busy
-    signal(SIGALRM, refresh_mef_refresh);
-    struct itimerval delay;
-
-    delay.it_value.tv_sec = 8;
-    delay.it_value.tv_usec = 0;
-    delay.it_interval.tv_sec = 0;
-    delay.it_interval.tv_usec = 0;
-
-    while (1) {
-        choice = getchar();
-
-        switch (choice) {
-
-            case '+': {
-                add_new_process(&processes_list, &pid_count);
-                break;
-            }
-
-            case '-': {
-                kill_last_proc(&processes_list, &pid_count);
-                break;
-            }
-
-            case 'k': {
-                kill_all_processes(&processes_list, &pid_count);
-                break;
-            }
-
-            case 's': {
-                fgets(numbers, 10, stdin);
-                int num = parse(numbers);
-
-                if (num <= 0) {
-                    for (int i = 0; i < pid_count; i++) {
-                        processes_list[i].is_allowed = false;
-                    }
-                } else if (num > pid_count) {
-                    some_error(__LINE__, __FILE__, "PID count");
-                    break;
-                } else {
-                    processes_list[num - 1].is_allowed = false;
-                }
-
-                break;
-            }
-
-            case 'g': {
-                fgets(numbers, 10, stdin);
-                int num = parse(numbers);
-
-                if (num <= 0) {
-                    for (int i = 0; i < pid_count; i++) {
-                        processes_list[i].is_allowed = true;
-                    }
-                    break;
-                } else if (num > pid_count) {
-                    some_error(__LINE__, __FILE__, "PID count");
-                    break;
-                } else {
-                    processes_list[num - 1].is_allowed = true;
-                }
-                break;
-            }
-
-            case 'p': {
-                fgets(numbers, 10, stdin);
-                int num = parse(numbers);
-
-                if (num <= 0 || num > pid_count) {
-                    break;
-                }
-
-                for (int i = 0; i < pid_count; i++) {
-                    if (i == num - 1) {
-                        processes_list[i].is_allowed = true;
-                        continue;
-                    }
-                    processes_list[i].is_allowed = false;
-                }
-
-                int ret = setitimer(ITIMER_REAL, &delay, NULL);
-                if (ret) {
-                    perror("timer");
-                    exit(EXIT_FAILURE);
-                }
-
-                break;
-            }
-
-            case 'q': {
-                kill_all_processes(&processes_list, &pid_count);
-                exit(EXIT_SUCCESS);
-            }
-
-            default:
-                break;
+        // If unusual choice - go to cycle start
+        if (choice != '+' && choice != '*' && choice != '&') {
+            continue;
         }
+
+        // Create child path, depending on the choice
+        char *child_path;
+        switch (choice) {
+            case '+': {
+                child_path = getenv("CHILD_PATH");
+                break;
+            }
+
+            case '*': {
+                child_path = get_child_path(envp);
+                break;
+            }
+
+            case '&': {
+                child_path = get_child_path(environ);
+                break;
+            }
+        }
+
+        // Create new child name
+        char child_name[9];
+        if(child_amount >= 100){
+            break;
+        }
+        sprintf(child_name, "child_%d", child_amount++);
+
+        // Create arguments, which we will transfer to child
+        char *const child_args[] = {child_name, env_file_path, NULL};
+
+        // Create new proc
+        pid_t pid = fork();
+
+        if (pid < 0) {
+            perror("fork");
+        } else if (pid > 0) {
+            // This is parent process
+            int status;
+            wait(&status);
+
+            if (WEXITSTATUS(status) != 0) {
+                perror("Child process violated");
+            }
+        }
+        if (pid == 0) {
+            // This is child process
+            execve(child_path, child_args, child_environment);
+        }
+
+        printf(ANSI_COLOR_RESET);
     }
+
+    exit(EXIT_SUCCESS);
 }

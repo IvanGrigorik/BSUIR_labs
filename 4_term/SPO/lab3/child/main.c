@@ -1,45 +1,40 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include <signal.h>
-#include <sys/time.h>
-#include "functions_child.h"
+#include <string.h>
 
-statistic stats;
+#define ANSI_COLOR_YELLOW "\x1b[33m"
+#define ANSI_COLOR_RESET "\x1b[0m"
 
-static const data ones = {1, 1};
-static const data zeros = {0, 0};
+int main(int argc, char *argv[]) {
 
-int main() {
-    struct sigaction child_action;
-    child_action.sa_flags = SA_SIGINFO;
-    child_action.sa_sigaction = child_handler;
-    sigaction(SIGUSR1, &child_action, NULL);
+    printf(ANSI_COLOR_YELLOW);
 
-    // Timer work
-    signal(SIGALRM, collect_stats);
-    struct itimerval delay;
-
-    delay.it_value.tv_sec = 0;
-    delay.it_value.tv_usec = 50000;
-    delay.it_interval.tv_sec = 0;
-    delay.it_interval.tv_usec = 50000;
-
-    int ret = setitimer(ITIMER_REAL, &delay, NULL);
-    if (ret) {
-        perror("timer");
-        exit(EXIT_FAILURE);
+    if (argc != 2) {
+        perror("Wrong argc value");
+        exit(1);
     }
 
-    // Main loop
-    while (1) {
-        stats.nums = ones;
-        stats.nums = zeros;
+    printf("Child name: %s\n", argv[0]);
+    printf("PID: %d\n", getpid());
+    printf("PPID: %d\n", getppid());
 
-        if (stats.cycles >= 101) {
-            request_for_parent();
-            // Wait while parent send request answer
-            usleep(500);
-            output_stats();
+    FILE *env_names = fopen(argv[1], "r");
+
+    const int MAX_PATH_SIZE = 256;
+    char buffer[MAX_PATH_SIZE];
+
+    while (fgets(buffer, MAX_PATH_SIZE, env_names) != NULL) {
+        buffer[strcspn(buffer, "\n")] = '\0';
+
+        char *env_value = getenv(buffer);
+
+        if (env_value) {
+            printf("%s = %s\n", buffer, env_value);
         }
     }
+    printf(ANSI_COLOR_RESET);
+    fclose(env_names);
+
+    exit(0);
 }
