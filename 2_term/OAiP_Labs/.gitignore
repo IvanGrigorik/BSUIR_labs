@@ -2,6 +2,7 @@
 # Prerequisites
 *.d
 
+
 # Compiled Object files
 *.slo
 *.lo
@@ -11,6 +12,11 @@
 # Precompiled Headers
 *.gch
 *.pch
+*.o
+*.layout
+*.depend
+*.cbp
+0
 
 # Compiled Dynamic libraries
 *.so
@@ -35,6 +41,8 @@
 
 # Ignore any folder
 *.idea/
+*bin
+*debug
 *cmake-build-debug/
 # Except labs and src folders
 !src/
