@@ -51,7 +51,9 @@ public class HomeController {
     @PostMapping("/random1")
     public ResponseEntity<?> controllerPost(@RequestBody ArrayList<RandomableEntities> randomableEntitiesArrayList,
                                             @NotNull Model model) {
-        counter.incrementCount();
+        for(int i = 0; i < randomableEntitiesArrayList.size(); i++) {
+            counter.incrementCount();
+        }
         MyLogger.setLog(Level.INFO, "Successful controller Post");
         return new ResponseEntity<>(randomService.generateRandomList(randomableEntitiesArrayList), HttpStatus.OK);
     }
