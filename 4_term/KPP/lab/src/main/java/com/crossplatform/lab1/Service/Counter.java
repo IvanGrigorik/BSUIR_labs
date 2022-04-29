@@ -14,7 +14,7 @@ public class Counter {
         MyLogger.setLog(Level.INFO, "Request count: " + count);
     }
 
-    public long getCount() {
+    synchronized public long getCount() {
         return count;
     }
 }
