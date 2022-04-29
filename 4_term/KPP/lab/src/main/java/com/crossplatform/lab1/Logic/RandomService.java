@@ -3,7 +3,6 @@ package com.crossplatform.lab1.Logic;
 import com.crossplatform.lab1.Entities.RandomableEntities;
 import com.crossplatform.lab1.MyLogger;
 
-import lombok.extern.java.Log;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -19,13 +19,12 @@ public class RandomService {
     private final Random rand = new Random();
 
     @Autowired
-    private RandomHash hashMap;
+    private RandomCache hashMap;
 
     public long generateRandomNumber(@NotNull RandomableEntities randomRequest) throws IllegalArgumentException {
         MyLogger.setLog(Level.INFO, "Randomize number " + randomRequest.number() + " " + randomRequest.mode());
 
         long result;
-
 
         if (hashMap.isInMap(randomRequest)) {
             result = hashMap.getResult(randomRequest);
@@ -46,7 +45,7 @@ public class RandomService {
         return result;
     }
 
-    public ArrayList<Long> generateRandomList(ArrayList<RandomableEntities> randomableEntitiesArrayList) {
+    public List<Long> generateRandomList(List<RandomableEntities> randomableEntitiesArrayList) {
         return randomableEntitiesArrayList
                 .stream()
                 .map(this::generateRandomNumber)

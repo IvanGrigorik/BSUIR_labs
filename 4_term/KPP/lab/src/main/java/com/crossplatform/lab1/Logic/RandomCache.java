@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 
 @Component
-public class RandomHash {
+public class RandomCache {
     private final HashMap<RandomableEntities, Long> hashMap = new HashMap<>();
 
     public boolean isInMap(RandomableEntities key) {

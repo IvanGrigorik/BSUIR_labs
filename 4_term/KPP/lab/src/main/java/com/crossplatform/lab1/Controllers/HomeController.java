@@ -13,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 
 @Controller
@@ -23,22 +23,28 @@ public class HomeController {
     RandomService randomService;
     Counter counter;
 
+    private final Object obj;
+    // private Semaphore sem;
+
     @GetMapping("/random")
     public String controllerGet(@RequestParam(value = "num") long number,
                                 @RequestParam(value = "md") RandomableEntities.MODES random_mode, @NotNull Model model) {
 
-        // If random_mode == 0 - random less, 1 - random more
-        RandomableEntities newEntity = new RandomableEntities(number, random_mode);
-        Long result = randomService.generateRandomNumber(newEntity);
+        // sem.acquire();
+        synchronized (obj) {
 
-        model.addAttribute("num", number);
-        model.addAttribute("md", random_mode);
-        model.addAttribute("rnum", result);
+            RandomableEntities newEntity = new RandomableEntities(number, random_mode);
+            Long result = randomService.generateRandomNumber(newEntity);
 
-        counter.incrementCount();
+            model.addAttribute("num", number);
+            model.addAttribute("md", random_mode);
+            model.addAttribute("rnum", result);
 
-        MyLogger.setLog(Level.INFO, "Successful mapping");
+            counter.incrementCount();
 
+            MyLogger.setLog(Level.INFO, "Successful mapping");
+        }
+        // sem.release();
         return "front";
     }
 
@@ -49,9 +55,8 @@ public class HomeController {
     }
 
     @PostMapping("/random1")
-    public ResponseEntity<?> controllerPost(@RequestBody ArrayList<RandomableEntities> randomableEntitiesArrayList,
-                                            @NotNull Model model) {
-        for(int i = 0; i < randomableEntitiesArrayList.size(); i++) {
+    public ResponseEntity<?> controllerPost(@RequestBody List<RandomableEntities> randomableEntitiesArrayList) {
+        for (int i = 0; i < randomableEntitiesArrayList.size(); i++) {
             counter.incrementCount();
         }
         MyLogger.setLog(Level.INFO, "Successful controller Post");
