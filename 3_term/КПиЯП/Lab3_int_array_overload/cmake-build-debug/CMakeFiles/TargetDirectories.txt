@@ -1,3 +1,0 @@
-D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/cmake-build-debug/CMakeFiles/Lab3_int_array_overload.dir
-D:/KPIYAP/BSUiR_labs_Ivan/Lab3_int_array_overload/cmake-build-debug/CMakeFiles/rebuild_cache.dir

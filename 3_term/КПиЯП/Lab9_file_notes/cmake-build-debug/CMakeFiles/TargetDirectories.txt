@@ -1,3 +1,0 @@
-E:/BSUIR_labs/3_term/КПиЯП/Lab9_file_notes/cmake-build-debug/CMakeFiles/edit_cache.dir
-E:/BSUIR_labs/3_term/КПиЯП/Lab9_file_notes/cmake-build-debug/CMakeFiles/Lab9_file_notes.dir
-E:/BSUIR_labs/3_term/КПиЯП/Lab9_file_notes/cmake-build-debug/CMakeFiles/rebuild_cache.dir

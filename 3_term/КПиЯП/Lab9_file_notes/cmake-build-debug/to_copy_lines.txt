@@ -1,2 +1,0 @@
-testbin1 testbin1 1
-testbin2 testbin2 1
