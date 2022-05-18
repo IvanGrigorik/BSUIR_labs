@@ -133,16 +133,7 @@ int main() {
                 }
             }
 
-            memset(buffer, 0, sizeof(buffer));
-            sprintf(buffer, "User %d connected\n", ntohs(address.sin_port));
-            for (int j = 0; j < max_clients; j++) {
-                // If valid socket descriptor then add to read list
-                if (users[j].client_socket > 0
-                    && users[j].client_socket != super_socket
-                    && users[j].client_socket != users[i].client_socket) {
-                    send(users[j].client_socket, buffer, strlen(buffer), 0);
-                }
-            }
+
         }
 
         // Else it's some IO operation on some other socket
@@ -161,7 +152,7 @@ int main() {
 
                     // Info about disconnect
                     memset(buffer, 0, sizeof(buffer));
-                    sprintf(buffer, "User %d disconnected\n", ntohs(address.sin_port));
+                    sprintf(buffer, "User %s disconnected\n", users[i].client_name);
                     for (int j = 0; j < max_clients; j++) {
                         // If valid socket descriptor then add to read list
                         if (users[j].client_socket > 0
@@ -175,6 +166,24 @@ int main() {
                     close(users[i].client_socket);
                     users[i].client_socket = 0;
                 } else {
+                    // Show connected message to all users
+                    if(buffer[0] == '$'){
+                        strcpy(users[i].client_name, buffer + 1);
+
+                        memset(buffer, 0, sizeof(buffer));
+                        sprintf(buffer, "User %s connected\n", users[i].client_name);
+                        for (int j = 0; j < max_clients; j++) {
+                            // If valid socket descriptor then add to read list
+                            if (users[j].client_socket > 0
+                                && users[j].client_socket != super_socket
+                                && users[j].client_socket != users[i].client_socket) {
+                                send(users[j].client_socket, buffer, strlen(buffer), 0);
+                            }
+                        }
+
+                        continue;
+                    }
+
                     for (int j = 0; j < max_clients; j++) {
                         // If valid socket descriptor then add to read list
                         if (users[j].client_socket > 0 && users[j].client_socket != super_socket) {

@@ -26,7 +26,7 @@ _Noreturn void *reader_routine(void *data) {
     sock = send_s->fd;
 
     while (1) {
-        if((recv(sock, buffer, sizeof(buffer), 0)) == -1 ){
+        if ((recv(sock, buffer, sizeof(buffer), 0)) == -1) {
             perror("Error in receive");
             exit(errno);
         }
@@ -53,9 +53,7 @@ _Noreturn void *writer_routine(void *sock_info) {
         printf("Your message: %s\n", message);
 
         memset(send_message, 0, sizeof(send_message));
-        strcpy(send_message, name);
-        strcat(send_message, ": ");
-        strcat(send_message, message);
+        sprintf(send_message, "%s: %s", name, message);
 
         if ((send(sock, send_message, sizeof(send_message), 0)) == 0) {
             perror("Sending error: ");
@@ -98,6 +96,14 @@ int main() {
     if ((connect(sock, (struct sockaddr *) &server_address, sizeof(server_address))) != 0) {
         perror("Connection error");
         exit(0);
+    }
+
+    char name_send[20];
+    strcpy(name_send, "$");
+    strcat(name_send, name);
+
+    if ((send(sock, name_send, sizeof(name), 0)) == 0) {
+        perror("Connection filed: ");
     }
 
     pthread_t send_th, write_th;
