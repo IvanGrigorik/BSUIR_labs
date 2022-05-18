@@ -8,13 +8,30 @@
 #include <netdb.h>
 #include <pthread.h>
 #include <errno.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <linux/limits.h>
 
 struct client_info {
     int fd;
     char *client_name;
 };
 
-#define IP 192.168.100.3
+void remove_spaces(char *s) {
+
+    char *d = s;
+    *s++ = *d++;
+    do {
+        while (*d == ' ') {
+            ++d;
+        }
+        *s++ = *d++;
+    } while (*s++);
+}
+
+// Change in other machine
+#define IP "192.168.100.3"
 
 _Noreturn void *reader_routine(void *data) {
 
@@ -52,8 +69,9 @@ _Noreturn void *writer_routine(void *sock_info) {
         fgets(message, 1024, stdin);
         printf("Your message: %s\n", message);
 
+        // If it's simple message
         memset(send_message, 0, sizeof(send_message));
-        sprintf(send_message, "%s: %s", name, message);
+        sprintf(send_message, "%s", message);
 
         if ((send(sock, send_message, sizeof(send_message), 0)) == 0) {
             perror("Sending error: ");
@@ -84,7 +102,7 @@ int main() {
     server_address.sin_family = AF_INET;
 
     // Set ip (change in other computer)
-    char ip[20] = {"192.168.100.3"};
+    char ip[20] = {IP};
     host = gethostbyname(ip);
     memcpy(&server_address.sin_addr, host->h_addr, host->h_length);
 

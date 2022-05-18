@@ -25,7 +25,7 @@ int main() {
     // Override SIGPIPE to show info
     signal(SIGPIPE, sigpipe_hand);
 
-    int super_socket, addrlen, new_socket,  max_clients = 10, activity;
+    int super_socket, addrlen, new_socket, max_clients = 10, activity;
     int max_sd;
     struct sockaddr_in address;
 
@@ -49,7 +49,7 @@ int main() {
         exit(errno);
     }
     // To reuse socket, if server crush
-    if (setsockopt(super_socket, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int)) < 0) {
+    if (setsockopt(super_socket, SOL_SOCKET, SO_REUSEADDR, &(int) {1}, sizeof(int)) < 0) {
         perror("setsockopt(SO_REUSEADDR) failed");
     }
     // Set socket family to internet
@@ -132,8 +132,6 @@ int main() {
                     break;
                 }
             }
-
-
         }
 
         // Else it's some IO operation on some other socket
@@ -167,11 +165,12 @@ int main() {
                     users[i].client_socket = 0;
                 } else {
                     // Show connected message to all users
-                    if(buffer[0] == '$'){
+                    if (buffer[0] == '$') {
                         strcpy(users[i].client_name, buffer + 1);
 
                         memset(buffer, 0, sizeof(buffer));
                         sprintf(buffer, "User %s connected\n", users[i].client_name);
+
                         for (int j = 0; j < max_clients; j++) {
                             // If valid socket descriptor then add to read list
                             if (users[j].client_socket > 0
@@ -180,18 +179,22 @@ int main() {
                                 send(users[j].client_socket, buffer, strlen(buffer), 0);
                             }
                         }
-
                         continue;
                     }
 
+                    // Create message information
+                    char send_message[4096];
+                    memset(send_message, 0, sizeof(send_message));
+                    sprintf(send_message, "%s: %s", users[i].client_name, buffer);
+
+                    // Just send message to all users
                     for (int j = 0; j < max_clients; j++) {
-                        // If valid socket descriptor then add to read list
                         if (users[j].client_socket > 0 && users[j].client_socket != super_socket) {
-                            send(users[j].client_socket, buffer, strlen(buffer), 0);
+                            send(users[j].client_socket, send_message, strlen(send_message), 0);
                         }
                     }
                     // Output info to the server
-                    printf("%s\n", buffer);
+                    printf("%s: %s\n", users[i].client_name, buffer);
                 }
             }
         }
