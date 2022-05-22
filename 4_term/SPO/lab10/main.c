@@ -7,6 +7,7 @@
 #include <signal.h>
 #include <string.h>
 #include <unistd.h>
+#include <dirent.h>
 
 #define BUFFER_SIZE 100
 char *buffer;
@@ -14,12 +15,11 @@ char *buffer;
 char *files[] = {"../files/file1", "../files/file2", "../files/file3", NULL};
 char output_file[] = {"../files/all.txt"};
 
-pthread_mutex_t m_reader, m_writer;
-
 bool next_read = true, next_write = false;
 struct aiocb *reader, *writer;
 
 void *reader_routine() {
+
     reader = malloc(sizeof(struct aiocb));
 
     reader->aio_reqprio = 0;
@@ -27,13 +27,26 @@ void *reader_routine() {
     reader->aio_sigevent.sigev_notify = SIGEV_SIGNAL;
     reader->aio_sigevent.sigev_signo = SIGUSR1;
 
-    for (int i = 0; i < 3; i++) {
+    char path[14] = "../files/";
+
+    char dir_name[4096];
+    DIR *dir = opendir(path);
+
+    struct dirent *file;
+    while ((file = readdir(dir))) {
+        char *filename = file->d_name;
+
+        if (strcmp(filename, ".") == 0 || strcmp(filename, "..") == 0) {
+            continue;
+        }
         while (!next_read);
         next_read = false;
 
         buffer = malloc(BUFFER_SIZE);
 
-        if ((reader->aio_fildes = open(files[i], O_RDONLY)) == -1) {
+        char openfile[4096];
+
+        if ((reader->aio_fildes = open(filename, O_RDONLY)) == -1) {
             perror("File open error");
             exit(EXIT_FAILURE);
         }
@@ -43,13 +56,15 @@ void *reader_routine() {
 
         aio_read(reader);
         while (!next_read);
-        printf("Now file %s read. Reader info: %s\n", files[i], reader->aio_buf);
+        printf("Now file %s read. Reader info: %s\n", filename, reader->aio_buf);
     }
+
 
     return NULL;
 }
 
 void *writer_routine() {
+
     int offset = 0;
     writer = malloc(sizeof(struct aiocb));
     writer->aio_reqprio = 0;
@@ -78,16 +93,19 @@ void *writer_routine() {
 }
 
 void end_read(__attribute__((unused)) int signum) {
+
     next_read = false;
     next_write = true;
 }
 
 void end_write(__attribute__((unused)) int signum) {
+
     next_write = false;
     next_read = true;
 }
 
 int main() {
+
     truncate(output_file, 0);
     signal(SIGUSR1, end_read);
     signal(SIGUSR2, end_write);
