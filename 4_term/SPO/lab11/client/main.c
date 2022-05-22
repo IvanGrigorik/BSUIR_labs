@@ -8,10 +8,6 @@
 #include <netdb.h>
 #include <pthread.h>
 #include <errno.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <linux/limits.h>
 
 struct client_info {
     int fd;
@@ -31,7 +27,7 @@ void remove_spaces(char *s) {
 }
 
 // Change in other machine
-#define IP "192.168.100.3"
+#define IP "172.20.10.13"
 
 _Noreturn void *reader_routine(void *data) {
 
@@ -67,7 +63,6 @@ _Noreturn void *writer_routine(void *sock_info) {
 
     while (1) {
         fgets(message, 1024, stdin);
-        printf("Your message: %s\n", message);
 
         // If it's simple message
         memset(send_message, 0, sizeof(send_message));

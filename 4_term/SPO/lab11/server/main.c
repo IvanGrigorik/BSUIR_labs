@@ -22,7 +22,7 @@ typedef struct clients {
 
 int main() {
 
-    // Override SIGPIPE to show info
+    // Override SIGPIPE to show info, if server crush
     signal(SIGPIPE, sigpipe_hand);
 
     int super_socket, addrlen, new_socket, max_clients = 10, activity;
@@ -35,10 +35,10 @@ int main() {
 
     fd_set read_fd_sock;
 
-    //greet message
+    // Greet message
     char *message = "Connected to server\n";
 
-    //initialise all client_socket[] to 0 so not checked
+    // Initialise all client_socket[] to 0 so not checked
     for (int i = 0; i < max_clients; i++) {
         users[i].client_socket = 0;
     }
@@ -59,7 +59,7 @@ int main() {
     // Set port (can be changed)
     address.sin_port = htons(8000);
 
-    // 2) Bind the socket to localhost port 8888
+    // 2) Bind the socket to localhost port 8000
     if (bind(super_socket, (struct sockaddr *) &address, sizeof(address)) < 0) {
         perror("Error in binding");
         exit(errno);
