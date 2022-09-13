@@ -1,0 +1,15 @@
+# .gitignore for Quartus 
+
+# Debugging
+incremental_db/
+db/
+
+# Simulations
+simulation/
+output_files/
+
+# Additional files
+*_dump.txt
+*.qpf
+*.qsf
+*.qws
