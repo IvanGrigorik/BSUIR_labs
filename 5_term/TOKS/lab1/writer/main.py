@@ -11,10 +11,10 @@ def main():
 
         # If we want to change speed of ports
         if message == 'ch':
-            port_number = input('Enter which port speed you want to change (0/1): ')
+            port_number = int(input('Enter which port speed you want to change (0/1): '))
             new_baudrate = 0
-            while int(new_baudrate) not in serial.Serial.BAUDRATES:
-                new_baudrate = input('Enter new port speed: ')
+            while new_baudrate not in serial.Serial.BAUDRATES:
+                new_baudrate = int(input('Enter new port speed: '))
 
             match int(port_number):
                 case 0:
