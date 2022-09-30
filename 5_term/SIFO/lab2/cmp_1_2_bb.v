@@ -4,7 +4,7 @@
 // MODULE: lpm_compare 
 
 // ============================================================
-// File Name: cmp2.v
+// File Name: cmp_1_2.v
 // Megafunction Name(s):
 // 			lpm_compare
 //
@@ -31,11 +31,13 @@
 //Altera or its authorized distributors.  Please refer to the 
 //applicable agreement for further details.
 
-module cmp2 (
+module cmp_1_2 (
 	dataa,
+	datab,
 	aeb);
 
-	input	[3:0]  dataa;
+	input	[7:0]  dataa;
+	input	[7:0]  datab;
 	output	  aeb;
 
 endmodule
@@ -52,30 +54,30 @@ endmodule
 // Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Stratix II"
 // Retrieval info: PRIVATE: LPM_PIPELINE NUMERIC "0"
 // Retrieval info: PRIVATE: Latency NUMERIC "0"
-// Retrieval info: PRIVATE: PortBValue NUMERIC "5"
+// Retrieval info: PRIVATE: PortBValue NUMERIC "0"
 // Retrieval info: PRIVATE: Radix NUMERIC "10"
 // Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "0"
 // Retrieval info: PRIVATE: SignedCompare NUMERIC "0"
 // Retrieval info: PRIVATE: aclr NUMERIC "0"
 // Retrieval info: PRIVATE: clken NUMERIC "0"
-// Retrieval info: PRIVATE: isPortBConstant NUMERIC "1"
-// Retrieval info: PRIVATE: nBit NUMERIC "4"
-// Retrieval info: CONSTANT: LPM_HINT STRING "ONE_INPUT_IS_CONSTANT=YES"
+// Retrieval info: PRIVATE: isPortBConstant NUMERIC "0"
+// Retrieval info: PRIVATE: nBit NUMERIC "8"
 // Retrieval info: CONSTANT: LPM_REPRESENTATION STRING "UNSIGNED"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "LPM_COMPARE"
-// Retrieval info: CONSTANT: LPM_WIDTH NUMERIC "4"
+// Retrieval info: CONSTANT: LPM_WIDTH NUMERIC "8"
 // Retrieval info: USED_PORT: AeB 0 0 0 0 OUTPUT NODEFVAL AeB
-// Retrieval info: USED_PORT: dataa 0 0 4 0 INPUT NODEFVAL dataa[3..0]
+// Retrieval info: USED_PORT: dataa 0 0 8 0 INPUT NODEFVAL dataa[7..0]
+// Retrieval info: USED_PORT: datab 0 0 8 0 INPUT NODEFVAL datab[7..0]
 // Retrieval info: CONNECT: AeB 0 0 0 0 @AeB 0 0 0 0
-// Retrieval info: CONNECT: @dataa 0 0 4 0 dataa 0 0 4 0
-// Retrieval info: CONNECT: @datab 0 0 4 0 5 0 0 0 0
+// Retrieval info: CONNECT: @dataa 0 0 8 0 dataa 0 0 8 0
+// Retrieval info: CONNECT: @datab 0 0 8 0 datab 0 0 8 0
 // Retrieval info: LIBRARY: lpm lpm.lpm_components.all
-// Retrieval info: GEN_FILE: TYPE_NORMAL cmp2.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL cmp2.inc FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL cmp2.cmp FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL cmp2.bsf TRUE FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL cmp2_inst.v FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL cmp2_bb.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL cmp2_waveforms.html TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL cmp2_wave*.jpg FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL cmp_1_2.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL cmp_1_2.inc FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL cmp_1_2.cmp FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL cmp_1_2.bsf FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL cmp_1_2_inst.v FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL cmp_1_2_bb.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL cmp_1_2_waveforms.html TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL cmp_1_2_wave*.jpg FALSE
 // Retrieval info: LIB_FILE: lpm

@@ -44,7 +44,7 @@ module cmp2 (
 	output	  aeb;
 
 	wire  sub_wire0;
-	wire [3:0] sub_wire1 = 4'h6;
+	wire [3:0] sub_wire1 = 4'h5;
 	wire  aeb = sub_wire0;
 
 	lpm_compare	lpm_compare_component (
@@ -80,7 +80,7 @@ endmodule
 // Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Stratix II"
 // Retrieval info: PRIVATE: LPM_PIPELINE NUMERIC "0"
 // Retrieval info: PRIVATE: Latency NUMERIC "0"
-// Retrieval info: PRIVATE: PortBValue NUMERIC "6"
+// Retrieval info: PRIVATE: PortBValue NUMERIC "5"
 // Retrieval info: PRIVATE: Radix NUMERIC "10"
 // Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "0"
 // Retrieval info: PRIVATE: SignedCompare NUMERIC "0"
@@ -96,7 +96,7 @@ endmodule
 // Retrieval info: USED_PORT: dataa 0 0 4 0 INPUT NODEFVAL dataa[3..0]
 // Retrieval info: CONNECT: AeB 0 0 0 0 @AeB 0 0 0 0
 // Retrieval info: CONNECT: @dataa 0 0 4 0 dataa 0 0 4 0
-// Retrieval info: CONNECT: @datab 0 0 4 0 6 0 0 0 0
+// Retrieval info: CONNECT: @datab 0 0 4 0 5 0 0 0 0
 // Retrieval info: LIBRARY: lpm lpm.lpm_components.all
 // Retrieval info: GEN_FILE: TYPE_NORMAL cmp2.v TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL cmp2.inc FALSE

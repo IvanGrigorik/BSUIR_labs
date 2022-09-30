@@ -1,7 +1,7 @@
 import serial
 
-port1 = '/dev/tnt0'
-port2 = '/dev/tnt1'
+port1 = 'COM1'
+port2 = 'COM2'
 
 
 def change_baudrate(port: serial.Serial, new_baudrate: int):
@@ -42,17 +42,14 @@ def reader_routine(port: serial.Serial):
         while port.inWaiting() > 0:
             message += port.read().decode('UTF-8')
 
-        match message:
-            case 'exit':
-                port.close()
-                exit(1)
-
-            case '':
-                continue
-
-            case _:
-                print(message)
-                print(decode_package(message))
+        if decode_package(message) == 'exit':
+            port.close()
+            exit(1)
+        elif message == '':
+            continue
+        else:
+            print(message)
+            print(decode_package(message))
 
 
 def writer_routine(port: serial.Serial):
@@ -61,17 +58,18 @@ def writer_routine(port: serial.Serial):
     while True:
         message = input('> ')
         port.write(encode_package(message).encode('UTF-8'))
+        if message == "exit":
+            exit()
 
 
 def main():
     choice = int(input('Do you want read or write (0/1)?'))
-    match choice:
-        case 0:
-            port = serial.Serial(port1, 9600)
-            reader_routine(port)
-        case 1:
-            port = serial.Serial(port2, 9600)
-            writer_routine(port)
+    if choice == 0:
+        port = serial.Serial(port1, 9600)
+        reader_routine(port)
+    elif choice == 1:
+        port = serial.Serial(port2, 9600)
+        writer_routine(port)
 
 
 if __name__ == '__main__':

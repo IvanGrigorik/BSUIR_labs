@@ -38,7 +38,7 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 952 64 1128 80)
+	(rect 904 64 1080 80)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "DCa[15..0]" (rect 90 0 144 12)(font "Arial" ))
 	(pt 0 8)
@@ -205,7 +205,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 888 56 936 88)
+	(rect 840 56 888 88)
 	(text "NOT" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst5" (rect 3 21 26 33)(font "Arial" ))
 	(port
@@ -232,12 +232,6 @@ applicable agreement for further details.
 (connector
 	(pt 616 248)
 	(pt 632 248)
-	(bus)
-)
-(connector
-	(text "D[15..0]" (rect 834 56 874 68)(font "Arial" ))
-	(pt 824 72)
-	(pt 888 72)
 	(bus)
 )
 (connector
@@ -321,16 +315,6 @@ applicable agreement for further details.
 	(pt 824 368)
 )
 (connector
-	(pt 824 72)
-	(pt 824 128)
-	(bus)
-)
-(connector
-	(pt 824 128)
-	(pt 824 144)
-	(bus)
-)
-(connector
 	(pt 824 144)
 	(pt 824 160)
 	(bus)
@@ -401,13 +385,29 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 936 72)
-	(pt 952 72)
+	(pt 504 248)
+	(pt 480 248)
+)
+(connector
+	(text "D[15..0]" (rect 786 56 826 68)(font "Arial" ))
+	(pt 824 72)
+	(pt 840 72)
 	(bus)
 )
 (connector
-	(pt 504 248)
-	(pt 480 248)
+	(pt 888 72)
+	(pt 904 72)
+	(bus)
+)
+(connector
+	(pt 824 72)
+	(pt 824 128)
+	(bus)
+)
+(connector
+	(pt 824 128)
+	(pt 824 144)
+	(bus)
 )
 (junction (pt 824 128))
 (junction (pt 824 144))
