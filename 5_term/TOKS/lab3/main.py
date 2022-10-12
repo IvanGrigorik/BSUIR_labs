@@ -93,7 +93,7 @@ def main():
     # print(arr_x)
     arr1 = encode_hamming(arr_x, r)
     # print(arr1)
-    arr1 =     "110101100101"  # with error
+    arr1 = "110101100101"  # with error
     # decoded   XX0X011X0101
     # right     110101100101
     # error:    110101101101    error in bits: 0, 7
