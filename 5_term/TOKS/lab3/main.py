@@ -69,49 +69,35 @@ def detect_errors(hamming_encoded):
     return hamming_encoded
 
 
+def decode_hamming(hamming_encoded):
+    # r - redundant bits count
+    r = (len(hamming_encoded) - 1).bit_length()
+    for i in range(r, -1, -1):
+        if len(hamming_encoded) > 2 ** i:
+            hamming_encoded = hamming_encoded[:2 ** i - 1] + hamming_encoded[2 ** i:]
+
+    return hamming_encoded
+
+
 def main():
-    # data1 = "00110101"
-    #
-    # r = redundant_bits_count(len(data1))
-    # arr_x = define_bits_position(data1, r)
-    # # print(arr_x)
-    # arr1 = encode_hamming(arr_x, r)
-    # # print(arr1)
-    # arr1 = "110101100101"  # with error
-    # # decoded   XX0X011X0101
-    # # right     110101100101
-    # # error:    110101101101    error in bits: 0, 7
-    #
-    # print(f"Wrong: {arr1}")
-    # print(f"Right: {detect_errors(arr1)}")
-    # arr1 = decode_hamming(arr1)
+    # Test case:
 
-    input_string = "*"
-    data = (''.join(format(ord(x), 'b') for x in input_string))
+    data1 = "0011010111"
+    print(f"Unencoded data:    {data1}")
+    r = redundant_bits_count(len(data1))
+    arr_x = define_bits_position(data1, r)
+    print(f"Defined position:  {arr_x}")
+    arr1 = encode_hamming(arr_x, r)
+    print(f"Encoded data: \t   {arr1}")
 
-    n = 10
-    chunks = [data[i:i + n] for i in range(0, len(data), n)]
+    arr1 =     "00010110010101"  # with error
+    # decoded   XX0X011X010111
+    # right     00010110010111
+    # error:    00010110010101    error in bits: 0, 7
 
-    # Sender routine
-    encoded_chunks = []
-    for chunk in chunks:
-        # Count of additional bits
-        redundant_bits = redundant_bits_count(len(chunk))
-        # Create new array with empty hamming numbers
-        arr = define_bits_position(chunk, redundant_bits)
-        # Fill numbers in array
-        arr = encode_hamming(arr, redundant_bits)
-        encoded_chunks.append(arr)
-        print(f"Decoded sender data: {chunk}")
-        print(f"Encoded sender data: {arr}" + '\n')
-
-    # Receiver routine
-    decoded_chunks = []
-    for encoded_chunk in encoded_chunks:
-        # Delete all hamming numbers in array
-        data = detect_errors(encoded_chunk)
-        print(f"Decoded receiver data: {data}" + '\n')
-        decoded_chunks.append(data)
+    print(f"Wrong transmitted: {arr1}")
+    no_errors = detect_errors(arr1)
+    print(f"Decoded: \t   {decode_hamming(no_errors)}")
 
 
 if __name__ == '__main__':
