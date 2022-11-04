@@ -4,3 +4,7 @@ out/
 .idea/
 *.swp
 nbproject/
+
+# Temp files
+*.bkp
+*.dtmp
