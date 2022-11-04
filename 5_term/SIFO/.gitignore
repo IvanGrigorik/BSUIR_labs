@@ -13,8 +13,6 @@ output_files/
 
 # Additional files
 *_dump.txt
-*.qpf
-*.qsf
 *.qws
 *.rpt
 *.summary
