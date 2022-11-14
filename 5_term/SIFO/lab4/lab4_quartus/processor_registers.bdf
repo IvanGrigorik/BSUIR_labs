@@ -86,7 +86,7 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 824 768 1008 784)
+	(rect 880 800 1064 816)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "data_out_PR[8..0]" (rect 90 0 179 12)(font "Arial" ))
 	(pt 0 8)
@@ -586,12 +586,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "data_out[8..0]" (rect 760 760 828 772)(font "Arial" ))
-	(pt 752 776)
-	(pt 824 776)
-	(bus)
-)
-(connector
 	(text "control[2]" (rect 296 600 342 612)(font "Arial" ))
 	(pt 288 616)
 	(pt 344 616)
@@ -617,7 +611,13 @@ applicable agreement for further details.
 	(pt 504 632)
 )
 (connector
-	(text "data[6..5]" (rect 296 584 343 596)(font "Arial" ))
+	(text "data_out[8..0]" (rect 816 792 884 804)(font "Arial" ))
+	(pt 808 808)
+	(pt 880 808)
+	(bus)
+)
+(connector
+	(text "address[1..0]" (rect 296 584 360 596)(font "Arial" ))
 	(pt 344 600)
 	(pt 288 600)
 	(bus)

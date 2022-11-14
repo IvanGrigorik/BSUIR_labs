@@ -76,7 +76,7 @@ set_global_assignment -name QIP_FILE reg1.qip
 set_global_assignment -name QIP_FILE reg3.qip
 set_global_assignment -name QIP_FILE lpm_mux0.qip
 set_global_assignment -name QIP_FILE sum9.qip
-set_global_assignment -name QIP_FILE ../../../../../../../my_files/programming_language/Quartus/test/lpm_ram_dq2.qip
+set_global_assignment -name QIP_FILE "C:/Users/givan/Desktop/lab5/lpm_ram_dq1.qip"
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
 set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top

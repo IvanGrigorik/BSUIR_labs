@@ -15,9 +15,10 @@
 
 FUNCTION lpm_counter0 
 (
+	aclr,
 	clock
 )
 
 RETURNS (
-	q[2..0]
+	q[3..0]
 );
