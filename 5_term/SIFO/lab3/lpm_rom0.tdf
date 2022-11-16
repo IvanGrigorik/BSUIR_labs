@@ -48,7 +48,7 @@ VARIABLE
 	altsyncram_component : altsyncram WITH (
 			CLOCK_ENABLE_INPUT_A = "BYPASS",
 			CLOCK_ENABLE_OUTPUT_A = "BYPASS",
-			INIT_FILE = "E:/temp/lab3/content/rom.hex",
+			INIT_FILE = "C:/Users/givan/Desktop/SIFO/lab3_work/content/rom.hex",
 			INTENDED_DEVICE_FAMILY = "Stratix II",
 			LPM_HINT = "ENABLE_RUNTIME_MOD=NO",
 			LPM_TYPE = "altsyncram",
@@ -90,7 +90,7 @@ END;
 -- Retrieval info: PRIVATE: JTAG_ENABLED NUMERIC "0"
 -- Retrieval info: PRIVATE: JTAG_ID STRING "NONE"
 -- Retrieval info: PRIVATE: MAXIMUM_DEPTH NUMERIC "0"
--- Retrieval info: PRIVATE: MIFfilename STRING "E:/temp/lab3/content/rom.hex"
+-- Retrieval info: PRIVATE: MIFfilename STRING "C:/Users/givan/Desktop/SIFO/lab3_work/content/rom.hex"
 -- Retrieval info: PRIVATE: NUMWORDS_A NUMERIC "32"
 -- Retrieval info: PRIVATE: RAM_BLOCK_TYPE NUMERIC "0"
 -- Retrieval info: PRIVATE: RegAddr NUMERIC "1"
@@ -103,7 +103,7 @@ END;
 -- Retrieval info: PRIVATE: rden NUMERIC "0"
 -- Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_A STRING "BYPASS"
 -- Retrieval info: CONSTANT: CLOCK_ENABLE_OUTPUT_A STRING "BYPASS"
--- Retrieval info: CONSTANT: INIT_FILE STRING "E:/temp/lab3/content/rom.hex"
+-- Retrieval info: CONSTANT: INIT_FILE STRING "C:/Users/givan/Desktop/SIFO/lab3_work/content/rom.hex"
 -- Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Stratix II"
 -- Retrieval info: CONSTANT: LPM_HINT STRING "ENABLE_RUNTIME_MOD=NO"
 -- Retrieval info: CONSTANT: LPM_TYPE STRING "altsyncram"

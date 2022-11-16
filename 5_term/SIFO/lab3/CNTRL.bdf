@@ -70,7 +70,7 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 1184 288 1360 304)
+	(rect 1192 248 1368 264)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "CNTRL_read" (rect 90 0 153 12)(font "Arial" ))
 	(pt 0 8)
@@ -322,7 +322,7 @@ applicable agreement for further details.
 	)
 	(drawing
 		(text "unsigned compare" (rect 36 17 125 29)(font "Arial" ))
-		(text "datab[]=9" (rect 20 58 73 72)(font "Arial" (font_size 8)))
+		(text "datab[]=8" (rect 20 58 73 72)(font "Arial" (font_size 8)))
 		(line (pt 16 16)(pt 112 16)(line_width 1))
 		(line (pt 112 16)(pt 112 80)(line_width 1))
 		(line (pt 112 80)(pt 16 80)(line_width 1))
@@ -681,14 +681,6 @@ applicable agreement for further details.
 	(pt 1072 696)
 )
 (connector
-	(pt 1184 296)
-	(pt 1176 296)
-)
-(connector
-	(pt 1176 296)
-	(pt 1176 256)
-)
-(connector
 	(pt 1056 248)
 	(pt 1112 248)
 )
@@ -696,6 +688,10 @@ applicable agreement for further details.
 	(text "addit_read" (rect 1063 248 1113 260)(font "Arial" ))
 	(pt 1080 264)
 	(pt 1112 264)
+)
+(connector
+	(pt 1176 256)
+	(pt 1192 256)
 )
 (junction (pt 816 184))
 (junction (pt 816 296))

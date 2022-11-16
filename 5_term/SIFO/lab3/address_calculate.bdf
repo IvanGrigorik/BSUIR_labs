@@ -70,7 +70,7 @@ applicable agreement for further details.
 )
 (pin
 	(input)
-	(rect -56 368 112 384)
+	(rect 120 368 288 384)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
 	(text "cnt_write" (rect 5 0 48 12)(font "Arial" ))
 	(pt 168 8)
@@ -346,56 +346,6 @@ applicable agreement for further details.
 		(circle (rect 31 12 39 20)(line_width 1))
 	)
 )
-(symbol
-	(rect 128 352 192 432)
-	(text "DFF" (rect 1 0 19 10)(font "Arial" (font_size 6)))
-	(text "inst19" (rect 3 68 32 80)(font "Arial" ))
-	(port
-		(pt 32 80)
-		(input)
-		(text "CLRN" (rect 21 59 44 71)(font "Courier New" (bold)))
-		(text "CLRN" (rect 21 58 44 70)(font "Courier New" (bold)))
-		(line (pt 32 80)(pt 32 76)(line_width 1))
-	)
-	(port
-		(pt 0 40)
-		(input)
-		(text "CLK" (rect 3 29 20 41)(font "Courier New" (bold))(invisible))
-		(text "CLK" (rect 3 29 20 41)(font "Courier New" (bold))(invisible))
-		(line (pt 0 40)(pt 12 40)(line_width 1))
-	)
-	(port
-		(pt 0 24)
-		(input)
-		(text "D" (rect 14 20 19 32)(font "Courier New" (bold)))
-		(text "D" (rect 14 20 19 32)(font "Courier New" (bold)))
-		(line (pt 0 24)(pt 12 24)(line_width 1))
-	)
-	(port
-		(pt 32 0)
-		(input)
-		(text "PRN" (rect 24 13 41 25)(font "Courier New" (bold)))
-		(text "PRN" (rect 24 11 41 23)(font "Courier New" (bold)))
-		(line (pt 32 4)(pt 32 0)(line_width 1))
-	)
-	(port
-		(pt 64 24)
-		(output)
-		(text "Q" (rect 45 20 50 32)(font "Courier New" (bold)))
-		(text "Q" (rect 45 20 50 32)(font "Courier New" (bold)))
-		(line (pt 52 24)(pt 64 24)(line_width 1))
-	)
-	(drawing
-		(line (pt 12 12)(pt 52 12)(line_width 1))
-		(line (pt 12 68)(pt 52 68)(line_width 1))
-		(line (pt 52 68)(pt 52 12)(line_width 1))
-		(line (pt 12 68)(pt 12 12)(line_width 1))
-		(line (pt 19 40)(pt 12 47)(line_width 1))
-		(line (pt 12 32)(pt 20 40)(line_width 1))
-		(circle (rect 28 4 36 12)(line_width 1))
-		(circle (rect 28 68 36 76)(line_width 1))
-	)
-)
 (connector
 	(pt 648 232)
 	(pt 680 232)
@@ -464,25 +414,8 @@ applicable agreement for further details.
 	(pt 288 328)
 )
 (connector
-	(text "clk_c" (rect 104 376 129 388)(font "Arial" ))
-	(pt 104 392)
-	(pt 128 392)
-)
-(connector
-	(pt 128 376)
-	(pt 112 376)
-)
-(connector
-	(pt 304 376)
-	(pt 304 360)
-)
-(connector
 	(pt 304 360)
 	(pt 320 360)
-)
-(connector
-	(pt 192 376)
-	(pt 304 376)
 )
 (connector
 	(pt 424 352)
@@ -516,6 +449,14 @@ applicable agreement for further details.
 (connector
 	(pt 424 352)
 	(pt 520 352)
+)
+(connector
+	(pt 304 360)
+	(pt 304 376)
+)
+(connector
+	(pt 304 376)
+	(pt 288 376)
 )
 (junction (pt 424 352))
 (junction (pt 600 360))

@@ -70,7 +70,7 @@ applicable agreement for further details.
 )
 (pin
 	(input)
-	(rect 312 192 496 208)
+	(rect 320 192 504 208)
 	(text "INPUT" (rect 149 0 177 10)(font "Arial" (font_size 6)))
 	(text "RAM_address[4..0]" (rect 5 0 99 12)(font "Arial" ))
 	(pt 184 8)
@@ -85,24 +85,8 @@ applicable agreement for further details.
 	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
 )
 (pin
-	(output)
-	(rect 680 272 856 288)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "test[7..0]" (rect 90 0 134 12)(font "Arial" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8)(line_width 1))
-		(line (pt 52 4)(pt 78 4)(line_width 1))
-		(line (pt 52 12)(pt 78 12)(line_width 1))
-		(line (pt 52 12)(pt 52 4)(line_width 1))
-		(line (pt 78 4)(pt 82 8)(line_width 1))
-		(line (pt 82 8)(pt 78 12)(line_width 1))
-		(line (pt 78 12)(pt 82 8)(line_width 1))
-	)
-)
-(pin
 	(bidir)
-	(rect 680 240 856 256)
+	(rect 664 240 840 256)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "ram_io[7..0]" (rect 90 0 149 12)(font "Arial" ))
 	(pt 0 8)
@@ -225,21 +209,6 @@ applicable agreement for further details.
 	(pt 520 232)
 )
 (connector
-	(pt 504 216)
-	(pt 504 200)
-	(bus)
-)
-(connector
-	(pt 520 216)
-	(pt 504 216)
-	(bus)
-)
-(connector
-	(pt 496 200)
-	(pt 504 200)
-	(bus)
-)
-(connector
 	(pt 520 264)
 	(pt 496 264)
 )
@@ -256,23 +225,22 @@ applicable agreement for further details.
 	(pt 504 296)
 )
 (connector
-	(pt 664 280)
-	(pt 680 280)
-	(bus)
-)
-(connector
-	(pt 664 248)
-	(pt 664 280)
-	(bus)
-)
-(connector
 	(pt 648 248)
 	(pt 664 248)
 	(bus)
 )
 (connector
-	(pt 664 248)
-	(pt 680 248)
+	(pt 520 216)
+	(pt 512 216)
 	(bus)
 )
-(junction (pt 664 248))
+(connector
+	(pt 504 200)
+	(pt 512 200)
+	(bus)
+)
+(connector
+	(pt 512 200)
+	(pt 512 216)
+	(bus)
+)
