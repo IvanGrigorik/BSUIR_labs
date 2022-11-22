@@ -687,7 +687,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect -72 712 -8 760)
+	(rect 72 712 136 760)
 	(text "AND2" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "inst7" (rect 3 37 26 49)(font "Arial" ))
 	(port
@@ -719,7 +719,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect -72 768 -8 816)
+	(rect 72 776 136 824)
 	(text "AND2" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "inst10" (rect 3 37 32 49)(font "Arial" ))
 	(port
@@ -1431,6 +1431,36 @@ applicable agreement for further details.
 		(line (pt 10 28)(pt 18 20)(line_width 1))
 	)
 )
+(symbol
+	(rect 664 296 824 392)
+	(text "sub2" (rect 66 1 99 17)(font "Arial" (font_size 10)))
+	(text "inst17" (rect 8 80 37 92)(font "Arial" ))
+	(port
+		(pt 0 40)
+		(input)
+		(text "dataa[6..0]" (rect 0 0 60 14)(font "Arial" (font_size 8)))
+		(text "dataa[6..0]" (rect 4 27 64 41)(font "Arial" (font_size 8)))
+		(line (pt 0 40)(pt 64 40)(line_width 3))
+	)
+	(port
+		(pt 160 56)
+		(output)
+		(text "result[6..0]" (rect 0 0 60 14)(font "Arial" (font_size 8)))
+		(text "result[6..0]" (rect 106 43 166 57)(font "Arial" (font_size 8)))
+		(line (pt 160 56)(pt 96 56)(line_width 3))
+	)
+	(drawing
+		(text "2" (rect 10 59 17 73)(font "Arial" (font_size 8)))
+		(text "A" (rect 66 34 75 48)(font "Arial" (font_size 8)))
+		(text "B" (rect 66 66 74 80)(font "Arial" (font_size 8)))
+		(text "A-B" (rect 75 50 97 64)(font "Arial" (font_size 8)))
+		(line (pt 64 32)(pt 96 40)(line_width 1))
+		(line (pt 96 40)(pt 96 72)(line_width 1))
+		(line (pt 96 72)(pt 64 80)(line_width 1))
+		(line (pt 64 80)(pt 64 32)(line_width 1))
+		(line (pt 8 72)(pt 64 72)(line_width 3))
+	)
+)
 (connector
 	(pt 200 416)
 	(pt 216 416)
@@ -1504,12 +1534,6 @@ applicable agreement for further details.
 	(text "word1[8..0]" (rect 368 320 422 332)(font "Arial" ))
 	(pt 360 336)
 	(pt 416 336)
-	(bus)
-)
-(connector
-	(text "word1[6..0]" (rect 696 384 750 396)(font "Arial" ))
-	(pt 688 400)
-	(pt 840 400)
 	(bus)
 )
 (connector
@@ -1882,11 +1906,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "mov" (rect -96 712 -74 724)(font "Arial" ))
-	(pt -72 728)
-	(pt -104 728)
-)
-(connector
 	(pt -8 920)
 	(pt 16 920)
 )
@@ -1971,49 +1990,16 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "gnd" (rect -88 625 -76 642)(font "Arial" )(vertical))
-	(pt -72 632)
-	(pt -72 656)
-)
-(connector
-	(text "gnd, gnd, gnd, gnd, gnd, word1[6..5]" (rect -8 680 170 692)(font "Arial" ))
+	(text "gnd, gnd, gnd, gnd, gnd, word1[6..5]" (rect -32 680 146 692)(font "Arial" ))
 	(pt 24 696)
 	(pt 136 696)
 	(bus)
-)
-(connector
-	(pt 176 736)
-	(pt -8 736)
-)
-(connector
-	(pt 176 736)
-	(pt 176 712)
 )
 (connector
 	(text "addr[6..0]" (rect 224 680 271 692)(font "Arial" ))
 	(pt 216 696)
 	(pt 296 696)
 	(bus)
-)
-(connector
-	(text "mov5" (rect 0 776 28 788)(font "Arial" ))
-	(pt -8 792)
-	(pt 24 792)
-)
-(connector
-	(text "mov" (rect -88 768 -66 780)(font "Arial" ))
-	(pt -96 784)
-	(pt -72 784)
-)
-(connector
-	(text "q5" (rect -88 784 -77 796)(font "Arial" ))
-	(pt -96 800)
-	(pt -72 800)
-)
-(connector
-	(text "q5" (rect -96 728 -85 740)(font "Arial" ))
-	(pt -72 744)
-	(pt -104 744)
 )
 (connector
 	(text "word1[0], word2[8..3]" (rect -88 888 14 900)(font "Arial" ))
@@ -2037,6 +2023,65 @@ applicable agreement for further details.
 	(pt 1000 960)
 	(pt 976 960)
 )
+(connector
+	(text "mov" (rect 48 712 70 724)(font "Arial" ))
+	(pt 72 728)
+	(pt 40 728)
+)
+(connector
+	(pt 176 736)
+	(pt 136 736)
+)
+(connector
+	(pt 176 712)
+	(pt 176 736)
+)
+(connector
+	(text "q5" (rect 48 728 59 740)(font "Arial" ))
+	(pt 72 744)
+	(pt 40 744)
+)
+(connector
+	(text "mov5" (rect 144 784 172 796)(font "Arial" ))
+	(pt 136 800)
+	(pt 168 800)
+)
+(connector
+	(text "mov" (rect 56 776 78 788)(font "Arial" ))
+	(pt 48 792)
+	(pt 72 792)
+)
+(connector
+	(text "q5" (rect 56 792 67 804)(font "Arial" ))
+	(pt 48 808)
+	(pt 72 808)
+)
+(connector
+	(text "gnd" (rect -88 641 -76 658)(font "Arial" )(vertical))
+	(pt -72 632)
+	(pt -72 672)
+)
+(connector
+	(text "word1[6..0]" (rect 608 320 662 332)(font "Arial" ))
+	(pt 664 336)
+	(pt 600 336)
+	(bus)
+)
+(connector
+	(pt 824 352)
+	(pt 832 352)
+	(bus)
+)
+(connector
+	(pt 832 352)
+	(pt 832 400)
+	(bus)
+)
+(connector
+	(pt 832 400)
+	(pt 840 400)
+	(bus)
+)
 (junction (pt 200 320))
 (junction (pt 688 888))
 (junction (pt 1264 960))
@@ -2052,5 +2097,5 @@ applicable agreement for further details.
 (text "jmp instruction" (rect 840 344 921 358)(font "Arial" (font_size 8)))
 (text "To write" (rect -32 976 15 990)(font "Arial" (font_size 8)))
 (text "Writing to RAM and 2 tacts delay" (rect 808 784 993 798)(font "Arial" (font_size 8)))
-(text "To read address from register" (rect -40 640 131 654)(font "Arial" (font_size 8)))
-(text "Reading from RAM with 1-tact delay" (rect 24 856 229 870)(font "Arial" (font_size 8)))
+(text "To read address from register" (rect 72 648 243 662)(font "Arial" (font_size 8)))
+(text "Reading from RAM with 1-tact delay" (rect 16 856 221 870)(font "Arial" (font_size 8)))
