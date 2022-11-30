@@ -76,9 +76,13 @@ def main():
             break
         Transmitter.clear_try_counter()
 
-        Transmitter.send_message(message)
+        while True:
+            Transmitter.send_message(message)
+            Transmitter.wait_transmission_time()
 
-        while Receiver.is_collision():
+            if not Receiver.is_collision():
+                break
+
             Transmitter.send_jam()
             Transmitter.wait_transmission_time()
 
