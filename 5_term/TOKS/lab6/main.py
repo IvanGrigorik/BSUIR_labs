@@ -30,26 +30,29 @@ received_ack = []
 
 def reader_routine(r_port: serial.Serial, w_port: serial.Serial):
     print(f"Start reader routine")
+    message_part = ''
     message = ''
-    while True:
-        message = ''
-        while r_port.inWaiting():
-            message = message + r_port.read().decode()
 
-        if message != '':
-            print(f"ACK message: {message}")
-            if message[5:8] == 'ACK':
-                received_ack.append(message[2:5])
-                print(int(message[2:5]))
-                print(received_ack)
+    while True:
+        message_part = ''
+        while r_port.inWaiting():
+            message_part = message_part + r_port.read().decode()
+
+        if message_part != '':
+            if message_part[5:8] == 'ACK':
+                print(f"ACK message received: {message_part}")
+                received_ack.append(message_part[2:5])
                 continue
 
-        if message != '':
-            print(f"Message: {message}\n> ", end='')
-            ack_message = message[0:5] + 'ACK' + message[8:]
+            ack_message = message_part[0:5] + 'ACK' + message_part[8:]
             w_port.write(ack_message.encode())
 
-            if message == 'exit':
+            message += message_part[11:]
+            if message_part[8:11] == "FIN":
+                print(f"Message: {message}\n> ")
+                message = ''
+
+            if message_part == 'exit':
                 break
 
 
@@ -97,8 +100,8 @@ def main():
                 time.sleep(1)
 
                 check_window = window.copy()
+
                 for package in window:
-                    print(package)
                     if package[2:5] in received_ack:
                         check_window.remove(package)
                         received_ack.remove(package[2:5])
