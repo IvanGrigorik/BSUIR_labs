@@ -1,4 +1,3 @@
-/.idea/
 # Prerequisites
 *.d
 
@@ -7,6 +6,7 @@
 *.lo
 *.o
 *.obj
+*.tmp
 
 # Precompiled Headers
 *.gch
@@ -34,7 +34,9 @@
 *.bin
 
 # Ignore any folder
-*.idea/
 *cmake-build-debug/
+.idea/
+.fleet/
+
 # Except labs and src folders
 !src/
