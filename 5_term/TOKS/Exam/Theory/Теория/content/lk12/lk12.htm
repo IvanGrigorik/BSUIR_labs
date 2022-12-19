@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//RU">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<META HTTP-EQUIV="Content-Language" CONTENT="ru">
+
+<title>Лекция</title>
+<style type="text/css">
+ body {font-family: Arial, sans-serif;}
+ .c {font-family: "Courier New", Courier, monospace}
+</style>
+
+</HEAD><BODY>
+
+<div align="justify">
+
+<p>&nbsp;</p>
+<div align="center">
+<p><strong>СРЕДЫ ПЕРЕДАЧИ ДАННЫХ</strong></p>
+</div>
+<p>&nbsp;</p>
+
+<p>Все исконно используемые в КС СрПД можно разделить на пять типов:<br>
+1.&nbsp;Коаксиальные кабели (coaxials) с различным волновым сопротивлением.<br>
+2.&nbsp;Экранированные и неэкранированные кабели на основе витых пар (twisted pairs) различных категорий.<br>
+3.&nbsp;Одно- и многорежимные (одно- и многомодовые) оптоволоконные кабели (fiber равно fibre).<br>
+4.&nbsp;Эфир (ether).<br>
+5.&nbsp;Телефонные пары (phone pairs).<br>
+Где: 1, 2, 5 -- «медь» (copper); 3 -- «оптика» (optics); 1, 2, 3, 5 -- проводные (wired) СрПД; 4 -- беспроводные (wireless) СрПД.</p>
+
+<p>Физически проводные СрПД выражаются в виде отдельных <em>проводов</em> (wires), <em>кабелей</em> (cables) и <em>шлейфов</em> (ribbon cables). В КС в основном применяют различные кабели.</p>
+
+<p>С точки зрения целевой области применения все кабели делят на:<br>
+1.&nbsp;<em>Кабели для внешней прокладки</em> (outdoor cables) -- СПД на улице.<br>
+2.&nbsp;<em>Кабели для внутренней прокладки</em> (indoor cables) -- СПД в помещениях.<br>
+3.&nbsp;<em>Оконечные кабели</em> (cords) -- для подключения рабочих мест.</p>
+
+<p>Основные отличительные требования outdoor-кабелей: большее число проводников, высокая прочность, улучшенные электро-магнитные характеристики, влагостойкость, широкий диапазон рабочих температур, наличие дополнительных упрочняющих или гальванически развязывающих вставок.</p>
+
+<p>Indoor-кабели отличаются от outdoor-кабелей меньшими габаритами и массой, большей гибкостью, лучшей пожаростойкостью, при сохранении тех же ключевых достоинств.</p>
+
+<p>Кабели cords являются сравнительно простыми и низкокачественными.</p>
+
+<p>В простейшем случае отдельный провод состоит из <em>физического проводника</em> (conductor) и <em>изоляции</em> (isolation).</p>
+
+<p>Проводники могут быть <em>одножильными</em> (solid) и <em>многожильными</em> (stranded).</p>
+
+<p>Отдельно выделяют так называемые <em>витые</em> (twisted) провода. Обычно свиты два провода, образующие дифференциальную пару.</p>
+
+<p>Традиционно кабели измеряют метрами или футами (1&nbsp;ft&nbsp;=&nbsp;30,48&nbsp;sm).</p>
+
+<p>Сечение проводников, используемых в КС (и не только), принято измерять в AWG (American Wire Gauge): диаметр 1 mm соответствует 18&nbsp;AWG (сечение 0,78&nbsp;mm<sup>2</sup>; максимальный ток 2,36&nbsp;A -- при максимально допустимой плотности тока 3&nbsp;A/mm<sup>2</sup>). Например, стандартное сечение жилы витой пары равно 24&nbsp;AWG (диаметр около 0,5&nbsp;mm).</p>
+
+<p>Многие сведения о кабеле, в частности соответствие стандартам, производители указывают при его маркировке.</p>
+
+<p>Любой <em>разъем</em> (connector) состоит из <em>вилки</em> (male) и <em>розетки</em> (female). Контакты разъемов могут быть либо штыревыми, либо гнездовыми. В настоящее время для соединения разъемов с проводами пайку практически не используют. Следовательно, широко применяют специальные инструменты и почти всегда отсутствуют соответствующие пайке специальные покрытия проводников.</p>
+
+<p>В сегментах КС широко использовали три базовых вида коаксиальных кабелей: с волновым сопротивлением 50&nbsp;&Omega; -- RG-8, RG-58, и с волновым сопротивлением 75&nbsp;&Omega; -- RG-59.</p>
+
+<p>Коаксиальные outdoor- и indoor-кабели отличаются от cord-кабелей в основном внешней изоляцией.</p>
+
+<div align="center">
+<img src="lk12.01.bmp">
+<br>
+Рисунок -- Структура коаксиального кабеля
+</div>
+
+<p>&nbsp;</p>
+
+<div align="center">
+<img src="lk12.02.bmp">
+<br>
+Рисунок -- Пример структуры сегмента с использованием коаксиального кабеля (10BASE2)
+</div>
+
+<p>Для формирования сегмента на базе коаксиального кабеля необходимо соответствующее количество BNС-разъемов (Bayonet-Neill-Concelman), T-соединителей и пара <em>терминаторов</em> (terminators), один из которых заземляют.</p>
+
+<p>Коаксиальные кабели производители обычно выпускают черными, реже серыми.</p>
+
+<p>В сегментах КС широко используют четыре основных вида кабелей на основе витых пар.</p>
+
+<div align="center">
+<img src="lk12.03.bmp">
+<br>
+Рисунок -- Структура кабелей на основе витых пар
+</div>
+
+<p>Где: TP -- Twisted Pair, S -- Shielded, U -- Unshielded, плюс может быть F -- Foiled (если для изготовления экрана применена фольга).</p>
+
+<p>Особо выделяют плоский (flat) кабель (например, для напольной прокладки).</p>
+
+<div align="center">
+<img src="lk12.04.bmp">
+<br>
+Рисунок -- Пример структуры сегмента с использованием витых пар (100BASE-TX)
+</div>
+
+<p>В типовых случаях, витыми парами соединяют разноранговое сетевое оборудование. Например, пользовательскую станцию подключают к коммутатору, или коммутатор подключают к маршрутизатору. При этом используют кабели с «прямой» разводкой. При необходимости, для соединения однорангового оборудования, например непосредственного связывания двух пользовательских станций, используют кросс-кабели -- пары TD и RD скрещены. (Полная аналогия с вариантами соединений ООД и АПД.)</p>
+
+<p>Для подключения кабелей на основе витых пар применяют разъемы RJ45.</p>
+
+<div align="center">
+<img src="lk12.05.jpg">
+<br>
+Рисунок -- Стандартная разводка витых пар
+</div>
+
+<p>(У нас традиционно выбирают вариант 568-B.)</p>
+
+<div align="center">
+<img src="lk12.06.jpg">
+<br>
+Рисунок -- Кросс-кабель Gigabit Ethernet
+</div>
+
+<p>Цвета самих кабелей (и колпаков разъемов) в стандартах не оговорены. От производителей более-менее доступны кабели 12 стандартных цветов (привязаны к палитре RAL). Обычные кабели имеют серый цвет (различные оттенки). Другие цвета (например, оранжевый или, даже, белый) «говорят» о более высоком качестве (например, лучшей пожарной безопасности). И востребованы для маркировки кабельных систем.</p>
+
+<p>Используемые оптоволоконные кабели отличаются больши'м разнообразием -- следствие относительной дороговизны.</p>
+
+<p>Рабочими компонентами оптоволоконных кабелей являются <em>световоды</em> (primary fiber, waveguide, lightpipe), изготовленные из оптоволокна, то есть особого кварцевого стекла. Поскольку оптоволокно очень хрупкое, его многократно защищают различными способами. Световод -- это оптический волновод. Рабочими компонентами самого световода являются <em>оболочка</em> (cladding) и <em>сердцевина</em> (core).</p>
+
+<div align="center">
+<img src="lk12.07.bmp">
+<br>
+Рисунок -- Структура световода
+</div>
+
+<p>В стандартах предусмотрены восемь базовых видов световодов: OM1, OM2, OM3, OM4 и OM5 -- многорежимные; OS1, OS2 и OS1a-- однорежимные (по-другому MM1, MM2, MM3, MM4, MM5; SM1, SM2, SM1a соответственно). Отличаются полосой пропускания и другими техническими характеристиками. Диаметр сердцевины: 62,5&nbsp;um (американский стандарт) -- OM1; 50&nbsp;um (европейский стандарт) -- OM2, OM3, OM4 и OM5; 9&nbsp;um -- OS1, OS2 и OS1a. Диаметр оболочки: 125&nbsp;um -- для всех видов. Общий же диаметр световода, с учетом буферизации, обычно равен около 250&nbsp;um (может быть до 1&nbsp;mm).</p>
+
+<p>Применяют множество видов оптоволоконных кабелей.</p>
+
+<div align="center">
+<img src="lk12.08.bmp">
+<br>
+Рисунок -- Примеры структур оптоволоконных кабелей различного назначения
+</div>
+
+<p>Дополнительно все оптоволоконные кабели делят на два подтипа:<br>
+1.&nbsp;Содержащие металлизированные упрочняющие конструкции или проводники.<br>
+2.&nbsp;Полностью диэлектрические.</p>
+
+<div align="center">
+<img src="lk12.09.bmp">
+<br>
+Рисунок -- Пример структуры сегмента с использованием оптоволокна (1000BASE-SX)
+</div>
+
+<p>Оптоволоконные соединения выполняют двумя способами:<br>
+1.&nbsp;Разъемным, причем может быть:<br>
+-- контактным;<br>
+-- линзовым.<br>
+2.&nbsp;Неразъемным, причем может быть:<br>
+-- сплавным;<br>
+-- механическим.</p>
+
+<p>Оптоволоконные разъемы так же отличаются больши'м разнообразием. Разработано около 100 типов. Основные стандартные: FC, SC, ST (менее компактные); E-2000 (LSH), LC (более компактные).</p>
+
+<p>Еще одно отличие заключается в том, что в стандартах оговорена цветовая маркировка оптоволоконных световодов, кабелей, разъемов, а также модулей (со световодами разных видов) в составе кабелей. Если цветовая маркировка по тем или иным причинам не подходит, то, как альтернатива, предусмотрена маркировка штриховкой.</p>
+
+<p>Таблица -- Цветовая маркировка оптоволоконных кабелей
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td colspan="3" align="center">Кабели cords, indoor и, по возможности, outdoor</td></tr>
+<tr><td align="center">Вид световодов</td><td align="center">TIA-598</td><td align="center">IEC&nbsp;60794-2<br>(EN&nbsp;60794-2)</td></tr>
+<tr><td align="center">OM1</td><td align="center" bgcolor="orange">оранжевый (orange)</td><td align="center" bgcolor="grey">серый (grey)</td></tr>
+<tr><td align="center">OM2</td><td align="center" bgcolor="orange">оранжевый (orange)</td><td align="center" bgcolor="orange">оранжевый (orange)</td></tr>
+<tr><td align="center">OM3</td><td align="center" bgcolor="aqua">аквамариновый (aqua)</td><td align="center" bgcolor="turquoise">бирюзовый (turquoise)</td></tr>
+<tr><td align="center">OM4</td><td align="center" bgcolor="aqua">аквамариновый (aqua)</td><td align="center" bgcolor="magenta">пурпурный (magenta)</td></tr>
+<tr><td align="center">OM5</td><td align="center" bgcolor="lime">лаймовый (lime)</td><td align="center" bgcolor="lime">лаймовый (lime)</td></tr>
+<tr><td align="center">OS1, OS2, OS1a</td><td align="center" bgcolor="yellow">желтый (yellow)</td><td align="center" bgcolor="yellow">желтый (yellow)</td></tr>
+<tr><td colspan="3" align="center">Световоды</td></tr>
+<tr><td align="center">Номер</td><td align="center">TIA-598</td><td align="center">IEC&nbsp;60794-2<br>(EN&nbsp;60794-2)</td></tr>
+<tr><td align="center">1</td><td align="center" bgcolor="blue">светло-синий (blue)</td><td align="center" bgcolor="blue">светло-синий (blue)</td></tr>
+<tr><td align="center">2</td><td align="center" bgcolor="orange">оранжевый (orange)</td><td align="center" bgcolor="yellow">желтый (yellow)</td></tr>
+<tr><td align="center">...</td><td align="center">...</td><td align="center">...</td></tr>
+<tr><td colspan="3" align="center">Разъемы</td></tr>
+<tr><td align="center">Вид световодов</td><td align="center">TIA-568.3</td><td align="center">ISO/IEC&nbsp;11801,<br>EN&nbsp;50173-1</td></tr>
+<tr><td align="center">OM1</td><td align="center" bgcolor="beige">бежевый (beige)</td><td align="center" bgcolor="beige">бежевый (beige)<br>либо<br>черный (black)</td></tr>
+<tr><td align="center">OM2</td><td align="center" bgcolor="black"><font color="white">черный (black)</font></td><td align="center" bgcolor="black"><font color="white">черный (black)<br>либо<br>бежевый (beige)</font></td></tr>
+<tr><td align="center">OM3</td><td align="center" bgcolor="aqua">аквамариновый (aqua)</td><td align="center" bgcolor="turquoise">--<br>но обычно<br>бирюзовый (turquoise)</td></tr>
+<tr><td align="center">OM4</td><td align="center" bgcolor="aqua">аквамариновый (aqua)</td><td align="center" bgcolor="violet">--<br>но обычно<br>фиолетовый (violet)</td></tr>
+<tr><td align="center">OM5</td><td align="center" bgcolor="lime">лаймовый (lime)</td><td align="center" bgcolor="lime">--<br>но обычно<br>лаймовый (lime)</td></tr>
+<tr><td align="center">OS1, OS2, OS1a</td><td align="center" bgcolor="blue">светло-синий (blue)</td><td align="center" bgcolor="blue">светло-синий (blue)</td></tr>
+<tr><td align="center">OS1, OS2, OS1a (угловой физический контакт)</td><td align="center" bgcolor="green">зеленый (green)</td><td align="center" bgcolor="green">зеленый (green)</td></tr>
+</table>
+</p>
+
+<div align="center">
+<img src="lk12.10.jpg">
+<br>
+Рисунок -- Основные телефонные разъемы типа RJ
+</div>
+
+<p>(Названия RJ11 и RJ12 вариативны, как и некоторые другие названия из группы RJ неоднозначны, в разных «серьезных» источниках фигурируют по-разному.)</p>
+
+<p>Реализации СрПД ЛКС, как правило, соответствуют стандартам семейства IEEE 802.x.</p>
+
+<p>Таблица -- Физический уровень Ethernet
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Коаксиальный кабель</td><td align="center">Витая пара</td><td align="center">Оптоволокно</td><td align="center">Специальные среды</td></tr>
+<tr><td colspan="4" align="center">Ранние реализации Ethernet (около 1&nbsp;Mbit/s)</td></tr>
+<tr><td align="center">Xerox Ethernet</td><td align="center">1BASE5<br>StarLAN1</td><td align="center">--</td><td align="center">2BASE-TL (RAS, phone pair)</td></tr>
+<tr><td colspan="4" align="center">Ethernet (10&nbsp;Mbit/s)</td></tr>
+<tr><td align="center"><u>10BASE5</u><br><u>10BASE2</u></td><td align="center"><u>10BASE-T</u><br>StarLAN10</td><td align="center">FOIRL<br>10BASE-FB<br><u>10BASE-FL</u><br>10BASE-FP</td><td align="center">10BROAD36 (RAS, coaxial)<br>10PASS-TS (RAS, phone pair)</td></tr>
+<tr><td colspan="4" align="center">Fast Ethernet (100&nbsp;Mbit/s)</td></tr>
+<tr><td align="center">--</td><td align="center"><u>100BASE-TX</u><br>100BASE-T2<br>100BASE-T4</td><td align="center"><u>100BASE-FX</u><br>100BASE-SX</td><td align="center">100BASE-BX10 (RAS, fiber)<br>100BASE-LX10 (RAS, fiber)<br>100BASE-T1 (industrial, twisted pair)</td></tr>
+<tr><td colspan="4" align="center">Gigabit Ethernet (1&nbsp;Gbit/s)</td></tr>
+<tr><td align="center">1000BASE-CX (twinaxial)</td><td align="center"><u>1000BASE-T</u><br>1000BASE-TX</td><td align="center"><u>1000BASE-SX</u><br><u>1000BASE-LX</u><br>1000BASE-LX10<br>1000BASE-EX<br>1000BASE-ZX</td><td align="center">1000BASE-BX10 (RAS, fiber)<br>1000BASE-PX10 (RAS, fiber)<br>1000BASE-PX20 (RAS, fiber)<br>1000BASE-KX (cluster, backplane)<br>1000BASE-T1 (industrial, twisted pair)</td></tr>
+<tr><td colspan="4" align="center">Gigabit Ethernet (Multigigabit)</td></tr>
+<tr><td align="center">--</td><td align="center"><u>2.5GBASE-T</u> (NBASE-T)</td><td align="center">--</td><td align="center">--</td></tr>
+<tr><td align="center">--</td><td align="center"><u>5GBASE-T</u> (NBASE-T)</td><td align="center">--</td><td align="center">--</td></tr>
+<tr><td colspan="4" align="center">Gigabit Ethernet (10&nbsp;Gbit/s)</td></tr>
+<tr><td align="center">10GBASE-CX4 (4 x twinaxial)<br>10GBase-CR (SFP+ Direct Attach) (4 x twinaxial)</td><td align="center"><u>10GBASE-T</u></td><td align="center"><u>10GBASE-SR</u><br><u>10GBASE-LR</u><br><u>10GBASE-ER</u><br>10GBASE-LX4<br>10GBASE-LRM</td><td align="center">10GBASE-SW (WAN, SONET)<br>10GBASE-LW (WAN, SONET)<br>10GBASE-EW (WAN, SONET)<br>10GBASE-ZR (WAN, SONET/SDH)<br>10GBASE-KR (cluster, backplane)<br>10GBASE-KX4 (cluster, backplane)<br>10GBASE-PR (RAS, EPON)<br>10/1GBASE-PRX (RAS, EPON)<br>10GPASS-XR (RAS, coaxial)</td></tr>
+<tr><td colspan="4" align="center">Gigabit Ethernet (25&nbsp;Gbit/s)</td></tr>
+<tr><td align="center">25GBASE-CR (twinaxial)</td><td align="center">25GBASE-T</td><td align="center">25GBASE-SR</td><td align="center">25GBASE-KR (cluster, backplane)</td></tr>
+<tr><td colspan="4" align="center">Gigabit Ethernet (40&nbsp;Gbit/s)</td></tr>
+<tr><td align="center">40GBASE-CR4 (4 x twinaxial)</td><td align="center">40GBASE-T</td><td align="center">40GBASE-SR4<br>40GBASE-LR4<br>40GBASE-ER4</td><td align="center">40GBASE-KR4 (cluster, backplane)<br>40GBASE-FR (WAN, SONET/SDH)</td></tr>
+<tr><td colspan="4" align="center">Gigabit Ethernet (100&nbsp;Gbit/s)</td></tr>
+<tr><td align="center">100GBASE-CR10 (10 x twinaxial)<br>100GBASE-CR4 (4 x twinaxial)</td><td align="center">--</td><td align="center">100GBASE-SR10<br>100GBASE-LR4<br>100GBASE-ER4<br>100GBASE-SR4</td><td align="center">100GBASE-KP4 (cluster, backplane)<br>100GBASE-KR4 (cluster, backplane)</td></tr>
+</table>
+</p>
+
+<p>Где подчеркнуты ключевые использовавшиеся либо используемые стандарты:<br>
+<u>10BASE5</u> (1983) -- «толстый» (thick) коаксиальный кабель 50&nbsp;&Omega; (до 500&nbsp;m) плюс внешние приемопередатчики;<br>
+<u>10BASE2</u> (802.3a, 1985) -- «тонкий» (thin) коаксиальный кабель 50&nbsp;&Omega; (до 185&nbsp;m) плюс интегрированные приемопередатчики;<br>
+<u>10BASE-T</u> (802.3i, 1990) -- две телефонные витые пары (до&nbsp;100 m);<br>
+<u>10BASE-FL</u> (802.3j, 1993) -- два многорежимных световода (до 500&nbsp;m) плюс нечетко регламентированные источники излучения (обычно LEDs);<br>
+<u>100BASE-TX</u> (802.3u, 1995) -- две неэкранированные либо экранированные витые пары категории 5 (до 100&nbsp;m);<br>
+<u>100BASE-FX</u> (802.3u, 1995) -- два многорежимных световода (до 2&nbsp;km) (реализации поддерживают и однорежимные световоды длиной десятки километров) плюс нечетко регламентированные источники излучения (реализации поддерживают LEDs и лазеры);<br>
+<u>1000BASE-SX</u> (802.3z, 1998) -- два многорежимных световода (до 275&nbsp;m -- 62,5&nbsp;um, до 550&nbsp;m -- 50&nbsp;um) плюс коротковолновые (short wavelength) лазеры (770&nbsp;--&nbsp;860&nbsp;nm);<br>
+<u>1000BASE-LX</u> (802.3z, 1998) -- два однорежимных (до 5&nbsp;km) либо многорежимных световода (до 550&nbsp;m) плюс длинноволновые (long wavelength) лазеры (1270&nbsp;--&nbsp;1355&nbsp;nm);<br>
+<u>1000BASE-T</u> (802.3ab, 1999) -- четыре неэкранированные либо экранированные витые пары категории 5 (до 100&nbsp;m);<br>
+<u>2.5GBASE-T</u> (802.3bz, 2016) -- четыре неэкранированные либо экранированные витые пары категории 5e (расстояние до 100&nbsp;m);<br>
+<u>5GBASE-T</u> (802.3bz, 2016) -- четыре неэкранированные либо экранированные витые пары категории 5e (расстояние до 100&nbsp;m);<br>
+<u>10GBASE-SR</u> (802.3ae, 2002) -- два многорежимных световода (до 33&nbsp;m -- 62,5&nbsp;um, до 400&nbsp;m -- 50&nbsp;um) плюс коротковолновые лазеры (840&nbsp;--&nbsp;860&nbsp;nm);<br>
+<u>10GBASE-LR</u> (802.3ae, 2002) -- два однорежимных световода (до 10&nbsp;km) плюс длинноволновые лазеры (1310&nbsp;nm);<br>
+<u>10GBASE-ER</u> (802.3ae, 2002) -- два однорежимных световода (до 30&nbsp;km) плюс экстрадлинноволновые (extra long wavelength) лазеры (1550&nbsp;nm);<br>
+<u>10GBASE-T</u> (802.3an, 2006) -- четыре неэкранированные (до 55&nbsp;m) либо экранированные (до 100&nbsp;m) витые пары категории 6, либо четыре неэкранированные либо экранированные витые пары категории 6A (до 100&nbsp;m).</p>
+
+</div>
+
+</BODY>
+</HTML>
