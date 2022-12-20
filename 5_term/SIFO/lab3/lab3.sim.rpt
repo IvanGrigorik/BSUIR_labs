@@ -1,0 +1,308 @@
+Simulator report for lab3
+Fri Oct 21 11:10:21 2022
+Quartus II Version 9.1 Build 222 10/21/2009 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|ALTSYNCRAM
+  6. |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ALTSYNCRAM
+  7. Coverage Summary
+  8. Complete 1/0-Value Coverage
+  9. Missing 1-Value Coverage
+ 10. Missing 0-Value Coverage
+ 11. Simulator INI Usage
+ 12. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2009 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 1.0 us       ;
+; Simulation Netlist Size     ; 118 nodes    ;
+; Simulation Coverage         ;      44.92 % ;
+; Total Number of Transitions ; 1048         ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Stratix II   ;
++-----------------------------+--------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                      ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+; Option                                                                                     ; Setting    ; Default Value ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+; Simulation mode                                                                            ; Functional ; Timing        ;
+; Start time                                                                                 ; 0 ns       ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF       ;               ;
+; Vector input source                                                                        ; main.vwf   ;               ;
+; Add pins automatically to simulation output waveforms                                      ; On         ; On            ;
+; Check outputs                                                                              ; Off        ; Off           ;
+; Report simulation coverage                                                                 ; On         ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On         ; On            ;
+; Display missing 1-value coverage report                                                    ; On         ; On            ;
+; Display missing 0-value coverage report                                                    ; On         ; On            ;
+; Detect setup and hold time violations                                                      ; Off        ; Off           ;
+; Detect glitches                                                                            ; Off        ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off        ; Off           ;
+; Generate Signal Activity File                                                              ; Off        ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off        ; Off           ;
+; Group bus channels in simulation results                                                   ; Off        ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On         ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off        ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off        ;               ;
+; Perform Glitch Filtering in Timing Simulation                                              ; Auto       ; Auto          ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++---------------------------------------------------------------------------------------------------+
+; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|ALTSYNCRAM ;
++---------------------------------------------------------------------------------------------------+
+Please refer to fitter text-based report (*.fit.rpt) to view logical memory report content in ASCII.
+
+
++------------------------------------------------------------------------------------------------+
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ALTSYNCRAM ;
++------------------------------------------------------------------------------------------------+
+Please refer to fitter text-based report (*.fit.rpt) to view logical memory report content in ASCII.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      44.92 % ;
+; Total nodes checked                                 ; 118          ;
+; Total output ports checked                          ; 118          ;
+; Total output ports with complete 1/0-value coverage ; 53           ;
+; Total output ports with no 1/0-value coverage       ; 5            ;
+; Total output ports with no 1-value coverage         ; 65           ;
+; Total output ports with no 0-value coverage         ; 5            ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                                                                                                                                                            ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                           ; Output Port Name                                                                              ; Output Port Type ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+; |main|data[3]                                                                                       ; |main|data[3]                                                                                 ; pin_out          ;
+; |main|data[2]                                                                                       ; |main|data[2]                                                                                 ; pin_out          ;
+; |main|data[1]                                                                                       ; |main|data[1]                                                                                 ; pin_out          ;
+; |main|gdfx_temp0[3]                                                                                 ; |main|gdfx_temp0[3]                                                                           ; out0             ;
+; |main|gdfx_temp0[2]                                                                                 ; |main|gdfx_temp0[2]                                                                           ; out0             ;
+; |main|gdfx_temp0[1]                                                                                 ; |main|gdfx_temp0[1]                                                                           ; out0             ;
+; |main|clk                                                                                           ; |main|clk                                                                                     ; out              ;
+; |main|read                                                                                          ; |main|read                                                                                    ; out              ;
+; |main|write                                                                                         ; |main|write                                                                                   ; out              ;
+; |main|inst2                                                                                         ; |main|inst2                                                                                   ; out0             ;
+; |main|rom_ram                                                                                       ; |main|rom_ram                                                                                 ; out              ;
+; |main|address[3]                                                                                    ; |main|address[3]                                                                              ; out              ;
+; |main|address[2]                                                                                    ; |main|address[2]                                                                              ; out              ;
+; |main|address[1]                                                                                    ; |main|address[1]                                                                              ; out              ;
+; |main|address[0]                                                                                    ; |main|address[0]                                                                              ; out              ;
+; |main|inst4                                                                                         ; |main|inst4                                                                                   ; out0             ;
+; |main|lpm_ram_io:inst5|_~1                                                                          ; |main|lpm_ram_io:inst5|_~1                                                                    ; out0             ;
+; |main|lpm_ram_io:inst5|datatri[3]                                                                   ; |main|lpm_ram_io:inst5|datatri[3]                                                             ; out              ;
+; |main|lpm_ram_io:inst5|datatri[2]                                                                   ; |main|lpm_ram_io:inst5|datatri[2]                                                             ; out              ;
+; |main|lpm_ram_io:inst5|datatri[1]                                                                   ; |main|lpm_ram_io:inst5|datatri[1]                                                             ; out              ;
+; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|ram_block1a1 ; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|q_a[1] ; portadataout0    ;
+; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|ram_block1a2 ; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|q_a[2] ; portadataout0    ;
+; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|ram_block1a3 ; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|q_a[3] ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a1    ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[1]    ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a2    ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[2]    ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a3    ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[3]    ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a4    ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[4]    ; portadataout0    ;
+; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[3]                                     ; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[3]                               ; out              ;
+; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[2]                                     ; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[2]                               ; out              ;
+; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[1]                                     ; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[1]                               ; out              ;
+; |main|buffer:inst|inst10                                                                            ; |main|buffer:inst|inst10                                                                      ; out0             ;
+; |main|buffer:inst|inst11                                                                            ; |main|buffer:inst|inst11                                                                      ; out0             ;
+; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[3]                                    ; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[3]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[2]                                    ; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[2]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[1]                                    ; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[1]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[3]                                    ; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[3]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[2]                                    ; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[2]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[1]                                    ; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[1]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[3]                                    ; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[3]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[2]                                    ; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[2]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[1]                                    ; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[1]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[3]                                    ; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[3]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[2]                                    ; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[2]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[1]                                    ; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[1]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[3]                                    ; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[3]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[2]                                    ; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[2]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[1]                                    ; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[1]                              ; regout           ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[3]                          ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[3]                    ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[2]                          ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[2]                    ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[1]                          ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[1]                    ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[3]                           ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[3]                     ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[2]                           ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[2]                     ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[1]                           ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[1]                     ; out              ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                                                                                                                                                               ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                           ; Output Port Name                                                                              ; Output Port Type ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+; |main|data[7]                                                                                       ; |main|data[7]                                                                                 ; pin_out          ;
+; |main|data[6]                                                                                       ; |main|data[6]                                                                                 ; pin_out          ;
+; |main|data[5]                                                                                       ; |main|data[5]                                                                                 ; pin_out          ;
+; |main|data[4]                                                                                       ; |main|data[4]                                                                                 ; pin_out          ;
+; |main|data[0]                                                                                       ; |main|data[0]                                                                                 ; pin_out          ;
+; |main|gdfx_temp0[7]                                                                                 ; |main|gdfx_temp0[7]                                                                           ; out0             ;
+; |main|gdfx_temp0[6]                                                                                 ; |main|gdfx_temp0[6]                                                                           ; out0             ;
+; |main|gdfx_temp0[5]                                                                                 ; |main|gdfx_temp0[5]                                                                           ; out0             ;
+; |main|gdfx_temp0[4]                                                                                 ; |main|gdfx_temp0[4]                                                                           ; out0             ;
+; |main|gdfx_temp0[0]                                                                                 ; |main|gdfx_temp0[0]                                                                           ; out0             ;
+; |main|address[4]                                                                                    ; |main|address[4]                                                                              ; out              ;
+; |main|lpm_ram_io:inst5|datatri[7]                                                                   ; |main|lpm_ram_io:inst5|datatri[7]                                                             ; out              ;
+; |main|lpm_ram_io:inst5|datatri[6]                                                                   ; |main|lpm_ram_io:inst5|datatri[6]                                                             ; out              ;
+; |main|lpm_ram_io:inst5|datatri[5]                                                                   ; |main|lpm_ram_io:inst5|datatri[5]                                                             ; out              ;
+; |main|lpm_ram_io:inst5|datatri[4]                                                                   ; |main|lpm_ram_io:inst5|datatri[4]                                                             ; out              ;
+; |main|lpm_ram_io:inst5|datatri[0]                                                                   ; |main|lpm_ram_io:inst5|datatri[0]                                                             ; out              ;
+; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|ram_block1a0 ; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|q_a[0] ; portadataout0    ;
+; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|ram_block1a4 ; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|q_a[4] ; portadataout0    ;
+; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|ram_block1a5 ; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|q_a[5] ; portadataout0    ;
+; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|ram_block1a6 ; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|q_a[6] ; portadataout0    ;
+; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|ram_block1a7 ; |main|lpm_ram_io:inst5|altram:sram|altsyncram:ram_block|altsyncram_g5a1:auto_generated|q_a[7] ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a0    ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[0]    ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a5    ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[5]    ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a6    ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[6]    ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a7    ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[7]    ; portadataout0    ;
+; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[7]                                     ; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[7]                               ; out              ;
+; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[6]                                     ; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[6]                               ; out              ;
+; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[5]                                     ; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[5]                               ; out              ;
+; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[4]                                     ; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[4]                               ; out              ;
+; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[0]                                     ; |main|lpm_bustri2:inst6|lpm_bustri:lpm_bustri_component|dout[0]                               ; out              ;
+; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[7]                                    ; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[7]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[6]                                    ; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[6]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[5]                                    ; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[5]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[4]                                    ; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[4]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[0]                                    ; |main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[0]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[7]                                    ; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[7]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[6]                                    ; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[6]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[5]                                    ; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[5]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[4]                                    ; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[4]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[0]                                    ; |main|buffer:inst|lpm_dff0:inst4|lpm_ff:lpm_ff_component|dffs[0]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[7]                                    ; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[7]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[6]                                    ; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[6]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[5]                                    ; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[5]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[4]                                    ; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[4]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[0]                                    ; |main|buffer:inst|lpm_dff0:inst5|lpm_ff:lpm_ff_component|dffs[0]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[7]                                    ; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[7]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[6]                                    ; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[6]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[5]                                    ; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[5]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[4]                                    ; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[4]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[0]                                    ; |main|buffer:inst|lpm_dff0:inst6|lpm_ff:lpm_ff_component|dffs[0]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[7]                                    ; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[7]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[6]                                    ; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[6]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[5]                                    ; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[5]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[4]                                    ; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[4]                              ; regout           ;
+; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[0]                                    ; |main|buffer:inst|lpm_dff0:inst7|lpm_ff:lpm_ff_component|dffs[0]                              ; regout           ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[7]                          ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[7]                    ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[6]                          ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[6]                    ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[5]                          ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[5]                    ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[4]                          ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[4]                    ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[0]                          ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|dout[0]                    ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[7]                           ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[7]                     ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[6]                           ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[6]                     ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[5]                           ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[5]                     ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[4]                           ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[4]                     ; out              ;
+; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[0]                           ; |main|buffer:inst|lpm_bustri0:inst|lpm_bustri:lpm_bustri_component|din[0]                     ; out              ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                                                                                                                                                         ;
++--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                        ; Output Port Name                                                                           ; Output Port Type ;
++--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+------------------+
+; |main|address[4]                                                                                 ; |main|address[4]                                                                           ; out              ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a0 ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[0] ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a5 ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[5] ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a6 ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[6] ; portadataout0    ;
+; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|ram_block1a7 ; |main|lpm_rom0:inst1|altsyncram:altsyncram_component|altsyncram_0rb1:auto_generated|q_a[7] ; portadataout0    ;
++--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 9.1 Build 222 10/21/2009 SJ Web Edition
+    Info: Processing started: Fri Oct 21 11:10:21 2022
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off lab3 -c lab3
+Warning: Tcl Script File content/lpm_rom0.qip not found
+    Info: set_global_assignment -name QIP_FILE content/lpm_rom0.qip
+Info: Using vector source file "C:/Users/givan/Desktop/SIFO/lab3_work/main.vwf"
+Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Warning: Found clock-sensitive change during active clock edge at time 20.0 ns on register "|main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[7]"
+Warning: Found clock-sensitive change during active clock edge at time 20.0 ns on register "|main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[6]"
+Warning: Found clock-sensitive change during active clock edge at time 20.0 ns on register "|main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[5]"
+Warning: Found clock-sensitive change during active clock edge at time 20.0 ns on register "|main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[4]"
+Warning: Found clock-sensitive change during active clock edge at time 20.0 ns on register "|main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[3]"
+Warning: Found clock-sensitive change during active clock edge at time 20.0 ns on register "|main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[2]"
+Warning: Found clock-sensitive change during active clock edge at time 20.0 ns on register "|main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[1]"
+Warning: Found clock-sensitive change during active clock edge at time 20.0 ns on register "|main|buffer:inst|lpm_dff0:inst3|lpm_ff:lpm_ff_component|dffs[0]"
+Info: Simulation partitioned into 1 sub-simulations
+Info: Simulation coverage is      44.92 %
+Info: Number of transitions in simulation is 1048
+Info: Quartus II Simulator was successful. 0 errors, 9 warnings
+    Info: Peak virtual memory: 143 megabytes
+    Info: Processing ended: Fri Oct 21 11:10:21 2022
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+
+
