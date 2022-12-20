@@ -1,0 +1,1340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//RU">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<META HTTP-EQUIV="Content-Language" CONTENT="ru">
+
+<title>Лекция</title>
+<style type="text/css">
+ body {font-family: Arial, sans-serif;}
+ .c {font-family: "Courier New", Courier, monospace}
+</style>
+
+</HEAD><BODY>
+
+<div align="justify">
+
+<p>&nbsp;</p>
+<div align="center">
+<p><strong>ПРИКЛАДНЫЕ ЗАДАЧИ В КОМПЬЮТЕРНЫХ СЕТЯХ</strong></p>
+</div>
+<p>&nbsp;</p>
+
+<p>В рамках данной дисциплины предполагается рассмотрение следующих классических прикладных протоколов семейства TCP/IP:<br>
+1.&nbsp;FTP.<br>
+2.&nbsp;Telnet.<br> 
+3.&nbsp;SMTP, POP, IMAP.<br> 
+4.&nbsp;HTTP.</p>
+
+<p>Для подробного рассмотрения безопасности прикладных протоколов предусмотрена отдельная дисциплина, поэтому соответствующий материал во многом опущен.</p>
+
+<p>(В таблицах ниже серым цветом выделена информация для поверхностного изучения. Аргументы команд так же приведены для ознакомления -- без подробного описания.)</p>
+
+<p>&nbsp;</p>
+<div align="center">
+<p><strong>FTP</strong></p>
+</div>
+<p>&nbsp;</p>
+
+<p>Как и следует из его названия, протокол FTP (File Transfer Protocol) (основное RFC -- RFC&nbsp;959) предназначен для пересылки файлов между двумя удаленными станциями. FTP разрабатывался одним из первых, но до сих пор занимает значимое место в сети Internet.</p>
+
+<p>FTP базируется на клиент-серверной модели и использует транспорт TCP.</p>
+
+<div align="center">
+<img src="lk10.01.01.bmp">
+<br>
+Рисунок -- Структура системы FTP
+</div>
+
+<p>FTP-клиент обслуживает запросы пользователя и работает на локальной по отношению к нему станции. FTP-сервер обслуживает запросы FTP-клиента и работает на удаленной станции. На рисунке показана взаимосвязь между одним FTP-клиентом и одним FTP-сервером, но возможна также схема взаимодействия, когда по инициативе FTP-клиента осуществляется файловый обмен между двумя FTP-серверами. Как в составе FTP-клиента, так и в составе FTP-сервера выделяют соответствующие протокольные интерпретаторы (protocol interpreters) и процессы пересылки данных (data transfer processes).</p>
+
+<p>FTP относят к протоколам, ориентированным на пользователя. Это означает, что реализация, по крайней мере FTP-клиента, обязана предоставлять пользователю более или менее функционально полный интерфейс.</p>
+
+<p>Классический интерфейс FTP-клиента, широко применяющийся в оболочках UNIX и соответствующих окнах Windows, представляет собой интерпретатор командной строки, активизируемый вводом команды <span class="c">ftp</span>. В качестве аргументов можно задать название либо IP-адрес FTP-сервера, а также номер порта, если он отличен от стандартного. Если команда введена успешно, появится приглашение интерпретатора:
+<pre>
+ftp&gt;
+</pre>
+</p>
+
+<p>Существуют также множество прикладных программ и пакетов, использующих графический интерфейс.</p>
+
+<p>FTP-сервер представляет собой непрерывно выполняющуюся программу, ожидающую запросы от FTP-клиентов, выраженную в виде демона UNIX либо сервиса Windows. В ОС UNIX работа демонов обычно контролируется конфигурационными файлами, а в Windows -- соответствующими оконными средствами.</p> 
+
+<p>В отличие от многих других протоколов, FTP задействует не одно, а два соединения, значит для него зарезервированы два номера программных портов (на стороне FTP-сервера):<br>
+20 -- FTP Data -- информационное соединение (data connection).<br>
+21 -- FTP -- управляющее соединение (control connection).</p>
+
+<p>Сначала FTP-клиентом создается управляющее соединение, которое в дальнейшем используется только для передачи FTP-команд от FTP-клиента и FTP-ответов от FTP-сервера. FTP-сервер принимает, интерпретирует и выполняет FTP-команды, а также передает FTP-ответы. Одно либо несколько информационных соединений, предназначенных исключительно для пересылки данных, то есть файлов и каталогов, создаются FTP-сервером или FTP-клиентом. Они не существуют на протяжении всего сеанса взаимодействия и могут создаваться и ликвидироваться по мере необходимости. Управляющее же соединение может быть завершено только после осуществления полезного информационного обмена, если таковой нужен.</p>
+
+<p>В некоторых особых ситуациях может происходить отказ от использования стандартных портов.</p>
+
+<p>Можно выделить три уровня, связанных с применением FTP:<br>
+1.&nbsp;Настройка, запуск и использование пользователем FTP-клиента, а администратором -- FTP-сервера.<br>
+2.&nbsp;Работа пользователя с протокольным интерпретатором.<br>
+3.&nbsp;Скрытое от пользователя взаимодействие непосредственно по протоколу FTP.</p>
+
+<p>На каждом из этих уровней существует свое понятие термина «команда». На самом высоком уровне это команда ОС. На промежуточном уровне это уже команда, вводимая при работе с программой FTP-клиента, то есть команда интерпретатора. И, наконец, на низком уровне это собственно команда протокола, передаваемая через управляющее соединение, то есть FTP-команда. Некоторые аббревиатуры команд интерпретатора и FTP-команд совпадают. Но необходимо понимать, что аббревиатуры все-таки отличаются, и учитывать тот факт, что одна команда интерпретатора может реализовываться последовательностью из нескольких FTP-команд.</p>
+
+<p>FTP-команда представляет собой последовательность из трех-четырех букв, за которыми могут следовать аргументы. Регистр букв не учитывается. Аргументы отделяются пробелами -- <span class="c">&lt;SP&gt;</span>. FTP-команда завершается парой символов возврата каретки и перевода строки -- <span class="c">&lt;CRLF&gt;</span>. (В квадратные скобки заключены опциональные аргументы.)</p> 
+
+<p>Таблица -- FTP-команды
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">FTP-команда</td><td align="center">Название</td><td align="center">Описание</td></tr>
+<tr><td align="center" colspan="3">Access control commands (команды контроля доступа)</td></tr>
+<tr><td><span class="c">USER &lt;SP&gt; &lt;username&gt; &lt;CRLF&gt;</span></td><td align="center">USER NAME</td><td align="justify">Имя пользователя</td></tr>
+<tr><td><span class="c">PASS &lt;SP&gt; &lt;password&gt; &lt;CRLF&gt;</span></td><td align="center">PASSWORD</td><td align="justify">Пароль (должна следовать непосредственно за <span class="c">USER</span>)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">ACCT &lt;SP&gt; &lt;account-information&gt; &lt;CRLF&gt;</span></td><td align="center">ACCOUNT</td><td align="justify">Пользовательский аккаунт (альтернатива паре <span class="c">USER</span> и <span class="c">PASS</span> при доступе к специфическим ресурсам)</td></tr> 
+</tbody>
+<tr><td><span class="c">CWD &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">CHANGE WORKING DIRECTORY</td><td align="justify">Сменить рабочий каталог (текущий каталог удаленной файловой системы)</td></tr>
+<tr><td><span class="c">CDUP &lt;CRLF&gt;</span></td><td align="center">CHANGE TO PARENT DIRECTORY</td><td align="justify">Перейти к родительскому каталогу (удаленной файловой системы)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">SMNT &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">STRUCTURE MOUNT</td><td align="justify">Смонтировать требующуюся файловую систему</td></tr>
+<tr><td><span class="c">REIN &lt;CRLF&gt;</span></td><td align="center">REINITIALIZE</td><td align="justify">Повторно инициализировать (пользователь выводится из удаленной системы с завершением текущего действия и сохранением настроек)</td></tr>
+</tbody>
+<tr><td><span class="c">QUIT &lt;CRLF&gt;</span></td><td align="center">LOGOUT</td><td align="justify">Выход из удаленной системы (с завершением текущего действия и закрытием управляющего соединения)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">FEAT &lt;CRLF&gt;</span></td><td align="center">FEATURE</td><td align="justify">Предоставить информацию о поддерживаемых расширениях (ключевые слова в FTP-ответе) (RFC&nbsp;2389)</td></tr>
+</tbody>
+<tr><td align="center" colspan="3">Transfer parameter commands (команды управления пересылкой)</td></tr>
+</tr><td><span class="c">PORT &lt;SP&gt; &lt;host-port&gt; &lt;CRLF&gt;</td><td align="center">DATA PORT</span></td><td align="justify">Совокупность IP-адреса и номера порта, необходимая для создания информационного соединения (<span class="c">&lt;host-port&gt;</span> пересылается в виде: <span class="c">&lt;h1&gt; "," &lt;h2&gt; "," &lt;h3&gt; "," &lt;h4&gt; "," &lt;p1&gt; "," &lt;p2&gt;</span>; где <span class="c">&lt;h1&gt;</span> ... <span class="c">&lt;h4&gt;</span> -- разбитый на четыре разделенных запятыми байта IP-адрес в десятичном представлении, причем байты следуют в правильном порядке; <span class="c">&lt;p1&gt;</span> и <span class="c">&lt;p2&gt;</span> -- аналогичным образом разбитый номер порта, причем байты так же следуют начиная со старшего)</td></tr>
+<tr><td><span class="c">PASV &lt;CRLF&gt;</span></td><td align="center">PASSIVE</td><td align="justify">Установить пассивный режим обмена</td></tr>
+<tr><td><span class="c">TYPE &lt;SP&gt; &lt;type-code&gt; &lt;CRLF&gt;</span></td><td align="center">REPRESENTATION TYPE</td><td align="justify">Файловое представление (коды: <span class="c">A</span> -- ASCII, <span class="c">N</span> -- non-print, <span class="c">T</span> -- Telnet format effectors, <span class="c">E</span> -- EBCDIC, <span class="c">C</span> --carriage control, <span class="c">I</span> -- image, <span class="c">L</span> -- local byte size, по умолчанию: <span class="c">A</span> и <span class="c">N</span>)</td></tr>
+<tr><td><span class="c">STRU &lt;SP&gt; &lt;structure-code&gt; &lt;CRLF&gt;</span></td><td align="center">FILE STRUCTURE</td><td align="justify">Cтруктура (коды: <span class="c">F</span> -- file structure, <span class="c">R</span> -- record structure, <span class="c">P</span> -- page structure, по умолчанию: <span class="c">F</span>)</td></tr>
+<tr><td><span class="c">MODE &lt;SP&gt; &lt;mode-code&gt; &lt;CRLF&gt;</span></td><td align="center">TRANSFER MODE</td><td align="justify">Режим пересылки (коды: <span class="c">S</span> -- stream, <span class="c">B</span> -- block, <span class="c">C</span> -- compressed, по умолчанию: <span class="c">S</span>)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">OPTS &lt;SP&gt; &lt;command-name&gt; [&lt;SP&gt; &lt;command-options&gt;] &lt;CRLF&gt;</span></td><td align="center">OPTIONS</td><td align="justify">Задать опции обработки FTP-команды при ее последующих вызовах (если опции предусмотрены) (RFC&nbsp;2389)</td></tr>
+<tr><td><span class="c">EPRT &lt;SP&gt; "|" &lt;net-prt&gt; "|" &lt;net-addr&gt; "|" &lt;tcp-port&gt; "|" &lt;CRLF&gt;</span></td><td align="center">EXTENDED PORT</td><td align="justify">Совокупность номера семейства протоколов, IP-адреса и номера порта (расширенный вариант <span class="c">PORT</span>; <span class="c">&lt;net-prt&gt;</span>: <span class="c">1</span> -- IPv4, <span class="c">2</span> -- IPv6; <span class="c">&lt;net-addr&gt;</span> и <span class="c">&lt;tcp-port&gt;</span> пересылаются в стандартной нотации) (RFC&nbsp;2428)</td></tr>
+<tr><td><span class="c">EPSV [&lt;SP&gt; (&lt;net-prt&gt; | ALL)] &lt;CRLF&gt;</span></td><td align="center">EXTENDED PASSIVE MODE</td><td align="justify">Установить пассивный режим обмена (расширенный вариант <span class="c">PASV</span>, может быть указан порт, аргумент <span class="c">ALL</span> позволяет отменить действие команды) (RFC&nbsp;2428)</td></tr>
+</tbody>
+<tr><td align="center" colspan="3">Service commands (сервисные команды)</td></tr>
+<tr><td><span class="c">RETR &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">RETRIEVE</td><td align="justify">Загрузить файл с FTP-сервера (download)</td></tr>
+<tr><td><span class="c">STOR &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">STORE</td><td align="justify">Загрузить файл на FTP-сервер (upload, если файл уже существует, то он обновляется)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">STOU &lt;CRLF&gt;</span></td><td align="center">STORE UNIQUE</td><td align="justify">Загрузить файл на FTP-сервер и сохранить там под уникальным названием</td></tr>
+<tr><td><span class="c">APPE &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">APPEND (with create)</td><td align="justify">Загрузить файл на FTP-сервер с дозаписью (если файл уже существует, то данные дописываются в его конец)</td></tr>
+<tr><td><span class="c">ALLO &lt;SP&gt; &lt;decimal-integer&gt; [&lt;SP&gt; R &lt;SP&gt; &lt;decimal-integer&gt;] &lt;CRLF&gt;</span></td><td align="center">ALLOCATE</td><td align="justify">Зарезервировать на FTP-сервере файловое пространство (в байтах, причем, если планируемый для пересылки файл имеет структуру R либо P, то после символа R указывается максимальный размер записи либо страницы)</td></tr>
+</tbody>
+<tr><td><span class="c">REST &lt;SP&gt; &lt;marker&gt; &lt;CRLF&gt;</span></td><td align="center">RESTART</td><td align="justify">Начать пересылку файла с указанного смещения в нем (используется для организации докачки) (+RFC&nbsp;3659)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">RNFR &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">RENAME FROM</td><td align="justify">Старое название переназываемого файла на FTP-сервере (либо старый путь для локально пересылаемого файла на FTP-сервере)</td></tr>
+<tr><td><span class="c">RNTO &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">RENAME TO</td><td align="justify">Новое название переназываемого файла на FTP-сервере (должна следовать непосредственно за <span class="c">RNFR</span>)</td></tr>
+<tr><td><span class="c">ABOR &lt;CRLF&gt;</span></td><td align="center">ABORT</td><td align="justify">Принудительно завершить (предыдущую FTP-команду и связанную с ней пересылку)</td></tr>
+</tbody>
+<tr><td><span class="c">DELE &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">DELETE</td><td align="justify">Удалить файл либо каталог на FTP-сервере</td></tr>
+<tr><td><span class="c">RMD &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">REMOVE DIRECTORY</td><td align="justify">Удалить каталог на FTP-сервере</td></tr>
+<tr><td><span class="c">MKD &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">MAKE DIRECTORY</td><td align="justify">Создать каталог на FTP-сервере</td></tr>
+<tr><td><span class="c">PWD &lt;CRLF&gt;</span></td><td align="center">PRINT WORKING DIRECTORY</td><td align="justify">Вывести на экран рабочий каталог</td></tr>
+<tr><td><span class="c">LIST [&lt;SP&gt; &lt;pathname&gt;] &lt;CRLF&gt;</span></td><td align="center">LIST</td><td align="justify">Вывести на экран детализированный список файлов из удаленного каталога (если путь не указан, то подразумевается рабочий каталог)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">NLST [&lt;SP&gt; &lt;pathname&gt;] &lt;CRLF&gt;</span></td><td align="center">NAME LIST</td><td align="justify">Вывести на экран упрощенный список файлов из удаленного каталога</td></tr>
+<tr><td><span class="c">SITE &lt;SP&gt; &lt;string&gt; &lt;CRLF&gt;</span></td><td align="center">SITE PARAMETERS</td><td align="justify">Предоставить специфическую системную информацию</td></tr>
+<tr><td><span class="c">SYST &lt;CRLF&gt;</span></td><td align="center">SYSTEM</td><td align="justify">Предоставить информацию об ОС сервера</td></tr>
+<tr><td><span class="c">STAT [&lt;SP&gt; &lt;pathname&gt;] &lt;CRLF&gt;</span></td><td align="center">STATUS</td><td align="justify">Предоставить информацию о текущем состоянии FTP-сервера или пересылки (FTP-ответ может пересылаться как по управляющему, так и по информационному соединению)</td></tr>
+<tr><td><span class="c">HELP [&lt;SP&gt; &lt;string&gt;] &lt;CRLF&gt;</span></td><td align="center">HELP</td><td align="justify">Предоставить справочную информацию (обычно информацию о FTP-команде; если аргумент не задан, то выдается обобщенная справка)</td></tr>
+<tr><td><span class="c">NOOP &lt;CRLF&gt;</span></td><td align="center">NOOP</td><td align="justify">Холостая FTP-команда (обычно используется для поддержания связи)</td></tr>
+<tr><td><span class="c">MDTM &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">MODIFICATION TIME</td><td align="justify">Предоставить дату и время последней модификации файла (RFC&nbsp;3659)</td></tr>
+<tr><td><span class="c">SIZE &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">SIZE OF FILE</td><td align="justify">Предоставить размер файла (RFC&nbsp;3659)</td></tr>
+<tr><td><span class="c">MLST &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">--</td><td align="justify">Предоставить информацию об объекте файловой системе (файле либо каталоге; FTP-ответ пересылается по управляющему соединению) (RFC&nbsp;3659)</td></tr>
+<tr><td><span class="c">MLSD &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</span></td><td align="center">--</td><td align="justify">Вывести на экран список файлов из удаленного каталога (более стандартизированная альтернатива <span class="c">LIST</span>) (RFC&nbsp;3659)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>В расширениях FTP есть еще несколько новых FTP-команд. Около десяти FTP-команд оказались невостребованными и были аннулированы.</p>
+
+<p>Каждая FTP-команда, переданная FTP-клиентом, должна сопровождаться по крайней мере одним FTP-ответом со стороны FTP-сервера, сообщающим об успешности ее выполнения. В нормальной ситуации, FTP-клиент ожидает FTP-ответ на текущую FTP-команду перед тем, как передать следующую. При этом используется механизм тайм-аута. В зависимости от реализации, на часть FTP-команд могут возвращаться различные комбинации FTP-ответов, однако существуют и жесткие ограничения. Существуют также рекомендации по наполнению FTP-ответов текстом.</p> 
+
+<p>FTP-ответ, состоящий из одной строки, формально выглядит следующим образом:
+<pre>
+&lt;xyz&gt; &lt;SP&gt; &lt;text&gt; &lt;CRLF&gt;
+</pre>
+Где <span class="c">&lt;xyz&gt;</span> -- целочисленный трехбайтный код.</p>
+
+<p>Если же FTP-ответ состоит из нескольких строк, что так же допустимо, он выглядит:
+<pre>
+&lt;xyz&gt; "-" &lt;text&gt; &lt;CRLF&gt;
+&lt;text&gt; &lt;CRLF&gt;
+...
+&lt;xyz&gt; &lt;text&gt; &lt;CRLF&gt;
+</pre>
+</p>
+
+<p>Коды предназначены для техники, а текстовые комментарии -- для людей.</p>
+
+<p>Таблица -- Декодирование FTP-ответов 
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Код</td><td align="center">Название</td><td align="center">Описание</td></tr>
+<tr><td align="center">1yz<td>Positive preliminary reply</td><td>Предварительное успешное завершение</td></tr>
+<tr><td align="center">2yz<td>Positive completion reply</td><td>Окончательное успешное завершение</td></tr>
+<tr><td align="center">3yz<td>Positive intermediate reply</td><td>Промежуточное успешное завершение</td></tr>
+<tr><td align="center">4yz<td>Transient negative completion reply</td><td>Ненормальное завершение в текущем случае</td></tr>
+<tr><td align="center">5yz<td>Permanent negative completion reply</td><td>Перманентно ненормальное завершение</td></tr>
+<tr><td align="center">x0z<td>Syntax</td><td>Синтаксис</td></tr>
+<tr><td align="center">x1z<td>Information</td><td>Информация</td></tr>
+<tr><td align="center">x2z<td>Connections</td><td>Соединения</td></tr>
+<tr><td align="center">x3z<td>Authentication and accounting</td><td>Аутентификация и аккаунты</td></tr>
+<tr><td align="center">x4z<td>Unspecified as yet</td><td>Еще стандартом не определено</td></tr>
+<tr><td align="center">x5z<td>File system</td><td>Файловая система</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td colspan="3">&nbsp;</td></tr>	
+<tr><td align="center"><span class="c">110</span><td>Restart marker reply</td><td>Подтверждение изменения файлового смещения (должно быть в формате: <span class="c">MARK &lt;SP&gt; &lt;yyyy&gt; &lt;SP&gt; "=" &lt;SP&gt; &lt;mmmm&gt;</span>, где <span class="c">&lt;yyyy&gt;</span> и <span class="c">&lt;mmmm&gt;</span> -- файловые смещения на сторонах процессов пересылки данных FTP-клиента и FTP-сервера соответственно)</td></tr>
+<tr><td align="center"><span class="c">120</span><td>Service ready in <span class="c">&lt;nnn&gt;</span> minutes</td><td>Запрос планируется обслужить за <span class="c">&lt;nnn&gt;</span> минут</td></tr>
+<tr><td align="center"><span class="c">125</span><td>Data connection already open; transfer starting</td><td>Информационное соединение установлено и пересылка начинается</td></tr>
+<tr><td align="center"><span class="c">150</span><td>File status okay; about to open data connection</td><td>Файл корректен, подготавливается информационное соединение</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>	
+<tr><td align="center"><span class="c">200</span><td>Command okay</td><td>Команда выполнена успешно</td></tr>
+<tr><td align="center"><span class="c">202</span><td>Command not implemented, superfluous at this site</td><td>В выполнении команды нет необходимости</td></tr>
+<tr><td align="center"><span class="c">211</span><td>System status, or system help reply</td><td>Состояние системы или справка</td></tr>
+<tr><td align="center"><span class="c">212</span><td>Directory status</td><td>Состояние каталога</td></tr>
+<tr><td align="center"><span class="c">213</span><td>File status</td><td>Состояние файла</td></tr>
+<tr><td align="center"><span class="c">214</span><td>Help message</td><td>Справочное сообщение</td></tr>
+<tr><td align="center"><span class="c">215</span><td><span class="c">&lt;NAME&gt;</span> system type</td><td>Официальный тип системы: <span class="c">&lt;NAME&gt;</span></td></tr>
+<tr><td align="center"><span class="c">220</span><td>Service ready for new user</td><td>Готовность обслуживать нового пользователя (обычно содержит баннер)</td></tr>
+<tr><td align="center"><span class="c">221</span><td>Service closing control connection</td><td>Управляющее соединение закрывается</td></tr>
+<tr><td align="center"><span class="c">225</span><td>Data connection open</td><td>Информационное соединение установлено</td></tr>
+<tr><td align="center"><span class="c">226</span><td>Closing data connection</td><td>Информационное соединение закрывается</td></tr>
+<tr><td align="center"><span class="c">227</span><td>Entering Passive Mode</td><td>Пассивный режим обмена установлен</td></tr>
+<tr><td align="center"><span class="c">230</span><td>User logged in, proceed</td><td>Пользователь вошел в систему, можно продолжать</td></tr>
+<tr><td align="center"><span class="c">250</span><td>Requested file action okay, completed</td><td>Запрошенное действие с файлом выполнено
+<tr><td align="center"><span class="c">257</span><td><span class="c">&lt;PATHNAME&gt;</span> created</td><td>Файл <span class="c">&lt;PATHNAME&gt;</span> создан</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>	
+<tr><td align="center"><span class="c">331</span><td>User name okay, need password</td><td>Имя пользователя воспринято, требуется пароль</td></tr>
+<tr><td align="center"><span class="c">332</span><td>Need account for login</td><td>Требуется аккаунт для входа в систему</td></tr>
+<tr><td align="center"><span class="c">350</span><td>Requested file action pending further information</td><td>Запрошенное действие с файлом отложено до поступления дополнительной информации</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>	
+<tr><td align="center"><span class="c">421</span><td>Service not available, closing control connection</td><td>Сервис недоступен, управляющее соединение закрывается</td></tr>
+<tr><td align="center"><span class="c">425</span><td>Can't open data connection</td><td>Невозможно установить информационное соединение</td></tr>
+<tr><td align="center"><span class="c">426</span><td>Connection closed; transfer aborted</td><td>Соединение закрыто, пересылка прервана</td></tr>
+<tr><td align="center"><span class="c">450</span><td>Requested file action not taken</td><td>Запрошенное действие с файлом не выполнено</td></tr>
+<tr><td align="center"><span class="c">451</span><td>Requested action aborted: local error in processing</td><td>Запрошенное действие прервано, локальная ошибка при обработке</td></tr>
+<tr><td align="center"><span class="c">452</span><td>Requested action not taken. Insufficient storage space in system</td><td>Запрошенное действие не выполнено, недостаточно свободного файлового пространства в системе</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>	
+<tr><td align="center"><span class="c">500</span><td>Syntax error, command unrecognized</td><td>Синтаксическая ошибка, команда не распознана</td></tr>
+<tr><td align="center"><span class="c">501</span><td>Syntax error in parameters or arguments</td><td>Синтаксическая ошибка в параметрах или аргументах</td></tr>
+<tr><td align="center"><span class="c">502</span><td>Command not implemented</td><td>Команда не выполнена</td></tr>
+<tr><td align="center"><span class="c">503</span><td>Bad sequence of commands</td><td>Неправильная последовательность команд</td></tr>
+<tr><td align="center"><span class="c">504</span><td>Command not implemented for that parameter</td><td>Команда с этим параметром не реализована</td></tr>
+<tr><td align="center"><span class="c">522</span><td>Network protocol not supported</td><td>Сетевой протокол не поддерживается (RFC&nbsp;2428)</td></tr>
+<tr><td align="center"><span class="c">530</span><td>Not logged in</td><td>Вход в систему не осуществлен</td></tr>
+<tr><td align="center"><span class="c">532</span><td>Need account for storing files</td><td>Требуется аккаунт для сохранения файла</td></tr>
+<tr><td align="center"><span class="c">550</span><td>Requested action not taken. File unavailable</td><td>Запрошенное действие не выполнено, файл недоступен</td></tr>
+<tr><td align="center"><span class="c">551</span><td>Requested action aborted: page type unknown</td><td>Запрошенное действие прервано, тип страницы неизвестен</td></tr>
+<tr><td align="center"><span class="c">552</span><td>Requested file action aborted. Exceeded storage allocation</td><td>Запрошенное действие с файлом прервано, пространство на накопителе не выделено</td></tr>
+<tr><td align="center"><span class="c">553</span><td>Requested action not taken. File name not allowed</td><td>Запрошенное действие не выполнено, название файла недопустимо</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>В отличие от FTP-команд, команды интерпретатора не стандартизированы, однако в реализациях широко используют традиционно сложившиеся аббревиатуры.</p>
+
+<p>Протокол FTP разрабатывался как универсальный -- в том числе, и для пересылки файлов между станциями, работающими под управлением различных ОС, возможно использующих различные файловые системы. Для того чтобы обмен по протоколу прошел успешно необходимо правильно задать или изменить используемые по умолчанию значения следующих параметров.</p>
+
+<p>Файловое представление (data type, representation type) необходимо для согласования файловых систем передающей и принимающей сторон. FTP поддерживает четыре основных файловых представления:<br>
+1.&nbsp;ASCII -- файл считается текстовым и пересылается в 7-мибитной кодировке NVT-ASCII (по умолчанию).<br>
+2.&nbsp;EBCDIC -- файл считается текстовым и пересылается в 8-мибитной кодировке EBCDIC фирмы IBM.<br> 
+3.&nbsp;Image -- файл считается бинарным и пересылается упакованным в 8-мибитные байты.<br> 
+4.&nbsp;Local byte size -- файл считается состоящим из неделимых байтов соответствующего размера (должен быть задан) и пересылается с учетом этого (если размер байта не кратен октету, то возникает автодополнение).</p>
+
+<p>В дополнение к файловому представлению, в FTP предусмотрена возможность структурировать файл при его пересылке по информационному соединению (data structure). Поддерживаются три структуры:<br>
+1.&nbsp;File structure -- файл не имеет внутренней структуры и рассматривается как непрерывный поток байтов (по умолчанию).<br>
+2.&nbsp;Record structure -- файл рассматривается как последовательность записей, структура приемлема только для текстовых файлов.<br>
+3.&nbsp;Page structure -- файл имеет страничную организацию, каждая страница имеет заголовок и индексацию, структура зависит от реализации.</p>
+
+<p>Наконец, существует возможность установить режим пересылки (transmission mode). Возможны три режима:<br>
+1.&nbsp;Stream -- файл пересылается как непрерывный поток байтов (по умолчанию); если файл не имеет внутренней структуры, то прием метасимвола <span class="c">&lt;EOF&gt;</span> означает, что пересылка окончена; для случаев со сложной структурой предусмотрены специальные коды для <span class="c">&lt;EOR&gt;</span> и <span class="c">&lt;EOF&gt;</span>.<br>
+2.&nbsp;Block -- файл пересылается в виде последовательности блоков, каждый из которых имеет заголовок, в котором записываются счетчик байтов и специальные коды; способ поддерживается редко.<br>
+3.&nbsp;Compressed -- файл пересылается в сжатом простейшими алгоритмами виде; способ поддерживается редко.</p>
+
+<p>В зависимости от того, какая из взаимодействующих сторон является инициатором установления информационного соединения различают активный и пассивный режимы обмена (data transfer process modes). При этом направление пересылки файлов, то есть какая из сторон является отправителем, а какая получателем, значения не имеет.</p>
+
+<p>Активный режим является рекомендуемым и наиболее используемым. В активном режиме управляющее соединение создается следующим образом. FTP-клиент, используя динамически выделенный порт (с номером больше 1024), создает управляющее соединение с портом 21 FTP-сервера. Затем FTP-клиент динамически выделяет еще один порт и посылает его номер FTP-серверу с помощью FTP-команды <span class="c">PORT</span>. Затем FTP-сервер создает информационное соединение с указанным портом, со своей стороны используя порт 20. Если FTP-клиент не передал команду <span class="c">PORT</span>, что в крайней степени не рекомендуется, то FTP-сервер создает информационное соединение с тем же самым портом FTP-клиента, который используется управляющим соединением.
+
+<p>Пассивный режим обычно устанавливается принудительно. В пассивном режиме FTP-клиент создает как управляющее, так и информационное соединения с FTP-сервером. После того, как аналогичным образом создано управляющее соединение, FTP-клиент передает FTP-команду <span class="c">PASV</span> FTP-серверу. Получив ее, FTP-сервер динамически выделяет порт для информационного соединения и передает его номер FTP-клиенту с помощью FTP-ответа <span class="c">227</span>. Затем FTP-клиент динамически выделяет еще один порт и создает информационное соединение с портом, номер которого получил от FTP-сервера.</p>
+
+<div align="center">
+<img src="lk10.01.02.bmp">
+<br>
+Рисунок -- Режимы обмена по протоколу FTP
+</div>
+
+<p>Широкое распространение получили так называемые «анонимные» (anonymous) FTP-серверы (RFC&nbsp;1635), предоставляющие всем желающим определенные файловые ресурсы (обычно расположенные в каталоге <span class="c">/pub)</span>. Как правило для аутентификации в такой системе достаточно ввести имя пользователя <span class="c">anonymous</span> и произвольный пароль, например, адрес электронной почты.</p>
+
+<p>FTP имеет немного расширений, и те реализуют редко. Даже связанные с безопасностью расширения почти не используют (реализации базового стандарта совсем незащищены).</p>
+
+<p>&nbsp;</p>
+<div align="center">
+<p><strong>Telnet</strong></p>
+</div>
+<p>&nbsp;</p>
+
+<p>Протокол Telnet (TErminaL NETwork) (основное RFC -- RFC&nbsp;854) реализует концепцию NVT (Network Virtual Terminal), уходящую корнями в UNIX-системы.</p>
+
+<p>Первые UNIX-системы были «большими» и строились согласно модели сильносвязанных КС. Физические терминалы в таких системах подключались по выделенным каналам (расстояние могло быть несколько десятков метров) и поэтому их стали называть TTYs (TeleTYpes), хотя по сути они были локальными в современном понимании.</p> 
+
+<p>Виртуальные терминалы, то есть NVTs, представляют собой удаленные от хоста программные эмуляторы физических терминалов, связь с которыми «протянута» через СПД.</p>
+
+<p>Изначально терминалы были текстовыми. Текстовые терминалы различают исходя из набора поддерживаемых клавиш (основной набор, расширенный и так далее), текстового разрешения (основное -- 80x25) и некоторых других характеристик. NVTs эмулируют основные виды текстовых терминалов.</p>
+
+<p>Наиболее распространенными были следующие текстовые терминалы (выпускалось множество аналогов): DEC VT100, VT220, VT420, VT520 и IBM TN3270.</p>
+
+<p>Почти все современные терминалы -- графические. Соответственно, графические терминалы различают в основном исходя из графического разрешения. Удаленные графические терминалы UNIX-систем подключают по протоколу XDMCP (X Display Manager Сontrol Protocol). UNIX-программа Xterm -- стандартный эмулятор текстового терминала на графическом (на одном графическом терминале можно эмулировать сразу несколько текстовых).</p> 
+
+<p>Следует отметить, что хост-терминальные системы не «вымерли», а их до сих пор достаточно широко применяют, особенно где беспроводные подключения не подходят по соображениям безопасности. Усовершенствованные, значительно более компактные физические терминалы сейчас называют тонкими клиентами (thin clients).</p>
+
+<p>Telnet базируется на клиент-серверной модели и использует транспорт TCP. Задействуется одно соединение. Стандартный номер программного порта Telnet-сервера -- 23.</p>
+
+<div align="center">
+<img src="lk10.02.01.bmp">
+<br>
+Рисунок -- Структура системы Telnet
+</div>
+
+<p>Основная задача протокола Telnet заключается в обеспечении корректной транспортировки символов потока ввода-вывода между NVT и хостом. Используется буферизация, в том числе чтобы излишне не загружать СПД. В режиме по умолчанию «набранные» символы отсылаются незамедлительно. В режиме linemode (RFC&nbsp;1184) символы отсылаются после нажатия <span class="c">Enter</span>.</p>
+
+<p>Команды самого протокола Telnet «накладываются» на основной поток ввода-вывода путем вставки в него управляющих метасимволов. Команды могут исходить как от Telnet-клиента, так и от Telnet-сервера. Часть команд предназначена для выполнения и на Telnet-сервере, и на Telnet-клиенте, часть -- только для выполнения на Telnet-сервере. Некоторые команды являются запросами и поэтому зависят от команд, являющихся подтверждениями.</p> 
+
+<p>Признаком Telnet-команды является метасимвол <span class="c">&lt;IAC&gt;</span> (байт со значением <span class="c">255</span>). Далее следуют код команды (один байт) и аргументы. Если необходимо переслать равный <span class="c">&lt;IAC&gt;</span> байт, то <span class="c">&lt;IAC&gt;</span> повторяется два раза (байт-стаффинг).</p>
+
+<p>Важной частью протокола Telnet является возможность согласования параметров NVT (например, текстового разрешения). Эти параметры выражаются в нескольких десятках Telnet-опций (под код опции так же отведен один байт). Изучать Telnet-опции в настоящее время смысла не имеет.</p> 
+
+<p>Таблица -- Telnet-команды
+<table border="1" cellspacing="1" cellpadding="1"></tr>
+<tr><td align="center">Код</td><td align="center">Название</td><td align="center">Описание</tr>
+<tr><td align="center"><span class="c">240</span></td><td align="center">SE</td><td align="justify">Конец согласуемой Telnet-опции</tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td align="center"><span class="c">241</span></td><td align="center">NOP</td><td align="justify">Холостая Telnet-команда</tr>
+<tr><td align="center"><span class="c">242</span></td><td align="center">Data Mark</td><td align="justify">Принудительно синхронизировать NVT с хостом с помощью экстренных TCP-данных (выполнить буферизированные Telnet-команды)</td></tr>
+<tr><td align="center"><span class="c">243</span></td><td align="center">Break</td><td align="justify">Прервать текущий процесс (альтернатива <span class="c">Ctrl-C</span>)</td></tr>
+<tr><td align="center"><span class="c">244</span></td><td align="center">Interrupt Process</td><td align="justify">Прервать текущий Telnet-процесс на Telnet-сервере (завершить сеанс)</td></tr>
+<tr><td align="center"><span class="c">245</span></td><td align="center">Abort Output</td><td align="justify">Прервать поток вывода на NVT</td></tr>
+<tr><td align="center"><span class="c">246</span></td><td align="center">Are You There</td><td align="justify">Послать уведомление о получении данной команды («Вы на связи?»)</td></tr>
+<tr><td align="center"><span class="c">247</span></td><td align="center">Erase Character</td><td align="justify">Удалить предыдущий символ (альтернатива <span class="c">Backspace</span> и <span class="c">Delete</span>)</td></tr>
+<tr><td align="center"><span class="c">248</span></td><td align="center">Erase Line</td><td align="justify">Удалить предыдущую строку</td></tr>
+<tr><td align="center"><span class="c">249</span></td><td align="center">Go Ahead</td><td align="justify">Ожидается следующая Telnet-команда</td></tr>
+</tbody>
+<tr><td align="center"><span class="c">250</span></td><td align="center">SB</td><td align="justify">Начало согласуемой Telnet-опции (далее должны следовать код опции и аргументы)</td></tr>
+<tr><td align="center"><span class="c">251</span></td><td align="center">WILL</td><td align="justify">Два варианта.<br>Предложение начать согласование Telnet-опции.<br>Подтверждение начала согласования Telnet-опции.<br>(Далее должен следовать код Telnet-опции)</td></tr>
+<tr><td align="center"><span class="c">252</span></td><td align="center">WON'T</td><td align="justify">Два варианта.<br>Предложение не начинать согласование Telnet-опции.<br>Отказ начать согласование Telnet-опции.<br>(Далее должен следовать код Telnet-опции)</td></tr>
+<tr><td align="center"><span class="c">253</span></td><td align="center">DO</td><td align="justify">Два варианта.<br>Начать согласование Telnet-опции.<br>Ожидается согласование Telnet-опции.<br>(Далее должен следовать код Telnet-опции)</td></tr>
+<tr><td align="center"><span class="c">254</span></td><td align="center">DON'T</td><td align="justify">Два варианта.<br>Не начинать согласование Telnet-опции.<br>Не ожидается согласование Telnet-опции.<br>(Далее должен следовать код Telnet-опции)</td></tr>
+<tr><td align="center"><span class="c">255</span></td><td align="center">--</td><td align="justify">Экранированный символ <span class="c">255</span> в потоке</td></tr>
+</table>
+</p>
+
+<p>Наиболее серьезным из недостатков Telnet является полная незащищенность соединения от несанкционированного доступа. Данные, в том числе и пароли, пересылаются в виде открытого текста (plain text). В современных условиях это не может устраивать любую организацию, даже некоммерческую. Стандарты в области защиты информации фактически запрещают применение Telnet. Поэтому на смену Telnet пришел SSH (Secure SHell) -- идея та же, но соединение полноценно защищено. В свое время предпринимались попытки доработать Telnet, но это направление оказалось тупиковым.</p>
+
+<p>&nbsp;</p>
+<div align="center">
+<p><strong>Протоколы электронной почты</strong></p>
+</div>
+<p>&nbsp;</p>
+
+<p>Сообщениями протоколов электронной почты являются <em>электронные письма</em> (emails). Электронные письма имеют текстовую природу.</p>
+
+<p>По аналогии с бумажным письмом, электронное письмо так же состоит из конверта (envelope) и содержимого (content). Содержимое, в свою очередь, состоит из заголовка (header) и основного текста (body). Структура (прежде всего, синтаксис) электронных писем неоднократно регламентировалась стандартами (начиная с RFC&nbsp;822 и более старых, заканчивая RFC&nbsp;5322). Для обеспечения прав и обязанностей, связанных с электронными письмами, предусмотрены два механизма: DKIM (DomainKeys Identified Mail) Signatures (RFC&nbsp;6376) и SPF (Sender Policy Framework) (RFC&nbsp;7208).</p>
+
+<p>Изначально, в отношении всех компонентов электронного письма допускалась только 7-мибитная кодировка US-ASCII.</p>
+
+<p>Очень значимым расширением электронной почты является MIME (Multipurpose Internet Mail Extensions) (RFC&nbsp;2045 -- 2049 и много обновлений), позволяющее включать в основной текст электронного письма (и «прикреплять» к электронному письму) различные мультимедийные данные.</p>
+
+<p>В настоящее время определены следующие MIME-типы:<br>
+1.&nbsp;<span class="c">text</span> -- текст (основное содержимое письма, указывается кодировка, возможна 8-мибитная кодировка).<br>
+2.&nbsp;<span class="c">image</span> -- изображение.<br>
+3.&nbsp;<span class="c">audio</span> -- звук.<br>
+4.&nbsp;<span class="c">video</span> -- видео.<br>
+5.&nbsp;<span class="c">application</span> -- электронные данные, не подпадающие ни под один из других типов.<br>
++6.&nbsp;<span class="c">multipart</span> -- комбинация нескольких типов.<br>
++7.&nbsp;<span class="c">message</span> -- письмо в письме либо внешнее приложение к письму (attachment).<br>
+Каждый из типов имеет некоторое количество подтипов.</p>
+
+<p>Одно из последних расширений (RFC&nbsp;6532) позволяет полностью интернационализировать электронную почту -- разрешает использовать кодировку UTF-8 вместо US-ASCII уже в адресах и напрямую в заголовках (второй шаг после MIME).</p>
+
+
+<p>Стандарты четко не ограничивают размеры электронного письма и его составных частей. Однако, в реализациях, размер содержимого обычно не должен превышать 64 килобайта, а общий объем (включая приложения) -- несколько мегабайтов.</p>
+
+
+<p>Одним из ключевых понятий системы электронной почты является понятие <em>почтового ящика</em> (mailbox, иногда maildrop). Электронный почтовый ящик по своей сути ничем не отличается от почтового ящика для бумажных писем, но не всегда представляет собой файловое хранилище.</p>
+
+<p>Почтовые ящики могут быть расположены как на выделенных для этого почтовых серверах -- лучше переводить как MXes (Mail eXchanges), так и на пользовательских станциях. Могут быть как локальными, так и удаленными от пользователя.</p>
+
+
+<p>Фактически, в системе электронной почты адресуют именно почтовые ящики. Современный формат адреса:
+<pre>
+&lt;address&gt; = &lt;mailbox&gt; / &lt;group&gt;
+
+&lt;mailbox&gt; = &lt;name-addr&gt; / &lt;addr-spec&gt;
+&lt;name-addr&gt; = [&lt;display-name&gt;] [&lt;CFWS&gt;] "<" &lt;addr-spec> "&gt;" [&lt;CFWS&gt;] / &lt;obs-angle-addr&gt;
+&lt;addr-spec&gt; = &lt;local-part&gt; @ &lt;domain&gt;
+
+&lt;group&gt; = &lt;display-name&gt; ":" [&lt;mailbox-list&gt; / &lt;CFWS&gt; / &lt;obs-group-list&gt;] ";" [&lt;CFWS&gt;]
+&lt;mailbox-list&gt; = (&lt;mailbox&gt; *("," &lt;mailbox&gt;)) / &lt;obs-mbox-list&gt;
+</pre>
+Где: <span class="c">&lt;display-name&gt;</span> -- имя человека либо название программы (отправителя либо получателя, просто отображается, при пересылке не используется); <span class="c">&lt;local-part&gt;</span> -- название почтового ящика (отправителя либо получателя; может содержать все печатные US-ASCII-символы кроме метасимволов: <span class="c">(</span>, <span class="c">)</span>, <span class="c"><</span>, <span class="c">></span>, <span class="c">[</span>, <span class="c">]</span>, <span class="c">:</span>, <span class="c">;</span>, <span class="c">@</span>, <span class="c">\</span>, <span class="c">,</span>, <span class="c">"</span>; метасимвол-точка является исключением, но точка не может быть крайней и не может встречаться более одного раза подряд; регистр букв учитывается; экранирование заключением в двойные кавычки позволяет включить в название все символы, при этом <span class="c">\</span> и <span class="c">"</span> заменяются на <span class="c">\\</span> и <span class="c">\"</span> соответственно; максимум 64 байта); <span class="c">&lt;domain&gt;</span> -- доменное название, относящееся к домену либо к станции (источника либо назначения), где расположен данный почтовый ящик; <span class="c">&lt;CFWS&gt;</span> -- комментарий (в круглых скобках) или стандартный разделитель (один либо несколько пробелов или табуляций).</p>
+
+<p>Имеется совместимость с устаревшим форматом (не отображено). Поддерживаются псевдонимы и групповая рассылка.</p>
+
+<p>При рассмотрении любой почтовой системы прежде всего выделяют взаимодействующие процессы, которые принято называть почтовыми агентами. Традиционно в список почтовых агентов включают:<br>
+1.&nbsp;MTAs (Mail Transport Agents) -- доставляют письма между почтовыми серверами.<br>
+2.&nbsp;MDAs (Mail Delivery Agents) -- помещают доставленные сообщения в почтовые ящики пользователей.<br>
+3.&nbsp;MUAs (Mail User Agents) -- реализуют интерфейс пользователей с их почтовыми ящиками.<br>
++4.&nbsp;MSAs (Mail Submission Agents) -- позволяют вводить письма разными способами.</p>
+
+<p>Следует отметить, что количественное и качественное наполнение списка почтовых агентов разнится (выше показан «усредненный» список). Например, в стандартах RFC термин MDA почти не упоминают. Изначально выделяли только MUA и MTA. Недавно на стороне отправителя между MUA и MTA был «вставлен» MSA.</p>
+
+<p>Наличие удаленных почтовых ящиков (расположенных на удаленных от пользователя почтовых серверах) привело к такой отличительной особенности системы электронной почты как выделение в рамках одной прикладной задачи двух групп базовых прикладных протоколов -- протоколов для передачи почты и протоколов для приема почты.</p>
+
+<p>В свою очередь, в рамках каждого из почтовых протоколов взята за основу клиент-серверная модель и используется транспорт TCP.</p>
+
+<div align="center">
+<img src="lk10.03.01.bmp">
+<br>
+Рисунок -- Обобщенная структура системы электронной почты
+</div>
+
+<p>Протокол SMTP (Simple Mail Transfer Protocol) (основное RFC -- RFC&nbsp;5321) используют для передачи электронной почты в почтовый ящик -- от пользовательской станции (отправителя) к почтовому серверу и от одного почтового сервера к другому. (В очень редких случаях, при «необычных» почтовых ящиках, письмо может передаваться и от почтового сервера к пользовательской станции, например, «прямо на экран монитора»).</p>
+
+<p>Таким образом, SMTP-клиентом (передатчиком письма) может быть как пользовательская станция, так и почтовый сервер, а SMTP-сервером (приемником письма) как правило является почтовый сервер. Правила взаимодействия между SMTP-клиентом и SMTP-сервером аналогичны правилам взаимодействия между FTP-клиентом и FTP-сервером. Задействуется одно соединение. Стандартный номер программного порта SMTP-сервера -- 25. Для MSA предусмотрен альтернативный номер порта -- 587, но многие почтовые системы для MSA по-прежнему используют порт 25.</p>
+
+<p>Физическим почтовым клиентом является оконечная пользовательская станция, за которой работает пользователь-отправитель или пользователь-получатель письма. Физическим почтовым сервером обычно является оконечная серверная станция. Логическим почтовым клиентом и логическим почтовым сервером являются определенные программы. Логический почтовый клиент не всегда находится на физическом почтовом клиенте, он может находиться на физическом почтовом сервере (что свойственно ОС UNIX, локальный пользователь может быть подключен и через удаленный терминал посредством SSH). И почтовые агенты могут соотноситься со станциями по-разному. На почтовом клиенте может располагаться только MUA, на почтовом сервере могут располагаться все почтовые агенты. MSA плюс MTA, равно как MTA плюс MDA, обычно совмещены на одном почтовом сервере, но в общем случае могут быть «разнесены» (при этом взаимодействуют так же по протоколу SMTP).</p>
+
+<p>Согласно типовой схеме пересылки письма сначала отрабатывает связка MUA -- MSA. MUA позволяет ввести письмо явно, либо указать MSA откуда взять письмо. Опционально, отправляемое письмо копируется в соответствующую папку почтового ящика отправителя. Затем MSA «ставит» письмо в очередь, отслеживаемую соответствующим MTA (если почтовый ящик получателя расположен на том же почтовом сервере, то письмо сразу «сбрасывается» в него). Забрав письмо из очереди, MTA считывает <span class="c">&lt;domain&gt;</span>-часть адреса почтового ящика получателя (MTAs анализируют только эту часть) и пытается установить соединение с MX домена -- почтовым сервером, отвечающим за указанный в адресе домен. Ведь заранее неизвестно, к домену либо непосредственно к станции относится считанное доменное название (исторически принята такая, косвенная, адресация через MX домена). Для поиска MX домена происходит обращение к системе DNS и используются записи о ресурсах типа MX (кроме «обычных» DNS-преобразований, которые никто не отменял). Если почтовый ящик получателя не расположен на MX домена, то MX домена «продвигает» письмо дальше, то есть становится посредником (SMTP Relay). Таким образом, при пересылке письма по СПД от отправителя к получателю может возникать своеобразная маршрутизация. Когда письмо «дошло» до станции назначения последний MTA в цепочке отдает его соответствующему MDA. MDA анализирует <span class="c">&lt;local-part&gt;</span>-часть адреса почтового ящика, находит почтовый ящик и помещает письмо в него. Дальнейшая обработка письма «находится вне компетенции» SMTP.
+Очевидно, что при пересылке письма оно много раз буферизируется. Кроме специальных разделяемых очередей, имеются и буферы в почтовых агентах. Очередь можно рассматривать как средство межпроцессного взаимодействия. Очередь так же позволяет предпринять повторную попытку передать письмо после промежуточного сбоя.</p>
+
+<p>Наличие MSA позволяет импортировать письма в том числе из корпоративных почтовых систем (Novell GroupWise, Lotus Notes -- IBM Domino, Microsoft Exchange и других), которые не полностью соответствуют стандартам RFC. Наличие MDA позволяет экспортировать письма. Выполняющий импорт-экспорт MX становится почтовым шлюзом (email gateway) между различными почтовыми системами. При пересылке письма MIME-типы могут преобразовываться.
+Для локальной доставки от MTA к MDA иногда используется специально для этого разработанная модификация SMTP под названием LMTP (Local Mail Transfer Protocol) (RFC&nbsp;2033).</p>
+
+<p>SMTP имеет целый ряд расширений, обобщенно известных как ESMTP (Extended SMTP), многие из которых уже интегрированы в основной стандарт. Некоторые расширения зависят друг от друга.</p>
+
+<p>SMTP поддерживает MIME.</p>
+
+<p>Аутентификация SMTP-клиента на SMTP-сервере выполняется посредством механизма SASL (Simple Authentication and Security Layer) (изначально аутентификация предусмотрена не была). Еще одним важным опциональным расширением, связанным с безопасностью, является механизм TLS (Transport Layer Security) -- новое название SSL (Secure Sockets Layer), позволяющий защитить соединение от несанкционированного доступа.</p>
+
+<p>Опционально SMTP поддерживает конвейеризацию команд (pipelining), то есть способность отправлять текущую SMTP-команду по мере необходимости, возможно еще не получив SMTP-ответ на предыдущую.</p>
+
+<p>SMTP-клиент отслеживает различные тайм-ауты.</p>
+
+<p>Формат SMTP-команд аналогичен формату FTP-команд. SMTP-команда начинается с четырехбуквенного кода -- по-другому, глагола (verb). Регистр букв не учитывается.</p>
+
+<p>Таблица -- SMTP-команды
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">SMTP-команда</span></td><td align="center">Название</td><td align="center">Описание</td></tr>
+<tr><td><span class="c">HELO &lt;SP&gt; &lt;Domain&gt; &lt;CRLF&gt;</span></td><td align="center">HELLO</td><td align="justify">Идентифицировать на SMTP-сервере (под своим доменным названием)</td></tr>
+<tr><td><span class="c">EHLO &lt;SP&gt; (&lt;Domain&gt; / &lt;address-literal&gt;) &lt;CRLF&gt;</span></td><td align="center">EXTENDED HELLO</td><td align="justify">Идентифицировать на SMTP-сервере для использования ESMTP (рекомендуемая альтернатива <span class="c">HELO</span>)</td></tr>
+<tr><td><span class="c">MAIL FROM: &lt;Reverse-path&gt; [&lt;SP&gt; &lt;Mail-parameters&gt;] &lt;CRLF&gt;</span></td><td align="center">MAIL</td><td align="justify">Почтовый ящик отправителя (<span class="c">MAIL FROM:</span> инициирует транзакцию передачи письма) (+RFC&nbsp;1845, +RFC&nbsp;1870, +RFC&nbsp;2852, +RFC&nbsp;3030, +RFC&nbsp;3461, +RFC&nbsp;3865, +RFC&nbsp;3885, +RFC&nbsp;4141, +RFC&nbsp;4405, +RFC&nbsp;4865, +RFC&nbsp;4954, +RFC&nbsp;6152, +RFC&nbsp;6531, +RFC&nbsp;6710)</td></tr>
+<tr><td><span class="c">RCPT TO: ("&lt;Postmaster@" &lt;Domain&gt; "&gt;" / "&lt;Postmaster&gt;" / &lt;Forward-path&gt;) [&lt;SP&gt; &lt;Rcpt-parameters&gt;] &lt;CRLF&gt;</span></td><td align="center">RECIPIENT</td><td align="justify">Почтовый ящик получателя (<span class="c">RCPT TO:</span> должна следовать непосредственно за <span class="c">MAIL FROM:</span>; если получателей несколько, то эта команда повторяется соответствующее число раз) (+RFC&nbsp;3461, +RFC&nbsp;4141, +RFC&nbsp;7293)</td></tr>
+<tr><td><span class="c">DATA &lt;CRLF&gt;</span></td><td align="center">DATA</td><td align="justify">Содержимое письма (<span class="c">DATA</span> должна следовать непосредственно за <span class="c">RCPT TO:</span>; следующие непосредственно за <span class="c">DATA &lt;CRLF&gt;</span> строки рассматриваются как содержимое письма -- вплоть до <span class="c">&lt;CRLF&gt;.&lt;CRLF&gt;</span>)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">RSET &lt;CRLF&gt;</span></td><td align="center">RESET</td><td align="justify">Отменить (текущую транзакцию посылки письма)</td></tr>
+<tr><td><span class="c">VRFY &lt;SP&gt; &lt;String&gt; [&lt;SP&gt; SMTPUTF8] &lt;/td&gt;</span></td><td align="center">VERIFY</td><td align="justify">Верифицировать (что запрашиваемый объект существует и является почтовым ящиком) (+RFC&nbsp;6531)</td></tr>
+<tr><td><span class="c">EXPN &lt;SP&gt; &lt;String&gt; [&lt;SP&gt; SMTPUTF8] &lt;CRLF&gt;</span></td><td align="center">EXPAND</td><td align="justify">Верифицировать список почтовой рассылки и, в положительном случае, предоставить список почтовых ящиков (+RFC&nbsp;6531)</td></tr>
+<tr><td><span class="c">HELP [&lt;SP&gt; &lt;String&gt;] &lt;CRLF&gt;</span></td><td align="center">HELP</td><td align="justify">Предоставить справочную информацию</td></tr>
+<tr><td><span class="c">NOOP [&lt;SP&gt; &lt;String&gt;] &lt;CRLF&gt;</span></td><td align="center">NOOP</td><td align="justify">Холостая SMTP-команда</td></tr>
+</tbody>
+<tr><td><span class="c">QUIT &lt;CRLF&gt;</span></td><td align="center">QUIT</td><td align="justify">Выход из удаленной системы</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">ETRN [&lt;SP&gt; &lt;option character&gt;] &lt;SP&gt; &lt;node name&gt; &lt;CRLF&gt;</span></td><td align="center">--</td><td align="justify">Обработать очередь писем на SMTP-сервере, относящуюся к указанной станции (RFC&nbsp;1985)</td></tr>
+<tr><td><span class="c">BDAT &lt;SP&gt; &lt;chunk-size&gt; [&lt;SP&gt; LAST] &lt;CRLF&gt;</span></td><td align="center">--</td><td align="justify">Фрагмент содержимого письма (при фрагментированной посылке, альтернатива <span class="c">DATA</span>) (RFC&nbsp;3030)</td></tr>
+<tr><td><span class="c">ATRN [&lt;SP&gt; &lt;domain&gt; *("," &lt;domain&gt;)] &lt;CRLF&gt;</span></td><td align="center">AUTHENTICATED TURN</td><td align="justify">Сменить роли SMTP-клиента и SMTP-сервера на охваченных соединением станциях (чтобы клиент стал сервером и наоборот; почти бессмысленно; возможно указание доменов, где выполнять смену) (RFC&nbsp;2645)</td></tr>
+</tbody>
+<tr><td><span class="c">STARTTLS &lt;CRLF&gt;</span></td><td align="center">START TLS</td><td align="justify">Запустить TLS (затем должно следовать согласование TLS-параметров) (RFC&nbsp;3207)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">BURL &lt;SP&gt; &lt;absolute-URI&gt; [&lt;SP&gt; LAST] &lt;CRLF&gt;</span></td><td align="center">--</td><td align="justify">Ссылка на содержимое письма (при импорте из IMAP, альтернатива DATA) (RFC&nbsp;4468)</td></tr>
+</tbody>
+<tr><td><span class="c">AUTH &lt;SP&gt; &lt;mechanism&gt; [&lt;SP&gt; &lt;initial-response&gt;] &lt;CRLF&gt;</span></td><td align="center">AUTHENTICATION</td><td align="justify">Аутентифицировать в соответствии с указанным механизмом SASL (затем должна следовать аутентификация) (RFC&nbsp;4954)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">X ... &lt;CRLF&gt;</span></td><td align="center">--</td><td align="justify">Выполнить «нестандартную» SMTP-команду (признаком является первая буква <span class="c">X</span> в названии, аргументы не регламентируются)
+</tbody>
+</table>
+</p>
+
+<p>Таким образом, SMTP-команды <span class="c">MAIL FROM:</span>, <span class="c">RCPT TO:</span> и <span class="c">DATA</span> -- это три шага транзакции передачи письма. Первые два шага образуют конверт письма, а третий шаг -- это передача содержимого письма с небольшим обрамлением.</p>
+
+<p>Некоторые SMTP-команды (<span class="c">SEND</span>, <span class="c">SOML</span>, <span class="c">SAML</span>, <span class="c">TURN</span>) в настоящее время аннулированы.</p>
+
+<p>Базовая схема декодирования SMTP-ответов аналогична схеме декодирования FTP-ответов.</p>
+
+<p>Таблица -- Декодирование базовых SMTP-ответов
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Код</td><td align="center">Название</td><td align="center">Описание</td></tr>
+<tr><td align="center">2yz</td><td align="justify">Positive completion reply</td><td align="justify">Окончательное успешное завершение</td></tr>
+<tr><td align="center">3yz</td><td align="justify">Positive intermediate reply</td><td align="justify">Промежуточное успешное завершение</td></tr>
+<tr><td align="center">4yz</td><td align="justify">Transient negative completion reply</td><td align="justify">Ненормальное завершение в текущем случае</td></tr>
+<tr><td align="center">5yz</td><td align="justify">Permanent negative completion reply</td><td align="justify">Перманентное ненормальное завершение</td></tr>
+<tr><td align="center">x0z</td><td align="justify">Syntax</td><td align="justify">Синтаксис</td></tr>
+<tr><td align="center">x1z</td><td align="justify">Information</td><td align="justify">Информация</td></tr>
+<tr><td align="center">x2z</td><td align="justify">Connections</td><td align="justify">Соединения</td></tr>
+<tr><td align="center">x3z</td><td align="justify">Unspecified</td><td align="justify">Не определено</td></tr>
+<tr><td align="center">x4z</td><td align="justify">Unspecified</td><td align="justify">Не определено</td></tr>
+<tr><td align="center">x5z</td><td align="justify">Mail system</td><td align="justify">Почтовая система</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center"><span class="c">211</span></td><td align="justify">System status, or system help reply</td><td align="justify">Состояние системы или справка</td></tr>
+<tr><td align="center"><span class="c">214</span></td><td align="justify">Help message</td><td align="justify">Справочное сообщение (для людей)</td></tr>
+<tr><td align="center"><span class="c">220</span></td><td align="justify"><span class="c">&lt;domain&gt;</span> Service ready</td><td align="justify">Сервис <span class="c">&lt;domain&gt;</span> готов</td></tr>
+<tr><td align="center"><span class="c">221</span></td><td align="justify"><span class="c">&lt;domain&gt;</span> Service closing transmission channel</td><td align="justify">Сервис <span class="c">&lt;domain&gt;</span> закрывает канал пересылки</td></tr>
+<tr><td align="center"><span class="c">235</span></td><td align="justify">Authentication Succeeded</td><td align="justify">Аутентификация прошла успешно (RFC&nbsp;4954)</td></tr>
+<tr><td align="center"><span class="c">250</span></td><td align="justify">Requested mail action okay, completed</td><td align="justify">Запрошенное действие, связанное с почтой, успешно завершено</td></tr>
+<tr><td align="center"><span class="c">251</span></td><td align="justify">User not local; will forward to <span class="c">&lt;forward-path&gt;</span></td><td align="justify">Пользователь не является локальным, перенаправление на <span class="c">&lt;forward-path&gt;</span></td></tr>
+<tr><td align="center"><span class="c">252</span></td><td align="justify">Cannot VRFY user, but will accept message and attempt delivery</td><td align="justify">Невозможно верифицировать пользователя, но сообщение будет принято и будет осуществлена попытка его доставить</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center"><span class="c">354</span></td><td align="justify">Start mail input; end with &lt;CRLF&gt;.&lt;CRLF&gt;</td><td align="justify">Начинайте вводить письмо, ввод завершите &lt;CRLF&gt;.&lt;CRLF&gt;</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center"><span class="c">421</span></td><td align="justify"><span class="c">&lt;domain&gt;</span> Service not available, closing transmission channel</td><td align="justify">Сервис <span class="c">&lt;domain&gt;</span> недоступен, канал пересылки закрывается</td></tr>
+<tr><td align="center"><span class="c">432</span></td><td align="justify">A password transition is needed</td><td align="justify">Требуется пересылка пароля (RFC&nbsp;4954)</td></tr>
+<tr><td align="center"><span class="c">450</span></td><td align="justify">Requested mail action not taken: mailbox unavailable</td><td align="justify">Запрошенное действие с почтой не выполнено, почтовый ящик недоступен</td></tr>
+<tr><td align="center"><span class="c">450</span></td><td align="justify">ATRN request refused</td><td align="justify">Запрос ATRN отклонен (RFC&nbsp;2645)</td></tr>
+<tr><td align="center"><span class="c">451</span></td><td align="justify">Requested action aborted: error in processing</td><td align="justify">Запрошенное действие прервано, обработка ошибки</td></tr>
+<tr><td align="center"><span class="c">451</span></td><td align="justify">Unable to process ATRN request now</td><td align="justify">В настоящий момент невозможно обработать запрос ATRN (RFC&nbsp;2645)</td></tr>
+<tr><td align="center"><span class="c">452</span></td><td align="justify">Requested action not taken: insufficient system storage</td><td align="justify">Запрошенное действие с почтой не выполнено, недостаточно места на накопителе</td></tr>
+<tr><td align="center"><span class="c">453</span></td><td align="justify">You have no mail</td><td align="justify">Для вас почты нет (RFC&nbsp;2645)</td></tr>
+<tr><td align="center"><span class="c">454</span></td><td align="justify">Temporary authentication failure</td><td align="justify">Вре'менная проблема с аутентификацией (сбой на SMTP-сервере) (RFC&nbsp;4954)</td></tr>
+<tr><td align="center"><span class="c">455</span></td><td align="justify">Server unable to accommodate parameters</td><td align="justify">Сервер не может подобрать параметры</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center"><span class="c">500</span></td><td align="justify">Syntax error, command unrecognized</td><td align="justify">Синтаксическая ошибка, команда не распознана</td></tr>
+<tr><td align="center"><span class="c">500</span></td><td align="justify">Authentication Exchange line is too long</td><td align="justify">Слишком длинная строка при аутентификационном обмене (RFC&nbsp;4954)</td></tr>
+<tr><td align="center"><span class="c">501</span></td><td align="justify">Syntax error in parameters or arguments</td><td align="justify">Синтаксическая ошибка в параметрах или аргументах</td></tr>
+<tr><td align="center"><span class="c">502</span></td><td align="justify">Command not implemented</td><td align="justify">Команда не реализована</td></tr>
+<tr><td align="center"><span class="c">503</span></td><td align="justify">Bad sequence of commands</td><td align="justify">Неправильная последовательность команд</td></tr>
+<tr><td align="center"><span class="c">504</span></td><td align="justify">Command parameter not implemented</td><td align="justify">Параметр команды не реализован</td></tr>
+<tr><td align="center"><span class="c">521</span></td><td align="justify">Server does not accept mail и другие варианты</td><td align="justify">Сервер не воспринял письмо (RFC&nbsp;7504)</td></tr>
+<tr><td align="center"><span class="c">523</span></td><td align="justify">Text: Encryption Needed</td><td align="justify">Требуется шифрование текста (RFC&nbsp;5248)</td></tr>
+<tr><td align="center"><span class="c">525</span></td><td align="justify">User Account Disabled</td><td align="justify">Пользовательский аккаунт запрещен (RFC&nbsp;5248)</td></tr>
+<tr><td align="center"><span class="c">534</span></td><td align="justify">Authentication mechanism is too weak</td><td align="justify">Механизм аутентификации слишком уязвим (RFC&nbsp;4954)</td></tr>
+<tr><td align="center"><span class="c">535</span></td><td align="justify">Authentication credentials invalid</td><td align="justify">Неправильные значения параметров аутентификации (RFC&nbsp;4954)</td></tr>
+<tr><td align="center"><span class="c">538</span></td><td align="justify">Encryption required for requested authentication mechanism</td><td align="justify">Запрошенный механизм аутентификации предполагает шифрование (RFC&nbsp;4954)</td></tr>
+<tr><td align="center"><span class="c">550</span></td><td align="justify">Requested action not taken: mailbox unavailable</td><td align="justify">Запрошенное действие не выполнено, почтовый ящик недоступен</td></tr>
+<tr><td align="center"><span class="c">551</span></td><td align="justify">User not local; please try <span class="c">&lt;forward-path&gt;</span></td><td align="justify">Пользователь не является локальным, попробуйте использовать <span class="c">&lt;forward-path&gt;</span></td></tr>
+<tr><td align="center"><span class="c">552</span></td><td align="justify">Requested mail action aborted: exceeded storage allocation</td><td align="justify">Запрошенное действие с почтой не выполнено, пространство на накопителе не выделено</td></tr>
+<tr><td align="center"><span class="c">553</span></td><td align="justify">Requested action not taken: mailbox name not allowed</td><td align="justify">Запрошенное действие с почтой не выполнено, недопустимое название почтового ящика</td></tr>
+<tr><td align="center"><span class="c">554</span></td><td align="justify">Transaction failed</td><td align="justify">Сбой транзакции</td></tr>
+<tr><td align="center"><span class="c">554</span></td><td align="justify">No SMTP service here</td><td align="justify">SMTP-сервис отсутствует</td></tr>
+<tr><td align="center"><span class="c">555</span></td><td align="justify">MAIL FROM/RCPT TO parameters not recognized or not implemented</td><td align="justify">Параметры MAIL FROM/RCPT TO не распознаны или не реализованы</td></tr>
+<tr><td align="center"><span class="c">556</span></td><td align="justify">Разные варианты</td><td align="justify">SMTP-сервер не воспринял письмо (альтернатива <span class="c">521</span> при использовании почтовых систем-посредников, разные причины) (RFC&nbsp;7504, RFC&nbsp;7505)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Новая, расширенная схема декодирования SMTP-ответов (RFC&nbsp;3463 и RFC&nbsp;5248) «открывает простор» для большей детализации и рекомендована для использования (предполагает дальнейшее наполнение).</p>
+
+<p>Таблица -- Декодирование расширенных SMTP-ответов
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Код</td><td align="center">Название</td><td align="center">Описание</td></tr>
+<tr><td align="center">2.XXX.XXX</td><td align="justify">Success</td><td align="justify">Успешное завершение</td></tr>
+<tr><td align="center">4.XXX.XXX</td><td align="justify">Persistent Transient Failure</td><td align="justify">Устойчивый промежуточный сбой</td></tr>
+<tr><td align="center">5.XXX.XXX</td><td align="justify">Permanent Failure</td><td align="justify">Перманентный сбой</td></tr>
+<tr><td align="center">X.0.XXX</td><td align="justify">Other or Undefined Status</td><td align="justify">Прочее или неопределенное состояние</td></tr>
+<tr><td align="center">X.1.XXX</td><td align="justify">Addressing Status</td><td align="justify">Состояние подсистемы адресации</td></tr>
+<tr><td align="center">X.2.XXX</td><td align="justify">Mailbox Status</td><td align="justify">Состояние почтового ящика</td></tr>
+<tr><td align="center">X.3.XXX</td><td align="justify">Mail System Status</td><td align="justify">Состояние почтовой системы</td></tr>
+<tr><td align="center">X.4.XXX</td><td align="justify">Network and Routing Status</td><td align="justify">Состояние СПД</td></tr>
+<tr><td align="center">X.5.XXX</td><td align="justify">Mail Delivery Protocol Status</td><td align="justify">Состояние почтового протокола</td></tr>
+<tr><td align="center">X.6.XXX</td><td align="justify">Message Content or Media Status</td><td align="justify">Состояние письма</td></tr>
+<tr><td align="center">X.7.XXX</td><td align="justify">Security or Policy Status</td><td align="justify">Состояние подсистем обеспечения безопасности и политики обслуживания</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center">X.0.0</td><td align="justify">Other undefined Status</td><td align="justify">Прочее неопределенное состояние</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center">X.1.0</td><td align="justify">Other address status</td><td align="justify">Прочее состояние подсистемы адресации</td></tr>
+<tr><td align="center">X.1.1</td><td align="justify">Bad destination mailbox address</td><td align="justify">Неправильный адрес почтового ящика назначения</td></tr>
+<tr><td align="center">X.1.2</td><td align="justify">Bad destination system address</td><td align="justify">Неправильный адрес системы назначения</td></tr>
+<tr><td align="center">X.1.3</td><td align="justify">Bad destination mailbox address syntax</td><td align="justify">Синтаксически неправильный адрес почтового ящика назначения</td></tr>
+<tr><td align="center">X.1.4</td><td align="justify">Destination mailbox address ambiguous</td><td align="justify">Неоднозначный адрес почтового ящика назначения</td></tr>
+<tr><td align="center">X.1.5</td><td align="justify">Destination address valid</td><td align="justify">Правильный адрес назначения</td></tr>
+<tr><td align="center">X.1.6</td><td align="justify">Destination mailbox has moved, No forwarding address</td><td align="justify">Почтовый ящик назначения перемещен, нет адреса для пересылки</td></tr>
+<tr><td align="center">X.1.7</td><td align="justify">Bad sender’s mailbox address syntax</td><td align="justify">Синтаксически неправильный адрес почтового ящика отправителя</td></tr>
+<tr><td align="center">X.1.8</td><td align="justify">Bad sender’s system address</td><td align="justify">Неправильный адрес системы отправителя</td></tr>
+<tr><td align="center">X.1.9</td><td align="justify">Message relayed to non-compliant mailer</td><td align="justify">Письмо передано серверу-посреднику, который не удовлетворяет требованиям протокола (RFC&nbsp;3886)</td></tr>
+<tr><td align="center">X.1.10</td><td align="justify">Recipient address has null MX</td><td align="justify">Домен, название которого указано в адресе получателя, не имеет MX (RFC&nbsp;7505)</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center">X.2.0</td><td align="justify">Other or undefined mailbox status</td><td align="justify">Прочее или неопределенное состояние почтового ящика</td></tr>
+<tr><td align="center">X.2.1</td><td align="justify">Mailbox disabled, not accepting messages</td><td align="justify">Работа с почтовым ящиком запрещена, письма не принимаются</td></tr>
+<tr><td align="center">X.2.2</td><td align="justify">Mailbox full</td><td align="justify">Почтовый ящик заполнен</td></tr>
+<tr><td align="center">X.2.3</td><td align="justify">Message length exceeds administrative limit</td><td align="justify">Размер письма превышает административно установленный лимит</td></tr>
+<tr><td align="center">X.2.4</td><td align="justify">Mailing list expansion problem</td><td align="justify">Проблема с интерпретацией списка почтовой рассылки</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center">X.3.0</td><td align="justify">Other or undefined mail system status</td><td align="justify">Прочее или неопределенное состояние почтовой системы</td></tr>
+<tr><td align="center">X.3.1</td><td align="justify">Mail system full</td><td align="justify">Накопитель почтовой системы заполнен</td></tr>
+<tr><td align="center">X.3.2</td><td align="justify">System not accepting network messages</td><td align="justify">Система не воспринимает сетевые сообщения (RFC&nbsp;7504)</td></tr>
+<tr><td align="center">X.3.3</td><td align="justify">System not capable of selected features</td><td align="justify">Система не поддерживает выбранные возможности</td></tr>
+<tr><td align="center">X.3.4</td><td align="justify">Message too big for system</td><td align="justify">Письмо слишком большое для системы</td></tr>
+<tr><td align="center">X.3.5</td><td align="justify">System incorrectly configured</td><td align="justify">Система сконфигурирована некорректно</td></tr>
+<tr><td align="center">X.3.6</td><td align="justify">Requested priority was changed</td><td align="justify">Запрошенный приоритет был изменен (RFC&nbsp;6710)</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center">X.4.0</td><td align="justify">Other or undefined network or routing status</td><td align="justify">Прочее или неопределенное состояние СПД</td></tr>
+<tr><td align="center">X.4.1</td><td align="justify">No answer from host</td><td align="justify">Хост не отвечает</td></tr>
+<tr><td align="center">X.4.2</td><td align="justify">Bad connection</td><td align="justify">Неправильное соединение</td></tr>
+<tr><td align="center">X.4.3</td><td align="justify">Directory server failure</td><td align="justify">Сбой при обращении к системе DNS</td></tr>
+<tr><td align="center">X.4.4</td><td align="justify">Unable to route</td><td align="justify">Невозможно выполнить маршрутизацию</td></tr>
+<tr><td align="center">X.4.5</td><td align="justify">Mail system congestion</td><td align="justify">Затор в почтовой системе</td></tr>
+<tr><td align="center">X.4.6</td><td align="justify">Routing loop detected</td><td align="justify">Обнаружен маршрутизационный цикл</td></tr>
+<tr><td align="center">X.4.7</td><td align="justify">Delivery time expired</td><td align="justify">Время доставки истекло</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center">X.5.0</td><td align="justify">Other or undefined protocol status</td><td align="justify">Прочее или неопределенное состояние почтового протокола</td></tr>
+<tr><td align="center">X.5.1</td><td align="justify">Invalid command</td><td align="justify">Неправильная команда</td></tr>
+<tr><td align="center">X.5.2</td><td align="justify">Syntax error</td><td align="justify">Синтаксическая ошибка</td></tr>
+<tr><td align="center">X.5.3</td><td align="justify">Too many recipients</td><td align="justify">Слишком много потребителей почты</td></tr>
+<tr><td align="center">X.5.4</td><td align="justify">Invalid command arguments</td><td align="justify">Неправильные аргументы команды</td></tr>
+<tr><td align="center">X.5.5</td><td align="justify">Wrong protocol version</td><td align="justify">Несоответствующая версия протокола</td></tr>
+<tr><td align="center">X.5.6</td><td align="justify">Authentication Exchange line is too long</td><td align="justify">Слишком длинная строка при аутентификационном обмене (RFC&nbsp;4954)</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center">X.6.0</td><td align="justify">Other or undefined media error</td><td align="justify">Прочее или неопределенное состояние письма</td></tr>
+<tr><td align="center">X.6.1</td><td align="justify">Media not supported</td><td align="justify">Формат письма не поддерживается</td></tr>
+<tr><td align="center">X.6.2</td><td align="justify">Conversion required and prohibited</td><td align="justify">Требуется преобразование письма, но преобразование запрещено</td></tr>
+<tr><td align="center">X.6.3</td><td align="justify">Conversion required but not supported</td><td align="justify">Требуется преобразование письма, но преобразование не поддерживается</td></tr>
+<tr><td align="center">X.6.4</td><td align="justify">Conversion with loss performed</td><td align="justify">Преобразование письма выполнено, но часть данных потеряна</td></tr>
+<tr><td align="center">X.6.5</td><td align="justify">Conversion Failed</td><td align="justify">Сбой при преобразовании письма</td></tr>
+<tr><td align="center">X.6.6</td><td align="justify">Message content not available</td><td align="justify">Содержимое письма недоступно (при ссылке на содержимое, которое находится на удаленном SMTP-сервере) (RFC&nbsp;4468)</td></tr>
+<tr><td align="center">X.6.7</td><td align="justify">Non-ASCII addresses not permitted for that sender/recipient</td><td align="justify">Не-ASCII-адреса указанного отправителя-получателя не разрешены (RFC&nbsp;6531)</td></tr>
+<tr><td align="center">X.6.8</td><td align="justify">UTF-8 string reply is required, but not permitted by the SMTP client</td><td align="justify">Ответ должен быть в кодировке UTF-8, но это запрещено SMTP-клиентом (RFC&nbsp;6531)</td></tr>
+<tr><td align="center">X.6.9</td><td align="justify">UTF-8 header message cannot be transferred to one or more recipients, so the message must be rejected</td><td align="justify">Письмо с заголовком в кодировке UTF-8 не может быть переслано одному либо нескольким получателям, поэтому должно быть отброшено (RFC&nbsp;6531)</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center">X.7.0</td><td align="justify">Other or undefined security status</td><td align="justify">Прочее или неопределенное состояние подсистем обеспечения безопасности и политики обслуживания</td></tr>
+<tr><td align="center">X.7.1</td><td align="justify">Delivery not authorized, message refused</td><td align="justify">Нет прав отсылать письма, письмо отброшено</td></tr>
+<tr><td align="center">X.7.2</td><td align="justify">Mailing list expansion prohibited</td><td align="justify">Интерпретация списков почтовой рассылки запрещена</td></tr>
+<tr><td align="center">X.7.3</td><td align="justify">Security conversion required but not possible</td><td align="justify">Требуется обеспечение защиты при преобразовании письма, но возможности обеспечить защиту нет</td></tr>
+<tr><td align="center">X.7.4</td><td align="justify">Security features not supported</td><td align="justify">Связанные с обеспечением защиты возможности не поддерживаются</td></tr>
+<tr><td align="center">X.7.5</td><td align="justify">Cryptographic failure</td><td align="justify">Сбой связан с криптографией</td></tr>
+<tr><td align="center">X.7.6</td><td align="justify">Cryptographic algorithm not supported</td><td align="justify">Криптографический алгоритм не поддерживается</td></tr>
+<tr><td align="center">X.7.7</td><td align="justify">Message integrity failure</td><td align="justify">Целостность письма нарушена</td></tr>
+<tr><td align="center">X.7.8</td><td align="justify">Authentication credentials invalid</td><td align="justify">Неправильные значения параметров аутентификации (RFC&nbsp;4954)</td></tr>
+<tr><td align="center">X.7.9</td><td align="justify">Authentication mechanism is too weak</td><td align="justify">Механизм аутентификации слишком уязвим (RFC&nbsp;4954)</td></tr>
+<tr><td align="center">X.7.10</td><td align="justify">Text: Encryption Needed</td><td align="justify">Требуется шифрование текста (RFC&nbsp;5248)</td></tr>
+<tr><td align="center">X.7.11</td><td align="justify">Encryption required for requested authentication mechanism</td><td align="justify">Запрошенный механизм аутентификации предполагает шифрование (RFC&nbsp;4954)</td></tr>
+<tr><td align="center">X.7.12</td><td align="justify">A password transition is needed</td><td align="justify">Требуется пересылка пароля (RFC&nbsp;4954)</td></tr>
+<tr><td align="center">X.7.13</td><td align="justify">User Account Disabled</td><td align="justify">Пользовательский аккаунт запрещен (RFC&nbsp;5248)</td></tr>
+<tr><td align="center">X.7.14</td><td align="justify">Trust relationship required</td><td align="justify">Требуется установление доверительных отношений (между MSA и удаленным сервером для получения доступа к содержимому письма) (RFC&nbsp;5248)</td></tr>
+<tr><td align="center">X.7.15</td><td align="justify">Priority Level is too low</td><td align="justify">Уровень приоритета слишком низкий (RFC&nbsp;6710)</td></tr>
+<tr><td align="center">X.7.16</td><td align="justify">Message is too big for the specified priority</td><td align="justify">Письмо слишком велико чтобы обеспечить указанный приоритет (RFC&nbsp;6710)</td></tr>
+<tr><td align="center">X.7.17</td><td align="justify">Mailbox owner has changed</td><td align="justify">Владелец почтового ящика сменился (RFC&nbsp;7293)</td></tr>
+<tr><td align="center">X.7.18</td><td align="justify">Domain owner has changed</td><td align="justify">Владелец домена сменился (RFC&nbsp;7293)</td></tr>
+<tr><td align="center">X.7.19</td><td align="justify">RRVS test cannot be completed</td><td align="justify">RRVS-тест невозможно выполнить (RFC&nbsp;7293)</td></tr>
+<tr><td align="center">X.7.27</td><td align="justify">Sender address has null MX</td><td align="justify">Домен, название которого указано в адресе отправителя, не имеет MX (RFC&nbsp;7505)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>В настоящее время в состав ESMTP входят следующие расширения (перечисляются в SMTP-ответе на SMTP-команду <span class="c">EHLO</span> и клиент «делает выводы»).</p>
+
+<p>Таблица -- SMTP-расширения
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">SMTP-расширение</td><td align="center">Описание</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">EXPN</span></td><td align="justify">Верификация списков почтовой рассылки</td></tr>
+<tr><td><span class="c">HELP</span></td><td align="justify">На сервере имеется справка</td></tr>
+<tr><td><span class="c">CHECKPOINT</span></td><td align="justify">Поддержка контрольных точек (RFC&nbsp;1845)</td></tr>
+<tr><td><span class="c">SIZE [&lt;SP&gt; &lt;size-param&gt;]</span></td><td align="justify">Учет размеров писем (SMTP-сервер может оповестить о максимальном поддерживаемом размере письма: в байтах, <span class="c">0</span> -- нет ограничения) (RFC&nbsp;1870)</td></tr>
+<tr><td><span class="c">ETRN</span></td><td align="justify">Поддержка запросов обработки очередей писем на SMTP-сервере (RFC&nbsp;1985)</td></tr>
+<tr><td><span class="c">ENHANCEDSTATUSCODES</span></td><td align="justify">Возвращение SMTP-сервером расширенных кодов состояния (RFC&nbsp;2034)</td></tr>
+<tr><td><span class="c">ATRN</span></td><td align="justify">On-Demand Mail Relay SMTP с динамической IP-адресацией (RFC&nbsp;2645)</td></tr>
+<tr><td><span class="c">DELIVERBY [&lt;min-by-time&gt;]</span></td><td align="justify">Доставка SMTP-сервером писем в течение указанных SMTP-клиентом интервалов времени (в секундах, сервер может оповестить о минимальном интервале, в течение которого он способен доставить письмо) (RFC&nbsp;2852)</td></tr>
+<tr><td><span class="c">PIPELINING</span></td><td align="justify">Конвейеризация команд (RFC&nbsp;2920)</td></tr>
+<tr><td><span class="c">CHUNKING</span></td><td align="justify">Пересылка больших писем (RFC&nbsp;3030)</td></tr>
+<tr><td><span class="c">BINARYMIME</span></td><td align="justify">Пересылка бинарных MIME-писем (RFC&nbsp;3030)</td></tr>
+<tr><td><span class="c">STARTTLS</span></td><td align="justify">TLS (RFC&nbsp;3207)</td></tr>
+<tr><td><span class="c">DSN</span></td><td align="justify">Уведомления о состоянии доставки (RFC&nbsp;3461)</td></tr>
+<tr><td><span class="c">NO-SOLICITING [&lt;SP&gt; &lt;Solicitation-keywords&gt;]</span></td><td align="justify">Прием SMTP-сервером писем, по умолчанию подпадающих под запрет, по просьбе (просьба может быть отклонена, сервер может оповестить о запрещенных классах писем, считающихся спамом) (RFC&nbsp;3865)</td></tr>
+<tr><td><span class="c">MTRK</span></td><td align="justify">Отслеживание писем (RFC&nbsp;3885)</td></tr>
+<tr><td><span class="c">CONPERM</span></td><td align="justify">Разрешение преобразования писем (RFC&nbsp;4141)</td></tr>
+<tr><td><span class="c">CONNEG</span></td><td align="justify">Согласование MIME-типов (RFC&nbsp;4141)</td></tr>
+<tr><td><span class="c">SUBMITTER</span></td><td align="justify">Указание SMTP-клиентом отправителей, ответственных за письма (RFC&nbsp;4405)</td></tr>
+<tr><td><span class="c">BURL [&lt;SP&gt; (imap / (imap "://" &lt;authority&gt;))]</span></td><td align="justify">Импорт писем напрямую из IMAP-сервера (RFC&nbsp;4468)</td></tr>
+<tr><td><span class="c">FUTURERELEASE &lt;SP&gt; &lt;max-future-release-interval&gt; &lt;SP&gt; &lt;max-future-release-date-time&gt;</span></td><td align="justify">Указание SMTP-клиентом задержек перед доставкой писем или времен в будущем, когда нужно доставлять письма (SMTP-сервер должен оповестить о максимальном интервале времени, в течение которого он может удерживать письмо, и о дате и времени, до которых он может удерживать письмо) (RFC&nbsp;4865)</td></tr>
+<tr><td><span class="c">AUTH &lt;SP&gt; &lt;supported SASL mechanisms&gt;</span></td><td align="justify">Аутентификация (в соответствии с доступными механизмами) (RFC&nbsp;4954)</td></tr>
+<tr><td><span class="c">8BITMIME</span></td><td align="justify">8-мибитный MIME-транспорт (RFC&nbsp;6152)</td></tr>
+<tr><td><span class="c">SMTPUTF8</span></td><td align="justify">Интернационализированная электронная почта (RFC&nbsp;6531)</td></tr>
+<tr><td><span class="c">MT-PRIORITY [&lt;SP&gt; &lt;priority-profile&gt;]</span></td><td align="justify">Приоритетная обработка писем (доступны целочисленные приоритеты от -9 до 9 включая ноль) (RFC&nbsp;6710)</td></tr>
+<tr><td><span class="c">RRVS</span></td><td align="justify">Учет последних достоверно известных дат и времен использования определенных почтовых ящиков определенными получателями (для обеспечения гарантии доставки писем известным владельцам почтовых ящиков если нет уверенности, что почтовые ящики по-прежнему принадлежат им) (RFC&nbsp;7293)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Протокол POP (Post Office Protocol) используют для приема электронной почты из почтового ящика -- от почтового сервера к пользовательской станции (получателя). Устоялась третья версия (POP3) (основное RFC -- RFC&nbsp;1939).</p>
+
+<p>Задействуется одно соединение. Стандартный номер программного порта POP-сервера -- 110.</p>
+
+<p>POP-сервер располагается на удаленном от пользователя почтовом сервере и имеет доступ к почтовому ящику получателя.</p>
+
+<p>Любой POP-сеанс последовательно проходит через три состояния:<br>
+1.&nbsp;AUTHORIZATION -- авторизация POP-клиента на POP-сервере.<br>
+2.&nbsp;TRANSACTION -- выполняется одна либо несколько транзакций с почтовым ящиком.<br>
+3.&nbsp;UPDATE -- взаимодействие POP-клиента с POP-сервером завершается (выделенные ресурсы освобождаются, соединение закрывается).</p>
+
+<p>POP осуществляет нумерацию сообщений.</p> 
+
+<p>Механизм SASL предоставляет альтернативный способ POP-авторизации (в отношении POP традиционно используют термин «авторизация») и может сосуществовать с механизмом TLS.</p>
+
+<p>Регистр букв в POP-командах не учитывается.</p>
+
+<p>Таблица -- POP-команды
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">POP-команда</td><td align="center">Описание</td></tr>
+<tr><td><span class="c">USER &lt;SP&gt; &lt;name&gt; &lt;CRLF&gt;</span></td><td align="justify">Имя пользователя</td></tr>
+<tr><td><span class="c">PASS &lt;SP&gt; &lt;string&gt; &lt;CRLF&gt;</span></td><td align="justify">Пароль</td></tr>
+<tr><td><span class="c">QUIT &lt;CRLF&gt;</span></td><td align="justify">Выход из удаленной системы (после этой команды POP-сервер переходит в состояние UPDATE)</td></tr>
+<tr><td><span class="c">STAT &lt;CRLF&gt;</span></td><td align="justify">Предоставить информацию о количестве писем в почтовом ящике и их суммарный размер (ответ должен быть в формате: <span class="c">+OK &lt;SP&gt; &lt;nn&gt; &lt;SP&gt; &lt;mm&gt;</span>, где <span class="c">&lt;nn&gt;</span> -- количество, <span class="c">&lt;mm&gt;</span> -- размер в байтах; кроме писем, помеченных для удаления)</td></tr>
+<tr><td><span class="c">LIST [&lt;SP&gt; &lt;msg&gt;] &lt;CRLF&gt;</span></td><td align="justify">Предоставить размеры писем в почтовом ящике (построчно; ответ должен быть в формате: <span class="c">+OK &lt;text&gt; &lt;CRLF&gt; *(&lt;nn&gt; &lt;SP&gt; &lt;mm&gt; &lt;CRLF&gt;)</span>, где <span class="c">&lt;nn&gt;</span> -- номер, <span class="c">&lt;mm&gt;</span> -- размер; в команде может быть указан номер интересующего письма)</td></tr>
+<tr><td><span class="c">RETR &lt;SP&gt; &lt;msg&gt; &lt;CRLF&gt;</span></td><td align="justify">Предоставить письмо (непомеченное для удаления; содержимое письма пересылается между ответом и строкой-точкой -- <span class="c">&lt;CRLF&gt; "." &lt;CRLF&gt;</span>)</td></tr>
+<tr><td><span class="c">DELE &lt;SP&gt; &lt;msg&gt; &lt;CRLF&gt;</span></td><td align="justify">Пометить сообщение для удаления (собственно перманентное удаление может быть выполнено только в состоянии UPDATE)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">NOOP &lt;CRLF&gt;</span></td><td align="justify">Холостая POP-команда</td></tr>
+<tr><td><span class="c">RSET &lt;CRLF&gt;</span></td><td align="justify">Снять метку об удалении со всех помеченных для удаления писем</td></tr>
+<tr><td><span class="c">APOP &lt;SP&gt; &lt;name&gt; &lt;SP&gt; &lt;digest&gt; &lt;CRLF&gt;</span></td><td align="justify">Авторизовать с помощью имени пользователя и хэша пароля (альтернатива паре <span class="c">USER</span> и <span class="c">PASS</span>)</td></tr>
+<tr><td><span class="c">TOP &lt;SP&gt; &lt;msg&gt; &lt;SP&gt; &lt;n&gt; &lt;CRLF&gt;</span></td><td align="justify">Предоставить заголовок и n первых строк письма (при пересылке заголовок отделяется от основного текста пустой строкой)</td></tr>
+<tr><td><span class="c">UIDL [&lt;SP&gt; &lt;msg&gt;] &lt;CRLF&gt;</span></td><td align="justify">Предоставить уникальные идентификаторы (unique-ids listing) писем в почтовом ящике (может быть указан номер интересующего письма, поочередно)</td></tr>
+</tbody>
+<tr><td><span class="c">CAPA &lt;CRLF&gt;</span></td><td align="justify">Предоставить список всех возможностей, включая расширения (построчно) (RFC&nbsp;2449)</td></tr>
+<tr><td><span class="c">STLS &lt;CRLF&gt;</span></td><td align="justify">Запустить TLS (затем должно следовать согласование TLS-параметров) (RFC&nbsp;2595)</td></tr>
+<tr><td><span class="c">AUTH &lt;SP&gt; &lt;mechanism&gt; [&lt;SP&gt; &lt;initial-response&gt;] &lt;CRLF&gt;</span></td><td align="justify">Авторизовать в соответствии с указанным механизмом SASL (затем должна следовать авторизация; еще одна альтернатива паре USER и PASS; если используется TLS, то должна быть позже STLS) (RFC&nbsp;5034)</td></tr>
+<tr><td><span class="c">UTF8 &lt;CRLF&gt;</span></td><td align="justify">Включить режим UTF-8 (RFC&nbsp;6856)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">LANG [&lt;SP&gt; &lt;basic language range&gt;] &lt;CRLF&gt;</span></td><td align="justify">Установить язык текстовых комментариев в POP-ответах (RFC&nbsp;6856)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Предусмотрены только два POP-ответа.</p>
+
+<p>Таблица -- POP-ответы
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">POP-ответ</td><td align="center">Описание</td></tr>
+<tr><td><span class="c">+OK [&lt;SP&gt; "[" &lt;resp-code&gt; "]"] [&lt;SP&gt; &lt;text&gt;] &lt;CRLF&gt;</span></td><td align="justify">Положительный</td></tr>
+<tr><td><span class="c">-ERR [&lt;SP&gt; "[" &lt;resp-code&gt; "]"] [&lt;SP&gt; &lt;text&gt;] &lt;CRLF&gt;</span></td><td align="justify">Отрицательный</td></tr>
+</table>
+</p>
+
+<p>Регистр <span class="c">+OK</span> и <span class="c">-ERR</span> должен быть именно таким. POP-ответы могут состоять из нескольких строк. Текстовое наполнение некоторых POP-ответов (например, на команды <span class="c">STAT</span> и <span class="c">LIST</span>) регламентировано.</p>
+
+<p>Согласно RFC&nbsp;2449, и более новым, выделяют следующие возможностипротокола POP (перечисляются в POP-ответе на POP-команду CAPA).</p>
+
+<p>Таблица -- POP-возможности
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">POP-возможность</td><td align="center">Описание</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">TOP</span></td><td align="justify">Поддерживается POP-команда <span class="c">TOP</span></td></tr>
+<tr><td><span class="c">USER</span></td><td align="justify">Поддерживаются POP-команды <span class="c">USER</span> и <span class="c">PASS</span></td></tr>
+<tr><td><span class="c">SASL &lt;SP&gt; &lt;supported SASL mechanisms&gt;</span></td><td align="justify">Поддерживается SASL, включая POP-команду <span class="c">AUTH</span></td></tr>
+<tr><td><span class="c">RESP-CODES</span></td><td align="justify">Поддерживаются расширенные коды в POP-ответах</td></tr>
+<tr><td><span class="c">LOGIN-DELAY &lt;SP&gt; &lt;minimum seconds between logins&gt; [&lt;SP&gt; USER]</span></td><td align="justify">Задержка перед разрешением повторной авторизации (в секундах; флаг <span class="c">USER</span> оповещает, что значение может быть скорректировано и что значение можно запросить после авторизации)</td></tr>
+<tr><td><span class="c">PIPELINING</span></td><td align="justify">Поддерживается конвейеризация команд</td></tr>
+<tr><td><span class="c">EXPIRE &lt;SP&gt; (&lt;server-guaranteed minimum retention days&gt; / NEVER) [&lt;SP&gt; USER]</span></td><td align="justify">Длительность хранения писем на POP-сервере (в днях)</td></tr>
+<tr><td><span class="c">UIDL</span></td><td align="justify">Поддерживается POP-команда <span class="c">UIDL</span></td></tr>
+<tr><td><span class="c">IMPLEMENTATION &lt;SP&gt; &lt;string giving server implementation information&gt;</span></td><td align="justify">Информационный баннер о POP-сервере</td></tr>
+<tr><td><span class="c">STLS</span></td><td align="justify">TLS (RFC&nbsp;2595)</td></tr>
+<tr><td><span class="c">AUTH-RESP-CODE</span></td><td align="justify">POP-ответы при ошибках авторизации будут содержать расширенный код AUTH (RFC&nbsp;3206)</td></tr>
+<tr><td><span class="c">UTF8 [USER]</span></td><td align="justify">Поддерживается кодировка UTF-8 (флаг <span class="c">USER</span> оповещает, что эта кодировка применима и к именам пользователей и паролям) (RFC&nbsp;6856)</td></tr>
+<tr><td><span class="c">LANG</span></td><td align="justify">Выбор языка текстовых комментариев в POP-ответах (RFC&nbsp;6856)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Таким образом, многие возможности (но не все) выражаются в наборах поддерживаемых POP-команд. Некоторые возможности конфигурируют с помощью дополнительных аргументов.</p>
+
+<p>POP-ответы на некоторые POP-команды могут содержать расширенные коды. Допустима иерархия с разделением уровней слешем. Регламентировано всего пять расширенных кодов ответов.</p>
+
+<p>Таблица -- Расширенные коды в POP-ответах
+<table border="1" cellspacing="1" cellpadding="1"></td></tr>
+<tr><td align="center">Код</td><td align="center">Описание</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">LOGIN-DELAY</span></td><td align="justify">Авторизация не прошла успешно, так как задержка перед разрешением повторной авторизации еще не истекла (RFC&nbsp;2449)</td></tr>
+<tr><td><span class="c">IN-USE</span></td><td align="justify">Авторизация прошла успешно, но почтовый ящик уже используется (например, через соединение с еще одной пользовательской станцией) (RFC&nbsp;2449)</td></tr>
+<tr><td><span class="c">SYS/TEMP</span></td><td align="justify">Сбой временный и произошел по причине системной ошибки на POP-сервере (RFC&nbsp;3206)</td></tr>
+<tr><td><span class="c">SYS/PERM</span></td><td align="justify">Сбой перманентный и произошел по причине системной ошибки на POP-сервере (RFC&nbsp;3206)</td></tr>
+<tr><td><span class="c">AUTH</span></td><td align="justify">Ошибка связана с учетными записями пользователей (RFC&nbsp;3206)</td></tr>
+<tr><td><span class="c">UTF8</span></td><td align="justify">Ошибка произошла так как письмо с содержимым в кодировке UTF-8 запрошено не в режиме UTF-8 (RFC&nbsp;6856)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Протокол IMAP (Internet Message Access Protocol) так же предназначен для приема электронной почты, но, в сравнении с POP, предоставляет комплексный функционал работы с почтовым ящиком. Устоялась первая ревизия четвертой версии (IMAP4rev1) (основное RFC -- RFC&nbsp;3501).</p>
+
+<p>Задействуется одно соединение. Стандартный номер программного порта IMAP-сервера -- 143.</p>
+
+<p>IMAP-сервер, так же как и POP-сервер, располагается на почтовом сервере и имеет доступ к почтовому ящику получателя.</p>
+
+<p>Любой IMAP-сеанс последовательно проходит через четыре состояния:<br>
+1.&nbsp;Not authenticated -- IMAP-клиент еще не аутентифицирован на IMAP-сервере.<br>
+2.&nbsp;Authenticated -- IMAP-клиент аутентифицирован на IMAP-сервере.<br>
+3.&nbsp;Selected -- IMAP-клиент выбрал почтовый ящик и работает с ним.<br>
+4.&nbsp;Logout -- IMAP-клиент завершает взаимодействие с IMAP-сервером.<br>
+Кроме того, почтовые ящики могут быть активными (active, subscribed) и неактивными.</p>
+
+<p>Бо'льшая, в сравнении с другими протоколами электронной почты, сложность IMAP требует большего разнообразия форматов данных. Данные, передаваемые по IMAP, представляются в следующих форматах:<br>
+1.&nbsp;Atom -- атом (неделим) -- один либо несколько символов, не являющихся метасимволами.<br>
+2.&nbsp;Number -- число -- одна либо несколько цифр.<br>
+3.&nbsp;String -- строка -- две формы: строка в простых двойных кавычках (может быть пустой, основная форма строки) и литеральная строка (в начале число в фигурных скобках -- количество литералов, далее <span class="c">&lt;CRLF&gt;</span>, далее сами литералы).<br>
+4.&nbsp;Parenthesized list -- список в круглых скобках -- элементы списка разделены <span class="c">&lt;SP&gt;</span> (может быть пустым и вложенным).<br>
+5.&nbsp;NIL -- отсутствие данных (строки, списка в круглых скобках) -- метасимвол.</p>
+
+<p>Каждому письму в почтовом ящике на IMAP-сервере присваиваются следующие атрибуты:<br>
+1.&nbsp;Message numbers -- номера:<br>
+--&nbsp;UID (Unique Identifier) -- уникальный идентификатор (32-ухбитный; уникальный в границах почтового ящика; дополняется 32-ухбитным кодом UIDVALIDITY, позволяющим проверить валидность этого идентификатора);<br>
+--&nbsp;message sequence number -- последовательный номер в почтовом ящике (нумерация начинается с единицы).<br>
+2.&nbsp;Flags -- флаги (начинаются с метасимвола <span class="c">\</span>, некоторые существуют перманентно, некоторые существуют только в течение сеанса с почтовым ящиком):<br>
+--&nbsp;<span class="c">\Seen</span> -- прочитано;<br>
+--&nbsp;<span class="c">\Answered</span> -- был дан ответ;<br>
+--&nbsp;<span class="c">\Flagged</span> -- срочное;<br>
+--&nbsp;<span class="c">\Deleted</span> -- помечено для удаления;<br>
+--&nbsp;<span class="c">\Draft</span> -- черновик;<br>
+--&nbsp;<span class="c">\Recent</span> -- новое.<br>
+3. Internal date -- дата получения (и время).<br>
+4. Size message -- размер (в байтах).<br>
+5. Envelope structure -- структура заголовка письма(не SMTP-конверт, используемый при пересылке).<br>
+6. Body structure -- структура основного текста письма.</p>
+
+<p>IMAP имеет ряд стандартизированных расширений (около сорока) и постоянно обновляется.</p>
+
+<p>Так, например, расширение CONDSTORE (RFC&nbsp;7162) предусматривает присвоение письму еще одного атрибута: mod-sequence -- последовательный номер модификации (64-ехбитный, позволяет отслеживать модификации письма, формируется на основе системного времени).</p>
+
+<p>Предусмотрен автоматический вывод IMAP-клиента из системы при неактивности -- отслеживается Autologout Timer (минимум полчаса).</p>
+
+<p>Важной особенностью IMAP является заложенная изначально конвейеризация (исключая редкие случаи с неоднозначной интерпретацией). Для обеспечения такового взаимодействия IMAP-клиент перед каждой IMAP-командой вставляет уникальный буквенно-цифровой тег (например, <span class="c">A0001</span>). Отвечая на текущую IMAP-команду, IMAP-сервер вставляет перед IMAP-ответом такой же тег. Это позволяет IMAP-клиенту правильно определять какой IMAP-ответ к какой IMAP-команде относится.</p>
+
+<p>Некоторые команды позволяют работать сразу с набором писем (sequence set). Например, <span class="c">2,4:6,9:*</span> -- ссылка на письма с последовательными номерами 2, 4, 5, 6, 9, 10 в ящике с десятью письмами.</p>
+<p>Регистр букв в IMAP-командах не учитывается.</p>
+
+<p>Таблица -- IMAP-команды
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">IMAP-команда</td><td align="center">Описание</td></tr>
+<tr><td align="center" colspan="2">Любое состояние</td></tr>
+<tr><td><span class="c">CAPABILITY &lt;CRLF&gt;</span></td><td align="justify">Предоставить список возможностей</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">NOOP &lt;CRLF&gt;</span></td><td align="justify">Холостая IMAP-команда</td></tr>
+</tbody>
+<tr><td><span class="c">LOGOUT &lt;CRLF&gt;</span></td><td align="justify">Выход из удаленной системы</td></tr>
+<tr><td><span class="c">ENABLE &lt;SP&gt; &lt;capability names&gt; &lt;CRLF&gt;</span></td><td align="justify">Активировать указанные расширения (RFC&nbsp;5161)</td></tr>
+<tr><td align="center" colspan="2">Состояние not authenticated</td></tr>
+<tr><td><span class="c">STARTTLS &lt;CRLF&gt;</span></td><td align="justify">Запустить TLS (затем должно следовать согласование TLS-параметров)</td></tr>
+<tr><td><span class="c">AUTHENTICATE &lt;SP&gt; &lt;authentication mechanism name&gt; &lt;CRLF&gt;</span></td><td align="justify">Аутентифицировать в соответствии с указанным механизмом (затем должна следовать аутентификация)</td></tr>
+<tr><td><span class="c">LOGIN &lt;SP&gt; &lt;user name&gt; &lt;SP&gt; &lt;password&gt; &lt;CRLF&gt;</span></td><td align="justify">Вход в удаленную систему (простая альтернатива <span class="c">AUTHENTICATE</span>)</td></tr>
+<tr><td align="center" colspan="2">Состояние authenticated</td></tr>
+<tr><td><span class="c">SELECT &lt;SP&gt; &lt;mailbox name&gt; [&lt;SP&gt; &lt;parenthesized list of attribute/value pairs&gt;] &lt;CRLF&gt;</span></td><td align="justify">Выбрать почтовый ящик и предоставить информацию о нем (+RFC&nbsp;4466, +RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">EXAMINE &lt;SP&gt; &lt;mailbox name&gt; [&lt;SP&gt; &lt;parenthesized list of attribute/value pairs&gt;] &lt;CRLF&gt;</span></td><td align="justify">Предоставить информацию о почтовом ящике (+RFC&nbsp;4466, +RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">CREATE &lt;SP&gt; &lt;mailbox name&gt; [&lt;SP&gt; &lt;list of CREATE parameters&gt;] &lt;CRLF&gt;</span></td><td align="justify">Создать почтовый ящик (+RFC&nbsp;4466)</td></tr>
+<tr><td><span class="c">DELETE &lt;SP&gt; &lt;mailbox name&gt; &lt;CRLF&gt;</span></td><td align="justify">Перманентно удалить почтовый ящик</td></tr>
+<tr><td><span class="c">RENAME &lt;SP&gt; &lt;existing mailbox name&gt; &lt;SP&gt; &lt;new mailbox name&gt; [&lt;SP&gt; &lt;list of RENAME parameters&gt;] &lt;CRLF&gt;</span></td><td align="justify">Переназвать почтовый ящик (+RFC&nbsp;4466)</td></tr>
+<tr><td><span class="c">SUBSCRIBE &lt;SP&gt; &lt;mailbox name&gt; &lt;CRLF&gt;</span></td><td align="justify">Добавить почтовый ящик в список активных почтовых ящиков IMAP-сервера</td></tr>
+<tr><td><span class="c">UNSUBSCRIBE &lt;SP&gt; &lt;mailbox name&gt; &lt;CRLF&gt;</span></td><td align="justify">Удалить почтовый ящик из списка активных почтовых ящиков IMAP-сервера</td></tr>
+<tr><td><span class="c">LIST &lt;SP&gt; &lt;reference name&gt; &lt;SP&gt; &lt;mailbox name with possible wildcards&gt; &lt;CRLF&gt;</span></td><td align="justify">Предоставить список доступных для IMAP-клиента почтовых ящиков начиная с указанного уровня иерархии (возможно использование шаблонов)</td></tr>
+<tr><td><span class="c">LSUB &lt;SP&gt; &lt;reference name&gt; &lt;SP&gt; &lt;mailbox name with possible wildcards&gt; &lt;CRLF&gt;</span></td><td align="justify">Предоставить список доступных для IMAP-клиента активных почтовых ящиков начиная с указанного уровня иерархии</td></tr>
+<tr><td><span class="c">STATUS &lt;SP&gt; &lt; mailbox name&gt; &lt;SP&gt; &lt;status data item names&gt; &lt;CRLF&gt;</span></td><td align="justify">Предоставить состояние почтового ящика</td></tr>
+<tr><td><span class="c">APPEND &lt;SP&gt; &lt;mailbox name&gt; [&lt;SP&gt; &lt;flag parenthesized list&gt;] [&lt;SP&gt; &lt;date/time string&gt;] &lt;SP&gt; &lt;message literal or message (or message part) URL&gt; &lt;CRLF&gt;</span></td><td align="justify">Добавить новое письмо в указанный почтовый ящик (+RFC&nbsp;4466, +RFC&nbsp;4469)</td></tr>
+<tr><td align="center" colspan="2">Состояние selected</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">CHECK &lt;SP&gt; &lt;CRLF&gt;</span></td><td align="justify">Установить флаг требования проверки выбранного почтового ящика</td></tr>
+</tbody>
+<tr><td><span class="c">CLOSE &lt;SP&gt; &lt;CRLF&gt;</span></td><td align="justify">Закрыть выбранный почтовый ящик (перманентно удалить все письма, помеченные для удаления; вернуться в состояние authenticated) (+RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">EXPUNGE &lt;SP&gt; &lt;CRLF&gt;</span></td><td align="justify">Перманентно удалить все письма, помеченные для удаления, из выбранного почтового ящика</td></tr>
+<tr><td><span class="c">SEARCH [&lt;SP&gt; &lt;result specifier&gt;] [&lt;SP&gt; &lt;charset specification&gt;] &lt;SP&gt; &lt;searching criteria (one or more)&gt; &lt;CRLF&gt;</span></td><td align="justify">Предоставить список писем из выбранного почтового ящика, отвечающих заданным критериям поиска (определено несколько десятков критериев) (+RFC&nbsp;4466, +RFC&nbsp;4731, +RFC&nbsp;5032, +RFC&nbsp;5182, +RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">FETCH &lt;SP&gt; &lt;sequence set&gt; &lt;SP&gt; &lt;message data item names or macro&gt; [&lt;SP&gt; &lt;fetch modifiers&gt;] &lt;CRLF&gt;</span></td><td align="justify">Предоставить указанные данные, относящиеся к указанным письмам (<span class="c">TEXT</span> или другие части) (+RFC&nbsp;4466, +RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">STORE &lt;SP&gt; &lt;sequence set&gt; [&lt;SP&gt; &lt;store modifiers&gt;] &lt;SP&gt; &lt;message data item name&gt; &lt;SP&gt; &lt;value for message data item&gt; &lt;CRLF&gt;</span></td><td align="justify">Обновить указанные данные, относящиеся к указанным письмам (в настоящее время допускается обновление только флагов) (+RFC&nbsp;4466, +RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">COPY &lt;SP&gt; &lt;sequence set&gt; &lt;SP&gt; &lt;mailbox name&gt; &lt;CRLF&gt;</span></td><td align="justify">Скопировать указанные письма из выбранного почтового ящика в указанный почтовый ящик (добавить в конец)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">UID &lt;SP&gt; &lt;command name&gt; &lt;SP&gt; &lt;command arguments&gt; &lt;CRLF&gt;</span></td><td align="justify">Два варианта.<br>Выполнить IMAP-команду (<span class="c">COPY</span>, <span class="c">FETCH</span>, <span class="c">STORE</span>), но в качестве аргумента &lt;sequence set&gt; использовать не последовательные номера письма, а UIDs.
+Выполнить IMAP-команду (<span class="c">SEARCH</span>), но в IMAP-ответе вместо последовательных номеров писем использовать UIDs</td></tr>
+<tr><td><span class="c">IDLE &lt;CRLF&gt;</span></td><td align="justify">Готовность принимать IMAP-ответы-обновления о выбранном почтовом ящике в реальном времени (RFC&nbsp;2177)</td></tr>
+<tr><td><span class="c">ESEARCH [&lt;source options&gt;] [&lt;result options&gt;] [&lt;charset specification&gt;] &lt;searching criteria (one or more)&gt; &lt;CRLF&gt;</span></td><td align="justify">Расширенный поиск (альтернатива SEARCH) (RFC&nbsp;7377)</td></tr>
+<tr><td align="center" colspan="2">Экспериментальные расширения</td></tr>
+<tr><td><span class="c">X &lt;atom&gt; ... &lt;CRLF&gt;</span></td><td align="justify">Выполнить нестандартную IMAP-команду (признаком является первая буква <span class="c">X</span> в названии, аргументы не регламентируются)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>IMAP-клиент должен быть постоянно готов к обработке любых IMAP-ответов.</p>
+
+<p>Предусмотрены три формата IMAP-ответов:<br>
+1.&nbsp;Status responses -- ответы о состоянии.<br>
+2.&nbsp;Server data -- данные от IMAP-сервера.<br>
+3.&nbsp;Command continuation request -- запрос следующей IMAP-команды (IMAP-сервером у IMAP-клиента).</p>
+
+<p>Ответы о состоянии могут быть тегированными и нетегированными. Данные от IMAP-сервера и запросы следующей IMAP-команды всегда нетегированные. В запросах следующей IMAP-команды вместо тега вставляется <span class="c">+</span>. В других нетегированных ответах вместо тега вставляется <span class="c">*</span>.</p>
+
+<p>Ответы о состоянии могут сопровождаться текстовыми комментариями (human-readable text).</p>
+
+<p>Ответы о состоянии могут включать заключаемые в квадратные скобки коды ответов. В настоящее время определены следующие коды ответов.</p>
+
+<p>Таблица -- Коды в IMAP-ответах
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Код</td><td align="center">Описание</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">ALERT</span></td><td align="justify">Пользователю следует обратить внимание на текстовый комментарий</td></tr>
+<tr><td><span class="c">BADCHARSET [&lt;SP&gt; "(" &lt;charset&gt; *(&lt;SP&gt; &lt;charset&gt;) ")"]</span></td><td align="justify">Сбой поиска по причине отсутствия поддержки набора символов</td></tr>
+<tr><td><span class="c">CAPABILITY *(&lt;SP&gt; &lt;capability&gt;) &lt;SP&gt; IMAP4rev1 *(&lt;SP&gt; &lt;capability&gt;)</span></td><td align="justify">Список возможностей (может упреждать IMAP-команду <span class="c">CAPABILITY</span>)</td></tr>
+<tr><td><span class="c">PARSE</span></td><td align="justify">B текстовом комментарии описана ошибка, возникшая в процессе разбора содержимого письма</td></tr>
+<tr><td><span class="c">PERMANENTFLAGS &lt;SP&gt; "(" [&lt;flag-perm&gt; *(&lt;SP&gt; &lt;flag-perm&gt;)] ")"</span></td><td align="justify">Список перманентных флагов (список в скобках)</td></tr>
+<tr><td><span class="c">READ-ONLY</span></td><td align="justify">Выбранный почтовый ящик доступен только для чтения</td></tr>
+<tr><td><span class="c">READ-WRITE</span></td><td align="justify">Выбранный почтовый ящик доступен для чтения и для записи</td></tr>
+<tr><td><span class="c">TRYCREATE</span></td><td align="justify">Сбой при выполнении IMAP-команды <span class="c">APPEND</span> либо <span class="c">COPY</span> по причине недоступности почтового ящика назначения</td></tr>
+<tr><td><span class="c">UIDNEXT &lt;SP&gt; &lt;nz-number&gt;</span></td><td align="justify">Следующий UID (рассчитанный UID для ожидаемого нового письма)</td></tr>
+<tr><td><span class="c">UIDVALIDITY &lt;SP&gt; &lt;nz-number&gt;</span></td><td align="justify">UIDVALIDITY</td></tr>
+<tr><td><span class="c">UNSEEN &lt;SP&gt; &lt;nz-number&gt;</span></td><td align="justify">Последовательный номер первого непрочитанного письма</td></tr>
+<tr><td><span class="c">BADURL &lt;SP&gt; &lt;url-resp-text&gt;</span></td><td align="justify">Сбой при выполнении IMAP-команды <span class="c">APPEND</span> при обработке URL (RFC&nbsp;4469)</td></tr>
+<tr><td><span class="c">TOOBIG</span></td><td align="justify">IMAP-сообщение превысило 4 гигабайта (RFC&nbsp;4469)</td></tr>
+<tr><td><span class="c">CLOSED</span></td><td align="justify">Текущий почтовый ящик неявно закрыт обращением к другому почтовому ящику посредством <span class="c">SELECT</span>/<span class="c">EXAMINE</span> (RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">HIGHESTMODSEQ &lt;SP&gt; &lt;mod-sequence-value&gt;</span></td><td align="justify">Наибольший последовательный номер модификации письма (RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">MODIFIED &lt;SP&gt; &lt;sequence-set&gt;</span></td><td align="justify">Набор писем с последовательными номерами модификации большими номера, указанного в IMAP-команде <span class="c">STORE</span> (модифицированных после соответствующей даты и времени) (RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">NOMODSEQ</span></td><td align="justify">Последовательные номера модификации писем не поддерживаются (RFC&nbsp;7162)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Таблица -- IMAP-ответы
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">IMAP-ответ</td><td align="center">Описание</td></tr>
+<tr><td align="center" colspan="2">Status (состояние)</td></tr>
+<tr><td><span class="c">OK &lt;SP&gt; ["[" &lt;response code&gt; "]" &lt;SP&gt;] &lt;human-readable text&gt; &lt;CRLF&gt;</span></td><td align="justify">Положительный IMAP-ответ (например, соответствующая IMAP-команда выполнена)</td></tr>
+<tr><td><span class="c">NO &lt;SP&gt; ["[" &lt;response code&gt; "]" &lt;SP&gt;] &lt;human-readable text&gt; &lt;CRLF&gt;</span></td><td align="justify">Ошибка при выполнении IMAP-команды</td></tr>
+<tr><td><span class="c">BAD &lt;SP&gt; ["[" &lt;response code&gt; "]" &lt;SP&gt;] &lt;human-readable text&gt; &lt;CRLF&gt;</span></td><td align="justify">Ошибка протокола</td></tr>
+<tr><td><span class="c">PREAUTH &lt;SP&gt; ["[" &lt;response code&gt; "]" &lt;SP&gt;] &lt;human-readable text&gt; &lt;CRLF&gt;</span></td><td align="justify">Аутентификация не требуется так как уже выполнена внешними средствами (вход в систему осуществлен)</td></tr>
+<tr><td><span class="c">BYE &lt;SP&gt; ["[" &lt;response code&gt; "]" &lt;SP&gt;] &lt;human-readable text&gt; &lt;CRLF&gt;</span></td><td align="justify">Осуществляется выход</td></tr>
+<tr><td align="center" colspan="2">Server and mailbox status (состояние сервера и почтового ящика)</td></tr>
+<tr><td><span class="c">CAPABILITY *(&lt;SP&gt; &lt;capability&gt;) &lt;SP&gt; IMAP4rev1 *(&lt;SP&gt; &lt;capability&gt;) &lt;CRLF&gt;</span></td><td align="justify">IMAP-ответ на IMAP-команду <span class="c">CAPABILITY</span> (должен содержать <span class="c">IMAP4rev1</span>; названия нестандартных возможностей должны начинаться с <span class="c">X</span>)</td></tr>
+<tr><td><span class="c">LIST &lt;SP&gt; &lt;name attributes&gt; &lt;SP&gt; &lt;hierarchy delimiter&gt; &lt;SP&gt; &lt;name&gt; &lt;CRLF&gt;</span></td><td align="justify">IMAP-ответ на IMAP-команду <span class="c">LIST</span> (на одну команду может быть несколько ответов)</td></tr>
+<tr><td><span class="c">LSUB &lt;SP&gt; &lt;name attributes&gt; &lt;SP&gt; &lt;hierarchy delimiter&gt; &lt;SP&gt; &lt;name&gt; &lt;CRLF&gt;</span></td><td align="justify">IMAP-ответ на IMAP-команду <span class="c">LSUB</span></td></tr>
+<tr><td><span class="c">STATUS &lt;SP&gt; &lt;name&gt; &lt;SP&gt; &lt;status parenthesized list&gt; &lt;CRLF&gt;</span></td><td align="justify">IMAP-ответ на IMAP-команду <span class="c">STATUS</span> (+RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">SEARCH &lt;SP&gt; &lt;zero or more numbers&gt; &lt;CRLF&gt;</span></td><td align="justify">IMAP-ответ на IMAP-команду <span class="c">SEARCH</span> (список последовательных номеров писем) (+RFC&nbsp;7162)</td></tr>
+<tr><td><span class="c">FLAGS &lt;SP&gt; &lt;flag parenthesized list&gt; &lt;CRLF&gt;</span></td><td align="justify">Флаги (IMAP-ответ на IMAP-команду <span class="c">SELECT</span> либо <span class="c">EXAMINE</span>; какие флаги установлены применительно к письмам в почтовом ящике)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">ESEARCH &lt;SP&gt; &lt;one or more search-return-data pairs&gt; &lt;CRLF&gt;</span></td><td align="justify">Альтернативный IMAP-ответ на IMAP-команду <span class="c">SEARCH</span> (RFC&nbsp;4466, +RFC&nbsp;4731, +RFC&nbsp;7162, +RFC&nbsp;7377)</td></tr>
+</tbody>
+<tr><td><span class="c">ENABLED &lt;SP&gt; &lt;capability listing&gt; &lt;CRLF&gt;</span></td><td align="justify">IMAP-ответ на IMAP-команду ENABLE (RFC&nbsp;5161)</td></tr>
+<tr><td align="center" colspan="2">Mailbox size (содержимое почтового ящика)</td></tr>
+<tr><td><span class="c">&lt;number&gt; &lt;SP&gt; EXISTS &lt;CRLF&gt;</span></td><td align="justify">Количество писем в почтовом ящике (IMAP-ответ на IMAP-команду <span class="c">SELECT</span> либо <span class="c">EXAMINE</span>, также посылается при появлении новых писем)</td></tr>
+<tr><td><span class="c">&lt;number&gt; &lt;SP&gt; RECENT &lt;CRLF&gt;</span></td><td align="justify">Количество писем в почтовом ящике с флагом <span class="c">\Recent</span></td></tr>
+<tr><td align="center" colspan="2">Message status (состояние письма)</td></tr>
+<tr><td><span class="c">&lt;nz-number&gt; &lt;SP&gt; EXPUNGE &lt;CRLF&gt;</span></td><td align="justify">IMAP-ответ на IMAP-команду <span class="c">EXPUNGE</span> (письмо с указанным номером перманентно удалено, при удалении письма' с определенным номером бо'льшие номера писем декрементируются, количество ответов на команду соответствует количеству удаляемых писем)</td></tr>
+<tr><td><span class="c">&lt;nz-number&gt; &lt;SP&gt; FETCH &lt;SP&gt; &lt;message data&gt; &lt;CRLF&gt;</span></td><td align="justify">IMAP-ответ на IMAP-команду <span class="c">FETCH</span> (также ответ на команду <span class="c">STORE</span>, также посылается при изменении флагов) (+RFC&nbsp;7162)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">VANISHED &lt;an EARLIER tag&gt; &lt;list of UIDs&gt;<br>VANISHED &lt;list of UIDs&gt;</span></td><td align="justify">Два варианта.<br>Альтернативный IMAP-ответ на IMAP-команду <span class="c">EXPUNGE</span> (при использовании расширения <span class="c">QRESYNC</span>, один ответ с UIDs вместо нескольких ответов с последовательными номерами) (RFC&nbsp;7162)</td></tr>
+</tbody>
+<tr><td align="center" colspan="2">Command continuation request (запрос следующей IMAP-команды)</td></tr>
+<tr><td><span class="c">"+" ["[" &lt;response code&gt; "]" &lt;SP&gt;] &lt;human-readable text&gt; &lt;CRLF&gt;</span></td><td align="justify">Готовность к обработке следующей IMAP-команды (также задействуется при аутентификации)</td></tr>
+</table>
+</p>
+
+<p>IMAP-ответ <span class="c">LIST</span>, в том числе, отображает атрибуты соответствующего объекта:<br>
+1.&nbsp;<span class="c">\Noinferiors</span> -- у объекта нет дочерних объектов.<br>
+2.&nbsp;<span class="c">\Noselect</span> -- данный объект не является почтовым ящиком.<br>
+3.&nbsp;<span class="c">\Marked</span> -- данный объект является почтовым ящиком и этот почтовый ящик «интересен» (возможно в нем появились новые письма).<br>
+4.&nbsp;<span class="c">\Unmarked</span> -- данный объект является почтовым ящиком и этот почтовый ящик не содержит новых писем.</p>
+
+<p>IMAP-ответ <span class="c">STATUS</span> отображает количественные значения атрибутов почтового ящика:<br>
+1.&nbsp;<span class="c">MESSAGES</span> -- количество писем в почтовом ящике.<br>
+2.&nbsp;<span class="c">RECENT</span> -- количество писем с флагом <span class="c">\Recent</span>.<br>
+3.&nbsp;<span class="c">UIDNEXT</span> -- следующий UID.<br>
+4.&nbsp;<span class="c">UIDVALIDITY</span> -- UIDVALIDITY.<br>
+5.&nbsp;<span class="c">UNSEEN</span> -- количество писем без флага <span class="c">\Seen</span>.</p>
+
+<p>Стандарт очерчивает три обязательные возможности IMAP (перечисляются в IMAP-ответе на IMAP-команду <span class="c">CAPABILITY</span>).</p>
+
+<p>Таблица -- IMAP-возможности
+<table border="1" cellspacing="1" cellpadding="1">
+<tbody bgcolor="#bbbbbb">
+<tr><td align="center">IMAP-возможность</td><td align="center">Описание</td></tr>
+<tr><td><span class="c">AUTH=PLAIN</span></td><td align="justify">Аутентификация (на основе открытого текста)</td></tr>
+<tr><td><span class="c">LOGINDISABLED</span></td><td align="justify">Запрет IMAP-команды <span class="c">LOGIN</span></td></tr>
+<tr><td><span class="c">STARTTLS</span></td><td align="justify">TLS</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>&nbsp;</p>
+<div align="center">
+<p><strong>HTTP</strong></p>
+</div>
+<p>&nbsp;</p>
+
+<p>Протокол HTTP (Hypertext Transfer Protocol), очевидно, предназначен для пересылки <em>гипертекста</em> (hypertext) между двумя удаленными станциями. В настоящее время на практике в подавляющем числе случаев используют версию 1.1 (HTTP/1.1) (RFC&nbsp;7230 -- RFC&nbsp;7235, но наиболее широко цитируют RFC&nbsp;2616), однако уже разработана версия 2.0 (RFC&nbsp;7540).</p>
+
+<p>HTTP-сообщениями являются различные <em>web-страницы</em> (web pages), написанные на языке HTML (Hypertext Markup Language) и его расширениях. Но протокол пригоден и для пересылки других данных.</p>
+
+<p>Роль адресов в системе HTTP играют URIs (Uniform Resource Identifiers) (RFC&nbsp;3986).</p>
+
+<p>Семантически (не синтаксически), URI имеет два проявления (может сочетать оба):<br>
+1.&nbsp;URL (Uniform Resource Locator) -- позволяет найти ресурс.<br>
+2.&nbsp;URN (Uniform Resource Name) -- позволяет опознать ресурс.</p>
+
+<p>URI -- более общее понятие, чем HTTP-адрес. Посредством URI можно запрашивать самые разные ресурсы (например, FTP). URIs также могут быть специальными.</p>
+
+<p>Формат URI применительно к HTTP:
+<pre>
+&lt;http_URL&gt; = http: "//" [&lt;userinfo&gt; "@"] &lt;host&gt; [":" &lt;port&gt;] [&lt;abs_path&gt; ["?" &lt;query&gt;] ["#" &lt;fragment&gt;]]
+</pre>
+Где: <span class="c">http:</span> -- схема адресации, <span class="c">&lt;userinfo&gt;</span> -- пользовательский аккаунт, <span class="c">&lt;host&gt;</span> -- IP-адрес либо доменное название HTTP-сервера, <span class="c">&lt;port&gt;</span> -- программный порт HTTP-сервера, <span class="c">&lt;abs_path&gt;</span> -- путь к ресурсу на HTTP-сервере (в файловой системе), <span class="c">&lt;query&gt;</span> -- запрос для дополнительной программной обработки ресурса, <span class="c">&lt;fragment&gt;</span> -- фрагмент ресурса («место» в ресурсе).
+</p>
+
+<p>Протокол HTTP и адресация URI являются основой глобальной информационной системы WWW (World Wide Web). «Наполнение» WWW практическим смыслом, включая технические и организационные аспекты, контролирует W3C (WWW Consortium) -- независимая надгосударственная организация, одна из основных организаций, управляющих Internet.</p>
+
+<p>HTTP базируется на клиент-серверной модели и использует транспорт TCP. Стандартный номер программного порта HTTP-сервера -- 80. Правила взаимодействия между HTTP-клиентом и HTTP-сервером аналогичны правилам, сформулированным для других классических протоколов Internet. HTTP-сообщения -- это либо запросы об определенных ресурсах от HTTP-клиента к с HTTP-серверу, либо ответы от HTTP-сервера к HTTP-клиенту с запрошенной информацией. Полезные данные чаще всего пересылаются от HTTP-сервера к HTTP-клиенту.</p>
+
+<p>Запросы могут быть условными. Условия описываются специальными заголовками. Заголовки запросов и ответов, вообще, являются основным механизмом пересылки требующихся метаданных.</p>
+
+<div align="center">
+<img src="lk10.04.01.bmp">
+<br>
+Рисунок -- Структура системы HTTP
+</div>
+
+<p>Пользовательским агентом является программа-браузер (browser).</p>
+
+<p>Серверами-посредниками в системе HTTP являются прокси-серверы (proxies) и, изредка, шлюзы (gateways). Поэтому часть стандарта отведена формализации взаимодействия посредством прокси-серверов. Прокси-серверы будут рассмотрены в дальнейшем. Шлюзы позволяют импортировать-экспортировать ресурсы при обмене с другими системами прикладного уровня (например, электронной почтой).</p>
+
+<p>Значительное место в стандарте уделено организации кэширования на стороне клиента и на прокси-серверах (отслеживанию валидности и так далее).</p>
+
+<p>Следует обратить внимание на терминологию HTTP, связную с ресурсами. Под ресурсом в системе HTTP подразумевают любой объект, адресуемый с помощью URI. Информационное наполнение ресурса принято называть <em>контентом</em> (content). Один и тот же контент может иметь несколько представлений, называемых вариантами (variants). Например, контент может быть доступен в разных символьных кодировках (character encodings = charsets) и на разных языках. Выбранный вариант текущего контента называют инстанцией (instance). При формировании инстанции происходит дополнительное преобразование данных в соответствии с заданной кодировкой контента (content encoding). Типичным примером кодировки контента является сжатие данных по определенному алгоритму. То, что вкладывается для пересылки в HTTP-сообщение, называют сущностью (entity). Сущность пересылается в заданной транспортной кодировке (transfer encoding). Типичным примером транспортной кодировки является фрагментация.</p>
+
+<p>HTTP-клиент может запросить часть контента, может внести изменения в контент. При необходимости, сущность сопровождается уникальным тегом (entity tag) (обычно формируется как хэш). Сравнение тегов позволяет отследить изменения контента (например, динамической web-страницы).</p>
+
+<p>В HTTP заложена собственная система поддержки типов данных (media types), но он частично совместим с MIME.</p>
+
+<p>За достаточно долгое время развития протокола HTTP было разработано большое число его расширений.</p>
+
+<p>Целый ряд расширений позволяют оптимизировать работу с ресурсом. В ситуации когда контент обновляется часто и при этом незначительно, можно пересылать только метаданные о изменении контента (delta encoding), что более эффективно. Некоторые данные (например, пользовательские настройки) HTTP-сервер может сохранить на HTTP-клиенте -- это так называемые куки (cookies). HTTP-клиент и HTTP-сервер могут согласовать вариант контента для пересылки, причем могут это сделать автоматически (transparent content negotiation). HTTP-клиент может отслеживать происхождение (origin) контента. На HTTP-сервере возможно создание архивов вариантов контента в определенные моменты времени (mementos), чтобы по мере надобности можно было «параллельно» обращаться и к ним.</p>
+
+<p>HTTP поддерживает механизм TLS, который в приложении к HTTP по-другому называют HTTPS (не то же самое, что S-HTTP).</p>
+
+<p>Наиболее объемным расширением HTTP является, пожалуй, WebDAV (Web Distributed Authoring and Versioning). WebDAV позволяет осуществлять распределенную разработку ресурса, присваивать ресурсу дополнительные свойства, создавать иерархию ресурсов. В WebDAV заложена собственная система контроля версий. При использовании WebDAV, один запрос может порождать на HTTP-сервере множество операций, то есть состоять из подзапросов (используется формат XML), которые должны обрабатываться более-менее независимо. Соответственно ответ может состоять из подответов.</p>
+
+<p>Наиболее кардинально от HTTP отходит его расширение под названием WebSocket -- по сути производный протокол. Взаимодействующие стороны уже не играют роли клиента и сервера. Полнодуплексное соединение между ними может использоваться для полностью асинхронной пересылки данных (в любом направлении по мере надобности), даже в реальном времени.</p>
+
+<p>Кроме всего прочего, в HTTP есть фреймворк для поддержки приватных расширений (HTTP extension framework).
+В рамках данной дисциплины не предполагается изучение HTTP/2.0 (пока), приватных расширений HTTP, W3C-расширений, языка HTML.</p>
+
+<p>Формат HTTP-сообщения согласно HTTP/1.1:
+<pre>
+&lt;generic-message&gt; = (&lt;Request-Line&gt; | &lt;Status-Line&gt;)
+                    *(&lt;message-header&gt; &lt;CRLF&gt;)
+                    &lt;CRLF&gt;
+                    [&lt;message-body&gt;]
+</pre>
+Где: <span class="c">&lt;Request-Line&gt;</span> -- строка запроса, <span class="c">&lt;Status-Line&gt;</span> -- строка состояния, <span class="c">&lt;message-header&gt;</span> -- заголовок сообщения (не HTML-заголовок), <span class="c">&lt;message-body&gt;</span> -- содержимое сообщения (сущность).</p>
+
+<p>Формат заголовка сообщения:
+<pre>
+&lt;message-header&gt; = &lt;field-name&gt; ":" [&lt;field-value&gt;]
+</pre>
+Где: <span class="c">&lt;field-name&gt;</span> -- название, <span class="c">&lt;field-value&gt;</span> -- значение.</p>
+
+<p>Выделяют четыре типа заголовков сообщений:<br>
+1.&nbsp;Общие заголовки (general headers) -- могут встречаться в любых HTTP-сообщениях и к сущностям не относятся.<br>
+2.&nbsp;Заголовки сущностей (entity headers) -- могут встречаться в любых HTTP-сообщениях и относятся к сущностям.<br>
+3.&nbsp;Заголовки запросов (request headers) -- предназначены только для запросов.<br>
+4.&nbsp;Заголовки ответов (response headers) -- предназначены только для ответов.</p>
+
+<p>Некоторые заголовки зависят друг от друга.</p>
+
+<p>Таблица -- Общие заголовки HTTP
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Заголовок</td><td align="center">Описание</td></tr>
+<tr><td><span class="c">Cache-Control ":" 1#&lt;cache-directive&gt;</span></td><td align="justify">Политика управления кэшем (около десяти директив для запросов и около десяти директив для ответов) (+RFC&nbsp;3229)</td></tr>
+<tr><td><span class="c">Connection ":" 1#(&lt;connection-token&gt;)</span></td><td align="justify">Политика управления соединением (пока одна опция: <span class="c">close</span> -- соединение должно быть закрыто после обработки запроса)</td></tr>
+<tr><td><span class="c">Date ":" &lt;HTTP-date&gt;</span></td><td align="justify">Дата и время создания HTTP-сообщения</td></tr>
+<tr><td><span class="c">Pragma ":" 1#&lt;pragma-directive&gt;</span></td><td align="justify">Общая политика управления (пока одна директива: <span class="c">no-cache</span> -- не кэшировать)</td></tr>
+<tr><td><span class="c">Trailer ":" 1#&lt;field-name&gt;</span></td><td align="justify">Список заголовков, содержащихся в хвостовике фрагментированного HTTP-сообщения</td></tr>
+<tr><td><span class="c">Transfer-Encoding ":" 1#&lt;transfer-coding&gt;</span></td><td align="justify">Транспортная кодировка (несколько типов: <span class="c">chunked</span> -- фрагментировать, <span class="c">gzip</span> -- сжимать алгоритмом gzip и другие)</td></tr>
+<tr><td><span class="c">Upgrade ":" 1#&lt;product&gt;</span></td><td align="justify">Протокол, который рекомендуется использовать вместо текущего (используется и для запуска TLS)</td></tr>
+<tr><td><span class="c">Via ":" 1#(&lt;received-protocol&gt; &lt;received-by&gt; [&lt;comment&gt;])</span></td><td align="justify">Индикатор серверов-посредников при пересылке HTTP-сообщения</td></tr>
+<tr><td><span class="c">Warning ":" 1#&lt;warning-value&gt;</span></td><td align="justify">Предупреждение</td></tr>
+<tr><td><span class="c">MIME-Version ":" 1*&lt;DIGIT&gt; "." 1*&lt;DIGIT&gt;</span></td><td align="justify">Версия MIME</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">Meter ":" 0#&lt;meter-directive&gt;</span></td><td align="justify">Политика статистики обращений к ресурсу (формализовано несколько директив) (RFC&nbsp;2227)</td></tr>
+<tr><td align="center" colspan="2">WebDAV</td></tr>
+<tr><td><span class="c">DAV ":" #(&lt;compliance-class&gt;)</span></td><td align="justify">Совместимость с WebDAV (четыре класса) (RFC&nbsp;4918, +RFC&nbsp;5842)</td></tr>
+<tr><td><span class="c">Lock-Token ":" &lt;Coded-URL&gt;</span></td><td align="justify">URL блокируемого либо разблокируемого ресурса (RFC&nbsp;4918)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Таблица -- Заголовки сущностей HTTP
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Заголовок</td><td align="center">Описание</td></tr>
+<tr><td><span class="c">Allow ":" #&lt;Method&gt;</span></td><td align="justify">Список поддерживаемых HTTP-методов</td></tr>
+<tr><td><span class="c">Content-Encoding ":" 1#&lt;content-coding&gt;</span></td><td align="justify">Кодировка контента</td></tr>
+<tr><td><span class="c">Content-Language ":" 1#&lt;language-tag&gt;</span></td><td align="justify">Язык</td></tr>
+<tr><td><span class="c">Content-Length ":" 1*&lt;DIGIT&gt;</span></td><td align="justify">Размер (в байтах)</td></tr>
+<tr><td><span class="c">Content-Location ":" (&lt;absoluteURI&gt; | &lt;relativeURI&gt;)</span></td><td align="justify">URI (если в действительности контент «взят» по адресу, отличному от указанного в запросе)</td></tr>
+<tr><td><span class="c">Content-MD5 ":" &lt;md5-digest&gt;</span></td><td align="justify">MD5-хэш (+RFC&nbsp;3230)</td></tr>
+<tr><td><span class="c">Content-Range ":" &lt;content-range-spec&gt;</span></td><td align="justify">Диапазон, который занимает текущая часть контента</td></tr>
+<tr><td><span class="c">Content-Type ":" &lt;media-type&gt;</span></td><td align="justify">Тип данных</td></tr>
+<tr><td><span class="c">Expires ":" &lt;HTTP-date&gt;</span></td><td align="justify">Дата и время, после которых контент будет считаться устаревшим</td></tr>
+<tr><td><span class="c">Last-Modified ":" &lt;HTTP-date&gt;</span></td><td align="justify">Дата и время последней модификации контента</td></tr>
+</table>
+</p>
+
+<p>Содержимое сообщения -- это и есть сущность:
+<pre>
+&lt;message-body&gt; = &lt;entity-body&gt; | &lt;entity-body encoded as per Transfer-Encoding&gt;
+</pre>
+Не все запросы и ответы имеют содержимое.</p>
+
+<p>Содержимое сообщения может пересылаться как целиком, так и фрагментами:
+<pre>
+&lt;Chunked-Body&gt; = *&lt;chunk&gt;
+                 &lt;last-chunk&gt;
+                 &lt;trailer&gt;
+                 &lt;CRLF&gt;
+
+&lt;chunk&gt; = &lt;chunk-size&gt; [&lt;chunk-extension&gt;] &lt;CRLF&gt;
+          &lt;chunk-data&gt; &lt;CRLF&gt;
+
+&lt;last-chunk&gt; = 1*("0") [&lt;chunk-extension&gt;] &lt;CRLF&gt;
+
+&lt;trailer&gt; = *(&lt;entity-header&gt; &lt;CRLF&gt;)
+</pre>
+</p>
+
+<p>Хвостовик фрагментированного HTTP-сообщения позволяет пересылать дополнительные заголовки после содержимого. Также таковая реализация фрагментации позволяет пересылать динамические объекты, размер которых заранее не известен.</p>
+
+<p>Регистр букв в структурах HTTP, за исключением специально оговоренных случаев, не учитывается.</p>
+
+<p>Формат строки запроса:
+<pre>
+&lt;Request-Line&gt; = &lt;Method&gt; &lt;SP&gt; &lt;Request-URI&gt; &lt;SP&gt; &lt;HTTP-Version&gt; &lt;CRLF&gt;
+</pre>
+Где: <span class="c">&lt;Method&gt;</span> -- метод запроса (фактически, команда), <span class="c">&lt;Request-URI&gt;</span> -- URI запрашиваемого ресурса, <span class="c">&lt;HTTP-Version&gt;</span> -- версия HTTP.</p>
+
+<p>HTTP-методы могут обладать свойствами безопасности и идемпотентности. HTTP-метод является безопасным (safe) если он не может изменить контент. HTTP-метод является идемпотентным (idempotent) если его последовательное многократное применение приводит к тому же результату, что и однократное применение. Свойствами безопасности и идемпотентности могут обладать и последовательности HTTP-методов, в том числе, последовательности разных HTTP-методов). Причем последовательность идемпотентных HTTP-методов может быть неидемпотентной.</p>
+
+<p>Таблица -- HTTP-методы
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">HTTP-метод</td><td align="center">Описание</td></tr>
+<tr><td><span class="c">OPTIONS</span></td><td align="justify">Предоставить опции доступа к ресурсу</td></tr>
+<tr><td><span class="c">GET</span></td><td align="justify">Предоставить контент (+RFC&nbsp;3253, +RFC&nbsp;4918)</td></tr>
+<tr><td><span class="c">HEAD</span></td><td align="justify">Предоставить контент, но без сущности как таковой (в ответе только заголовки) (+RFC&nbsp;4918)</td></tr>
+<tr><td><span class="c">POST</span></td><td align="justify">Обновить часть контента предоставленными данными (предполагается обработка HTTP-сервером) (+RFC&nbsp;4918)</td></tr>
+<tr><td><span class="c">PUT</span></td><td align="justify">Заменить контент представленным контентом (+RFC&nbsp;3253, +RFC&nbsp;4918, +RFC&nbsp;6638)</td></tr>
+<tr><td><span class="c">DELETE</span></td><td align="justify">Удалить ресурс (+RFC&nbsp;3253, +RFC&nbsp;4918, +RFC&nbsp;5842)</td></tr>
+<tr><td><span class="c">TRACE</span></td><td align="justify">Ответить на запрос в режиме трассировки (отвечать должен каждый сервер-посредник, что позволяет HTTP-клиенту отследить, модифицируется ли запрос при продвижении к HTTP-серверу назначения)</td></tr>
+<tr><td><span class="c">CONNECT</span></td><td align="justify">Создать туннель (фактически HTTPS-соединение) между прокси-сервером и HTTP-сервером для доступа к ресурсам на HTTP-сервере (между HTTP-клиентом и прокси-сервером будет туннель HTTPSoverHTTP)</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">PATCH</span></td><td align="justify">Внести указанные изменения в ресурс (RFC&nbsp;5789)</td></tr>
+<tr><td align="center" colspan="2">WebDAV</td></tr>
+<tr><td><span class="c">VERSION-CONTROL</span></td><td align="justify">Создать ресурс, подверженный контролю версий (RFC&nbsp;3253)</td></tr>
+<tr><td><span class="c">REPORT</span></td><td align="justify">Предоставить историю изменения версий ресурса (RFC&nbsp;3253, +RFC&nbsp;3744)</td></tr>
+<tr><td><span class="c">CHECKOUT</span></td><td align="justify">Разблокировать ресурс для модификации (RFC&nbsp;3253, +RFC&nbsp;3648)</td></tr>
+<tr><td><span class="c">CHECKIN</span></td><td align="justify">Создать новую версию ресурса либо обновить версию ресурса после его модификации, и заблокировать ресурс (RFC&nbsp;3253, +RFC&nbsp;3648)</td></tr>
+<tr><td><span class="c">UNCHECKOUT</span></td><td align="justify">Отменить все внесенные в ресурс изменения и вернуть ресурс в предыдущее заблокированное состояние (RFC&nbsp;3253, +RFC&nbsp;3648)</td></tr>
+<tr><td><span class="c">MKWORKSPACE</span></td><td align="justify">Создать на HTTP-сервере ресурс для контроля других ресурсов и коллекций ресурсов (RFC&nbsp;3253)</td></tr>
+<tr><td><span class="c">UPDATE</span></td><td align="justify">Восстановить указанную версию заблокированного ресурса (RFC&nbsp;3253, +RFC&nbsp;3648)</td></tr>
+<tr><td><span class="c">LABEL</span></td><td align="justify">Присвоить версии ресурса метку (RFC&nbsp;3253, +RFC&nbsp;3648)</td></tr>
+<tr><td><span class="c">MERGE</span></td><td align="justify">Окончательно внести в ресурс изменения, сделанные на других ресурсах, контролирующих данный ресурс (RFC&nbsp;3253)</td></tr>
+<tr><td><span class="c">BASELINE-CONTROL</span></td><td align="justify">Создать ресурс для хранения версий других ресурсов и коллекций ресурсов (RFC&nbsp;3253)</td></tr>
+<tr><td><span class="c">MKACTIVITY</span></td><td align="justify">Создать на HTTP-клиенте ресурс для контроля других ресурсов и коллекций ресурсов (RFC&nbsp;3253)</td></tr>
+<tr><td><span class="c">ORDERPATCH</span></td><td align="justify">Внести указанные изменения в порядок ресурсов в упорядоченной коллекции ресурсов (RFC&nbsp;3648)</td></tr>
+<tr><td><span class="c">ACL</span></td><td align="justify">Модифицировать список контроля доступа к ресурсу (RFC&nbsp;3744)</td></tr>
+<tr><td><span class="c">MKREDIRECTREF</span></td><td align="justify">Создать ресурс -- ссылку для перенаправления запросов (RFC&nbsp;4437)</td></tr>
+<tr><td><span class="c">UPDATEREDIRECTREF</span></td><td align="justify">Обновить ресурс -- ссылку для перенаправления запросов (RFC&nbsp;4437)</td></tr>
+<tr><td><span class="c">MKCALENDAR</span></td><td align="justify">Создать коллекцию ресурсов -- календарь для диспетчеризации (RFC&nbsp;4791)</td></tr>
+<tr><td><span class="c">PROPFIND</span></td><td align="justify">Предоставить свойства ресурса (RFC&nbsp;4918, +RFC&nbsp;3253, +RFC&nbsp;5842)</td></tr>
+<tr><td><span class="c">PROPPATCH</span></td><td align="justify">Внести указанные изменения в свойства ресурса (RFC&nbsp;4918, +RFC&nbsp;3253)</td></tr>
+<tr><td><span class="c">MKCOL</span></td><td align="justify">Создать ресурс -- коллекцию ресурсов (фактически каталог со ссылками) (RFC&nbsp;4918, +RFC&nbsp;3253)</td></tr>
+<tr><td><span class="c">COPY</span></td><td align="justify">Скопировать один ресурс в другой (ресурс назначения указывается в специальном заголовке сообщения) (RFC&nbsp;4918, +RFC&nbsp;3253, +RFC&nbsp;3744, +RFC&nbsp;5842, +RFC&nbsp;6638)</td></tr>
+<tr><td><span class="c">MOVE</span></td><td align="justify">Переместить ресурс (RFC&nbsp;4918, +RFC&nbsp;3253, +RFC&nbsp;3744, +RFC&nbsp;5842, +RFC&nbsp;6638)</td></tr>
+<tr><td><span class="c">LOCK</span></td><td align="justify">Заблокировать доступ к ресурсу (RFC&nbsp;4918, +RFC&nbsp;3744)</td></tr>
+<tr><td><span class="c">UNLOCK</span></td><td align="justify">Разблокировать доступ к ресурсу (RFC&nbsp;4918, +RFC&nbsp;3253)</td></tr>
+<tr><td><span class="c">SEARCH</span></td><td align="justify">Предоставить результаты поиска применительно к ресурсу согласно поисковому запросу (RFC&nbsp;5323)</td></tr>
+<tr><td><span class="c">BIND</span></td><td align="justify">Создать в коллекции ресурсов альтернативную ссылку на ресурс, возможно из другой коллекции ресурсов (RFC&nbsp;5842)</td></tr>
+<tr><td><span class="c">UNBIND</span></td><td align="justify">Удалить из коллекции ресурсов альтернативную ссылку на ресурс (RFC&nbsp;5842)</td></tr>
+<tr><td><span class="c">REBIND</span></td><td align="justify">Переместить альтернативную ссылку на ресурс из одной коллекции ресурсов в другую (RFC&nbsp;5842)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>HTTP-методы <span class="c">PATCH</span>, <span class="c">LINK</span>, <span class="c">UNLINK</span> применения не нашли и их считают устаревшими.</p>
+
+<p>Таблица -- Заголовки запросов HTTP
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Заголовок</td><td align="center">Описание</td></tr>
+<tr><td><span class="c">Accept ":" #(&lt;media-range&gt; [&lt;accept-params&gt;])</span></td><td align="justify">Список допустимых типов данных (предусмотрен шаблон <span class="c">*</span>)</td></tr>
+<tr><td><span class="c">Accept-Charset ":" 1#((&lt;charset&gt; | "*" )[";" q "=" &lt;qvalue&gt;]</span></td><td align="justify">Список допустимых кодировок символов</td></tr>
+<tr><td><span class="c">Accept-Encoding" ":" 1#(&lt;codings&gt; [";" q "=" &lt;qvalue&gt;])</span></td><td align="justify">Список допустимых кодировок контента</td></tr>
+<tr><td><span class="c">Accept-Language ":" 1#(&lt;language-range&gt; [";" q "=" &lt;qvalue&gt;])</span></td><td align="justify">Список допустимых языков</td></tr>
+<tr><td><span class="c">Authorization ":" &lt;credentials&gt;</span></td><td align="justify">Значения параметров авторизации</td></tr>
+<tr><td><span class="c">Expect ":" 1#&lt;expectation&gt;</span></td><td align="justify">Ожидаемое поведение HTTP-сервера</td></tr>
+<tr><td><span class="c">From ":" &lt;mailbox&gt;</span></td><td align="justify">Почтовый ящик пользователя, сформировавшего запрос</td></tr>
+<tr><td><span class="c">Host ":" &lt;host&gt; [":" &lt;port&gt;]</span></td><td align="justify">Запрашиваемый хост (HTTP-сервер)</td></tr>
+<tr><td><span class="c">If-Match ":" ("*" | 1#&lt;entity-tag&gt;)</span></td><td align="justify">Если сформированный тег сущности равен одному из указанных, то ответить</td></tr>
+<tr><td><span class="c">If-Modified-Since ":" &lt;HTTP-date&gt;</span></td><td align="justify">Если ресурс модифицирован после указанных даты и времени, то ответить</td></tr>
+<tr><td><span class="c">If-None-Match ":" ("*" | 1#&lt;entity-tag&gt;)</span></td><td align="justify">Если сформированный тег сущности не равен одному из указанных, то ответить</td></tr>
+<tr><td><span class="c">If-Range ":" (&lt;entity-tag&gt; | &lt;HTTP-date&gt;)</span></td><td align="justify">Если сформированный тег сущности равен указанному, либо если ресурс не модифицирован после указанных даты и времени, то предоставить указанную часть контента, иначе предоставить весь контент</td></tr>
+<tr><td><span class="c">If-Unmodified-Since ":" &lt;HTTP-date&gt;</span></td><td align="justify">Если ресурс не модифицирован после указанных даты и времени, то ответить </td></tr>
+<tr><td><span class="c">Max-Forwards ":" 1*&lt;DIGIT&gt;</span></td><td align="justify">Максимальное количество перенаправлений запроса серверами-посредниками</td></tr>
+<tr><td><span class="c">Proxy-Authorization ":" &lt;credentials&gt;</span></td><td align="justify">Значения параметров авторизации на прокси-сервере</td></tr>
+<tr><td><span class="c">Range ":" &lt;ranges-specifier&gt;</span></td><td align="justify">Диапазон байтов контента, которые нужно предоставить (при запросе части контента, HTTP -- байт-ориентированный протокол)</td></tr>
+<tr><td><span class="c">Referer ":" (&lt;absoluteURI&gt; | &lt;relativeURI&gt;)</span></td><td align="justify">URI ресурса, с которого был осуществлен запрос (предыдущей web-страницы)</td></tr>
+<tr><td><span class="c">TE ":" #(&lt;t-codings&gt;)</span></td><td align="justify">Список допустимых транспортных кодировок</td></tr>
+<tr><td><span class="c">User-Agent ":" 1*(&lt;product&gt; | &lt;comment&gt;)</span></td><td align="justify">Баннер о пользовательском агенте</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">Accept-Features ":" #(&lt;feature-expr&gt; *(";" &lt;feature-extension&gt;))</span></td><td align="justify">Список допустимых возможностей (RFC&nbsp;2295)</td></tr>
+<tr><td><span class="c">Negotiate ":" 1#&lt;negotiate-directive&gt;</span></td><td align="justify">Политика согласования возможностей (формализовано несколько директив) (RFC&nbsp;2295)</td></tr>
+<tr><td><span class="c">Want-Digest ":" #(&lt;digest-algorithm&gt; [";" q "=" &lt;qvalue&gt;]</span></td><td align="justify">Список алгоритмов для требуемого вычисления хэша инстанции либо ее части (RFC&nbsp;3230)</td></tr>
+<tr><td><span class="c">A-IM ":" #(&lt;instance-manipulation&gt; [";" "q" "=" &lt;qvalue&gt;])</span></td><td align="justify">Список допустимых манипуляций инстанциями (RFC&nbsp;3229)</td></tr>
+<tr><td><span class="c">Cookie ":" &lt;OWS&gt; &lt;cookie-string&gt; &lt;OWS&gt;</span></td><td align="justify">Куки (RFC&nbsp;6265) (<span class="c">&lt;OWS&gt;</span> -- опциональный разделитель -- комбинация символов <span class="c">&lt;CRLF&gt;</span>, <span class="c">&lt;SP&gt;</span>, <span class="c">&lt;HTAB&gt;</span>)</td></tr>
+<tr><td><span class="c">Origin ":" &lt;OWS&gt; &lt;origin-list-or-null&gt; &lt;OWS&gt;</span></td><td align="justify">Требуемое происхождение контента (RFC&nbsp;6454)</td></tr>
+<tr><td><span class="c">Accept-Datetime ":" &lt;accept-dt-value&gt;</span></td><td align="justify">Дата и время, соответствующая запрашиваемому архиву варианта контента (RFC&nbsp;7089)</td></tr>
+<tr><td><span class="c">Forwarded ":" 1#&lt;forwarded-element&gt;</span></td><td align="justify">Список элементов запроса, модифицированных прокси-серверами (пока четыре параметра, может «накапливаться») (RFC&nbsp;7239)</td></tr>
+<tr><td><span class="c">Prefer ":" 1#&lt;preference&gt;</span></td><td align="justify">Желаемое поведение HTTP-сервера (в отличие от <span class="c">Expect</span>, сервер может не выполнять пожелания) (RFC&nbsp;7240)</td></tr>
+<tr><td><span class="c">ALPN ":" 1#&lt;protocol-id&gt;</span></td><td align="justify">Идентификаторы допустимых прикладных протоколов для использования внутри туннеля при HTTP-методе CONNECT (пока HTTP/1.1 -- основной вариант) (RFC&nbsp;7639)</td></tr>
+<tr><td align="center" colspan="2">WebDAV</td></tr>
+<tr><td><span class="c">Label ":" &lt;name of a label&gt;</span></td><td align="justify">Метка ресурса (RFC&nbsp;3253)</td></tr>
+<tr><td><span class="c">Ordering-Type ":" &lt;absoluteURI&gt;</span></td><td align="justify">Тип сортировки коллекции ресурсов (специальное URI) (RFC&nbsp;3648)</td></tr>
+<tr><td><span class="c">Position ":" (first | last | ((before | after) &lt;segment&gt;))</span></td><td align="justify">Положение ссылки на ресурс в коллекции ресурсов (RFC&nbsp;3648)</td></tr>
+<tr><td><span class="c">Apply-To-Redirect-Ref ":" (T | F)</span></td><td align="justify">Флаг допустимости перенаправления запроса (<span class="c">F</span> -- не перенаправлять, <span class="c">T</span> -- перенаправлять) (RFC&nbsp;4437)</td></tr>
+<tr><td><span class="c">Depth ":" (0 | 1 | infinity)</span></td><td align="justify">«Глубина охвата» ресурса в коллекции ресурсов (<span class="c">0</span> -- только сам ресурс; <span class="c">1</span> -- ресурс и все ресурсы, на которые он непосредственно ссылается; <span class="c">infinity</span> -- ресурс и все ресурсы, на которые он ссылается) (RFC&nbsp;4918)</td></tr>
+<tr><td><span class="c">Destination ":" &lt;Simple-ref&gt;</span></td><td align="justify">URI ресурса назначения (RFC&nbsp;4918)</td></tr>
+<tr><td><span class="c">If ":" (1*&lt;No-tag-list&gt; | 1*&lt;Tagged-list&gt;)</span></td><td align="justify">Если указанное условие о состояния ресурса выполняется, то выполнить запрос (RFC&nbsp;4918)</td></tr>
+<tr><td><span class="c">Overwrite ":" (T | F)</span></td><td align="justify">Флаг перезаписи ресурса по адресу назначения, где нет ресурса (перезаписи ссылки) (<span class="c">F</span> -- не перезаписывать, <span class="c">T</span> -- перезаписывать) (RFC&nbsp;4918)</td></tr>
+<tr><td><span class="c">Timeout ":" 1#&lt;TimeType&gt;</span></td><td align="justify">Интервал времени блокирования ресурса (в секундах) (RFC&nbsp;4918)</td></tr>
+<tr><td><span class="c">Schedule-Reply ":" (T | F)</span></td><td align="justify">Флаг уведомления диспетчера об удалении диспетчеризируемого ресурса (<span class="c">F</span> -- не уведомлять, <span class="c">T</span> -- уведомлять) (RFC&nbsp;6638)</td></tr>
+<tr><td><span class="c">If-Schedule-Tag-Match ":" &lt;opaque-tag&gt;</span></td><td align="justify">Если тег диспетчеризации равен указанному, то выполнить запрос (RFC&nbsp;6638)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Формат строки состояния:
+<pre>
+&lt;Status-Line&gt; = &lt;HTTP-Version&gt; &lt;SP&gt; &lt;Status-Code&gt; &lt;SP&gt; &lt;Reason-Phrase&gt; &lt;CRLF&gt;
+</pre>
+Где: <span class="c">&lt;Status-Code&gt;</span> -- код состояния, <span class="c">&lt;Reason-Phrase&gt;</span> -- комментарий.</p>
+
+<p>Таблица -- Декодирование HTTP-ответов
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Код</td><td align="center">Название</td><td align="center">Описание</td></tr>
+<tr><td align="center">1xx</td><td align="justify">Informational</td><td align="justify">Информация о запросе</td></tr>
+<tr><td align="center">2xx</td><td align="justify">Successful</td><td align="justify">Успешное вопринятие запроса</td></tr>
+<tr><td align="center">3xx</td><td align="justify">Redirection</td><td align="justify">Перенаправление запроса</td></tr>
+<tr><td align="center">4xx</td><td align="justify">Client Error</td><td align="justify">Ошибка клиента при формировании запроса</td></tr>
+<tr><td align="center">5xx</td><td align="justify">Server Error</td><td align="justify">Ошибка сервера при обработке запроса</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center"><span class="c">100</span></td><td align="justify">Continue</td><td align="justify">Ожидается следующий запрос</td></tr>
+<tr><td align="center"><span class="c">101</span></td><td align="justify">Switching Protocols</td><td align="justify">Ожидается повтор текущего запроса с указанием upgrade-протокола</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center"><span class="c">200</span></td><td align="justify">OK</td><td align="justify">Запрос обработан успешно</td></tr>
+<tr><td align="center"><span class="c">201</span></td><td align="justify">Created</td><td align="justify">В результате обработки запроса создан новый ресурс</td></tr>
+<tr><td align="center"><span class="c">202</span></td><td align="justify">Accepted</td><td align="justify">Запрос воспринят успешно, но еще не обработан</td></tr>
+<tr><td align="center"><span class="c">203</span></td><td align="justify">Non-Authoritative Information</td><td align="justify">Метаданные о ресурсе в заголовках ответов не являются авторитетными</td></tr>
+<tr><td align="center"><span class="c">204</span></td><td align="justify">No Content</td><td align="justify">Ответ не содержит контент</td></tr>
+<tr><td align="center"><span class="c">205</span></td><td align="justify">Reset Content</td><td align="justify">Пользовательскому агенту рекомендуется очистить форму, связанную с запросом (например, HTTP-сервер обработал предоставленные данные)</td></tr>
+<tr><td align="center"><span class="c">206</span></td><td align="justify">Partial Content</td><td align="justify">Ответ содержит часть контента</td></tr>
+<tr><td align="center"><span class="c">207</span></td><td align="justify">Multi-Status</td><td align="justify">Ответ содержит подответы (WebDAV) (RFC&nbsp;4918)</td></tr>
+<tr><td align="center"><span class="c">208</span></td><td align="justify">Already Reported</td><td align="justify">В данном подответе на запрос c HTTP-методом PROPFIND о коллекции ресурсов c альтернативными ссылками, в описании свойств коллекции данная ссылка уже есть в других подответах (WebDAV) (RFC&nbsp;5842)</td></tr>
+<tr><td align="center"><span class="c">226</span></td><td align="justify">IM Used</td><td align="justify">Ответ содержит инстанцию, полученную в результате манипуляций (RFC&nbsp;3229)</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center"><span class="c">300</span></td><td align="justify">Multiple Choices</td><td align="justify">Ресурс имеет много вариантов, расположенных по разным адресам, требуется согласование</td></tr>
+<tr><td align="center"><span class="c">301</span></td><td align="justify">Moved Permanently</td><td align="justify">Адрес запрошенного ресурса изменен перманентно, рекомендуется использовать указанный новый адрес</td></tr>
+<tr><td align="center"><span class="c">302</span></td><td align="justify">Found</td><td align="justify">Перенаправление произошло по непонятным причинам, рекомендуется использовать текущий адрес</td></tr>
+<tr><td align="center"><span class="c">303</span></td><td align="justify">See Other</td><td align="justify">Ответ на запрос содержится по указанному адресу</td></tr>
+<tr><td align="center"><span class="c">304</span></td><td align="justify">Not Modified</td><td align="justify">Условный запрос не привел к модификации ресурса</td></tr>
+<tr><td align="center"><span class="c">305</span></td><td align="justify">Use Proxy</td><td align="justify">Доступ к ресурсу возможен только посредством указанного прокси-сервера</td></tr>
+<tr><td align="center"><span class="c">307</span></td><td align="justify">Temporary Redirect</td><td align="justify">Адрес запрошенного ресурса изменен временно, рекомендуется использовать текущий адрес</td></tr>
+<tr><td align="center"><span class="c">308</span></td><td align="justify">Permanent Redirect</td><td align="justify">Адрес запрошенного ресурса изменен перманентно (применимо к ответу на запрос с любым HTTP-методом) (RFC&nbsp;7238)</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center"><span class="c">400</span></td><td align="justify">Bad Request</td><td align="justify">Синтаксическая ошибка в запросе</td></tr>
+<tr><td align="center"><span class="c">401</span></td><td align="justify">Unauthorized</td><td align="justify">Требуется авторизация</td></tr>
+<tr><td align="center"><span class="c">403</span></td><td align="justify">Forbidden</td><td align="justify">Доступ к ресурсу запрещен</td></tr>
+<tr><td align="center"><span class="c">404</span></td><td align="justify">Not Found</td><td align="justify">Ресурс не найден</td></tr>
+<tr><td align="center"><span class="c">405</span></td><td align="justify">Method Not Allowed</td><td align="justify">Указанный в запросе HTTP-метод не поддерживается</td></tr>
+<tr><td align="center"><span class="c">406</span></td><td align="justify">Not Acceptable</td><td align="justify">Указанный в запросе тип данных не поддерживается</td></tr>
+<tr><td align="center"><span class="c">407</span></td><td align="justify">Proxy Authentication Required</td><td align="justify">Требуется аутентификация на прокси-сервере</td></tr>
+<tr><td align="center"><span class="c">408</span></td><td align="justify">Request Timeout</td><td align="justify">Запрос не поступил в течение ожидаемого интервала времени</td></tr>
+<tr><td align="center"><span class="c">409</span></td><td align="justify">Conflict</td><td align="justify">Запрос конфликтует с состоянием ресурса</td></tr>
+<tr><td align="center"><span class="c">410</span></td><td align="justify">Gone</td><td align="justify">Ресурс не найден и новый адрес ресурса не известен</td></tr>
+<tr><td align="center"><span class="c">411</span></td><td align="justify">Length Required</td><td align="justify">Требуется указание размера контента</td></tr>
+<tr><td align="center"><span class="c">412</span></td><td align="justify">Precondition Failed</td><td align="justify">Условие в запросе не совместимо с ресурсом</td></tr>
+<tr><td align="center"><span class="c">413</span></td><td align="justify">Request Entity Too Large</td><td align="justify">Размер сущности слишком большой</td></tr>
+<tr><td align="center"><span class="c">414</span></td><td align="justify">Request-URI Too Long</td><td align="justify">Длина URI в запросе слишком большая</td></tr>
+<tr><td align="center"><span class="c">415</span></td><td align="justify">Unsupported Media Type</td><td align="justify">Тип данных не поддерживается</td></tr>
+<tr><td align="center"><span class="c">416</span></td><td align="justify">Requested Range Not Satisfiable</td><td align="justify">Недопустимый диапазон</td></tr>
+<tr><td align="center"><span class="c">417</span></td><td align="justify">Expectation Failed</td><td align="justify">Ожидаемое HTTP-клиентом поведение не поддерживается</td></tr>
+<tr><td align="center"><span class="c">422</span></td><td align="justify">Unprocessable Entity</td><td align="justify">HTTP-сервер воспринял подзапросы, но не может их обработать (WebDAV) (RFC&nbsp;4918)</td></tr>
+<tr><td align="center"><span class="c">423</span></td><td align="justify">Locked</td><td align="justify">Ресурс-источник или ресурс назначения заблокирован (WebDAV) (RFC&nbsp;4918)</td></tr>
+<tr><td align="center"><span class="c">424</span></td><td align="justify">Failed Dependency</td><td align="justify">Запрошенное действие зависит от действия, при выполнении которого произошел сбой (WebDAV) (RFC&nbsp;4918)</td></tr>
+<tr><td align="center"><span class="c">426</span></td><td align="justify">Upgrade Required</td><td align="justify">Требуется взаимодействие по альтернативному протоколу</td></tr>
+<tr><td align="center"><span class="c">428</span></td><td align="justify">Precondition Required</td><td align="justify">Требуется условный запрос (RFC&nbsp;6585)</td></tr>
+<tr><td align="center"><span class="c">429</span></td><td align="justify">Too Many Requests</td><td align="justify">Запросы поступают слишком часто (RFC&nbsp;6585)</td></tr>
+<tr><td align="center"><span class="c">431</span></td><td align="justify">Request Header Fields Too Large</td><td align="justify">Один либо несколько заголовков запросов слишком длинные (RFC&nbsp;6585)</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center"><span class="c">500</span></td><td align="justify">Internal Server Error</td><td align="justify">Внутренняя ошибка сервера</td></tr>
+<tr><td align="center"><span class="c">501</span></td><td align="justify">Not Implemented</td><td align="justify">Запрос не поддерживается</td></tr>
+<tr><td align="center"><span class="c">502</span></td><td align="justify">Bad Gateway</td><td align="justify">Выбран некорректный следующий в звене сервер-посредник</td></tr>
+<tr><td align="center"><span class="c">503</span></td><td align="justify">Service Unavailable</td><td align="justify">Сервис недоступен (остановлен, перегружен)</td></tr>
+<tr><td align="center"><span class="c">504</span></td><td align="justify">Gateway Timeout</td><td align="justify">Наступил тайм-аут при взаимодействии со следующим в звене сервером-посредником</td></tr>
+<tr><td align="center"><span class="c">505</span></td><td align="justify">HTTP Version Not Supported</td><td align="justify">Использованная в запросе версия HTTP не поддерживается</td></tr>
+<tr><td align="center"><span class="c">506</span></td><td align="justify">Variant Also Negotiates</td><td align="justify">Выбранный вариант требует согласования (согласование должно продолжаться) (RFC&nbsp;2295)</td></tr>
+<tr><td align="center"><span class="c">507</span></td><td align="justify">Insufficient Storage</td><td align="justify">Недостаточно свободного файлового пространства (WebDAV) (RFC&nbsp;4918)</td></tr>
+<tr><td align="center"><span class="c">508</span></td><td align="justify">Loop Detected</td><td align="justify">В коллекциях ресурсов c альтернативными связями обнаружен цикл (WebDAV) (RFC&nbsp;5842)</td></tr>
+<tr><td align="center"><span class="c">510</span></td><td align="justify">Not Extended</td><td align="justify">Запрошенное приватное расширение не поддерживается (RFC&nbsp;2774)</td></tr>
+<tr><td align="center"><span class="c">511</span></td><td align="justify">Network Authentication Required</td><td align="justify">Требуется аутентификация HTTP-клиента в сети (RFC&nbsp;6585)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Наряду с кодами состояний предусмотрены еще предупреждения (заголовки Warning):
+<pre>
+&lt;warning-value&gt; = &lt;warn-code&gt; &lt;SP&gt; &lt;warn-agent&gt; &lt;SP&gt; &lt;warn-text&gt; [&lt;SP&gt; &lt;warn-date&gt;]
+</pre>
+Где: <span class="c">&lt;warn-code&gt;</span> -- код предупреждения, <span class="c">&lt;warn-agent&gt;</span> -- сформировавший предупреждение HTTP-сервер, <span class="c">&lt;warn-text&gt;</span> -- текст предупреждения, <span class="c">&lt;warn-date&gt;</span> -- дата и время создания предупреждения.</p>
+
+<p>Таблица -- Декодирование HTTP-предупреждений
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Код</td><td align="center">Название</td><td align="center">Описание</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td align="center" colspan="3">Аналогично</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td align="center"><span class="c">110</span></td><td align="justify">Response is Stale</td><td align="justify">Ответ устарел</td></tr>
+<tr><td align="center"><span class="c">111</span></td><td align="justify">Revalidation Failed</td><td align="justify">Кэш не обновлен</td></tr>
+<tr><td align="center"><span class="c">112</span></td><td align="justify">Disconnected Operation</td><td align="justify">Кэширование отключено</td></tr>
+<tr><td align="center"><span class="c">113</span></td><td align="justify">Heuristic Expiration</td><td align="justify">Два варианта.<br>Период обновления кэша больше суток.<br>Возраст ответа больше суток</td></tr>
+<tr><td align="center"><span class="c">199</span></td><td align="justify">Miscellaneous Warning</td><td align="justify">Прочее предупреждение (комментарий)</td></tr>
+<tr><td align="center"><span class="c">214</span></td><td align="justify">Transformation Applied</td><td align="justify">Контент преобразован сервером-посредником</td></tr>
+<tr><td align="center"><span class="c">299</span></td><td align="justify">Miscellaneous Persistent Warning</td><td align="justify">Прочее персистентное предупреждение</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Таблица -- Заголовки ответов HTTP
+<table border="1" cellspacing="1" cellpadding="1">
+<tr><td align="center">Заголовок</span></td><td align="center">Описание</td></tr>
+<tr><td><span class="c">Accept-Ranges ":" &lt;acceptable-ranges&gt;</span></td><td align="justify">Список доступных диапазонов байтов в ответе на запрос с заголовком Range</td></tr>
+<tr><td><span class="c">Age ":" &lt;age-value&gt;</span></td><td align="justify">Промежуток времени после формирования текущего ответа</td></tr>
+<tr><td><span class="c">ETag ":" &lt;entity-tag&gt;</span></td><td align="justify">Текущее значение тега сущности</td></tr>
+<tr><td><span class="c">Location ":" &lt;absoluteURI&gt;</span></td><td align="justify">URI для перенаправления запроса</td></tr>
+<tr><td><span class="c">Proxy-Authenticate ":" 1#&lt;challenge&gt;</span></td><td align="justify">Способ и параметры аутентификации на прокси-сервере (при взаимодействии через прокси-сервер)</td></tr>
+<tr><td><span class="c">Retry-After ":" (&lt;HTTP-date&gt; | &lt;delta-seconds&gt;)</span></td><td align="justify">Дата и время предлагаемой повторной попытки доступа к ресурсу либо интервал времени, который нужно выждать (при недоступности ресурса)</td></tr>
+<tr><td><span class="c">Server ":" 1*(&lt;product&gt; | &lt;comment&gt;)</span></td><td align="justify">Баннер о HTTP-сервере</td></tr>
+<tr><td><span class="c">Vary ":" ("*" | 1#&lt;field-name&gt;)</span></td><td align="justify">Список заголовков запросов, связанных с вариативностью ответов (для улучшения управления кэшем) (+RFC&nbsp;7089)</td></tr>
+<tr><td><span class="c">WWW-Authenticate ":" 1#&lt;challenge&gt;</span></td><td align="justify">Способ и параметры аутентификации на HTTP-сервере для получения доступа к ресурсу</td></tr>
+<tbody bgcolor="#bbbbbb">
+<tr><td><span class="c">Alternates ":" &lt;variant-list&gt;</span></td><td align="justify">Список допустимых вариантов (RFC&nbsp;2295)</td></tr>
+<tr><td><span class="c">TCN ":" #(&lt;response-type&gt; | &lt;server-side-override-directive&gt; | &lt;tcn-extension&gt;)</span></td><td align="justify">Результат автоматического согласования возможностей (RFC&nbsp;2295)</td></tr>
+<tr><td><span class="c">Variant-Vary ":" ("*" | 1#&lt;field-name&gt;)</span></td><td align="justify">Список вариативных частей контента (RFC&nbsp;2295)</td></tr>
+<tr><td><span class="c">Safe ":" (yes | no)</span></td><td align="justify">Флаг безопасности обработанного тестового небезопасного запроса («репетиция» определяется по особым признакам: запрос является копией предыдущего запроса и другим) (RFC&nbsp;2310)</td></tr>
+<tr><td><span class="c">Delta-Base ":" &lt;entity-tag&gt;</span></td><td align="justify">Тег базовой сущности-инстанции, с которой производилось сравнение (RFC&nbsp;3229)</td></tr>
+<tr><td><span class="c">IM ":" #(&lt;instance-manipulation&gt;)</span></td><td align="justify">Список выполненных манипуляций инстанциями (RFC&nbsp;3229) (порядок существенен)</td></tr>
+<tr><td><span class="c">Digest ":" #(&lt;instance-digest&gt;)</span></td><td align="justify">Список хэшов инстанции либо ее части (RFC&nbsp;3230)</td></tr>
+<tr><td><span class="c">Accept-Patch ":" 1#&lt;media-type&gt;</span></td><td align="justify">Список допустимых при внесении изменений в ресурс типов данных (RFC&nbsp;5789)</td></tr>
+<tr><td><span class="c">Set-Cookie ":" &lt;SP&gt; &lt;set-cookie-string&gt;</span></td><td align="justify">Куки (RFC&nbsp;6265)</td></tr>
+<tr><td><span class="c">Content-Disposition ":" &lt;disposition-type&gt; *(";" &lt;disposition-parm&gt;)</span></td><td align="justify">Расположение вложенных данных в HTTP-сообщении (аналог заголовков MIME) (RFC&nbsp;6266)</td></tr>
+<tr><td><span class="c">Strict-Transport-Security ":" [&lt;directive&gt;] *(";" [&lt;directive&gt;])</span></td><td align="justify">Политика усиленной транспортной безопасности (HTTP Strict Transport Security, пока пара директив) (RFC&nbsp;6797)</td></tr>
+<tr><td><span class="c">Memento-Datetime ":" &lt;accept-dt-value&gt;</span></td><td align="justify">Дата и время создания текущего архива варианта контента (RFC&nbsp;7089)</td></tr>
+<tr><td><span class="c">Preference-Applied ":" 1#&lt;applied-pref&gt;</span></td><td align="justify">Список выполненных пожеланий HTTP-клиента о поведении (RFC&nbsp;7240)</td></tr>
+<tr><td><span class="c">Authentication-Info ":" #&lt;auth-param&gt;</span></td><td align="justify">Список параметров аутентификации на HTTP-сервере (в завершающем успешную аутентификацию ответе) (RFC&nbsp;7615)</td></tr>
+<tr><td><span class="c">Proxy-Authentication-Info ":" #&lt;auth-param&gt;</span></td><td align="justify">Список параметров аутентификации на прокси-сервере (в завершающем успешную аутентификацию ответе) (RFC&nbsp;7615)</td></tr>
+<tr><td align="center" colspan="2">WebDAV</td></tr>
+<tr><td><span class="c">Redirect-Ref ":" (&lt;URI&gt; | &lt;relative-ref&gt;)</span></td><td align="justify">URI для перенаправления запросов (RFC&nbsp;4437)</td></tr>
+<tr><td><span class="c">DASL ":" 1#&lt;Coded-URL&gt;</span></td><td align="justify">Список URLs, отображающих поддерживаемые грамматики поиска (много типов) (RFC&nbsp;5323)</td></tr>
+<tr><td><span class="c">Schedule-Tag ":" &lt;opaque-tag&gt;</span></td><td align="justify">Тег диспетчеризации (RFC&nbsp;6638)</td></tr>
+</tbody>
+</table>
+</p>
+
+<p>Изначально предполагали, что для обслуживания каждого отдельного компонента web-страницы, расположенного в пределах HTTP-сервера (например, при загрузке рисунка, при переходе по ссылке; о ссылках на находящиеся на других HTTP-серверах компоненты здесь речь не идет), следует создавать новое персональное TCP-соединение. Но на практике это приводило к нерациональному использованию сетевых ресурсов и, следовательно, к перегрузкам или заторам. Решить указанную проблему позволяют реализации, поддерживающие так называемые <em>персистентные соединения</em> (persistent connections, keep-alives) -- web-страница и все ее локальные компоненты передаются по одному и тому же TCP-соединению и это соединение закрывается принудительно. По правилам HTTP/1.0 после ответа от HTTP-сервера соединение по умолчанию закрывалось (персистентность включалась принудительно с помощью заголовков <span class="c">Connection: Keep-Alive</span> и <span class="c">Keep-Alive: ...</span>). Начиная с HTTP/1.1 соединение по умолчанию считается персистентным (персистентность выключается принудительно с помощью заголовка <span class="c">Connection: close</span>).
+</p>
+
+<p>Возможность конвейеризации при использовании персистентного соединения определяется исходя из идемпотентности HTTP-методов.</p>
+
+</div>
+
+</BODY>
+</HTML>

@@ -1,0 +1,30 @@
+# .gitignore for Quartus 
+
+# Debugging
+incremental_db/
+db/
+
+# Builders
+.sopc_builder/
+
+# Simulations
+simulation/
+output_files/
+
+# Additional files
+*_dump.txt
+*.qws
+*.rpt
+*.summary
+
+
+# I dont know what it is
+# *.bsf // block schematic file? 
+*.jpg
+*.html
+*.bak
+*.rpt
+*.pin
+*.pof
+*.sof
+*.txt
