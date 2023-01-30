@@ -42,7 +42,7 @@ def main():
     port_writer = serial.Serial(writer_file)
     port_reader = serial.Serial(reader_file)
 
-    for x in range (10):
+    for x in range(20):
         # Generate own message with 10% chance
         # message structure:
         #   SFS: PPP_T_RRR
@@ -63,6 +63,7 @@ def main():
         if len(receiver_data) > 0:
             if receiver_data[3] == '0':
                 have_token = True
+        max_priority = '000'
         if len(receiver_data) > 0:
             max_priority = format(max(int(priority, 2),
                                       int(receiver_data[4:7], 2)), "b").zfill(3)
@@ -71,7 +72,6 @@ def main():
         if have_token:
             message = ''
             if len(message_queue) > 0:
-
 
                 if len(receiver_data) == 0:
                     message = message_queue[0][0:4] + "000" + message_queue[0][
