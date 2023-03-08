@@ -1,0 +1,171 @@
+autostart = False
+version = 0.8.7
+[127.0.0.1:7202]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10201
+    [[3725]]
+        image = C:\Users\givan\Desktop\AKSiS\GNS3\c1700-advipservicesk9-mz.124-15.T14.image
+        ram = 1024
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R3]]
+        model = 3725
+        console = 2103
+        aux = 2503
+        cnfg = configs\R3.cfg
+        f0/0 = R1 f0/1
+        f0/1 = R4 f0/1
+        slot1 = NM-1FE-TX
+        f1/0 = R6 f1/0
+        x = -178.0
+        y = -116.0
+        z = 1.0
+[127.0.0.1:7203]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10301
+    [[3725]]
+        image = C:\Users\givan\Desktop\AKSiS\GNS3\c1700-advipservicesk9-mz.124-15.T14.image
+        ram = 1024
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R4]]
+        model = 3725
+        console = 2104
+        aux = 2504
+        cnfg = configs\R4.cfg
+        f0/0 = R1 f1/0
+        f0/1 = R3 f0/1
+        slot1 = NM-1FE-TX
+        f1/0 = R8 f0/1
+        x = -291.0
+        y = 64.0
+        z = 1.0
+[127.0.0.1:7200]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10001
+    [[3725]]
+        image = C:\Users\givan\Desktop\AKSiS\GNS3\c1700-advipservicesk9-mz.124-15.T14.image
+        ram = 1024
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R1]]
+        model = 3725
+        console = 2101
+        aux = 2501
+        cnfg = configs\R1.cfg
+        f0/0 = R2 f0/0
+        f0/1 = R3 f0/0
+        slot1 = NM-1FE-TX
+        f1/0 = R4 f0/0
+        x = -379.0
+        y = -109.0
+        z = 1.0
+[127.0.0.1:7201]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10101
+    [[3725]]
+        image = C:\Users\givan\Desktop\AKSiS\GNS3\c1700-advipservicesk9-mz.124-15.T14.image
+        ram = 1024
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R2]]
+        model = 3725
+        console = 2102
+        aux = 2502
+        cnfg = configs\R2.cfg
+        f0/0 = R1 f0/0
+        f0/1 = NIO_udp:30000:127.0.0.1:20000
+        slot1 = NM-1FE-TX
+        x = -549.0
+        y = -187.0
+        z = 1.0
+[127.0.0.1:7206]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10601
+    [[3725]]
+        image = C:\Users\givan\Desktop\AKSiS\GNS3\c1700-advipservicesk9-mz.124-15.T14.image
+        ram = 1024
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R7]]
+        model = 3725
+        console = 2107
+        aux = 2507
+        cnfg = configs\R7.cfg
+        f0/0 = R6 f0/0
+        f0/1 = R5 f0/1
+        slot1 = NM-1FE-TX
+        f1/0 = R8 f1/0
+        x = 101.0
+        y = 74.0
+        z = 1.0
+[127.0.0.1:7207]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10701
+    [[3725]]
+        image = C:\Users\givan\Desktop\AKSiS\GNS3\c1700-advipservicesk9-mz.124-15.T14.image
+        ram = 1024
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R8]]
+        model = 3725
+        console = 2108
+        aux = 2508
+        cnfg = configs\R8.cfg
+        f0/1 = R4 f1/0
+        slot1 = NM-1FE-TX
+        f1/0 = R7 f1/0
+        x = -72.0
+        y = 131.0
+        z = 1.0
+[127.0.0.1:7204]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10401
+    [[3725]]
+        image = C:\Users\givan\Desktop\AKSiS\GNS3\c1700-advipservicesk9-mz.124-15.T14.image
+        ram = 1024
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R5]]
+        model = 3725
+        console = 2105
+        aux = 2505
+        cnfg = configs\R5.cfg
+        f0/0 = NIO_udp:30001:127.0.0.1:20001
+        f0/1 = R7 f0/1
+        x = 333.0
+        y = 113.0
+        z = 1.0
+[127.0.0.1:7205]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10501
+    [[3725]]
+        image = C:\Users\givan\Desktop\AKSiS\GNS3\c1700-advipservicesk9-mz.124-15.T14.image
+        ram = 1024
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R6]]
+        model = 3725
+        console = 2106
+        aux = 2506
+        cnfg = configs\R6.cfg
+        f0/0 = R7 f0/0
+        slot1 = NM-1FE-TX
+        f1/0 = R3 f1/0
+        x = 25.0
+        y = -57.0
+        z = 1.0
+[GNS3-DATA]
+    configs = configs
+    [[Cloud C2]]
+        symbol = Host
+        x = 333.5
+        y = 246.5
+        z = 1.0
+        connections = R5:f0/0:NIO_udp:30001:127.0.0.1:20001
+    [[Cloud C1]]
+        symbol = Host
+        x = -551.5
+        y = 14.5
+        z = 1.0
+        connections = R2:f0/1:NIO_udp:30000:127.0.0.1:20000
