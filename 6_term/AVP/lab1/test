@@ -125,8 +125,6 @@ _Z18sum_small_matricesRSt6vectorIS_IdSaIdEESaIS1_EERKS3_:
 .LC2:
 	.string	"Matrix not equal!"
 .LC3:
-	.string	" Index:"
-.LC4:
 	.string	"Matrix equal"
 	.text
 	.p2align 4
@@ -200,7 +198,7 @@ _Z7compareRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
 	cmpl	$100, %r12d
 	jne	.L20
 	movl	$12, %edx
-	movl	$.LC4, %esi
+	movl	$.LC3, %esi
 	movl	$_ZSt4cout, %edi
 	call	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 	movq	_ZSt4cout(%rip), %rax
@@ -248,13 +246,11 @@ _Z7compareRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
 	vmovsd	%xmm1, %xmm1, %xmm0
 	movq	%r14, %rdi
 	call	_ZNSo9_M_insertIdEERSoT_
-	movl	$7, %edx
-	movl	$.LC3, %esi
-	movq	%rax, %r14
+	movl	$1684371514, %esi
 	movq	%rax, %rdi
-	call	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
+	call	_ZNSolsEi
 	movl	%r12d, %esi
-	movq	%r14, %rdi
+	movq	%rax, %rdi
 	call	_ZNSolsEi
 	movl	%ebp, %esi
 	movq	%rax, %rdi
@@ -341,7 +337,7 @@ _Z7compareRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
 	.size	_Z7compareRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, .-_Z7compareRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
 	.section	.rodata._ZNSt6vectorIdSaIdEEC2EmRKS0_.str1.8,"aMS",@progbits,1
 	.align 8
-.LC5:
+.LC4:
 	.string	"cannot create std::vector larger than max_size()"
 	.section	.text._ZNSt6vectorIdSaIdEEC2EmRKS0_,"axG",@progbits,_ZNSt6vectorIdSaIdEEC5EmRKS0_,comdat
 	.align 2
@@ -446,7 +442,7 @@ _ZNSt6vectorIdSaIdEEC2EmRKS0_:
 	ret
 .L58:
 	.cfi_restore_state
-	movl	$.LC5, %edi
+	movl	$.LC4, %edi
 	call	_ZSt20__throw_length_errorPKc
 	.cfi_endproc
 .LFE9806:
@@ -876,9 +872,9 @@ _ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm429496
 .LFE10284:
 	.size	_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE11_M_gen_randEv, .-_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE11_M_gen_randEv
 	.section	.text.unlikely,"ax",@progbits
-.LCOLDB16:
+.LCOLDB15:
 	.text
-.LHOTB16:
+.LHOTB15:
 	.p2align 4
 	.globl	_Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE
 	.type	_Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE, @function
@@ -959,7 +955,7 @@ _Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE:
 .L153:
 	movq	8(%r13), %r12
 	movq	0(%r13), %rbp
-	flds	.LC14(%rip)
+	flds	.LC13(%rip)
 	cmpq	%r12, %rbp
 	je	.L183
 	.p2align 4,,10
@@ -970,7 +966,7 @@ _Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE:
 	cmpq	%rdx, %rbx
 	je	.L155
 	movq	10048(%rsp), %rsi
-	vmovsd	.LC12(%rip), %xmm2
+	vmovsd	.LC11(%rip), %xmm2
 	movq	%rdx, %r15
 	.p2align 4,,10
 	.p2align 3
@@ -1024,8 +1020,8 @@ _Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE:
 	leaq	5056(%rsp), %rdi
 	vmovsd	%xmm1, 16(%rsp)
 	call	_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE11_M_gen_randEv
-	movq	.LC12(%rip), %rcx
-	flds	.LC14(%rip)
+	movq	.LC11(%rip), %rcx
+	flds	.LC13(%rip)
 	vxorps	%xmm3, %xmm3, %xmm3
 	movq	10048(%rsp), %rax
 	vmovsd	16(%rsp), %xmm1
@@ -1094,7 +1090,7 @@ _Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE:
 	.p2align 4,,10
 	.p2align 3
 .L166:
-	vmovsd	.LC13(%rip), %xmm1
+	vmovsd	.LC12(%rip), %xmm1
 	jmp	.L161
 .L168:
 	movq	%rax, %rbx
@@ -1166,11 +1162,11 @@ _Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE.cold
 	.byte	0x1
 	.uleb128 .LLSDACSEC9518-.LLSDACSBC9518
 .LLSDACSBC9518:
-	.uleb128 .LEHB2-.LCOLDB16
+	.uleb128 .LEHB2-.LCOLDB15
 	.uleb128 .LEHE2-.LEHB2
 	.uleb128 0
 	.uleb128 0
-	.uleb128 .LEHB3-.LCOLDB16
+	.uleb128 .LEHB3-.LCOLDB15
 	.uleb128 .LEHE3-.LEHB3
 	.uleb128 0
 	.uleb128 0
@@ -1180,9 +1176,9 @@ _Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE.cold
 	.size	_Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE, .-_Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE
 	.section	.text.unlikely
 	.size	_Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE.cold, .-_Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE.cold
-.LCOLDE16:
+.LCOLDE15:
 	.text
-.LHOTE16:
+.LHOTE15:
 	.section	.text._ZSt18__do_uninit_fill_nIPSt6vectorIdSaIdEEmS2_ET_S4_T0_RKT1_,"axG",@progbits,_ZSt18__do_uninit_fill_nIPSt6vectorIdSaIdEEmS2_ET_S4_T0_RKT1_,comdat
 	.p2align 4
 	.weak	_ZSt18__do_uninit_fill_nIPSt6vectorIdSaIdEEmS2_ET_S4_T0_RKT1_
@@ -1418,7 +1414,7 @@ _ZNSt6vectorIS_IdSaIdEESaIS1_EEC2EmRKS1_RKS2_:
 	ret
 .L218:
 	.cfi_restore_state
-	movl	$.LC5, %edi
+	movl	$.LC4, %edi
 .LEHB9:
 	call	_ZSt20__throw_length_errorPKc
 .L209:
@@ -1463,9 +1459,9 @@ _ZNSt6vectorIS_IdSaIdEESaIS1_EEC2EmRKS1_RKS2_:
 	.weak	_ZNSt6vectorIS_IdSaIdEESaIS1_EEC1EmRKS1_RKS2_
 	.set	_ZNSt6vectorIS_IdSaIdEESaIS1_EEC1EmRKS1_RKS2_,_ZNSt6vectorIS_IdSaIdEESaIS1_EEC2EmRKS1_RKS2_
 	.section	.text.unlikely
-.LCOLDB17:
+.LCOLDB16:
 	.text
-.LHOTB17:
+.LHOTB16:
 	.p2align 4
 	.globl	_Z17multiply_matricesRSt6vectorIS_IdSaIdEESaIS1_EES4_
 	.type	_Z17multiply_matricesRSt6vectorIS_IdSaIdEESaIS1_EES4_, @function
@@ -1620,7 +1616,7 @@ _Z17multiply_matricesRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold:
 	.byte	0x1
 	.uleb128 .LLSDACSEC9540-.LLSDACSBC9540
 .LLSDACSBC9540:
-	.uleb128 .LEHB12-.LCOLDB17
+	.uleb128 .LEHB12-.LCOLDB16
 	.uleb128 .LEHE12-.LEHB12
 	.uleb128 0
 	.uleb128 0
@@ -1630,13 +1626,13 @@ _Z17multiply_matricesRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold:
 	.size	_Z17multiply_matricesRSt6vectorIS_IdSaIdEESaIS1_EES4_, .-_Z17multiply_matricesRSt6vectorIS_IdSaIdEESaIS1_EES4_
 	.section	.text.unlikely
 	.size	_Z17multiply_matricesRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold, .-_Z17multiply_matricesRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold
-.LCOLDE17:
+.LCOLDE16:
 	.text
-.LHOTE17:
+.LHOTE16:
 	.section	.text.unlikely
-.LCOLDB19:
+.LCOLDB18:
 	.text
-.LHOTB19:
+.LHOTB18:
 	.p2align 4
 	.globl	_Z21multiply_matrices_avxRSt6vectorIS_IdSaIdEESaIS1_EES4_
 	.type	_Z21multiply_matrices_avxRSt6vectorIS_IdSaIdEESaIS1_EES4_, @function
@@ -1814,7 +1810,7 @@ _Z21multiply_matrices_avxRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold:
 	.byte	0x1
 	.uleb128 .LLSDACSEC9520-.LLSDACSBC9520
 .LLSDACSBC9520:
-	.uleb128 .LEHB16-.LCOLDB19
+	.uleb128 .LEHB16-.LCOLDB18
 	.uleb128 .LEHE16-.LEHB16
 	.uleb128 0
 	.uleb128 0
@@ -1824,13 +1820,13 @@ _Z21multiply_matrices_avxRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold:
 	.size	_Z21multiply_matrices_avxRSt6vectorIS_IdSaIdEESaIS1_EES4_, .-_Z21multiply_matrices_avxRSt6vectorIS_IdSaIdEESaIS1_EES4_
 	.section	.text.unlikely
 	.size	_Z21multiply_matrices_avxRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold, .-_Z21multiply_matrices_avxRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold
-.LCOLDE19:
+.LCOLDE18:
 	.text
-.LHOTE19:
+.LHOTE18:
 	.section	.text.unlikely
-.LCOLDB20:
+.LCOLDB19:
 	.text
-.LHOTB20:
+.LHOTB19:
 	.p2align 4
 	.globl	_Z26multiply_matrices_manuallyRSt6vectorIS_IdSaIdEESaIS1_EES4_
 	.type	_Z26multiply_matrices_manuallyRSt6vectorIS_IdSaIdEESaIS1_EES4_, @function
@@ -2043,7 +2039,7 @@ _Z26multiply_matrices_manuallyRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold:
 	.byte	0x1
 	.uleb128 .LLSDACSEC9542-.LLSDACSBC9542
 .LLSDACSBC9542:
-	.uleb128 .LEHB20-.LCOLDB20
+	.uleb128 .LEHB20-.LCOLDB19
 	.uleb128 .LEHE20-.LEHB20
 	.uleb128 0
 	.uleb128 0
@@ -2053,9 +2049,9 @@ _Z26multiply_matrices_manuallyRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold:
 	.size	_Z26multiply_matrices_manuallyRSt6vectorIS_IdSaIdEESaIS1_EES4_, .-_Z26multiply_matrices_manuallyRSt6vectorIS_IdSaIdEESaIS1_EES4_
 	.section	.text.unlikely
 	.size	_Z26multiply_matrices_manuallyRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold, .-_Z26multiply_matrices_manuallyRSt6vectorIS_IdSaIdEESaIS1_EES4_.cold
-.LCOLDE20:
+.LCOLDE19:
 	.text
-.LHOTE20:
+.LHOTE19:
 	.section	.text._ZSt18__do_uninit_fill_nIPSt6vectorIS0_IS0_IdSaIdEESaIS2_EESaIS4_EEmS6_ET_S8_T0_RKT1_,"axG",@progbits,_ZSt18__do_uninit_fill_nIPSt6vectorIS0_IS0_IdSaIdEESaIS2_EESaIS4_EEmS6_ET_S8_T0_RKT1_,comdat
 	.p2align 4
 	.weak	_ZSt18__do_uninit_fill_nIPSt6vectorIS0_IS0_IdSaIdEESaIS2_EESaIS4_EEmS6_ET_S8_T0_RKT1_
@@ -2718,7 +2714,7 @@ _ZNSt6vectorIS_IS_IdSaIdEESaIS1_EESaIS3_EEC2EmRKS3_RKS4_:
 	ret
 .L374:
 	.cfi_restore_state
-	movl	$.LC5, %edi
+	movl	$.LC4, %edi
 .LEHB37:
 	call	_ZSt20__throw_length_errorPKc
 .LEHE37:
@@ -2796,17 +2792,17 @@ _ZNSt6vectorIS_IS_IdSaIdEESaIS1_EESaIS3_EEC2EmRKS3_RKS4_:
 	.weak	_ZNSt6vectorIS_IS_IdSaIdEESaIS1_EESaIS3_EEC1EmRKS3_RKS4_
 	.set	_ZNSt6vectorIS_IS_IdSaIdEESaIS1_EESaIS3_EEC1EmRKS3_RKS4_,_ZNSt6vectorIS_IS_IdSaIdEESaIS1_EESaIS3_EEC2EmRKS3_RKS4_
 	.section	.text.unlikely
-.LCOLDB21:
+.LCOLDB20:
 	.text
-.LHOTB21:
+.LHOTB20:
 	.p2align 4
-	.globl	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
-	.type	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, @function
-_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
-.LFB9541:
+	.globl	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
+	.type	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, @function
+_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
+.LFB9530:
 	.cfi_startproc
 	.cfi_personality 0x3,__gxx_personality_v0
-	.cfi_lsda 0x3,.LLSDA9541
+	.cfi_lsda 0x3,.LLSDA9530
 	pushq	%r15
 	.cfi_def_cfa_offset 16
 	.cfi_offset 15, -16
@@ -2980,7 +2976,7 @@ _Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
 	movq	(%rax,%rbx), %rsi
 	addq	%rbp, %rsi
 .LEHB47:
-	call	_Z17multiply_matricesRSt6vectorIS_IdSaIdEESaIS1_EES4_
+	call	_Z21multiply_matrices_avxRSt6vectorIS_IdSaIdEESaIS1_EES4_
 .LEHE47:
 	movq	(%r15), %rax
 	movq	%r12, %rsi
@@ -3068,62 +3064,62 @@ _Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
 	jmp	.L379
 	.section	.gcc_except_table
 	.align 4
-.LLSDA9541:
+.LLSDA9530:
 	.byte	0xff
 	.byte	0x3
-	.uleb128 .LLSDATT9541-.LLSDATTD9541
-.LLSDATTD9541:
+	.uleb128 .LLSDATT9530-.LLSDATTD9530
+.LLSDATTD9530:
 	.byte	0x1
-	.uleb128 .LLSDACSE9541-.LLSDACSB9541
-.LLSDACSB9541:
-	.uleb128 .LEHB40-.LFB9541
+	.uleb128 .LLSDACSE9530-.LLSDACSB9530
+.LLSDACSB9530:
+	.uleb128 .LEHB40-.LFB9530
 	.uleb128 .LEHE40-.LEHB40
 	.uleb128 0
 	.uleb128 0
-	.uleb128 .LEHB41-.LFB9541
+	.uleb128 .LEHB41-.LFB9530
 	.uleb128 .LEHE41-.LEHB41
-	.uleb128 .L414-.LFB9541
+	.uleb128 .L414-.LFB9530
 	.uleb128 0
-	.uleb128 .LEHB42-.LFB9541
+	.uleb128 .LEHB42-.LFB9530
 	.uleb128 .LEHE42-.LEHB42
-	.uleb128 .L418-.LFB9541
+	.uleb128 .L418-.LFB9530
 	.uleb128 0
-	.uleb128 .LEHB43-.LFB9541
+	.uleb128 .LEHB43-.LFB9530
 	.uleb128 .LEHE43-.LEHB43
-	.uleb128 .L415-.LFB9541
+	.uleb128 .L415-.LFB9530
 	.uleb128 0
-	.uleb128 .LEHB44-.LFB9541
+	.uleb128 .LEHB44-.LFB9530
 	.uleb128 .LEHE44-.LEHB44
-	.uleb128 .L420-.LFB9541
+	.uleb128 .L420-.LFB9530
 	.uleb128 0x1
-	.uleb128 .LEHB45-.LFB9541
+	.uleb128 .LEHB45-.LFB9530
 	.uleb128 .LEHE45-.LEHB45
-	.uleb128 .L416-.LFB9541
+	.uleb128 .L416-.LFB9530
 	.uleb128 0
-	.uleb128 .LEHB46-.LFB9541
+	.uleb128 .LEHB46-.LFB9530
 	.uleb128 .LEHE46-.LEHB46
-	.uleb128 .L421-.LFB9541
+	.uleb128 .L421-.LFB9530
 	.uleb128 0
-	.uleb128 .LEHB47-.LFB9541
+	.uleb128 .LEHB47-.LFB9530
 	.uleb128 .LEHE47-.LEHB47
-	.uleb128 .L417-.LFB9541
+	.uleb128 .L417-.LFB9530
 	.uleb128 0
-.LLSDACSE9541:
+.LLSDACSE9530:
 	.byte	0x1
 	.byte	0
 	.align 4
 	.long	0
 
-.LLSDATT9541:
+.LLSDATT9530:
 	.text
 	.cfi_endproc
 	.section	.text.unlikely
 	.cfi_startproc
 	.cfi_personality 0x3,__gxx_personality_v0
-	.cfi_lsda 0x3,.LLSDAC9541
-	.type	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold, @function
-_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold:
-.LFSB9541:
+	.cfi_lsda 0x3,.LLSDAC9530
+	.type	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold, @function
+_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold:
+.LFSB9530:
 .L391:
 	.cfi_def_cfa_offset 208
 	.cfi_offset 3, -56
@@ -3188,52 +3184,52 @@ _Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold:
 	call	_ZdlPv
 	jmp	.L387
 	.cfi_endproc
-.LFE9541:
+.LFE9530:
 	.section	.gcc_except_table
 	.align 4
-.LLSDAC9541:
+.LLSDAC9530:
 	.byte	0xff
 	.byte	0x3
-	.uleb128 .LLSDATTC9541-.LLSDATTDC9541
-.LLSDATTDC9541:
+	.uleb128 .LLSDATTC9530-.LLSDATTDC9530
+.LLSDATTDC9530:
 	.byte	0x1
-	.uleb128 .LLSDACSEC9541-.LLSDACSBC9541
-.LLSDACSBC9541:
-	.uleb128 .LEHB48-.LCOLDB21
+	.uleb128 .LLSDACSEC9530-.LLSDACSBC9530
+.LLSDACSBC9530:
+	.uleb128 .LEHB48-.LCOLDB20
 	.uleb128 .LEHE48-.LEHB48
 	.uleb128 0
 	.uleb128 0
-	.uleb128 .LEHB49-.LCOLDB21
+	.uleb128 .LEHB49-.LCOLDB20
 	.uleb128 .LEHE49-.LEHB49
-	.uleb128 .L419-.LCOLDB21
+	.uleb128 .L419-.LCOLDB20
 	.uleb128 0
-.LLSDACSEC9541:
+.LLSDACSEC9530:
 	.byte	0x1
 	.byte	0
 	.align 4
 	.long	0
 
-.LLSDATTC9541:
+.LLSDATTC9530:
 	.section	.text.unlikely
 	.text
-	.size	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, .-_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
+	.size	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, .-_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
 	.section	.text.unlikely
-	.size	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold, .-_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold
-.LCOLDE21:
+	.size	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold, .-_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold
+.LCOLDE20:
 	.text
-.LHOTE21:
+.LHOTE20:
 	.section	.text.unlikely
-.LCOLDB22:
+.LCOLDB21:
 	.text
-.LHOTB22:
+.LHOTB21:
 	.p2align 4
-	.globl	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
-	.type	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, @function
-_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
-.LFB9530:
+	.globl	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
+	.type	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, @function
+_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
+.LFB9541:
 	.cfi_startproc
 	.cfi_personality 0x3,__gxx_personality_v0
-	.cfi_lsda 0x3,.LLSDA9530
+	.cfi_lsda 0x3,.LLSDA9541
 	pushq	%r15
 	.cfi_def_cfa_offset 16
 	.cfi_offset 15, -16
@@ -3407,7 +3403,7 @@ _Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
 	movq	(%rax,%rbx), %rsi
 	addq	%rbp, %rsi
 .LEHB57:
-	call	_Z21multiply_matrices_avxRSt6vectorIS_IdSaIdEESaIS1_EES4_
+	call	_Z17multiply_matricesRSt6vectorIS_IdSaIdEESaIS1_EES4_
 .LEHE57:
 	movq	(%r15), %rax
 	movq	%r12, %rsi
@@ -3495,62 +3491,62 @@ _Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_:
 	jmp	.L452
 	.section	.gcc_except_table
 	.align 4
-.LLSDA9530:
+.LLSDA9541:
 	.byte	0xff
 	.byte	0x3
-	.uleb128 .LLSDATT9530-.LLSDATTD9530
-.LLSDATTD9530:
+	.uleb128 .LLSDATT9541-.LLSDATTD9541
+.LLSDATTD9541:
 	.byte	0x1
-	.uleb128 .LLSDACSE9530-.LLSDACSB9530
-.LLSDACSB9530:
-	.uleb128 .LEHB50-.LFB9530
+	.uleb128 .LLSDACSE9541-.LLSDACSB9541
+.LLSDACSB9541:
+	.uleb128 .LEHB50-.LFB9541
 	.uleb128 .LEHE50-.LEHB50
 	.uleb128 0
 	.uleb128 0
-	.uleb128 .LEHB51-.LFB9530
+	.uleb128 .LEHB51-.LFB9541
 	.uleb128 .LEHE51-.LEHB51
-	.uleb128 .L487-.LFB9530
+	.uleb128 .L487-.LFB9541
 	.uleb128 0
-	.uleb128 .LEHB52-.LFB9530
+	.uleb128 .LEHB52-.LFB9541
 	.uleb128 .LEHE52-.LEHB52
-	.uleb128 .L491-.LFB9530
+	.uleb128 .L491-.LFB9541
 	.uleb128 0
-	.uleb128 .LEHB53-.LFB9530
+	.uleb128 .LEHB53-.LFB9541
 	.uleb128 .LEHE53-.LEHB53
-	.uleb128 .L488-.LFB9530
+	.uleb128 .L488-.LFB9541
 	.uleb128 0
-	.uleb128 .LEHB54-.LFB9530
+	.uleb128 .LEHB54-.LFB9541
 	.uleb128 .LEHE54-.LEHB54
-	.uleb128 .L493-.LFB9530
+	.uleb128 .L493-.LFB9541
 	.uleb128 0x1
-	.uleb128 .LEHB55-.LFB9530
+	.uleb128 .LEHB55-.LFB9541
 	.uleb128 .LEHE55-.LEHB55
-	.uleb128 .L489-.LFB9530
+	.uleb128 .L489-.LFB9541
 	.uleb128 0
-	.uleb128 .LEHB56-.LFB9530
+	.uleb128 .LEHB56-.LFB9541
 	.uleb128 .LEHE56-.LEHB56
-	.uleb128 .L494-.LFB9530
+	.uleb128 .L494-.LFB9541
 	.uleb128 0
-	.uleb128 .LEHB57-.LFB9530
+	.uleb128 .LEHB57-.LFB9541
 	.uleb128 .LEHE57-.LEHB57
-	.uleb128 .L490-.LFB9530
+	.uleb128 .L490-.LFB9541
 	.uleb128 0
-.LLSDACSE9530:
+.LLSDACSE9541:
 	.byte	0x1
 	.byte	0
 	.align 4
 	.long	0
 
-.LLSDATT9530:
+.LLSDATT9541:
 	.text
 	.cfi_endproc
 	.section	.text.unlikely
 	.cfi_startproc
 	.cfi_personality 0x3,__gxx_personality_v0
-	.cfi_lsda 0x3,.LLSDAC9530
-	.type	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold, @function
-_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold:
-.LFSB9530:
+	.cfi_lsda 0x3,.LLSDAC9541
+	.type	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold, @function
+_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold:
+.LFSB9541:
 .L464:
 	.cfi_def_cfa_offset 208
 	.cfi_offset 3, -56
@@ -3615,44 +3611,44 @@ _Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold:
 	call	_ZdlPv
 	jmp	.L460
 	.cfi_endproc
-.LFE9530:
+.LFE9541:
 	.section	.gcc_except_table
 	.align 4
-.LLSDAC9530:
+.LLSDAC9541:
 	.byte	0xff
 	.byte	0x3
-	.uleb128 .LLSDATTC9530-.LLSDATTDC9530
-.LLSDATTDC9530:
+	.uleb128 .LLSDATTC9541-.LLSDATTDC9541
+.LLSDATTDC9541:
 	.byte	0x1
-	.uleb128 .LLSDACSEC9530-.LLSDACSBC9530
-.LLSDACSBC9530:
-	.uleb128 .LEHB58-.LCOLDB22
+	.uleb128 .LLSDACSEC9541-.LLSDACSBC9541
+.LLSDACSBC9541:
+	.uleb128 .LEHB58-.LCOLDB21
 	.uleb128 .LEHE58-.LEHB58
 	.uleb128 0
 	.uleb128 0
-	.uleb128 .LEHB59-.LCOLDB22
+	.uleb128 .LEHB59-.LCOLDB21
 	.uleb128 .LEHE59-.LEHB59
-	.uleb128 .L492-.LCOLDB22
+	.uleb128 .L492-.LCOLDB21
 	.uleb128 0
-.LLSDACSEC9530:
+.LLSDACSEC9541:
 	.byte	0x1
 	.byte	0
 	.align 4
 	.long	0
 
-.LLSDATTC9530:
+.LLSDATTC9541:
 	.section	.text.unlikely
 	.text
-	.size	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, .-_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
+	.size	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, .-_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
 	.section	.text.unlikely
-	.size	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold, .-_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold
-.LCOLDE22:
+	.size	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold, .-_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold
+.LCOLDE21:
 	.text
-.LHOTE22:
+.LHOTE21:
 	.section	.text.unlikely
-.LCOLDB23:
+.LCOLDB22:
 	.text
-.LHOTB23:
+.LHOTB22:
 	.p2align 4
 	.globl	_Z18calculate_manuallyRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
 	.type	_Z18calculate_manuallyRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, @function
@@ -4053,13 +4049,13 @@ _Z18calculate_manuallyRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.col
 	.byte	0x1
 	.uleb128 .LLSDACSEC9543-.LLSDACSBC9543
 .LLSDACSBC9543:
-	.uleb128 .LEHB68-.LCOLDB23
+	.uleb128 .LEHB68-.LCOLDB22
 	.uleb128 .LEHE68-.LEHB68
 	.uleb128 0
 	.uleb128 0
-	.uleb128 .LEHB69-.LCOLDB23
+	.uleb128 .LEHB69-.LCOLDB22
 	.uleb128 .LEHE69-.LEHB69
-	.uleb128 .L565-.LCOLDB23
+	.uleb128 .L565-.LCOLDB22
 	.uleb128 0
 .LLSDACSEC9543:
 	.byte	0x1
@@ -4073,22 +4069,22 @@ _Z18calculate_manuallyRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.col
 	.size	_Z18calculate_manuallyRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_, .-_Z18calculate_manuallyRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
 	.section	.text.unlikely
 	.size	_Z18calculate_manuallyRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold, .-_Z18calculate_manuallyRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_.cold
-.LCOLDE23:
+.LCOLDE22:
 	.text
-.LHOTE23:
+.LHOTE22:
 	.section	.rodata.str1.1
-.LC24:
+.LC23:
 	.string	"With AVX took me "
-.LC25:
+.LC24:
 	.string	" milliseconds."
-.LC26:
+.LC25:
 	.string	"Without AVX took me "
-.LC27:
+.LC26:
 	.string	"With manually AVX took me "
 	.section	.text.unlikely
-.LCOLDB28:
+.LCOLDB27:
 	.section	.text.startup,"ax",@progbits
-.LHOTB28:
+.LHOTB27:
 	.p2align 4
 	.globl	main
 	.type	main, @function
@@ -4211,7 +4207,7 @@ main:
 	call	_Z13calculate_avxRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
 .LEHE80:
 	call	_ZNSt6chrono3_V212steady_clock3nowEv
-	movl	$.LC24, %esi
+	movl	$.LC23, %esi
 	movl	$_ZSt4cout, %edi
 	movabsq	$4835703278458516699, %rdx
 	subq	%rbx, %rax
@@ -4227,7 +4223,7 @@ main:
 	movq	%rbx, %rsi
 	call	_ZNSo9_M_insertIlEERSoT_
 	movq	%rax, %rdi
-	movl	$.LC25, %esi
+	movl	$.LC24, %esi
 	call	_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
 	movq	%rax, %rdi
 	call	_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_.isra.0
@@ -4239,7 +4235,7 @@ main:
 	call	_Z9calculateRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
 .LEHE81:
 	call	_ZNSt6chrono3_V212steady_clock3nowEv
-	movl	$.LC26, %esi
+	movl	$.LC25, %esi
 	movl	$_ZSt4cout, %edi
 	movabsq	$4835703278458516699, %rdx
 	subq	%rbx, %rax
@@ -4255,7 +4251,7 @@ main:
 	movq	%rbx, %rsi
 	call	_ZNSo9_M_insertIlEERSoT_
 	movq	%rax, %rdi
-	movl	$.LC25, %esi
+	movl	$.LC24, %esi
 	call	_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
 	movq	%rax, %rdi
 	call	_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_.isra.0
@@ -4270,7 +4266,7 @@ main:
 	call	_Z18calculate_manuallyRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EES8_
 .LEHE82:
 	call	_ZNSt6chrono3_V212steady_clock3nowEv
-	movl	$.LC27, %esi
+	movl	$.LC26, %esi
 	movl	$_ZSt4cout, %edi
 	movabsq	$4835703278458516699, %rdx
 	subq	%rbx, %rax
@@ -4286,7 +4282,7 @@ main:
 	movq	%rbx, %rsi
 	call	_ZNSo9_M_insertIlEERSoT_
 	movq	%rax, %rdi
-	movl	$.LC25, %esi
+	movl	$.LC24, %esi
 	call	_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
 	movq	%rax, %rdi
 	call	_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_.isra.0
@@ -4507,7 +4503,7 @@ main.cold:
 	.byte	0x1
 	.uleb128 .LLSDACSEC9545-.LLSDACSBC9545
 .LLSDACSBC9545:
-	.uleb128 .LEHB84-.LCOLDB28
+	.uleb128 .LEHB84-.LCOLDB27
 	.uleb128 .LEHE84-.LEHB84
 	.uleb128 0
 	.uleb128 0
@@ -4517,9 +4513,9 @@ main.cold:
 	.size	main, .-main
 	.section	.text.unlikely
 	.size	main.cold, .-main.cold
-.LCOLDE28:
+.LCOLDE27:
 	.section	.text.startup
-.LHOTE28:
+.LHOTE27:
 	.p2align 4
 	.type	_GLOBAL__sub_I__Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE, @function
 _GLOBAL__sub_I__Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_EESaIS5_EE:
@@ -4556,16 +4552,16 @@ _GLOBAL__sub_I__Z20randomize_one_matrixRSt6vectorIS_IS_IS_IdSaIdEESaIS1_EESaIS3_
 	.long	1202590843
 	.long	1065646817
 	.align 8
-.LC12:
+.LC11:
 	.long	0
 	.long	1072693248
 	.align 8
-.LC13:
+.LC12:
 	.long	-1
 	.long	1072693247
 	.section	.rodata.cst4,"aM",@progbits,4
 	.align 4
-.LC14:
+.LC13:
 	.long	1333788672
 	.hidden	__dso_handle
 	.ident	"GCC: (GNU) 12.2.1 20221121 (Red Hat 12.2.1-4)"
