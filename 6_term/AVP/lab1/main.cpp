@@ -250,6 +250,8 @@ int main() {
 //    cout << "Without AVX took me " << time << " milliseconds." << endl;
 //    compare(big_result, big_result_avx);
 
+
+
     start = steady_clock::now();
     auto big_result_manually = calculate_manually_reverse(big_matrix1, big_matrix2);
     time = duration_cast<milliseconds>(steady_clock::now() - start).count();
