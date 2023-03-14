@@ -32,17 +32,8 @@ __global__ void mash_gpu() {
     auto quarter_i = i % 2;
     auto quarter_j = j % 2;
 
-    if (quarter_i == 0) {
-        i /= 2;
-    } else if (quarter_i == 1) {
-        i = i + (N - i) / 2;
-    }
-
-    if (quarter_j == 0) {
-        j /= 2;
-    } else if (quarter_j == 1) {
-        j = j + (N - j) / 2;
-    }
+    quarter_i == 0 ? i /= 2 : i += (N - i) / 2;
+    quarter_j == 0 ? j /= 2 : j += (N - j) / 2;
 
     out_matrix_gpu[i][j] = matrix[i_1][j_1];
 }
