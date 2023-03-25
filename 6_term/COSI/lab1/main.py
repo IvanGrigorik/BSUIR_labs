@@ -105,7 +105,7 @@ def sampled(func, n, period=(2 * pi)):
 
 def main():
     func = lambda arg: sin(3 * arg) + cos(arg)
-
+ё
     N = 16
     inner = sampled(func, N)
 
