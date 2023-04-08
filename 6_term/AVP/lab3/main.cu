@@ -6,7 +6,7 @@ using namespace std::chrono;
 
 using namespace std;
 
-#define N /*16*/ /*32*/ /*64*/ 128
+#define N 16 /*32*/ /*64*/ /*512*/
 
 __managed__
 int matrix[N][N];
@@ -20,10 +20,12 @@ void fill_matrix() {
     }
 }
 
-__managed__ int out_matrix_gpu[N][N];
+__managed__
+int out_matrix_gpu[N][N];
 int out_matrix_cpu[N][N];
 
-__global__ void mash_gpu() {
+__global__
+void mash_gpu() {
     unsigned idx = blockIdx.x * blockDim.x + threadIdx.x;
     unsigned i = idx / N % N;
     unsigned j = idx % N;
@@ -47,17 +49,8 @@ void mash_cpu() {
             auto quarter_i = i % 2;
             auto quarter_j = j % 2;
 
-            if (quarter_i == 0) {
-                i_out /= 2;
-            } else if (quarter_i == 1) {
-                i_out = i_out + (N - i_out) / 2;
-            }
-
-            if (quarter_j == 0) {
-                j_out /= 2;
-            } else if (quarter_j == 1) {
-                j_out = j_out + (N - j_out) / 2;
-            }
+            quarter_i == 0 ? i_out /= 2 : i_out += (N - i) / 2;
+            quarter_j == 0 ? j_out /= 2 : j_out += (N - j) / 2;
 
             out_matrix_cpu[i_out][j_out] = matrix[i][j];
         }
@@ -70,21 +63,21 @@ void run_gpu() {
     cudaEventCreate(&stop);
 
     cudaEventRecord(start);
-    mash_gpu<<<N + 127 / 128, 128>>>();
+    mash_gpu<<<N + 127 / 128, N>>>();
     cudaDeviceSynchronize();
     cudaEventRecord(stop);
 
+    cudaEventSynchronize(start);
     cudaEventSynchronize(stop);
+
     float milliseconds = 0;
     cudaEventElapsedTime(&milliseconds, start, stop);
 
     cout << "GPU elapsed time: " << milliseconds << endl;
-    cudaDeviceSynchronize();
 
 }
 
 void run_cpu() {
-
     auto start = steady_clock::now();
     mash_cpu();
     auto time = duration_cast<microseconds>(
@@ -102,6 +95,7 @@ bool is_equal() {
     }
     return true;
 }
+void matrix_output();
 
 int main() {
 
@@ -110,44 +104,65 @@ int main() {
     run_gpu();
     run_cpu();
 
+    matrix_output();
     cout << "Is matrix equal: " << std::boolalpha << is_equal() << endl;
 }
 
 
-//void matrix_output() {
-//    cout << "Initial matrix: " << endl;
-//    for (int i = 0; i < N; i++) {
-//        cout << "|";
-//        for (int j = 0; j < N; j++) {
-//            cout << setw(3) << matrix[i][j] << ' ';
-//            if ((j + 1) % 2 == 0) {
-//                cout << "| ";
-//            }
-//        }
-//        if ((i + 1) % 2 == 0 && i + 1 != N) {
-//            cout << endl;
-//            for (int k = 0; k < N; k++) {
-//                cout << setw(3) << "-----";
-//            }
-//        }
-//        cout << endl;
-//    }
-//
-//    cout << endl << "Result matrix: " << endl;
-//    for (int i = 0; i < N; i++) {
-//        for (int j = 0; j < N; j++) {
-//            cout << setw(3) << out_matrix[i][j] << ' ';
-//            if (j == N / 2 - 1) {
-//                cout << setw(3) << "| ";
-//            }
-//        }
-//        if (i == N / 2 - 1) {
-//            cout << endl;
-//            for (int k = 0; k < N; k++) {
-//                cout << setw(3) << "----";
-//            }
-//        }
-//
-//        cout << endl;
-//    }
-//}
+void matrix_output() {
+    cout << "Initial matrix: " << endl;
+    for (int i = 0; i < N; i++) {
+        cout << "|";
+        for (int j = 0; j < N; j++) {
+            cout << setw(3) << matrix[i][j] << ' ';
+            if ((j + 1) % 2 == 0) {
+                cout << "| ";
+            }
+        }
+        if ((i + 1) % 2 == 0 && i + 1 != N) {
+            cout << endl;
+            for (int k = 0; k < N; k++) {
+                cout << setw(3) << "-----";
+            }
+        }
+        cout << endl;
+    }
+
+    cout << endl << "Result matrix: " << endl;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            cout << setw(3) << out_matrix_gpu[i][j] << ' ';
+            if (j == N / 2 - 1) {
+                cout << setw(3) << "| ";
+            }
+        }
+        if (i == N / 2 - 1) {
+            cout << endl;
+            for (int k = 0; k < N; k++) {
+                cout << setw(3) << "----";
+            }
+        }
+
+        cout << endl;
+    }
+
+
+    cout << endl << "Result matrix cpu: " << endl;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            cout << setw(3) << out_matrix_cpu[i][j] << ' ';
+            if (j == N / 2 - 1) {
+                cout << setw(3) << "| ";
+            }
+        }
+        if (i == N / 2 - 1) {
+            cout << endl;
+            for (int k = 0; k < N; k++) {
+                cout << setw(3) << "----";
+            }
+        }
+
+        cout << endl;
+    }
+
+}

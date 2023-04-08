@@ -1,5 +1,6 @@
 import numpy as np
 import sympy
+import matplotlib.pyplot as plt
 
 
 def signal(x):
@@ -28,6 +29,12 @@ def fwht(sample):
     return result
 
 
+def draw_samples(samples):
+    plt.stem(samples)
+    plt.grid()
+    plt.show()
+
+
 def main():
     n = 16
     sample = discretize(signal, n)
@@ -35,7 +42,7 @@ def main():
     print(transformation_result)
 
     transform = sympy.fwht(sample)
-    print("Transform: ", transform)
+    print(transform)
 
 
 if __name__ == "__main__":
