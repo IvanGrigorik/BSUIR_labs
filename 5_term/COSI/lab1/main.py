@@ -1,115 +1,109 @@
-import cmath
-from cmath import pi as pi
-from math import cos as cos
-from math import sin as sin
+from cmath import *
 
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.backends.backend_pdf import PdfPages
+import scipy as scipy
 
-from ft import dft as dft
-from ft import idft as idft
-from ft import fft as fft
-from ft import ifft as ifft
 
-func = lambda x: sin(3 * x) + cos(x) # <--replace on your function
+def inner_function(x):
+    return np.sin(3 * x) + np.cos(x)
 
-import numpy.fft
 
-def sampled(func, n, period=(2 * pi)):
-    out = []
-    for i in range(n):
-        out.append(func(period * (i + 1) / n))
+def discretize(n):
+    return [inner_function(i * 2 * pi / n) for i in range(n)]
+
+
+def draw_inner_function():
+    x = np.arange(0, 2 * pi, 0.01)
+    y = inner_function(x)
+    plt.plot(x, y)
+    plt.grid()
+    plt.show()
+
+
+def draw_samples(samples):
+    plt.plot(samples)
+    plt.grid()
+    plt.show()
+
+
+def draw_peaks(data):
+    plt.stem(data)
+    plt.grid()
+    plt.show()
+
+
+def dft(x):
+    n = len(x)
+    c = [0.0 + 0.0j] * n
+    for k in range(n):
+        for m in range(n):
+            c[k] += x[m] * exp(-2j * pi * k * m / n)
+    return c
+
+
+def idft(x):
+    n = len(x)
+    c = [0.0 + 0.0j] * n
+    for k in range(n):
+        for m in range(n):
+            c[k] += x[m] * exp(2j * pi * k * m / n)
+        c[k] *= 1 / n
+    return c
+
+
+def fft(x):
+    n = len(x)
+    r = n // 2  # Just half len of simpled signal
+    out = [0. + 0.0j] * n
+
+    for i in range(n // 2):
+        out[i] = x[i] + x[i + r]
+        out[i + r] = (x[i] - x[i + r]) * exp(-2j * pi * i / n)
+
+    if n > 2:
+        top_list = fft(out[:r])
+        bot_list = fft(out[r:])
+
+        for i in range(r):
+            out[i * 2] = top_list[i]
+            out[(i + 1) * 2 - 1] = bot_list[i]
 
     return out
 
-with PdfPages('result.pdf') as pdf:
 
-    N = 16  # <--replace on your N
-    inner = sampled(func, N)
+def main():
+    # draw_inner_function()
 
-    spectrum, iters_dft = dft(inner)
+    n = 16
+    samples = discretize(n)
+    draw_samples(samples)
 
-    # DFT
-    x = np.arange(0, 2 * pi, 0.1)  # <--replace on your function
-    y = np.sin(3 * x) + np.cos(x)
+    spectrum = dft(samples)
+    dft_spectrum = spectrum
+    magnitudes = np.abs(spectrum)
+    draw_peaks(magnitudes)
 
-    plt.plot(x, y)
-    plt.title('Inner signal')
-    plt.xlabel(r'$x$')
-    plt.ylabel(r'$y = f(x)$')
-    pdf.savefig()
-    plt.close()
+    phases = np.angle(spectrum)
+    draw_peaks(phases)
 
-    plt.plot(np.arange(N), inner, "b:o")
-    plt.title('Sampled signal. N = 16')
-    plt.xlabel(r'$x$')
-    plt.ylabel(r'$y$')
-    pdf.savefig()
-    plt.close()
+    another_samples = [x.real for x in idft(spectrum)]
+    draw_samples(another_samples)
 
-    plt.plot(np.arange(N), [cmath.polar(x)[0] for x in spectrum], "go")
-    plt.title('DFT. Amplitude spectrum')
-    plt.xlabel(r'$f$')
-    pdf.savefig()
-    plt.close()
+    spectrum = fft(samples)
+    fft_spectrum = spectrum
+    magnitudes = np.abs(spectrum)
+    draw_peaks(magnitudes)
 
-    plt.plot(np.arange(N), [cmath.polar(x)[1] for x in spectrum], "go")
-    plt.title('DFT. Phase spectrum')
-    pdf.savefig()
-    plt.xlabel(r'$f$')
-    plt.close()
+    phases = np.angle(spectrum)
+    draw_peaks(phases)
 
-    plt.plot(np.arange(N),[x.real for x in idft(spectrum)], "r:o")
-    plt.title('Inverse DFT')
-    plt.xlabel(r'$x$')
-    plt.ylabel(r'$y$')
-    pdf.savefig()
-    plt.close()
+    for x in range(len(spectrum)):
+        print(f"{x + 1}) {dft_spectrum[x]} :  {fft_spectrum[x]}")
 
-    #FFT
-    spectrum, iters_fft = fft(inner)
+    print(dft_spectrum[5].imag / dft_spectrum[5].real)
+    print(fft_spectrum[5].imag / fft_spectrum[5].real)
 
-    plt.plot(np.arange(N), [cmath.polar(x)[0] for x in spectrum], "go")
-    plt.title('FFT. Amplitude spectrum')
-    pdf.savefig()
-    plt.xlabel(r'$f$')
-    plt.close()
 
-    plt.plot(np.arange(N), [cmath.polar(x)[1] for x in spectrum], "go")
-    plt.title('FFT. Phase spectrum')
-    plt.xlabel(r'$f$')
-    pdf.savefig()
-    plt.close()
-
-    plt.plot(np.arange(N), [x.real / N for x in ifft(spectrum)], "r:o")
-    plt.title('Inverse FFT')
-    plt.xlabel(r'$x$')
-    plt.ylabel(r'$y$')
-    pdf.savefig()
-    plt.close()
-
-    fig = plt.figure()
-    fig.suptitle('Сomplexity', fontsize=14, fontweight='bold')
-
-    ax = fig.add_subplot(111)
-
-    ax.text(1, 8, 'DFT', style='italic',
-            bbox={'facecolor': 'red', 'alpha': 0.5})
-    ax.text(1, 7, 'FFT', style='italic',
-            bbox={'facecolor': 'red', 'alpha': 0.5})
-    ax.text(2, 9, 'Sums', style='italic',
-            bbox={'facecolor': 'gray', 'alpha': 0.5})
-    ax.text(3, 9, 'Muls', style='italic',
-            bbox={'facecolor': 'gray', 'alpha': 0.5})
-
-    ax.text(2, 8, iters_dft[0], style='italic')
-    ax.text(3, 8, iters_dft[1], style='italic')
-    ax.text(2, 7, iters_fft[0], style='italic')
-    ax.text(3, 7, iters_fft[1], style='italic')
-
-    ax.axis([0, 10, 0, 10])
-
-    pdf.savefig()
-    plt.close()
-
+if __name__ == "__main__":
+    main()
