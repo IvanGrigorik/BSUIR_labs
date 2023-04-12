@@ -15,6 +15,10 @@ Image::Image(const string &imagePath) : path(imagePath) {
     int originalNoChannel;
     int desiredChannels = 3;
     image = stbi_load(imagePath.c_str(), &height, &width, &originalNoChannel, desiredChannels);
+    if (height == 0) {
+        perror("Image opening failed");
+        exit(-1);
+    }
 
     imageMatrix.resize(height);
     for (int i = 0; i < height; ++i) {
