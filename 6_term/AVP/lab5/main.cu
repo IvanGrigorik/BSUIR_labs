@@ -1,8 +1,7 @@
-#include <iostream>
-#include <cmath>
-#include <algorithm>
-#include <iomanip>
 #include "Image.h"
+#include <algorithm>
+#include <cmath>
+#include <iostream>
 
 #define degToRad(val) (val * M_PI / 180)
 
@@ -28,31 +27,24 @@ int houghTransform(const Image &image) {
 
     // Memory allocation
     houghAccum.resize(2 * maxDist);
-    for (int i = 0; i < 2 * maxDist; i++) {
-        houghAccum[i].resize(thetasCount);
-    }
+    for (int i = 0; i < 2 * maxDist; i++) { houghAccum[i].resize(thetasCount); }
 
     const float step = 180.f / static_cast<float>(thetasCount);
-    std::vector<float> thetas;
-
 
     for (int x = 0; x < image.getHeight(); x++) {
         for (int y = 0; y < image.getWidth(); y++) {
             // Find pixel fits the marker
-            if (image.getPixel(x, y) != marker) {
-                continue;
-            }
+            if (image.getPixel(x, y) != marker) { continue; }
 
-            // Iterate through all possible lines (need to rewrite)
             double ang = -90;
             for (int h = 0; h < thetasCount; ang += step, h++) {
-                int idx = static_cast <int>(maxDist + x * cos(degToRad(ang)) + y * sin(degToRad(ang)));
+                int idx = static_cast<int>(maxDist + x * cos(degToRad(ang)) + y * sin(degToRad(ang)));
                 houghAccum[idx][h]++;
             }
         }
     }
 
-    ulong idx{}, max{};
+    int idx{}, max{};
     for (auto &i: houghAccum) {
         for (int j = 0; j < i.size(); j++) {
             if (i[j] > max) {
@@ -62,25 +54,33 @@ int houghTransform(const Image &image) {
         }
     }
 
-    double angle{-90};
-    for (int i = 0; i < idx; i++) {
-        angle += step;
-    }
-    return static_cast<int>(angle);
+    return static_cast<int>(-90 + step * static_cast<float>(idx));
 }
 
+
+//Image rotateImage(const Image &image, const int angle) {
+//
+//    Image returnedImage{};
+//    for (int i = 0; i < image.getHeight(); i++) {
+//        for (int j = 0; j < image.getWidth(); j++) {
+//
+//        }
+//    }
+//}
 
 int main() {
     using namespace std;
     Image image{"../images/line65.png"};
-    cout << "Image height: " << image.getHeight() << endl << "Image width: " << image.getWidth() << endl;
-
-    //
-    auto angle = houghTransform(image);
+    cout << "Image height: " << image.getHeight() << endl
+         << "Image width: " << image.getWidth() << endl;
 
 
+    // Get angle to rotate image
+    const auto rotationAngle = houghTransform(image);
+    cout << endl
+         << "Hough result: " << rotationAngle << endl;
 
-    cout << endl << "Hough result: " << angle << endl;
+    //    Image rotatedImage = rotateImage(image, rotationAngle);
 
     return 0;
 }

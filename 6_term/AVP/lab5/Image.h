@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <string>
 #include <fstream>
-#include <vector>
 #include <ostream>
+#include <string>
+#include <vector>
 
 typedef struct Pixel {
     int red{}, green{}, blue{};
@@ -19,18 +19,20 @@ typedef struct Pixel {
 
 class Image {
 private:
-    std::string path{};
-    int height{}, width{}, RGB{};
-    std::string type;
-    unsigned char *image;
+    std::string imageName{};
+    int height{}, width{};
     std::vector<std::vector<Pixel>> imageMatrix{};
 
 public:
+    Image();
+
     explicit Image(const std::string &path);
 
+    // [[nodiscard]] - function return value can not be ignored and must be saved to some variable
     [[nodiscard]] int getHeight() const;
 
     [[nodiscard]] int getWidth() const;
 
     [[nodiscard]] Pixel getPixel(int x, int y) const;
+
 };
