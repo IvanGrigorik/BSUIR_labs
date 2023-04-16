@@ -2,7 +2,7 @@
 // Created by sifi on 4/8/23.
 //
 
-#include "Image.h"
+#include "Image.cuh"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image/stb_image.h"
@@ -11,8 +11,8 @@
 
 using namespace std;
 
-Image::Image(const string &imagePath) : imageName(imagePath) {
-    auto image = stbi_load(imagePath.c_str(), &width, &height, nullptr, 3);
+void Image::readImage() {
+    auto image = stbi_load(imagePath.c_str(), &width, &height, &channels, 3);
     if (height == 0) {
         perror("Image opening failed");
         exit(-1);
@@ -30,8 +30,26 @@ Image::Image(const string &imagePath) : imageName(imagePath) {
     }
 }
 
+void Image::writeImage() {
+    auto *image = new unsigned char[height * width * channels];
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            image[(i * width + j) * 3] = imageMatrix[i][j].red;
+            image[(i * width + j) * 3 + 1] = imageMatrix[i][j].green;
+            image[(i * width + j) * 3 + 2] = imageMatrix[i][j].blue;
+        }
+    }
+
+    stbi_write_png(imagePath.c_str(), width, height, channels, image, width * channels);
+}
+
 Pixel Image::getPixel(int x, int y) const {
     return imageMatrix[x][y];
+}
+
+void Image::setPixel(int x, int y, Pixel px) {
+    imageMatrix[x][y] = px;
 }
 
 int Image::getHeight() const {
@@ -42,8 +60,23 @@ int Image::getWidth() const {
     return width;
 }
 
-Image::Image() {
-    imageName = "out.png";
+int Image::getChannels() const {
+    return channels;
+}
+
+void Image::setProperties(int newHeight, int newWidth, int newChannels) {
+    height = newHeight;
+    width = newWidth;
+    channels = newChannels;
+
+    if (!imageMatrix.empty()) {
+        imageMatrix.clear();
+    }
+
+    imageMatrix.resize(height);
+    for (int i = 0; i < height; i++) {
+        imageMatrix[i].resize(width);
+    }
 }
 
 bool Pixel::operator==(const Pixel &rhs) const {

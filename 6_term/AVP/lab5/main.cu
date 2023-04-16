@@ -1,6 +1,7 @@
-#include "Image.h"
+#include "Image.cuh"
 #include <algorithm>
 #include <cmath>
+#include <iomanip>
 #include <iostream>
 
 #define degToRad(val) (val * M_PI / 180)
@@ -57,30 +58,39 @@ int houghTransform(const Image &image) {
     return static_cast<int>(-90 + step * static_cast<float>(idx));
 }
 
+Image rotateImage(const Image &image, const int angle) {
+    Image newImage{"../outImage.png"};
+    const int maxDist = static_cast<int>(round(sqrt(pow(image.getHeight(), 2) + pow(image.getWidth(), 2))));
+    auto centerX = image.getWidth() / 2, centerY = image.getHeight() / 2;
+    newImage.setProperties(maxDist, maxDist, image.getChannels());
 
-//Image rotateImage(const Image &image, const int angle) {
-//
-//    Image returnedImage{};
-//    for (int i = 0; i < image.getHeight(); i++) {
-//        for (int j = 0; j < image.getWidth(); j++) {
-//
-//        }
-//    }
-//}
+    auto angCos = cos(degToRad(angle)), angSin = sin(degToRad(angle));
+    for (int i = 0; i < image.getHeight(); i++) {
+        for (int j = 0; j < image.getWidth(); j++) {
+            auto x = static_cast<int>((i - centerX) * angCos + (j - centerY) * angSin);
+            auto y = static_cast<int>((j - centerY) * angCos - (i - centerX) * angSin);
+
+//            if (x > maxDist or x < 0 or y > maxDist or y < 0) { continue; }
+
+            newImage.setPixel(x, y, image.getPixel(i, j));
+        }
+    }
+
+    newImage.writeImage();
+}
 
 int main() {
     using namespace std;
-    Image image{"../images/line65.png"};
-    cout << "Image height: " << image.getHeight() << endl
-         << "Image width: " << image.getWidth() << endl;
-
+    Image image{"../images/straight_line.png"};
+    image.readImage();
+    cout << "Image height: " << image.getHeight() << endl << "Image width: " << image.getWidth() << endl;
 
     // Get angle to rotate image
     const auto rotationAngle = houghTransform(image);
-    cout << endl
-         << "Hough result: " << rotationAngle << endl;
+    cout << endl << "Hough result: " << rotationAngle << endl;
 
-    //    Image rotatedImage = rotateImage(image, rotationAngle);
+
+    Image rotatedImage = rotateImage(image, rotationAngle);
 
     return 0;
 }
