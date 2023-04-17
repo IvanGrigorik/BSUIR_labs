@@ -45,11 +45,11 @@ void Image::writeImage() {
 }
 
 Pixel Image::getPixel(int x, int y) const {
-    return imageMatrix[x][y];
+    return imageMatrix[y][x];
 }
 
 void Image::setPixel(int x, int y, Pixel px) {
-    imageMatrix[x][y] = px;
+    imageMatrix[y][x] = px;
 }
 
 int Image::getHeight() const {

@@ -1,13 +1,12 @@
 #include "Image.cuh"
 #include <algorithm>
 #include <cmath>
-#include <iomanip>
 #include <iostream>
 
 #define degToRad(val) (val * M_PI / 180)
 
 std::vector<std::vector<int>> houghAccum;
-Pixel marker{0, 0, 0};
+Pixel marker{0, 255, 0};
 
 /// Returns line angle relative to the horizon (see explanation ahead the function)
 /*
@@ -21,7 +20,7 @@ Pixel marker{0, 0, 0};
  * |||||||||||||||||||||||||||||||| image x-axis
  * Return angle A
  */
-int houghTransform(const Image &image) {
+double houghTransform(const Image &image) {
     const int maxDist = static_cast<int>(round(sqrt(pow(image.getHeight(), 2) + pow(image.getWidth(), 2))));
     // Little theta and step optimization
     const int thetasCount = 2 * (image.getHeight() + image.getWidth()) - 4;
@@ -32,8 +31,8 @@ int houghTransform(const Image &image) {
 
     const float step = 180.f / static_cast<float>(thetasCount);
 
-    for (int x = 0; x < image.getHeight(); x++) {
-        for (int y = 0; y < image.getWidth(); y++) {
+    for (int y = 0; y < image.getHeight(); y++) {
+        for (int x = 0; x < image.getWidth(); x++) {
             // Find pixel fits the marker
             if (image.getPixel(x, y) != marker) { continue; }
 
@@ -55,42 +54,52 @@ int houghTransform(const Image &image) {
         }
     }
 
-    return static_cast<int>(-90 + step * static_cast<float>(idx));
+    return -90 + step * static_cast<float>(idx);
 }
 
-Image rotateImage(const Image &image, const int angle) {
+Image rotateImage(const Image &image, const double angle) {
     Image newImage{"../outImage.png"};
-    const int maxDist = static_cast<int>(round(sqrt(pow(image.getHeight(), 2) + pow(image.getWidth(), 2))));
-    auto centerX = image.getWidth() / 2, centerY = image.getHeight() / 2;
-    newImage.setProperties(maxDist, maxDist, image.getChannels());
 
-    auto angCos = cos(degToRad(angle)), angSin = sin(degToRad(angle));
-    for (int i = 0; i < image.getHeight(); i++) {
-        for (int j = 0; j < image.getWidth(); j++) {
-            auto x = static_cast<int>((i - centerX) * angCos + (j - centerY) * angSin);
-            auto y = static_cast<int>((j - centerY) * angCos - (i - centerX) * angSin);
+    const auto height = image.getHeight(), width = image.getWidth();
 
-//            if (x > maxDist or x < 0 or y > maxDist or y < 0) { continue; }
+    const int centerX = width / 2, centerY = height / 2;
+    newImage.setProperties(height, width, image.getChannels());
 
-            newImage.setPixel(x, y, image.getPixel(i, j));
+    const auto radAngle = degToRad(angle);
+    const auto k1 = angle > 0 ? sin(radAngle) : cos(radAngle);
+    const auto k2 = angle > 0 ? cos(radAngle) : sin(radAngle);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            auto newX = static_cast<int>(k1 * (x - centerX) + k2 * (y - centerY) + centerX);
+            auto newY = static_cast<int>(k1 * (y - centerY) - k2 * (x - centerX) + centerY);
+
+            if (newX < 0 or newX >= width or newY < 0 or newY >= height) { continue; }
+
+            newImage.setPixel(newX, newY, image.getPixel(x, y));
         }
     }
 
-    newImage.writeImage();
+    return newImage;
 }
 
 int main() {
     using namespace std;
-    Image image{"../images/straight_line.png"};
+    //    Image image{"../images/line65.png"};
+    Image image{"../images/man2.png"};
     image.readImage();
     cout << "Image height: " << image.getHeight() << endl << "Image width: " << image.getWidth() << endl;
 
-    // Get angle to rotate image
-    const auto rotationAngle = houghTransform(image);
-    cout << endl << "Hough result: " << rotationAngle << endl;
+    //     Get angle to rotate image
+    const auto houghtResult = houghTransform(image);
+    cout << endl << "Hough result: " << houghtResult << endl;
+    const auto rotationAngle = houghtResult > 0 ? 180 - houghtResult :  - (90 + houghtResult);
+    cout  << "Rotation angle: " << rotationAngle << endl;
 
+    //    rotation angle is 38.6744 in man.png
 
     Image rotatedImage = rotateImage(image, rotationAngle);
+    rotatedImage.writeImage();
 
     return 0;
 }
