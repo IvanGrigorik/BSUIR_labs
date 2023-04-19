@@ -12,9 +12,10 @@
 
 typedef struct Pixel {
     int red{}, green{}, blue{};
-
+    bool isDefined = false;
     bool operator==(const Pixel &rhs) const;
     bool operator!=(const Pixel &rhs) const;
+    Pixel &operator+=(const Pixel &rhs);
 } Pixel;
 
 class Image {
@@ -24,7 +25,7 @@ private:
     std::vector<std::vector<Pixel>> imageMatrix{};
 
 public:
-//    ~Image() = default;
+    //    ~Image() = default;
     explicit Image(std::string path) : imagePath(std::move(path)){};
 
     // [[nodiscard]] - function return value can not be ignored and must be saved to some variable

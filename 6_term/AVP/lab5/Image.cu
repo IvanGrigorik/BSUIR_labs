@@ -23,9 +23,8 @@ void Image::readImage() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             // In format RGB (+0 - R; +1 - G; +2 - B)
-            imageMatrix[i].push_back({image[(i * width + j) * 3],
-                                      image[(i * width + j) * 3 + 1],
-                                      image[(i * width + j) * 3 + 2]});
+            imageMatrix[i].push_back(
+                    {image[(i * width + j) * 3], image[(i * width + j) * 3 + 1], image[(i * width + j) * 3 + 2]});
         }
     }
 }
@@ -48,8 +47,9 @@ Pixel Image::getPixel(int x, int y) const {
     return imageMatrix[y][x];
 }
 
-void Image::setPixel(int x, int y, Pixel px) {
+void Image::setPixel(int x, int y, const Pixel px) {
     imageMatrix[y][x] = px;
+    imageMatrix[y][x].isDefined = true;
 }
 
 int Image::getHeight() const {
@@ -80,11 +80,17 @@ void Image::setProperties(int newHeight, int newWidth, int newChannels) {
 }
 
 bool Pixel::operator==(const Pixel &rhs) const {
-    return red == rhs.red &&
-           green == rhs.green &&
-           blue == rhs.blue;
+    return red == rhs.red && green == rhs.green && blue == rhs.blue;
 }
 
 bool Pixel::operator!=(const Pixel &rhs) const {
     return !(rhs == *this);
+}
+
+Pixel &Pixel::operator+=(const Pixel &rhs) {
+    red += rhs.red;
+    green += rhs.green;
+    blue += rhs.blue;
+
+    return *this;
 }
