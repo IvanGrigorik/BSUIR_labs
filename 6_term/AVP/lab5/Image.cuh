@@ -20,23 +20,24 @@ typedef struct Pixel {
 
 class Image {
 private:
-    std::string imagePath{};
+    std::string imageName{};
     int height{}, width{}, channels{};
     std::vector<std::vector<Pixel>> imageMatrix{};
 
 public:
-    //    ~Image() = default;
-    explicit Image(std::string path) : imagePath(std::move(path)){};
+    [[maybe_unused]] explicit Image(std::string path) : imageName(std::move(path)){};
 
     // [[nodiscard]] - function return value can not be ignored and must be saved to some variable
     [[nodiscard]] int getHeight() const;
     [[nodiscard]] int getWidth() const;
     [[nodiscard]] int getChannels() const;
+    void setImageName(const std::string &name);
     void setProperties(int newHeight, int newWidth, int newChannels);
 
     [[nodiscard]] Pixel getPixel(int x, int y) const;
     void setPixel(int x, int y, Pixel px);
+    void definePixel(int x, int y);
 
-    void writeImage();
+    void writeImage() const;
     void readImage();
 };

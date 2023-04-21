@@ -12,7 +12,7 @@
 using namespace std;
 
 void Image::readImage() {
-    auto image = stbi_load(imagePath.c_str(), &width, &height, &channels, 3);
+    auto image = stbi_load(imageName.c_str(), &width, &height, &channels, 3);
     if (height == 0) {
         perror("Image opening failed");
         exit(-1);
@@ -29,7 +29,7 @@ void Image::readImage() {
     }
 }
 
-void Image::writeImage() {
+void Image::writeImage() const {
     auto *image = new unsigned char[height * width * channels];
 
     for (int i = 0; i < height; i++) {
@@ -40,7 +40,7 @@ void Image::writeImage() {
         }
     }
 
-    stbi_write_png(imagePath.c_str(), width, height, channels, image, width * channels);
+    stbi_write_png(imageName.c_str(), width, height, channels, image, width * channels);
 }
 
 Pixel Image::getPixel(int x, int y) const {
@@ -49,6 +49,9 @@ Pixel Image::getPixel(int x, int y) const {
 
 void Image::setPixel(int x, int y, const Pixel px) {
     imageMatrix[y][x] = px;
+}
+
+void Image::definePixel(int x, int y) {
     imageMatrix[y][x].isDefined = true;
 }
 
@@ -77,6 +80,10 @@ void Image::setProperties(int newHeight, int newWidth, int newChannels) {
     for (int i = 0; i < height; i++) {
         imageMatrix[i].resize(width);
     }
+}
+
+void Image::setImageName(const string &name) {
+    Image::imageName = name;
 }
 
 bool Pixel::operator==(const Pixel &rhs) const {

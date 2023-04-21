@@ -21,6 +21,8 @@ Pixel marker{0, 255, 0};
  * Return angle A
  */
 double houghTransform(const Image &image) {
+    Image monochromaticImage{"../outImages/monochromatic.png"};
+    monochromaticImage.setProperties(image.getHeight(), image.getWidth(), image.getChannels());
     const int maxDist = static_cast<int>(round(sqrt(pow(image.getHeight(), 2) + pow(image.getWidth(), 2))));
     // Little theta and step optimization
     const int thetasCount = 2 * (image.getHeight() + image.getWidth()) - 4;
@@ -39,6 +41,7 @@ double houghTransform(const Image &image) {
             if (image.getPixel(x, y) != marker) {
                 continue;
             }
+            monochromaticImage.setPixel(x, y, {255, 255, 255});
 
             double ang = -90;
             for (int h = 0; h < thetasCount; ang += step, h++) {
@@ -48,6 +51,7 @@ double houghTransform(const Image &image) {
         }
     }
 
+    monochromaticImage.writeImage();
     int idx{}, max{};
     for (auto &i: houghAccum) {
         for (int j = 0; j < i.size(); j++) {
@@ -62,12 +66,12 @@ double houghTransform(const Image &image) {
 }
 
 Image rotateImage(const Image &image, const double angle) {
-    Image newImage{"../outImage.png"};
+    Image rotatedImage{"../outImages/rotatedImage.png"};
 
     const auto height = image.getHeight(), width = image.getWidth();
 
     const int centerX = width / 2, centerY = height / 2;
-    newImage.setProperties(height, width, image.getChannels());
+    rotatedImage.setProperties(height, width, image.getChannels());
 
     const auto radAngle = degToRad(90 + angle);
     //    const auto k1 = angle > 0 ? sin(radAngle) : cos(radAngle);
@@ -85,18 +89,19 @@ Image rotateImage(const Image &image, const double angle) {
                 continue;
             }
 
-            newImage.setPixel(newX, newY, image.getPixel(x, y));
+            rotatedImage.setPixel(newX, newY, image.getPixel(x, y));
+            rotatedImage.definePixel(newX, newY);
         }
     }
 
-    return newImage;
+    rotatedImage.writeImage();
+    return rotatedImage;
 }
 
-#include <iostream>
 Image interpolarImage(const Image &image) {
     Image interpolaredImage{image};
     auto height = image.getHeight(), width = image.getWidth();
-    Image undefinedMap{"../undefinedPixels.png"};
+    Image undefinedMap{"../outImages/undefinedPixels.png"};
     undefinedMap.setProperties(height, width, image.getChannels());
 
     for (int y = 0; y < height; y++) {
@@ -116,6 +121,7 @@ Image interpolarImage(const Image &image) {
                 newPixel.red /= 2;
                 newPixel.green /= 2;
                 newPixel.blue /= 2;
+                newPixel.isDefined = true;
                 interpolaredImage.setPixel(x, y, newPixel);
                 undefinedMap.setPixel(x, y, {255, 255, 255});
             }
@@ -126,9 +132,45 @@ Image interpolarImage(const Image &image) {
     return interpolaredImage;
 }
 
+int distanceToMarkedLine(const Image &image) {
+    int length{}, shots{};
+
+    for (int i = 0; i < image.getHeight(); i++) {
+        for (int j = 0; j < 5; j++) {
+            if (image.getPixel(j, i) == marker) {
+                length += i;
+                shots++;
+            }
+        }
+    }
+
+    return length / shots;
+}
+
+Image centralizeLine(const Image &image, int offset) {
+    Image centralizedImage{"../outImages/centralized.png"};
+    auto height = image.getHeight(), width = image.getWidth();
+    centralizedImage.setProperties(height, width, image.getChannels());
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            if (y + offset > 0 and y + offset < height) {
+                Pixel px = image.getPixel(x, y);
+                centralizedImage.setPixel(x, y + offset, px);
+                if (px.isDefined) {
+                    centralizedImage.definePixel(x, y + offset);
+                }
+            }
+        }
+    }
+
+    centralizedImage.writeImage();
+    return centralizedImage;
+}
+
 int main() {
     using namespace std;
-    Image image{"../images/saoriLine.png"};
+    Image image{"../images/man2.png"};
     image.readImage();
     cout << "Image height: " << image.getHeight() << endl << "Image width: " << image.getWidth() << endl;
 
@@ -138,8 +180,19 @@ int main() {
     const auto rotationAngle = houghtResult > 0 ? 90 - houghtResult : -(90 + houghtResult);
     cout << "Rotation angle: " << rotationAngle << endl;
 
+    // Rotate image
     auto outImage = rotateImage(image, rotationAngle);
+
+    // Get shift distance to centralize line
+    auto shiftDistance = outImage.getHeight() / 2 - distanceToMarkedLine(outImage);
+    cout << "Shift distance: " << shiftDistance << endl;
+
+    // Centralize line
+    outImage = centralizeLine(outImage, shiftDistance);
+
+    // Interpolate the image
     outImage = interpolarImage(outImage);
+    outImage.setImageName("../outImages/outImage.png");
     outImage.writeImage();
 
     return 0;
