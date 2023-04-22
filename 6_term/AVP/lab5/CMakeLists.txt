@@ -3,6 +3,6 @@ project(lab5 CUDA)
 
 set(CMAKE_CUDA_STANDARD 17)
 
-add_executable(lab5 main.cu Image.cu Image.cuh)
+add_executable(lab5 main.cu Image.cu Image.cuh cpu.cu)
 
 set_target_properties(lab5 PROPERTIES CUDA_SEPARABLE_COMPILATION ON)

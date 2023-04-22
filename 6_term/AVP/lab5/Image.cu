@@ -55,6 +55,7 @@ void Image::definePixel(int x, int y) {
     imageMatrix[y][x].isDefined = true;
 }
 
+
 int Image::getHeight() const {
     return height;
 }
