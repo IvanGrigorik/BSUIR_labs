@@ -1,7 +1,3 @@
-//
-// Created by sifi on 4/8/23.
-//
-
 #pragma once
 
 #include <fstream>
@@ -18,14 +14,19 @@ typedef struct Pixel {
     Pixel &operator+=(const Pixel &rhs);
 } Pixel;
 
-class Image {
+typedef struct GPUPixel {
+    uint8_t red{}, green{}, blue{};
+    bool isDefined = false;
+} GPUPixel;
+
+class ImageCPU {
 private:
     std::string imageName{};
     int height{}, width{}, channels{};
     std::vector<std::vector<Pixel>> imageMatrix{};
 
 public:
-    [[maybe_unused]] explicit Image(std::string path) : imageName(std::move(path)){};
+    [[maybe_unused]] explicit ImageCPU(std::string path) : imageName(std::move(path)){};
 
     // [[nodiscard]] - function return value can not be ignored and must be saved to some variable
     [[nodiscard]] int getHeight() const;
@@ -39,5 +40,16 @@ public:
     void definePixel(int x, int y);
 
     void writeImage() const;
+    void readImage();
+};
+
+struct ImageGPU {
+
+    std::string imagePath{};
+    int width{}, height{}, channels{};
+    GPUPixel *devData{};
+    size_t pitch{};
+
+    explicit ImageGPU(std::string path) : imagePath(std::move(path)){};
     void readImage();
 };

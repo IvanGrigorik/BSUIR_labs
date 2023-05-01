@@ -17,8 +17,8 @@ Pixel marker{0, 255, 0};
  * |||||||||||||||||||||||||||||||| image x-axis
  * Return angle A
  */
-double houghTransform(const Image &image) {
-    Image monochromaticImage{"../outImages/monochromatic.png"};
+double houghTransform(const ImageCPU &image) {
+    ImageCPU monochromaticImage{"../outImages/monochromatic.png"};
     monochromaticImage.setProperties(image.getHeight(), image.getWidth(), image.getChannels());
     const int maxDist = static_cast<int>(round(sqrt(pow(image.getHeight(), 2) + pow(image.getWidth(), 2))));
     // Little theta and step optimization
@@ -62,8 +62,8 @@ double houghTransform(const Image &image) {
     return -90 + step * static_cast<float>(idx);
 }
 
-Image rotateImage(const Image &image, const double angle) {
-    Image rotatedImage{"../outImages/rotatedImage.png"};
+ImageCPU rotateImage(const ImageCPU &image, const double angle) {
+    ImageCPU rotatedImage{"../outImages/rotatedImage.png"};
 
     const auto height = image.getHeight(), width = image.getWidth();
 
@@ -93,10 +93,10 @@ Image rotateImage(const Image &image, const double angle) {
     return rotatedImage;
 }
 
-Image interpolarImage(const Image &image) {
-    Image interpolaredImage{image};
+ImageCPU interpolarImage(const ImageCPU &image) {
+    ImageCPU interpolaredImage{image};
     auto height = image.getHeight(), width = image.getWidth();
-    Image undefinedMap{"../outImages/undefinedPixels.png"};
+    ImageCPU undefinedMap{"../outImages/undefinedPixels.png"};
     undefinedMap.setProperties(height, width, image.getChannels());
 
     for (int y = 0; y < height; y++) {
@@ -138,7 +138,7 @@ Image interpolarImage(const Image &image) {
     return interpolaredImage;
 }
 
-int distanceToMarkedLine(const Image &image) {
+int distanceToMarkedLine(const ImageCPU &image) {
     int length{}, shots{};
 
     for (int i = 0; i < image.getHeight(); i++) {
@@ -153,8 +153,8 @@ int distanceToMarkedLine(const Image &image) {
     return length / shots;
 }
 
-Image centralizeLine(const Image &image, int offset) {
-    Image centralizedImage{"../outImages/centralized.png"};
+ImageCPU centralizeLine(const ImageCPU &image, int offset) {
+    ImageCPU centralizedImage{"../outImages/centralized.png"};
     auto height = image.getHeight(), width = image.getWidth();
     centralizedImage.setProperties(height, width, image.getChannels());
 
@@ -178,9 +178,9 @@ void runCpu(std::string imagePath) {
     using namespace std;
 
     cout << "CPU running" << endl;
-    Image image{std::move(imagePath)};
+    ImageCPU image{std::move(imagePath)};
     image.readImage();
-    cout << "Image height: " << image.getHeight() << endl << "Image width: " << image.getWidth() << endl;
+    cout << "ImageCPU height: " << image.getHeight() << endl << "ImageCPU width: " << image.getWidth() << endl;
 
     //     Get angle to rotate image
     const auto houghtResult = houghTransform(image);

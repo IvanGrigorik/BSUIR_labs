@@ -810,7 +810,7 @@ STBIWDEF int stbi_write_hdr(char const *filename, int x, int y, int comp, const 
 //
 
 #ifndef STBIW_ZLIB_COMPRESS
-// stretchy buffer; stbiw__sbpush() == vector<>::push_back() -- stbiw__sbcount() == vector<>::size()
+// stretchy buffer; stbiw__sbpush() == vec<>::push_back() -- stbiw__sbcount() == vec<>::size()
 #define stbiw__sbraw(a) ((int *) (void *) (a) - 2)
 #define stbiw__sbm(a)   stbiw__sbraw(a)[0]
 #define stbiw__sbn(a)   stbiw__sbraw(a)[1]
