@@ -11,6 +11,7 @@
 #include "stb_image/stb_image_write.h"
 
 using namespace std;
+#include <iostream>
 
 void ImageCPU::readImage() {
     auto image = stbi_load(imageName.c_str(), &width, &height, &channels, 3);
@@ -117,7 +118,7 @@ void ImageGPU::readImage() {
         for (int j = 0; j < width; j++) {
             // In format RGB (+0 - R; +1 - G; +2 - B)
             imageMatrix[i * width + j] = {image[(i * width + j) * 3], image[(i * width + j) * 3 + 1],
-                                          image[(i * width + j) * 3 + 2]};
+                                          image[(i * width + j) * 3 + 2], true};
         }
     }
 
@@ -125,4 +126,51 @@ void ImageGPU::readImage() {
     CUDA_ASSERT(cudaMallocPitch(&devData, &pitch, width * sizeof(GPUPixel), height))
     CUDA_ASSERT(cudaMemcpy2D(devData, pitch, imageMatrix, width * sizeof(GPUPixel), width * sizeof(GPUPixel), height,
                              cudaMemcpyHostToDevice))
+}
+void ImageGPU::setProperties(int newHeight, int newWidth, int newChannels) {
+    height = newHeight;
+    width = newWidth;
+    channels = newChannels;
+
+    if (pitch != 0) {
+        CUDA_ASSERT(cudaFree(&devData));
+    }
+    auto imageMatrix = new GPUPixel[height * width];
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            // In format RGB (+0 - R; +1 - G; +2 - B), plus "is defined" variable
+            imageMatrix[i * width + j] = {0, 0, 0, false};
+        }
+    }
+    CUDA_ASSERT(cudaMallocPitch(&devData, &pitch, width * sizeof(GPUPixel), height))
+    CUDA_ASSERT(cudaMemcpy2D(devData, pitch, imageMatrix, width * sizeof(GPUPixel), width * sizeof(GPUPixel), height,
+                             cudaMemcpyHostToDevice))
+}
+void ImageGPU::writeImage() const {
+    auto imageMatrix = new GPUPixel[height * width];
+
+    CUDA_ASSERT(cudaMemcpy2D(imageMatrix, width * sizeof(GPUPixel),//
+                             devData, pitch,                       //
+                             width * sizeof(GPUPixel), height,     //
+                             cudaMemcpyDeviceToHost))
+
+    auto *image = new unsigned char[height * width * channels];
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            image[(i * width + j) * 3] = imageMatrix[i * width + j].red;
+            image[(i * width + j) * 3 + 1] = imageMatrix[i * width + j].green;
+            image[(i * width + j) * 3 + 2] = imageMatrix[i * width + j].blue;
+        }
+    }
+
+//    for (int i = 0; i < height; i++) {
+//        for (int j = 0; j < width; j++) {
+//            cout << int(imageMatrix[i * width + j].red) << ':' << int(imageMatrix[i * width + j].green) << ':'
+//                 << int(imageMatrix[i * width + j].blue) << ' ';
+//        }
+//        cout << endl;
+//    }
+
+    stbi_write_png(imagePath.c_str(), width, height, channels, image, width * channels);
 }

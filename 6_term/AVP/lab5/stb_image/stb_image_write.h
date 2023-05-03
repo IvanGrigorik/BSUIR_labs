@@ -1593,7 +1593,7 @@ static int stbi_write_jpg_core(stbi__write_context *s, int width, int height, in
          }
       }
 
-      // Do the bit alignment of the EOI marker
+      // Do the bit alignment of the EOI markerCPU
       stbiw__jpg_writeBits(s, &bitBuf, &bitCnt, fillBits);
    }
 

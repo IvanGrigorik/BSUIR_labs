@@ -52,4 +52,8 @@ struct ImageGPU {
 
     explicit ImageGPU(std::string path) : imagePath(std::move(path)){};
     void readImage();
+    void setProperties(int newHeight, int newWidth, int newChannels);
+
+    void writeImage() const;
+
 };

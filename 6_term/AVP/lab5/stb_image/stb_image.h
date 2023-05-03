@@ -1976,8 +1976,8 @@ typedef struct
 
    stbi__uint32   code_buffer; // jpeg entropy-coded buffer
    int            code_bits;   // number of valid bits
-   unsigned char  marker;      // marker seen while filling entropy buffer
-   int            nomore;      // flag if we saw a marker so must stop
+   unsigned char  marker;      // markerCPU seen while filling entropy buffer
+   int            nomore;      // flag if we saw a markerCPU so must stop
 
    int            progressive;
    int            spec_start;
@@ -2911,9 +2911,9 @@ static void stbi__idct_simd(stbi_uc *out, int out_stride, short data[64])
 #endif // STBI_NEON
 
 #define STBI__MARKER_none  0xff
-// if there's a pending marker from the entropy stream, return that
-// otherwise, fetch from the stream and get a marker. if there's no
-// marker, return 0xff, which is never a valid marker value
+// if there's a pending markerCPU from the entropy stream, return that
+// otherwise, fetch from the stream and get a markerCPU. if there's no
+// markerCPU, return 0xff, which is never a valid markerCPU value
 static stbi_uc stbi__get_marker(stbi__jpeg *j)
 {
    stbi_uc x;
@@ -3098,8 +3098,8 @@ static int stbi__process_marker(stbi__jpeg *z, int m)
 {
    int L;
    switch (m) {
-      case STBI__MARKER_none: // no marker found
-         return stbi__err("expected marker","Corrupt JPEG");
+      case STBI__MARKER_none: // no markerCPU found
+         return stbi__err("expected markerCPU","Corrupt JPEG");
 
       case 0xDD: // DRI - specify restart interval
          if (stbi__get16be(z->s) != 4) return stbi__err("bad DRI len","Corrupt JPEG");
@@ -3194,7 +3194,7 @@ static int stbi__process_marker(stbi__jpeg *z, int m)
       return 1;
    }
 
-   return stbi__err("unknown marker","Corrupt JPEG");
+   return stbi__err("unknown markerCPU","Corrupt JPEG");
 }
 
 // after we see SOS
@@ -3365,7 +3365,7 @@ static int stbi__decode_jpeg_header(stbi__jpeg *z, int scan)
    int m;
    z->jfif = 0;
    z->app14_color_transform = -1; // valid values are 0,1,2
-   z->marker = STBI__MARKER_none; // initialize cached marker to empty
+   z->marker = STBI__MARKER_none; // initialize cached markerCPU to empty
    m = stbi__get_marker(z);
    if (!stbi__SOI(m)) return stbi__err("no SOI","Corrupt JPEG");
    if (scan == STBI__SCAN_type) return 1;
@@ -3387,20 +3387,20 @@ static int stbi__decode_jpeg_header(stbi__jpeg *z, int scan)
 static int stbi__skip_jpeg_junk_at_end(stbi__jpeg *j)
 {
    // some JPEGs have junk at end, skip over it but if we find what looks
-   // like a valid marker, resume there
+   // like a valid markerCPU, resume there
    while (!stbi__at_eof(j->s)) {
       int x = stbi__get8(j->s);
-      while (x == 255) { // might be a marker
+      while (x == 255) { // might be a markerCPU
          if (stbi__at_eof(j->s)) return STBI__MARKER_none;
          x = stbi__get8(j->s);
          if (x != 0x00 && x != 0xff) {
-            // not a stuffed zero or lead-in to another marker, looks
-            // like an actual marker, return it
+            // not a stuffed zero or lead-in to another markerCPU, looks
+            // like an actual markerCPU, return it
             return x;
          }
          // stuffed zero has x=0 now which ends the loop, meaning we go
          // back to regular scan loop.
-         // repeated 0xff keeps trying to read the next byte of the marker.
+         // repeated 0xff keeps trying to read the next byte of the markerCPU.
       }
    }
    return STBI__MARKER_none;
@@ -3423,7 +3423,7 @@ static int stbi__decode_jpeg_image(stbi__jpeg *j)
          if (!stbi__parse_entropy_coded_data(j)) return 0;
          if (j->marker == STBI__MARKER_none ) {
          j->marker = stbi__skip_jpeg_junk_at_end(j);
-            // if we reach eof without hitting a marker, stbi__get_marker() below will fail and we'll eventually return 0
+            // if we reach eof without hitting a markerCPU, stbi__get_marker() below will fail and we'll eventually return 0
          }
          m = stbi__get_marker(j);
          if (STBI__RESTART(m))
@@ -6981,7 +6981,7 @@ static void *stbi__load_gif_main(stbi__context *s, int **delays, int *x, int *y,
 
       do {
          u = stbi__gif_load_next(s, &g, comp, req_comp, two_back);
-         if (u == (stbi_uc *) s) u = 0;  // end of animated gif marker
+         if (u == (stbi_uc *) s) u = 0;  // end of animated gif markerCPU
 
          if (u) {
             *x = g.w;
@@ -7052,7 +7052,7 @@ static void *stbi__gif_load(stbi__context *s, int *x, int *y, int *comp, int req
    STBI_NOTUSED(ri);
 
    u = stbi__gif_load_next(s, &g, comp, req_comp, 0);
-   if (u == (stbi_uc *) s) u = 0;  // end of animated gif marker
+   if (u == (stbi_uc *) s) u = 0;  // end of animated gif markerCPU
    if (u) {
       *x = g.w;
       *y = g.h;
@@ -7931,7 +7931,7 @@ STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user
       0.60    fix compiling as c++
       0.59    fix warnings: merge Dave Moore's -Wall fixes
       0.58    fix bug: zlib uncompressed mode len/nlen was wrong endian
-      0.57    fix bug: jpg last huffman symbol before marker was >9 bits but less than 16 available
+      0.57    fix bug: jpg last huffman symbol before markerCPU was >9 bits but less than 16 available
       0.56    fix bug: zlib uncompressed mode len vs. nlen
       0.55    fix bug: restart_interval not initialized to 0
       0.54    allow NULL for 'int *comp'

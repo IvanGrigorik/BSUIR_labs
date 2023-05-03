@@ -3,7 +3,8 @@
 #include <utility>
 
 std::vector<std::vector<int>> houghAccum;
-Pixel marker{0, 255, 0};
+Pixel thresholdCPU{20, 20, 20};
+Pixel markerCPU{0, 255, 0};
 
 /// Returns line angle relative to the horizon (see explanation ahead the function)
 /*
@@ -34,12 +35,14 @@ double houghTransform(const ImageCPU &image) {
 
     for (int y = 0; y < image.getHeight(); y++) {
         for (int x = 0; x < image.getWidth(); x++) {
-            // Find pixel fits the marker
-            if (image.getPixel(x, y) != marker) {
+            // Find pixel fits the markerCPU
+
+            if (abs(image.getPixel(x, y).red - markerCPU.red) >= thresholdCPU.red or      //
+                abs(image.getPixel(x, y).green - markerCPU.green) >= thresholdCPU.green or//
+                abs(image.getPixel(x, y).blue - markerCPU.blue) >= thresholdCPU.blue) {
                 continue;
             }
             monochromaticImage.setPixel(x, y, {255, 255, 255});
-
             double ang = -90;
             for (int h = 0; h < thetasCount; ang += step, h++) {
                 int idx = static_cast<int>(maxDist + x * cos(degToRad(ang)) + y * sin(degToRad(ang)));
@@ -47,6 +50,7 @@ double houghTransform(const ImageCPU &image) {
             }
         }
     }
+
 
     monochromaticImage.writeImage();
     int idx{}, max{};
@@ -58,6 +62,7 @@ double houghTransform(const ImageCPU &image) {
             }
         }
     }
+
 
     return -90 + step * static_cast<float>(idx);
 }
@@ -105,29 +110,33 @@ ImageCPU interpolarImage(const ImageCPU &image) {
                 Pixel newPixel{};
 
                 // rotated image cannot contain more than two undefined pixels in a row
-                if (x + 1 < width and x + 2 < width and !image.getPixel(x + 1, y).isDefined and
-                    !image.getPixel(x + 2, y).isDefined) {
-                    // if trying to interpolate unnecessary parts of line
-                    if (x > width / 2) {
-                        break;
-                    }
+                if (x + 2 < width and !image.getPixel(x + 1, y).isDefined and !image.getPixel(x + 2, y).isDefined) {
                     continue;
                 }
 
-                if (x + 1 < width and interpolaredImage.getPixel(x + 1, y).isDefined) {
-                    newPixel = interpolaredImage.getPixel(x + 1, y);
-                } else if (x - 1 >= 0 and interpolaredImage.getPixel(x - 1, y).isDefined) {
-                    newPixel = interpolaredImage.getPixel(x - 1, y);
+                int shots{};
+                if (x + 1 < width and image.getPixel(x + 1, y).isDefined) {
+                    newPixel = image.getPixel(x + 1, y);
+                    shots++;
                 }
-                if (y + 1 < height and interpolaredImage.getPixel(x, y + 1).isDefined) {
-                    newPixel += interpolaredImage.getPixel(x, y + 1);
-                } else if (y - 1 >= 0 and interpolaredImage.getPixel(x, y - 1).isDefined) {
-                    newPixel += interpolaredImage.getPixel(x, y - 1);
+                if (x - 1 >= 0 and image.getPixel(x - 1, y).isDefined) {
+                    newPixel += image.getPixel(x - 1, y);
+                    shots++;
                 }
-                newPixel.red /= 2;
-                newPixel.green /= 2;
-                newPixel.blue /= 2;
-                newPixel.isDefined = true;
+                if (y + 1 < height and image.getPixel(x, y + 1).isDefined) {
+                    newPixel += image.getPixel(x, y + 1);
+                    shots++;
+                }
+                if (y - 1 >= 0 and image.getPixel(x, y - 1).isDefined) {
+                    newPixel += image.getPixel(x, y - 1);
+                    shots++;
+                }
+                if (shots != 0) {
+                    newPixel.red /= shots;
+                    newPixel.green /= shots;
+                    newPixel.blue /= shots;
+                    newPixel.isDefined = true;
+                }
                 interpolaredImage.setPixel(x, y, newPixel);
                 undefinedMap.setPixel(x, y, {255, 255, 255});
             }
@@ -142,8 +151,8 @@ int distanceToMarkedLine(const ImageCPU &image) {
     int length{}, shots{};
 
     for (int i = 0; i < image.getHeight(); i++) {
-        for (int j = 0; j < 5; j++) {
-            if (image.getPixel(j, i) == marker) {
+        for (int j = 0; j < image.getWidth(); j++) {
+            if (image.getPixel(j, i) == markerCPU) {
                 length += i;
                 shots++;
             }
@@ -182,7 +191,7 @@ void runCpu(std::string imagePath) {
     image.readImage();
     cout << "ImageCPU height: " << image.getHeight() << endl << "ImageCPU width: " << image.getWidth() << endl;
 
-    //     Get angle to rotate image
+    // Get angle to rotate image
     const auto houghtResult = houghTransform(image);
     cout << endl << "Hough result: " << houghtResult << endl;
     const auto rotationAngle = houghtResult > 0 ? 90 - houghtResult : -(90 + houghtResult);
