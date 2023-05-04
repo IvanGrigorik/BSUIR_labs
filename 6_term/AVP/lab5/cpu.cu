@@ -186,14 +186,13 @@ ImageCPU centralizeLine(const ImageCPU &image, int offset) {
 void runCpu(std::string imagePath) {
     using namespace std;
 
-    cout << "CPU running" << endl;
     ImageCPU image{std::move(imagePath)};
     image.readImage();
     cout << "ImageCPU height: " << image.getHeight() << endl << "ImageCPU width: " << image.getWidth() << endl;
 
     // Get angle to rotate image
     const auto houghtResult = houghTransform(image);
-    cout << endl << "Hough result: " << houghtResult << endl;
+    cout << "Hough result: " << houghtResult << endl;
     const auto rotationAngle = houghtResult > 0 ? 90 - houghtResult : -(90 + houghtResult);
     cout << "Rotation angle: " << rotationAngle << endl;
 
