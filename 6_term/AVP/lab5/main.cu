@@ -1,15 +1,18 @@
 #include "Image.cuh"
 #include "cpu.cuh"
 #include "utilities.cuh"
+#include <chrono>
 #include <iostream>
 
 using namespace std;
-
-// Hough ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using namespace chrono;
 
 __device__ GPUPixel markerGPU{0, 255, 0};
 __device__ GPUPixel thresholdGPU{20, 20, 20};
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Hough ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 __global__ void houghKernel(const ImageGPU image, int *houghAccum,//NOLINT (to disable clang-tidy)
                             float step, int thetasCount, int maxDist) {
     const unsigned x = threadIdx.x + blockDim.x * blockIdx.x;
@@ -69,7 +72,9 @@ double houghGPU(const ImageGPU &image, const dim3 numBlocks, const dim3 threadsP
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Rotation ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 __global__ void rotateKernel(const ImageGPU sourceImage, ImageGPU destinationImage,//NOLINT (to disable clang-tidy)
                              const double k1, const double k2, const int centerX, const int centerY) {
     // Cast, 'cause need sign to further calculations
@@ -113,7 +118,9 @@ ImageGPU rotateImageGPU(const ImageGPU &image, const dim3 numBlocks, const dim3 
     return rotatedImage;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Centralize line ////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 __global__ void distanceToMarkedKernel(const ImageGPU image, unsigned *accum, unsigned *shotVal) {//NOLINT
     const int x = static_cast<int>(threadIdx.x + blockDim.x * blockIdx.x);
     const int y = static_cast<int>(threadIdx.y + blockDim.y * blockIdx.y);
@@ -174,7 +181,9 @@ ImageGPU centralizeLine(const ImageGPU &image, const dim3 numBlocks, const dim3 
     return centralizedImage;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Interpolate ////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 __global__ void interpolateKernel(const ImageGPU sourceImage, const ImageGPU destinationImage,//NOLINT
                                   const ImageGPU undefinedMap) {                              //NOLINT
     const int x = static_cast<int>(threadIdx.x + blockDim.x * blockIdx.x);
@@ -234,7 +243,7 @@ __global__ void interpolateKernel(const ImageGPU sourceImage, const ImageGPU des
         }
     }
 
-    if(shots != 0) {
+    if (shots != 0) {
         dstRow[x] = {static_cast<uint8_t>(r / shots),//
                      static_cast<uint8_t>(g / shots),//
                      static_cast<uint8_t>(b / shots), true};
@@ -253,7 +262,10 @@ ImageGPU interpolateImage(const ImageGPU &image, const dim3 numBlocks, const dim
     CUDA_ASSERT(cudaDeviceSynchronize())
     return interpolatedImage;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Main function //////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void rotateLine(const std::string &imagePath) {
     ImageGPU image{imagePath};
     image.readImage();
@@ -262,6 +274,7 @@ void rotateLine(const std::string &imagePath) {
     dim3 numBlocks{(image.width + threadsPerBlock.x - 1) / threadsPerBlock.x,
                    (image.height + threadsPerBlock.y - 1) / threadsPerBlock.y};
 
+    cout << "ImageGPU height: " << image.height << endl << "ImageGPU width: " << image.width << endl;
     // Get angle to rotate the image
     const auto houghtResult = houghGPU(image, numBlocks, threadsPerBlock);
     std::cout << "Hough result: " << houghtResult << endl;
@@ -282,13 +295,29 @@ void rotateLine(const std::string &imagePath) {
 int main() {
     auto imagePath = "../images/saoriLine.png";
 
+    // GPU part
+    cudaEvent_t start_event, stop_event;
+    cudaEventCreate(&start_event);
+    cudaEventCreate(&stop_event);
 
+    cudaEventRecord(start_event);
     cout << "GPU implementation: " << endl;
     rotateLine(imagePath);
 
-    cout << endl << endl;
+    cudaEventRecord(stop_event);
+    cudaEventSynchronize(start_event);
+    cudaEventSynchronize(stop_event);
+
+    float timeGPU = 0;
+    cudaEventElapsedTime(&timeGPU, start_event, stop_event);
+    cout << "GPU elapsed time: " << timeGPU << " ms" << endl << endl;
+
+    // CPU part
+    auto start = steady_clock::now();
     cout << "CPU implementation: " << endl;
     runCpu(imagePath);
+    auto timeCPU = duration_cast<milliseconds>(steady_clock::now() - start).count();
+    cout << "GPU elapsed time: " << timeCPU << " ms" << endl;
 
     return 0;
 }
