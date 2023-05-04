@@ -2,9 +2,6 @@
 #include "cpu.cuh"
 #include "utilities.cuh"
 #include <iostream>
-#include <thrust/device_vector.h>
-#include <thrust/execution_policy.h>
-#include <thrust/reduce.h>
 
 using namespace std;
 
@@ -101,7 +98,7 @@ __global__ void rotateKernel(const ImageGPU sourceImage, ImageGPU destinationIma
 
 ImageGPU rotateImageGPU(const ImageGPU &image, const dim3 numBlocks, const dim3 threadsPerBlock,
                         const double rotationAngle) {
-    ImageGPU rotatedImage{"../rotatedImage.png"};
+    ImageGPU rotatedImage{"../outImages/rotatedImageGPU.png"};
     const int centerX = image.width / 2, centerY = image.height / 2;
 
     rotatedImage.setProperties(image.height, image.width, image.channels);
@@ -169,7 +166,7 @@ ImageGPU centralizeLine(const ImageGPU &image, const dim3 numBlocks, const dim3 
     auto shiftDistance = image.height / 2 - average;
     cout << "Shift distance: " << shiftDistance << endl;
 
-    ImageGPU centralizedImage{"../centralized.png"};
+    ImageGPU centralizedImage{"../outImages/centralizedGPU.png"};
     centralizedImage.setProperties(image.height, image.width, image.channels);
 
     centralizeKernel<<<numBlocks, threadsPerBlock>>>(image, centralizedImage, shiftDistance);
@@ -189,11 +186,13 @@ __global__ void interpolateKernel(const ImageGPU sourceImage, const ImageGPU des
     }
 
     auto srcRow = getRow(sourceImage.devData, sourceImage.pitch, y);
-    if (!srcRow[x].isDefined) {
+    auto dstRow = getRow(destinationImage.devData, destinationImage.pitch, y);
+
+    if (srcRow[x].isDefined) {
+        dstRow[x] = srcRow[x];
         return;
     }
 
-    auto dstRow = getRow(destinationImage.devData, destinationImage.pitch, y);
     auto mapRow = getRow(undefinedMap.devData, undefinedMap.pitch, y);
 
     // rotated image cannot contain more than two undefined pixels in a row, thus we can
@@ -209,14 +208,15 @@ __global__ void interpolateKernel(const ImageGPU sourceImage, const ImageGPU des
         g += srcRow[x + 1].green;
         b += srcRow[x + 1].blue;
         shots++;
-    } else if (x - 1 >= 0 and srcRow[x - 1].isDefined) {
+    }
+    if (x - 1 >= 0 and srcRow[x - 1].isDefined) {
         r += srcRow[x - 1].red;
         g += srcRow[x - 1].green;
         b += srcRow[x - 1].blue;
         shots++;
     }
     if (y + 1 < sourceImage.height) {
-        auto rowP1 = getRow(destinationImage.devData, destinationImage.pitch, y + 1);
+        auto rowP1 = getRow(sourceImage.devData, sourceImage.pitch, y + 1);
         if (rowP1[x].isDefined) {
             r += rowP1[x].red;
             g += rowP1[x].green;
@@ -225,7 +225,7 @@ __global__ void interpolateKernel(const ImageGPU sourceImage, const ImageGPU des
         }
     }
     if (y - 1 >= 0) {
-        auto rowM1 = getRow(destinationImage.devData, destinationImage.pitch, y - 1);
+        auto rowM1 = getRow(sourceImage.devData, sourceImage.pitch, y - 1);
         if (rowM1[x].isDefined) {
             r += rowM1[x].red;
             g += rowM1[x].green;
@@ -233,17 +233,20 @@ __global__ void interpolateKernel(const ImageGPU sourceImage, const ImageGPU des
             shots++;
         }
     }
-    dstRow[x] = {static_cast<uint8_t>(r / shots),//
-                 static_cast<uint8_t>(g / shots),//
-                 static_cast<uint8_t>(b / shots), true};
+
+    if(shots != 0) {
+        dstRow[x] = {static_cast<uint8_t>(r / shots),//
+                     static_cast<uint8_t>(g / shots),//
+                     static_cast<uint8_t>(b / shots), true};
+    }
 }
 
 ImageGPU interpolateImage(const ImageGPU &image, const dim3 numBlocks, const dim3 threadsPerBlock) {
 
-    ImageGPU interpolatedImage{"../interpolated.png"};
+    ImageGPU interpolatedImage{"../outImages/outImageGPU.png"};
     interpolatedImage.setProperties(image.height, image.width, image.channels);
 
-    ImageGPU undefinedMap{"../undefinedPixels.png"};
+    ImageGPU undefinedMap{"../outImages/undefinedPixelsGPU.png"};
     undefinedMap.setProperties(image.height, image.width, image.channels);
 
     interpolateKernel<<<numBlocks, threadsPerBlock>>>(image, interpolatedImage, undefinedMap);
@@ -277,7 +280,8 @@ void rotateLine(const std::string &imagePath) {
 }
 
 int main() {
-    auto imagePath = "../images/man.png";
+    auto imagePath = "../images/saoriLine.png";
+
 
     cout << "GPU implementation: " << endl;
     rotateLine(imagePath);

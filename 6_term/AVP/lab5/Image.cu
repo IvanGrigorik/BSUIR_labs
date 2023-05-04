@@ -164,13 +164,5 @@ void ImageGPU::writeImage() const {
         }
     }
 
-//    for (int i = 0; i < height; i++) {
-//        for (int j = 0; j < width; j++) {
-//            cout << int(imageMatrix[i * width + j].red) << ':' << int(imageMatrix[i * width + j].green) << ':'
-//                 << int(imageMatrix[i * width + j].blue) << ' ';
-//        }
-//        cout << endl;
-//    }
-
     stbi_write_png(imagePath.c_str(), width, height, channels, image, width * channels);
 }
