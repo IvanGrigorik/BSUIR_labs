@@ -1,0 +1,147 @@
+GED
+
+	Undo Commands
+	     1.	Properties
+	     2.	Properties
+	     3.	Resize
+	     4.	Properties
+	     5.	Insert Node
+	     6.	Delete
+	     7.	Move
+	     8.	Move
+	     9.	Resize
+	    10.	Properties
+	    11.	Insert Node
+	    12.	Move
+	    13.	Delete
+	    14.	Move
+	    15.	Move
+	    16.	Properties
+	    17.	Properties
+	    18.	Properties
+	    19.	Move
+	    20.	Move
+	    21.	Move
+	    22.	Move
+	    23.	Move
+	    24.	Delete
+	    25.	Delete
+	    26.	Move
+	    27.	Move
+	    28.	Resize
+	    29.	Resize
+	    30.	Move
+	    31.	Move
+	    32.	Move
+	    33.	Paste
+	    34.	Delete
+	    35.	Move
+	    36.	Paste
+	    37.	Delete
+	    38.	Properties
+	    39.	Properties
+	    40.	Properties
+	    41.	Resize
+	    42.	Resize
+	    43.	Resize
+	    44.	Move
+	    45.	Move
+	    46.	Move
+	    47.	Move
+	    48.	Move
+	    49.	Paste
+	    50.	Delete
+	    51.	Move
+	    52.	Paste
+	    53.	Properties
+	    54.	Properties
+	    55.	Properties
+	    56.	Insert Node
+	    57.	Move
+	    58.	Properties
+	    59.	Delete
+	    60.	Paste
+	    61.	Move
+	    62.	Move
+	    63.	Move
+	    64.	Delete Insert
+	    65.	Move
+	    66.	Move
+	    67.	Move
+	    68.	Move
+	    69.	Move
+	    70.	Move
+	    71.	Properties
+	    72.	Insert Bus
+	    73.	Properties
+	    74.	Insert Bus
+	    75.	Properties
+	    76.	Resize
+	    77.	Move
+	    78.	Paste
+	    79.	Move
+	    80.	Move
+	    81.	Paste
+	    82.	Move
+	    83.	Resize
+	    84.	Move
+	    85.	Resize
+	    86.	Resize
+	    87.	Move
+	    88.	Resize
+	    89.	Move
+	    90.	Move
+	    91.	Move
+	    92.	Move
+	    93.	Move
+	    94.	Move
+	    95.	Properties
+	    96.	Properties
+	    97.	Properties
+	    98.	Insert Node
+	    99.	Delete
+	   100.	Delete
+
+
+RPW
+
+	Undo Commands
+	     1.	||Simulation Report||Simulator||Logical Memories|||main|ROM:inst|lpm_rom0:inst|altsyncram:altsyncram_component|altsyncram_v771:auto_generated|ALTSYNCRAM
+	     2.	||Simulation Report||Simulator||Simulation Waveforms
+
+
+GED
+
+	Undo Commands
+	     1.	Delete
+	     2.	Delete
+	     3.	Insert Symbol
+	     4.	Move
+	     5.	Move
+
+	Redo Commands
+	     1.	Insert Symbol
+
+
+RPW
+
+	Undo Commands
+	     1.	||Compilation Report||Flow Summary
+
+
+GED
+
+	Undo Commands
+	     1.	Insert Bus
+	     2.	Insert Bus
+	     3.	Insert Bus
+	     4.	Move
+	     5.	Move
+	     6.	Resize
+	     7.	Move
+	     8.	Properties
+	     9.	Insert Node
+	    10.	Move
+	    11.	Insert Symbol
+
+

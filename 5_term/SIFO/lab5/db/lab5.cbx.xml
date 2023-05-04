@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="lab5">
+		<CBX_INST_ENTRY INSTANCE_NAME="|main|arbitrator:inst8|decode3_5:inst8|lpm_decode:lpm_decode_component" CBX_FILE_NAME="decode_p7f.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|main|master1:inst|LPM_CONSTANT:inst" CBX_FILE_NAME="lpm_constant_4a4.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|main|master2:inst3|LPM_CONSTANT:inst" CBX_FILE_NAME="lpm_constant_o84.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|main|master3:inst4|LPM_CONSTANT:inst" CBX_FILE_NAME="lpm_constant_9a4.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|main|arbitrator:inst8|counter_acl3:inst6|lpm_counter:lpm_counter_component" CBX_FILE_NAME="cntr_q3i.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|main|arbitrator:inst8|decode:inst4|lpm_decode:lpm_decode_component" CBX_FILE_NAME="decode_u7f.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|main|arbitrator:inst8|lpm_counter0:inst|lpm_counter:lpm_counter_component" CBX_FILE_NAME="cntr_r3i.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

@@ -41,3 +41,4 @@
 
 # Except labs and src folders
 !src/
+.fleet/
