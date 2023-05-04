@@ -30,13 +30,12 @@ received_ack = []
 
 def reader_routine(r_port: serial.Serial, w_port: serial.Serial):
     print(f"Start reader routine")
-    message_part = ''
     message = ''
 
     while True:
         message_part = ''
         while r_port.inWaiting():
-            message_part = message_part + r_port.read().decode()
+            message_part += r_port.read().decode()
 
         if message_part != '':
             if message_part[5:8] == 'ACK':
@@ -80,6 +79,7 @@ def main():
 
         # Sent by 3 parts of message (static windows)
         message_parts = [message[i:i + MS * 3] for i in range(0, len(message), MS * 3)]
+        print(message_parts)
         idx = 0
         for part in message_parts:
             window = []
@@ -94,17 +94,17 @@ def main():
                 idx = int(idx) + 1
 
             while True:
-                for package in window:
-                    w_port.write(package.encode())
+                for packet in window:
+                    w_port.write(packet.encode())
                     time.sleep(0.01)
                 time.sleep(1)
 
                 check_window = window.copy()
 
-                for package in window:
-                    if package[2:5] in received_ack:
-                        check_window.remove(package)
-                        received_ack.remove(package[2:5])
+                for packet in window:
+                    if packet[2:5] in received_ack:
+                        check_window.remove(packet)
+                        received_ack.remove(packet[2:5])
 
                 if len(check_window) == 0:
                     print(f"Window sent")
