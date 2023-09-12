@@ -1,0 +1,1 @@
+-wto "89e8db05da66405a95c1e4aa3d045b15" --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "MUX8TO1_seq_tb_behav" "xil_defaultlib.MUX8TO1_seq_tb" -log "elaborate.log" 

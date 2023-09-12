@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 __pycache__
 *.pyc
 Pipfile.lock
 ~*
+=======
+__pycache__
+*.pyc
+Pipfile.lock
+>>>>>>> 6_term
