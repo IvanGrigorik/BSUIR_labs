@@ -1,0 +1,296 @@
+autostart = False
+version = 0.8.7
+[127.0.0.1:7210]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 11001
+    [[7200]]
+        image = C:\Users\givan\Desktop\University\AKSiS\GNS3\c7200-adventerprisek9-mz.124-15.T17.image
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R4]]
+        console = 2124
+        aux = 2524
+        cnfg = configs\R4.cfg
+        slot1 = PA-GE
+        slot2 = PA-GE
+        g2/0 = R8 g2/0
+        slot3 = PA-GE
+        g3/0 = R7 g3/0
+        x = -19.1680015377
+        y = 159.068109219
+        z = 1.0
+        hx = 17.9142135624
+        hy = 46.4177849
+[127.0.0.1:7206]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10601
+    [[7200]]
+        image = C:\Users\givan\Desktop\University\AKSiS\GNS3\c7200-adventerprisek9-mz.124-15.T17.image
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R1]]
+        console = 2120
+        aux = 2520
+        cnfg = configs\R1.cfg
+        slot1 = PA-GE
+        g1/0 = R2 g1/0
+        slot2 = PA-GE
+        g2/0 = R3 g2/0
+        slot3 = PA-GE
+        g3/0 = R8 g3/0
+        x = -489.0
+        y = -10.0
+        z = 1.0
+[127.0.0.1:7207]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10701
+    [[7200]]
+        image = C:\Users\givan\Desktop\University\AKSiS\GNS3\c7200-adventerprisek9-mz.124-15.T17.image
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R5]]
+        console = 2122
+        aux = 2522
+        cnfg = configs\R5.cfg
+        slot1 = PA-GE
+        g1/0 = R7 g1/0
+        slot2 = PA-GE
+        slot3 = PA-GE
+        x = 435.0
+        y = 10.0
+        z = 1.0
+    [[ROUTER R7]]
+        console = 2121
+        aux = 2521
+        cnfg = configs\R7.cfg
+        slot1 = PA-GE
+        g1/0 = R5 g1/0
+        slot2 = PA-GE
+        g2/0 = R6 g2/0
+        slot3 = PA-GE
+        g3/0 = R4 g3/0
+        x = 180.0
+        y = 10.0
+        z = 1.0
+[127.0.0.1:7204]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10401
+    [[7200]]
+        image = C:\Users\givan\Desktop\University\AKSiS\GNS3\c7200-adventerprisek9-mz.124-15.T17.image
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R2]]
+        console = 2112
+        aux = 2512
+        cnfg = configs\R2.cfg
+        slot1 = PA-GE
+        g1/0 = R1 g1/0
+        slot2 = PA-GE
+        slot3 = PA-GE
+        x = -693.0
+        y = -9.0
+        z = 1.0
+[127.0.0.1:7205]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10501
+    [[7200]]
+        image = C:\Users\givan\Desktop\University\AKSiS\GNS3\c7200-adventerprisek9-mz.124-15.T17.image
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R6]]
+        console = 2117
+        aux = 2517
+        cnfg = configs\R6.cfg
+        slot1 = PA-GE
+        slot2 = PA-GE
+        g2/0 = R7 g2/0
+        slot3 = PA-GE
+        g3/0 = R3 g3/0
+        x = -28.5
+        y = -126.5
+        z = 1.0
+[127.0.0.1:7209]
+    workingdir = C:\Users\givan\AppData\Local\Temp
+    udp = 10901
+    [[7200]]
+        image = C:\Users\givan\Desktop\University\AKSiS\GNS3\c7200-adventerprisek9-mz.124-15.T17.image
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R3]]
+        console = 2119
+        aux = 2519
+        cnfg = configs\R3.cfg
+        slot1 = PA-GE
+        g1/0 = R8 g1/0
+        slot2 = PA-GE
+        g2/0 = R1 g2/0
+        slot3 = PA-GE
+        g3/0 = R6 g3/0
+        x = -294.090403796
+        y = -127.550685808
+        z = 1.0
+    [[ROUTER R8]]
+        console = 2123
+        aux = 2523
+        cnfg = configs\R8.cfg
+        slot1 = PA-GE
+        g1/0 = R3 g1/0
+        slot2 = PA-GE
+        g2/0 = R4 g2/0
+        slot3 = PA-GE
+        g3/0 = R1 g3/0
+        x = -297.655374954
+        y = 160.707719527
+        z = 1.0
+        hx = 21.5
+        hy = 44.0000000002
+[GNS3-DATA]
+    configs = configs
+    m11 = 0.999999999998
+    m22 = 0.999999999998
+    [[NOTE 1]]
+        text = "Subnet2"
+        x = 43.1335136525
+        y = 81.3380951168
+    [[NOTE 2]]
+        text = "Subnet 5"
+        x = 306.000000001
+        y = -11.0
+    [[NOTE 3]]
+        text = "Subnet7"
+        x = -379.000000001
+        y = 42.0000000001
+    [[NOTE 4]]
+        text = "61.32.0.2"
+        x = -673.000000001
+        y = -54.0000000001
+    [[NOTE 5]]
+        text = "61.32.0.1"
+        x = -511.000000001
+        y = -52.0000000001
+    [[NOTE 6]]
+        text = "Subnet6"
+        x = -399.000000001
+        y = -81.0000000001
+    [[NOTE 7]]
+        text = "loopback 2a00:6440::1"
+        x = 419.000000001
+        y = -43.0000000001
+    [[NOTE 8]]
+        text = "fdaa:aa00:0:F::XXX"
+        x = -622.000000001
+        y = 46.0000000001
+    [[NOTE 9]]
+        text = "loopback 2a00:1760::1"
+        x = -721.000000001
+        y = -80.0000000001
+    [[NOTE 10]]
+        text = "Subnet4"
+        x = -178.898015641
+        y = -132.208152802
+    [[NOTE 11]]
+        text = "Subnet3"
+        x = 97.580735804
+        y = -67.8614357139
+    [[NOTE 12]]
+        text = "Subnet 1"
+        x = -165.462986798
+        y = 156.291413923
+    [[NOTE 13]]
+        text = "Subnet 0"
+        x = -260.922402258
+        y = 14.8700576851
+    [[NOTE 14]]
+        text = "Internet"
+        x = -594.0
+        y = -11.0
+    [[NOTE 15]]
+        text = "g1/0"
+        x = 40.4946531991
+        y = -28.9969413607
+        interface = R8 g1/0
+    [[NOTE 16]]
+        text = "g3/0"
+        x = -47.9255847977
+        y = -15.5416535755
+        interface = R8 g3/0
+    [[NOTE 17]]
+        text = "g2/0"
+        x = 72.9993067515
+        y = 21.7645017982
+        interface = R8 g2/0
+    [[NOTE 18]]
+        text = "g1/0"
+        x = 38.1622010504
+        y = 60.5827277983
+        interface = R3 g1/0
+    [[NOTE 19]]
+        text = "g2/0"
+        x = -12.4886526151
+        y = 44.9076907497
+        interface = R3 g2/0
+    [[NOTE 20]]
+        text = "g3/0"
+        x = 72.9996869989
+        y = 22.1582402935
+        interface = R3 g3/0
+    [[NOTE 21]]
+        text = "g1/0"
+        x = 73.0
+        y = 22.0
+        interface = R2 g1/0
+    [[NOTE 22]]
+        text = "g3/0"
+        x = 40.2981677996
+        y = 60.5624688557
+        interface = R1 g3/0
+    [[NOTE 23]]
+        text = "g2/0"
+        x = 72.1246915844
+        y = -3.02901109329
+        interface = R1 g2/0
+    [[NOTE 24]]
+        text = "g1/0"
+        x = -40.2340187158
+        y = 29.0710678119
+        interface = R1 g1/0
+    [[NOTE 25]]
+        text = "g2/0"
+        x = -43.4660546417
+        y = -5.90943145602
+        interface = R7 g2/0
+    [[NOTE 26]]
+        text = "g1/0"
+        x = 73.0
+        y = 22.0
+        interface = R7 g1/0
+    [[NOTE 27]]
+        text = "g3/0"
+        x = -16.023746815
+        y = 58.9683049032
+        interface = R7 g3/0
+    [[NOTE 28]]
+        text = "g3/0"
+        x = -36.999686999
+        y = 23.8417597065
+        interface = R6 g3/0
+    [[NOTE 29]]
+        text = "g2/0"
+        x = 66.4660546416
+        y = 43.909431456
+        interface = R6 g2/0
+    [[NOTE 30]]
+        text = "g1/0"
+        x = -40.0000000001
+        y = 25.0
+        interface = R5 g1/0
+    [[NOTE 31]]
+        text = "g3/0"
+        x = 65.023746815
+        y = -1.96830490318
+        interface = R4 g3/0
+    [[NOTE 32]]
+        text = "g2/0"
+        x = -40.9993067515
+        y = 29.2354982018
+        interface = R4 g2/0
