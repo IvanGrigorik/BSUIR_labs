@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Prerequisites
 *.d
 
@@ -33,59 +32,29 @@
 *.out
 *.app
 *.bin
-
-# Ignore any folder
-*cmake-build-debug/
-.idea/
-.fleet/
-.vscode/
 
 # Except labs and src folders
 !src/
 .fleet/
 target/
-=======
-# Prerequisites
-*.d
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-*.tmp
+# Vivado files
+.jobs/
+synth_*/
+*.runs/
+*cache*/
+*.hw/
+sim_*/
+*sim/
+*.ip_user*/
 
-# Precompiled Headers
-*.gch
-*.pch
+lab1.runs/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-*.bin
-
-# Ignore any folder
-*cmake-build-debug/
-*cmake-build-release/
-.idea/
+# IDEs files
+.vscode/
+*build*/
+build*/
 .fleet/
+.idea/
 
-# Except labs and src folders
-!src/
->>>>>>> 6_term
+
