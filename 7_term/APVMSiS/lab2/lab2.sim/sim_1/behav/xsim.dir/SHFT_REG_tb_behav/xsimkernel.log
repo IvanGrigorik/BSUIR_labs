@@ -1,7 +1,0 @@
-Running: xsim.dir/SHFT_REG_tb_behav/xsimk.exe -simmode gui -wdb SHFT_REG_tb_behav.wdb -simrunnum 0 -socket 53748
-Design successfully loaded
-Design Loading Memory Usage: 7152 KB (Peak: 7152 KB)
-Design Loading CPU Usage: 15 ms
-Simulation completed
-Simulation Memory Usage: 7640 KB (Peak: 7640 KB)
-Simulation CPU Usage: 296 ms

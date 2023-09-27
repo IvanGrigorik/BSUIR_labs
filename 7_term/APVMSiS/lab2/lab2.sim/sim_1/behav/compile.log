@@ -1,4 +1,0 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "E:/university/BSUIR/BSUIR_labs/7_term/APVMSiS/lab2/lab2.srcs/sources_1/new/8SHFT_REG.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity SHFT_REG
-INFO: [VRFC 10-163] Analyzing VHDL file "E:/university/BSUIR/BSUIR_labs/7_term/APVMSiS/lab2/lab2.srcs/sim_1/new/SHFT_REG_tb.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity SHFT_REG_tb
