@@ -1,0 +1,4 @@
+Breakpoint File Version 1.0
+64 true E:/university/BSUIR/BSUIR_labs/7_term/APVMSiS/lab2/lab2.srcs/sim_1/new/SHFT_REG_tb.vhd
+68 true E:/university/BSUIR/BSUIR_labs/7_term/APVMSiS/lab2/lab2.srcs/sim_1/new/SHFT_REG_tb.vhd
+69 true E:/university/BSUIR/BSUIR_labs/7_term/APVMSiS/lab2/lab2.srcs/sim_1/new/SHFT_REG_tb.vhd

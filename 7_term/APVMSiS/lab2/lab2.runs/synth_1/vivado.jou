@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Wed Sep 27 18:05:29 2023
+# Process ID: 1104
+# Current directory: E:/university/BSUIR/BSUIR_labs/7_term/APVMSiS/lab2/lab2.runs/synth_1
+# Command line: vivado.exe -log SHFT_REG.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source SHFT_REG.tcl
+# Log file: E:/university/BSUIR/BSUIR_labs/7_term/APVMSiS/lab2/lab2.runs/synth_1/SHFT_REG.vds
+# Journal file: E:/university/BSUIR/BSUIR_labs/7_term/APVMSiS/lab2/lab2.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source SHFT_REG.tcl -notrace
