@@ -1,4 +1,0 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "E:/university/BSUIR/BSUIR_labs/7_term/APVMSiS/lab1/lab1.srcs/sources_1/new/MUX8TO1_seq.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity MUX8TO1_seq
-INFO: [VRFC 10-163] Analyzing VHDL file "E:/university/BSUIR/BSUIR_labs/7_term/APVMSiS/lab1/lab1.srcs/sim_1/new/MUX8TO1_seq_tb.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity MUX8TO1_seq_tb
