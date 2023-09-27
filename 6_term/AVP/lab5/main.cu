@@ -1,96 +1,323 @@
 #include "Image.cuh"
-#include <algorithm>
-#include <cmath>
-#include <iomanip>
+#include "cpu.cuh"
+#include "utilities.cuh"
+#include <chrono>
 #include <iostream>
 
-#define degToRad(val) (val * M_PI / 180)
+using namespace std;
+using namespace chrono;
 
-std::vector<std::vector<int>> houghAccum;
-Pixel marker{0, 0, 0};
+__device__ GPUPixel markerGPU{0, 255, 0};
+__device__ GPUPixel thresholdGPU{20, 20, 20};
 
-/// Returns line angle relative to the horizon (see explanation ahead the function)
-/*
- * |                     ----
- * |                 ----
- * |             ---- A (equivalent)
- * | ****************************** horizon line
- * |       A ----
- * |     ----
- * | ----
- * |||||||||||||||||||||||||||||||| image x-axis
- * Return angle A
- */
-int houghTransform(const Image &image) {
-    const int maxDist = static_cast<int>(round(sqrt(pow(image.getHeight(), 2) + pow(image.getWidth(), 2))));
-    // Little theta and step optimization
-    const int thetasCount = 2 * (image.getHeight() + image.getWidth()) - 4;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Hough ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+__global__ void houghKernel(const ImageGPU image, int *houghAccum,//NOLINT (to disable clang-tidy)
+                            float step, int thetasCount, int maxDist) {
+    const unsigned x = threadIdx.x + blockDim.x * blockIdx.x;
+    const unsigned y = threadIdx.y + blockDim.y * blockIdx.y;
 
-    // Memory allocation
-    houghAccum.resize(2 * maxDist);
-    for (int i = 0; i < 2 * maxDist; i++) { houghAccum[i].resize(thetasCount); }
+    if (y >= image.height or x >= image.width) {
+        return;
+    }
+    //    if(x == 20)
+
+    auto row = getRow(image.devData, image.pitch, y);
+    auto element = row[x];
+    //    printf("x:%d y:%d: %d:%d:%d\n", x, y, element.red, element.green, element.blue);
+
+    if (abs(element.red - markerGPU.red) >= thresholdGPU.red or      //
+        abs(element.green - markerGPU.green) >= thresholdGPU.green or//
+        abs(element.blue - markerGPU.blue) >= thresholdGPU.blue) {
+        return;
+    }
+
+    double ang = -90;
+    for (int h = 0; h < thetasCount; ang += step, h++) {
+        int idx = static_cast<int>(maxDist + x * cos(degToRad(ang)) + y * sin(degToRad(ang)));
+        atomicAdd(&houghAccum[thetasCount * idx + h], 1);
+        //        if (idx == 44 and h == 60) {
+        //            printf("X:Y: %d:%d\n", x, y);
+        //        }
+    }
+}
+
+double houghGPU(const ImageGPU &image, const dim3 numBlocks, const dim3 threadsPerBlock) {
+    int *houghAccum;
+    const int maxDist = static_cast<int>(round(sqrt(pow(image.height, 2) + pow(image.width, 2))));
+    const int thetasCount = 2 * (image.height + image.width) - 4;
+
+    auto accumLen = 2 * maxDist * thetasCount;
+    CUDA_ASSERT(cudaMallocManaged(&houghAccum, accumLen * sizeof(int)))
+    CUDA_ASSERT(cudaMemset(houghAccum, 0, accumLen * sizeof(int)))
 
     const float step = 180.f / static_cast<float>(thetasCount);
 
-    for (int x = 0; x < image.getHeight(); x++) {
-        for (int y = 0; y < image.getWidth(); y++) {
-            // Find pixel fits the marker
-            if (image.getPixel(x, y) != marker) { continue; }
-
-            double ang = -90;
-            for (int h = 0; h < thetasCount; ang += step, h++) {
-                int idx = static_cast<int>(maxDist + x * cos(degToRad(ang)) + y * sin(degToRad(ang)));
-                houghAccum[idx][h]++;
-            }
-        }
-    }
+    houghKernel<<<numBlocks, threadsPerBlock>>>(image, houghAccum, step, thetasCount, maxDist);
+    CUDA_ASSERT(cudaDeviceSynchronize())
 
     int idx{}, max{};
-    for (auto &i: houghAccum) {
-        for (int j = 0; j < i.size(); j++) {
-            if (i[j] > max) {
-                max = i[j];
+    for (int i = 0; i < maxDist * 2; i++) {
+        for (int j = 0; j < thetasCount; j++) {
+            if (houghAccum[i * thetasCount + j] > max) {
+                max = houghAccum[i * thetasCount + j];
                 idx = j;
             }
         }
     }
 
-    return static_cast<int>(-90 + step * static_cast<float>(idx));
+    auto angle = -90 + step * static_cast<float>(idx);
+    return angle;
 }
 
-Image rotateImage(const Image &image, const int angle) {
-    Image newImage{"../outImage.png"};
-    const int maxDist = static_cast<int>(round(sqrt(pow(image.getHeight(), 2) + pow(image.getWidth(), 2))));
-    auto centerX = image.getWidth() / 2, centerY = image.getHeight() / 2;
-    newImage.setProperties(maxDist, maxDist, image.getChannels());
 
-    auto angCos = cos(degToRad(angle)), angSin = sin(degToRad(angle));
-    for (int i = 0; i < image.getHeight(); i++) {
-        for (int j = 0; j < image.getWidth(); j++) {
-            auto x = static_cast<int>((i - centerX) * angCos + (j - centerY) * angSin);
-            auto y = static_cast<int>((j - centerY) * angCos - (i - centerX) * angSin);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Rotation ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+__global__ void rotateKernel(const ImageGPU sourceImage, ImageGPU destinationImage,//NOLINT (to disable clang-tidy)
+                             const double k1, const double k2, const int centerX, const int centerY) {
+    // Cast, 'cause need sign to further calculations
+    const int x = static_cast<int>(threadIdx.x + blockDim.x * blockIdx.x);
+    const int y = static_cast<int>(threadIdx.y + blockDim.y * blockIdx.y);
 
-//            if (x > maxDist or x < 0 or y > maxDist or y < 0) { continue; }
+    if (y >= sourceImage.height or x >= sourceImage.width or y >= destinationImage.height or
+        x >= destinationImage.width) {
+        return;
+    }
 
-            newImage.setPixel(x, y, image.getPixel(i, j));
+    int newX = static_cast<int>(k1 * (x - centerX) + k2 * (y - centerY) + centerX);
+    int newY = static_cast<int>(k1 * (y - centerY) - k2 * (x - centerX) + centerY);
+
+    if (newX < 0 or newX >= sourceImage.width or newY < 0 or newY >= sourceImage.height) {
+        return;
+    }
+
+
+    auto srcRow = getRow(sourceImage.devData, sourceImage.pitch, y);
+    auto sourceElement = srcRow[x];
+
+    auto dstRow = getRow(destinationImage.devData, destinationImage.pitch, newY);
+    dstRow[newX] = sourceElement;
+}
+
+ImageGPU rotateImageGPU(const ImageGPU &image, const dim3 numBlocks, const dim3 threadsPerBlock,
+                        const double rotationAngle) {
+    ImageGPU rotatedImage{"../outImages/rotatedImageGPU.png"};
+    const int centerX = image.width / 2, centerY = image.height / 2;
+
+    rotatedImage.setProperties(image.height, image.width, image.channels);
+    const auto radAngle = degToRad(90 + rotationAngle);
+
+    const auto k1 = sin(radAngle);
+    const auto k2 = cos(radAngle);
+
+    rotateKernel<<<numBlocks, threadsPerBlock>>>(image, rotatedImage, k1, k2, centerX, centerY);
+    CUDA_ASSERT(cudaDeviceSynchronize());
+
+    return rotatedImage;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Centralize line ////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+__global__ void distanceToMarkedKernel(const ImageGPU image, unsigned *accum, unsigned *shotVal) {//NOLINT
+    const int x = static_cast<int>(threadIdx.x + blockDim.x * blockIdx.x);
+    const int y = static_cast<int>(threadIdx.y + blockDim.y * blockIdx.y);
+
+    if (y >= image.height or x >= image.width) {
+        return;
+    }
+
+    auto row = getRow(image.devData, image.pitch, y);
+    auto element = row[x];
+    if (element.isDefined and               //
+        element.red == markerGPU.red and    //
+        element.green == markerGPU.green and//
+        element.blue == markerGPU.blue) {
+        atomicAdd(accum, y);
+        atomicAdd(shotVal, 1);
+    }
+}
+
+__global__ void centralizeKernel(const ImageGPU sourceImage, const ImageGPU destinationImage, int offset) {//NOLINT
+    const int x = static_cast<int>(threadIdx.x + blockDim.x * blockIdx.x);
+    const int y = static_cast<int>(threadIdx.y + blockDim.y * blockIdx.y);
+
+    if (y >= sourceImage.height or x >= sourceImage.width or y >= destinationImage.height or
+        x >= destinationImage.width) {
+        return;
+    }
+
+    auto srcRow = getRow(sourceImage.devData, sourceImage.pitch, y);
+    auto dstRow = getRow(destinationImage.devData, destinationImage.pitch, y + offset);
+
+    if (y + offset > 0 and y + offset < destinationImage.height) {
+        dstRow[x] = srcRow[x];
+    }
+}
+
+ImageGPU centralizeLine(const ImageGPU &image, const dim3 numBlocks, const dim3 threadsPerBlock) {
+    // Do preparation calculates
+    unsigned *heightAccum;
+    CUDA_ASSERT(cudaMallocManaged(&heightAccum, image.width * sizeof(unsigned)))
+    CUDA_ASSERT(cudaMemset(heightAccum, 0, 1))
+    unsigned *shotValue;
+    CUDA_ASSERT(cudaMallocManaged(&shotValue, image.width * sizeof(unsigned)))
+    CUDA_ASSERT(cudaMemset(shotValue, 0, 1))
+
+    distanceToMarkedKernel<<<numBlocks, threadsPerBlock>>>(image, heightAccum, shotValue);
+    CUDA_ASSERT(cudaDeviceSynchronize())
+
+    auto average = static_cast<int>(*heightAccum / *shotValue);
+    auto shiftDistance = image.height / 2 - average;
+    cout << "Shift distance: " << shiftDistance << endl;
+
+    ImageGPU centralizedImage{"../outImages/centralizedGPU.png"};
+    centralizedImage.setProperties(image.height, image.width, image.channels);
+
+    centralizeKernel<<<numBlocks, threadsPerBlock>>>(image, centralizedImage, shiftDistance);
+    CUDA_ASSERT(cudaDeviceSynchronize())
+    return centralizedImage;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Interpolate ////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+__global__ void interpolateKernel(const ImageGPU sourceImage, const ImageGPU destinationImage,//NOLINT
+                                  const ImageGPU undefinedMap) {                              //NOLINT
+    const int x = static_cast<int>(threadIdx.x + blockDim.x * blockIdx.x);
+    const int y = static_cast<int>(threadIdx.y + blockDim.y * blockIdx.y);
+
+    // Only one image can be compared, because all images have similar sizes
+    if (y >= destinationImage.height or x >= destinationImage.width) {
+        return;
+    }
+
+    auto srcRow = getRow(sourceImage.devData, sourceImage.pitch, y);
+    auto dstRow = getRow(destinationImage.devData, destinationImage.pitch, y);
+
+    if (srcRow[x].isDefined) {
+        dstRow[x] = srcRow[x];
+        return;
+    }
+
+    auto mapRow = getRow(undefinedMap.devData, undefinedMap.pitch, y);
+
+    // rotated image cannot contain more than two undefined pixels in a row, thus we can
+    if (x + 2 < sourceImage.width and !srcRow[x + 1].isDefined and !srcRow[x + 2].isDefined) {
+        return;
+    }
+
+    int r{}, g{}, b{}, shots{};
+
+    // Compare 4 pixels around
+    if (x + 1 < sourceImage.width and srcRow[x + 1].isDefined) {
+        r += srcRow[x + 1].red;
+        g += srcRow[x + 1].green;
+        b += srcRow[x + 1].blue;
+        shots++;
+    }
+    if (x - 1 >= 0 and srcRow[x - 1].isDefined) {
+        r += srcRow[x - 1].red;
+        g += srcRow[x - 1].green;
+        b += srcRow[x - 1].blue;
+        shots++;
+    }
+    if (y + 1 < sourceImage.height) {
+        auto rowP1 = getRow(sourceImage.devData, sourceImage.pitch, y + 1);
+        if (rowP1[x].isDefined) {
+            r += rowP1[x].red;
+            g += rowP1[x].green;
+            b += rowP1[x].blue;
+            shots++;
+        }
+    }
+    if (y - 1 >= 0) {
+        auto rowM1 = getRow(sourceImage.devData, sourceImage.pitch, y - 1);
+        if (rowM1[x].isDefined) {
+            r += rowM1[x].red;
+            g += rowM1[x].green;
+            b += rowM1[x].blue;
+            shots++;
         }
     }
 
-    newImage.writeImage();
+    if (shots != 0) {
+        dstRow[x] = {static_cast<uint8_t>(r / shots),//
+                     static_cast<uint8_t>(g / shots),//
+                     static_cast<uint8_t>(b / shots), true};
+    }
+}
+
+ImageGPU interpolateImage(const ImageGPU &image, const dim3 numBlocks, const dim3 threadsPerBlock) {
+
+    ImageGPU interpolatedImage{"../outImages/outImageGPU.png"};
+    interpolatedImage.setProperties(image.height, image.width, image.channels);
+
+    ImageGPU undefinedMap{"../outImages/undefinedPixelsGPU.png"};
+    undefinedMap.setProperties(image.height, image.width, image.channels);
+
+    interpolateKernel<<<numBlocks, threadsPerBlock>>>(image, interpolatedImage, undefinedMap);
+    CUDA_ASSERT(cudaDeviceSynchronize())
+    return interpolatedImage;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Main function //////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void rotateLine(const std::string &imagePath) {
+    ImageGPU image{imagePath};
+    image.readImage();
+
+    dim3 threadsPerBlock(30, 30);// change 20 to 30
+    dim3 numBlocks{(image.width + threadsPerBlock.x - 1) / threadsPerBlock.x,
+                   (image.height + threadsPerBlock.y - 1) / threadsPerBlock.y};
+
+    cout << "ImageGPU height: " << image.height << endl << "ImageGPU width: " << image.width << endl;
+    // Get angle to rotate the image
+    const auto houghtResult = houghGPU(image, numBlocks, threadsPerBlock);
+    std::cout << "Hough result: " << houghtResult << endl;
+    const auto rotationAngle = houghtResult > 0 ? 90 - houghtResult : -(90 + houghtResult);
+    cout << "Rotation angle: " << rotationAngle << endl;
+
+    // Rotate the image
+    auto rotatedImage = rotateImageGPU(image, numBlocks, threadsPerBlock, rotationAngle);
+    rotatedImage.writeImage();
+
+    // Shift the marked strip to the center
+    auto centralizedImage = centralizeLine(rotatedImage, numBlocks, threadsPerBlock);
+    centralizedImage.writeImage();
+    auto interpolated = interpolateImage(centralizedImage, numBlocks, threadsPerBlock);
+    interpolated.writeImage();
 }
 
 int main() {
-    using namespace std;
-    Image image{"../images/straight_line.png"};
-    image.readImage();
-    cout << "Image height: " << image.getHeight() << endl << "Image width: " << image.getWidth() << endl;
+    auto imagePath = "../images/saoriLine.png";
 
-    // Get angle to rotate image
-    const auto rotationAngle = houghTransform(image);
-    cout << endl << "Hough result: " << rotationAngle << endl;
+    // GPU part
+    cudaEvent_t start_event, stop_event;
+    cudaEventCreate(&start_event);
+    cudaEventCreate(&stop_event);
 
+    cudaEventRecord(start_event);
+    cout << "GPU implementation: " << endl;
+    rotateLine(imagePath);
 
-    Image rotatedImage = rotateImage(image, rotationAngle);
+    cudaEventRecord(stop_event);
+    cudaEventSynchronize(start_event);
+    cudaEventSynchronize(stop_event);
+
+    float timeGPU = 0;
+    cudaEventElapsedTime(&timeGPU, start_event, stop_event);
+    cout << "GPU elapsed time: " << timeGPU << " ms" << endl << endl;
+
+    // CPU part
+    auto start = steady_clock::now();
+    cout << "CPU implementation: " << endl;
+    runCpu(imagePath);
+    auto timeCPU = duration_cast<milliseconds>(steady_clock::now() - start).count();
+    cout << "GPU elapsed time: " << timeCPU << " ms" << endl;
 
     return 0;
 }
