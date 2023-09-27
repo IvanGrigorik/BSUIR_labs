@@ -23,7 +23,7 @@ eval( EAInclude(ISEJScriptLib) );
 
 
 ISEStep( "vivado",
-         "-log MUX8TO1_seq.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source MUX8TO1_seq.tcl" );
+         "-log MUX8TO1.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source MUX8TO1.tcl" );
 
 
 

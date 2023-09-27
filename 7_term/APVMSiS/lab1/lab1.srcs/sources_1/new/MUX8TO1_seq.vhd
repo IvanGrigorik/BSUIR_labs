@@ -27,7 +27,7 @@ begin
             end loop;
         elsif AorB = '1' then 
             for i in 0 to 3 loop
-                Ys(i) <= As(i);
+                Ys(i) <= Bs(i);
             end loop;
         end if;
     end process;

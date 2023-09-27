@@ -5,7 +5,7 @@ entity MUX8TO1 is
     port ( 
             OE : in std_logic;       -- NOE = not OE
             AorB : in std_logic;     -- not A and B
-            A1 : in std_logic;         
+            A1 : in std_logic;        
             A2 : in std_logic;
             A3 : in std_logic;
             A4 : in std_logic;

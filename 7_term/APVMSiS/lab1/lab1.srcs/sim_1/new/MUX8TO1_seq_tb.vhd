@@ -35,8 +35,9 @@ begin
   
     -- Put initialisation code here
 
+
     for i in std_logic range '0' to '1' loop
-        OE <= i;
+        OE <= not i;
         for j in std_logic range '0' to '1' loop
             AorB <= j;
             wait for 10 ns;
@@ -58,28 +59,6 @@ begin
         end loop;
     end loop;
 
---    end loop;
---     for i in std_logic range '0' to '1' loop
---           OE <= i;
---           for j in std_logic range '0' to '1' loop
---               AorB <= j;
-               
---               for A in std_logic range '0' to '3' loop
---                   for b in std_logic range '0' to '1' loop
---                       As(i) <= b;
---                       wait for 10ns;
---                   end loop;
---               end loop;
-           
-               
---               for B in std_logic range '0' to '3' loop
---                   for b in std_logic range '0' to '1' loop
---                       Bs(i) <= b;
---                       wait for 10ns;
---                   end loop;
---               end loop;
---           end loop;
---       end loop;
 
     -- Put test bench stimulus code here
 
