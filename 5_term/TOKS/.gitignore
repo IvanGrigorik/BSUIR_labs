@@ -1,10 +1,20 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+__pycache__
+*.pyc
+Pipfile.lock
+=======
+>>>>>>> 462d18914906cd841da43a5a38f62983d0dcaea1
 __pycache__
 *.pyc
 Pipfile.lock
 ~*
+<<<<<<< HEAD
 =======
 __pycache__
 *.pyc
 Pipfile.lock
 >>>>>>> 6_term
+=======
+>>>>>>> 462d18914906cd841da43a5a38f62983d0dcaea1
