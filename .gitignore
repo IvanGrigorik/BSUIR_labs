@@ -56,5 +56,7 @@ lab1.runs/
 build*/
 .fleet/
 .idea/
+.metadata/
+
 
 
