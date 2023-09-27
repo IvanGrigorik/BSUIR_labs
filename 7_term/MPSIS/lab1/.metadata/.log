@@ -1,0 +1,60 @@
+!SESSION 2023-09-04 16:24:54.134 -----------------------------------------------
+eclipse.buildId=M20120914-1540
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ru_RU
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.ui 2 0 2023-09-04 16:26:05.768
+!MESSAGE Warnings while parsing the viewer contributions from the 'org.eclipse.ui.popupMenus' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2023-09-04 16:26:05.768
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.CBreakpointPropertiesRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2023-09-04 16:26:05.768
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.EnableDisableBreakpointRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2023-09-04 16:26:05.768
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.ui.actions.RulerCreateBreakpointInteractiveAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2023-09-04 16:26:05.768
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.CBreakpointPropertiesRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2023-09-04 16:26:05.768
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.EnableDisableBreakpointRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2023-09-04 16:26:05.768
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.ui.actions.asm.RulerCreateBreakpointInteractiveAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2023-09-04 16:26:05.768
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='AUTOGEN:::org.eclipse.cdt.dsf.debug.ui.disassemblyRulerActions/org.eclipse.debug.ui.actions.RulerAddBreakpointAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2023-09-04 16:26:05.768
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='org.eclipse.cdt.dsf.debug.ui.disassembly.commands.rulerToggleBreakpoint'
+
+!ENTRY org.eclipse.core.net 1 0 2023-09-04 16:26:10.978
+!MESSAGE System property http.proxyHost is set to 192.168.251.1 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2023-09-04 16:26:10.978
+!MESSAGE System property http.proxyPort is set to 8080 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2023-09-04 16:26:10.978
+!MESSAGE System property https.proxyHost is set to 192.168.251.1 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2023-09-04 16:26:10.978
+!MESSAGE System property https.proxyPort is set to 8080 but should not be set.
+
+!ENTRY com.ti.ccstudio.buildDefinitions.core 2 0 2023-09-04 16:29:16.004
+!MESSAGE Unrecognized option setting '--silicon_errata=CPU30' for tool 'com.ti.ccstudio.buildDefinitions.MSP430_4.2.exe.compilerDebug.785222377'
+
+!ENTRY com.ti.ccstudio.buildDefinitions.core 2 0 2023-09-04 16:29:16.004
+!MESSAGE Unrecognized option setting '--cinit_hold_wdt=on' for tool 'com.ti.ccstudio.buildDefinitions.MSP430_4.2.exe.compilerDebug.785222377'
+
+!ENTRY com.ti.ccstudio.buildDefinitions.core 2 0 2023-09-04 16:29:16.035
+!MESSAGE Unrecognized option setting '--silicon_errata=CPU30' for tool 'com.ti.ccstudio.buildDefinitions.MSP430_4.2.exe.compilerRelease.1245544341'
+
+!ENTRY com.ti.ccstudio.buildDefinitions.core 2 0 2023-09-04 16:29:16.035
+!MESSAGE Unrecognized option setting '--cinit_hold_wdt=on' for tool 'com.ti.ccstudio.buildDefinitions.MSP430_4.2.exe.compilerRelease.1245544341'
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-09-04 16:29:16.909
+!MESSAGE Indexed 'MSP430F55xx_ta1_01' (1 sources, 0 headers) in 0,38 sec: 4 declarations; 2 references; 1 unresolved inclusions; 1 syntax errors; 15 unresolved names (71,43 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-09-04 16:29:17.954
+!MESSAGE Indexed 'MSP430F55xx_ta1_01' (1 sources, 4 headers) in 0,70 sec: 825 declarations; 1 054 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0,00 %)
+
+!ENTRY com.ti.ccstudio.debug 1 0 2023-09-04 17:11:01.206
+!MESSAGE DS_ERROR: MSP430: GEL: File: C:\Users\Administrator\Desktop\lab1\MSP430F55xx_ta1_01\Debug\MSP430F55xx_ta1_01.out Load cancelled by user.
+
