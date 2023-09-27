@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 462d18914906cd841da43a5a38f62983d0dcaea1
 # .gitignore for Quartus 
 
 # Debugging
@@ -30,6 +33,7 @@ output_files/
 *.sof
 *.txt
 *.html
+<<<<<<< HEAD
 =======
 # .gitignore for Quartus 
 
@@ -62,3 +66,5 @@ output_files/
 *.sof
 *.txt
 >>>>>>> 6_term
+=======
+>>>>>>> 462d18914906cd841da43a5a38f62983d0dcaea1

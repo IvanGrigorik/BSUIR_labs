@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 462d18914906cd841da43a5a38f62983d0dcaea1
 # Prerequisites
 *.d
 
@@ -36,12 +39,14 @@
 
 # Ignore any folder
 *cmake-build-debug/
+*cmake-build-release/
 .idea/
 .fleet/
 
 # Except labs and src folders
 !src/
 .fleet/
+<<<<<<< HEAD
 =======
 # Prerequisites
 *.d
@@ -87,3 +92,5 @@
 # Except labs and src folders
 !src/
 >>>>>>> 6_term
+=======
+>>>>>>> 462d18914906cd841da43a5a38f62983d0dcaea1
