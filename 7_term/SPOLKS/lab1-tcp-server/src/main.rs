@@ -64,8 +64,7 @@ fn handle_connection(mut stream: TcpStream) {
             }
 
             None => {
-                println!("Connection lost");
-                return;
+                println!("Zero bytes message");
             }
 
             _ => {
