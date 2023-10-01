@@ -1,6 +1,6 @@
 #include <msp430.h>
 #include <stdbool.h>
-
+// Var 11
 static volatile bool button1INTR = false;
 static volatile bool button2INTR = false;
 static volatile unsigned timer_counter = 0;
@@ -25,20 +25,19 @@ void setup(void) {
 
     // Set up second button
     P2DIR &= ~BIT2;
+    // All pins are I/O
     P2SEL = 0;
+    // Pullup for button
     P2REN = BIT2;
     P2OUT = BIT2;
+
     P2IES |= BIT2;
     P2IFG = 0;
     P2IE |= BIT2;
 
-//	P2DIR &= ~BIT2; // enable S1 button
-//	P2REN = BIT2;
-//	P2OUT = BIT2;
-
     // Set up timer
     TA1CCTL0 = CCIE;
-    TA1CCR0 = 1047; // TODO: change number?
+    TA1CCR0 = 2047; // TODO: change number?
     TA1CTL = TASSEL_2 + MC_1 + TACLR;
 }
 
@@ -67,6 +66,7 @@ __interrupt void TIMER1_A0_ISR(void) {
 	static int b2_debounce_pressed = 0;
 
     static bool isOn = false;
+    static bool need_to_on = false;
 
     timer_counter++;
     if (button1INTR) {
@@ -91,10 +91,10 @@ __interrupt void TIMER1_A0_ISR(void) {
     if (button2INTR) {
 		P2IE &= ~BIT2;
 		b2_debounce_total++;
-		b2_debounce_pressed = (P2IN & BIT2) == 0;
+		b2_debounce_pressed += (P2IN & BIT2) == 0;
 
 		if (b2_debounce_total == 10) {
-			is_button2_pressed += b2_debounce_pressed > 7;
+			is_button2_pressed = b2_debounce_pressed > 7;
 			b2_debounce_pressed = 0;
 			b2_debounce_total = 0;
 
@@ -102,17 +102,54 @@ __interrupt void TIMER1_A0_ISR(void) {
 
 			if(is_button2_pressed) P2IES &= ~BIT2;
 			else P2IES |= BIT2;
+
 			P2IE |= BIT2;	// Turn interruption off
 		}
 	}
 
+    if(is_button1_pressed) {
+    	need_to_on = true;
+    	timer_counter = 0;
+    } else if (is_button2_pressed){
+    	need_to_on = false;
+    	timer_counter = 0;
+    }
 
-    if(is_button1_pressed && isOn == 0) {
-    	P1OUT |= BIT1;
-    	isOn = true;
-    } else if (is_button2_pressed && isOn != 0) {
-    	P1OUT &= ~BIT1;
-    	isOn = false;
+    if(need_to_on && !isOn) {
+    	if(timer_counter > 100){
+			P1OUT |= BIT1;
+		}
+    	if(timer_counter > 200){
+			P1OUT |= BIT2;
+		}
+    	if(timer_counter > 300){
+			P1OUT |= BIT3;
+		}
+    	if(timer_counter > 400){
+			P1OUT |= BIT4;
+		}
+    	if(timer_counter > 500){
+			P1OUT |= BIT5;
+	    	isOn = true;
+    	}
+
+    } else if (!need_to_on && isOn) {
+    	if(timer_counter > 100){
+		P1OUT &= ~BIT1;
+	}
+	if(timer_counter > 200){
+		P1OUT &= ~BIT2;
+	}
+	if(timer_counter > 300){
+		P1OUT &= ~BIT3;
+	}
+	if(timer_counter > 400){
+		P1OUT &= ~BIT4;
+	}
+	if(timer_counter > 500){
+		P1OUT &= ~BIT5;
+		isOn = false;
+	}
     }
 
 }
@@ -124,24 +161,6 @@ int main(void) {
     __enable_interrupt();
     __low_power_mode_0();
     __no_operation();
-//    while (1) {
-//        int shift = BIT1;
-//
-//        if (!(P1IN & BIT7)) {
-//            while (shift < BIT6) {
-//                P1OUT += shift;
-//                shift <<= 1;
-//                __delay_cycles(100000);
-//            }
-//        } else if (!(P2IN & BIT2)) {
-//            shift = BIT1;
-//            while (shift < BIT6) {
-//                P1OUT -= shift;
-//                shift <<= 1;
-//                __delay_cycles(100000);
-//            }
-//        }
-//    }
 }
 
 
