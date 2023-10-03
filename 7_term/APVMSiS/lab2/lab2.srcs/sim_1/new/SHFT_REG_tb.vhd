@@ -1,6 +1,5 @@
 library IEEE;
 use IEEE.Std_logic_1164.all;
-use IEEE.Numeric_Std.all;
 
 entity SHFT_REG_tb is
 end;
@@ -9,36 +8,29 @@ architecture bench of SHFT_REG_tb is
 
   component SHFT_REG
       port ( 
-          SRCLR : in std_logic  := '1';
+          SRCLR : in std_logic := '1';
           SRCK : in std_logic := '0';
           SRLOAD : in std_logic := '1';
           RCK : in std_logic := '0';
           SER : in std_logic := '0';
-          A: in std_logic := '0';
-          B : in std_logic := '0';
-          C : in std_logic := '0';
-          D : in std_logic := '0';
-          E : in std_logic := '0';
-          F : in std_logic := '0';
-          G : in std_logic := '0';
-          H : in std_logic := '0';
+          in_bus : in std_logic_vector (7 downto 0);
           REG_OUT : out std_logic := '0');
   end component;
 
-  signal SRCLR: std_logic;
-  signal SRCK: std_logic;
-  signal SRLOAD: std_logic;
-  signal RCK: std_logic;
-  signal SER: std_logic;
-  signal A: std_logic;
-  signal B: std_logic;
-  signal C: std_logic;
-  signal D: std_logic;
-  signal E: std_logic;
-  signal F: std_logic;
-  signal G: std_logic;
-  signal H: std_logic;
+  signal SRCLR: std_logic := '1';
+  signal SRCK: std_logic := '0';
+  signal SRLOAD: std_logic := '1';
+  signal RCK: std_logic := '1';
+  signal SER: std_logic := '0';
+  signal in_bus: std_logic_vector (7 downto 0) := "00000000";
   signal REG_OUT: std_logic := '0';
+
+  constant clock_period: time := 20 ns;
+  
+  signal input_array : std_logic_vector (15 downto 0) := "0110101100010110"; 
+  signal input_array2 : std_logic_vector (15 downto 0) := "0101010101010101"; 
+  signal input_bus : std_logic_vector (7 downto 0) := "01101111";
+  signal is_reseted : boolean := false;
 
 begin
 
@@ -47,85 +39,64 @@ begin
                            SRLOAD  => SRLOAD,
                            RCK     => RCK,
                            SER     => SER,
-                           A       => A,
-                           B       => B,
-                           C       => C,
-                           D       => D,
-                           E       => E,
-                           F       => F,
-                           G       => G,
-                           H       => H,
+                           in_bus  => in_bus,
                            REG_OUT => REG_OUT );
 
+  SRCK <= not SRCK after clock_period / 2;
+  RCK <= not RCK after clock_period / 2;
+  
+  
   stimulus: process
   begin
   
     -- Put initialisation code here
-    wait for 1 us;
-    SRCK <= '1';         --  1
-    SER <= '1';
-    wait for 1 us;
-    SRCK <= '0';    
-    wait for 1 us;
-    
-    SRCK <= '1';        --  01XXXXXX
     SER <= '0';
-    wait for 1 us;
-    SRCK <= '0';    
-    wait for 1 us;
-    
-    SRCK <= '1';         --  001XXXXX
-    SER <= '0';
-    wait for 1 us;
-    SRCK <= '0';    
-    wait for 1 us;
-    
-    SRCK <= '1';         --  1001XXXX
-    SER <= '1';
-    wait for 1 us;
-    SRCK <= '0';    
-    wait for 1 us;
-    
-    SRCK <= '1';         --  11001XXX
-    SER <= '1';
-    wait for 1 us;
-    SRCK <= '0';    
-    wait for 1 us; 
-    
-    SRCK <= '1';         --  011001XX
-    SER <= '0';
-    wait for 1 us;
-    SRCK <= '0';    
-    wait for 1 us;
-    
-    SRCK <= '1';         --  1011001X
-    SER <= '1';
-    wait for 1 us;
-    SRCK <= '0';    
-    wait for 1 us;
-    
-    SRCK <= '1';         --  01011001 q: 1
-    SER <= '0';
-    wait for 1 us;
-    SRCK <= '0';    
-    wait for 1 us;
-
-    SRCK <= '1';         --  10101100 q: 0
-    SER <= '1';
-    wait for 1 us;
-    SRCK <= '0';    
-    wait for 1 us;
-    
-    SRCK <= '1';         --  11010110 q: 0
-    SER <= '1';
-    wait for 1 us;
-    SRCK <= '0';    
-    wait for 1 us;
+    in_bus <= input_bus;
+    wait for clock_period / 2;
     -- Put test bench stimulus code here
-
+    
+    for i in 0 to 15 loop
+        if (i = 12 and not is_reseted) then
+            SRCLR <= '0';
+            is_reseted <= true;
+            wait for clock_period / 2;
+            SRCLR <= '1';
+        else 
+            SER <= input_array(i);
+            wait for clock_period;
+        end if; 
+    end loop;
+    
+    for i in 0 to 15 loop
+        SER <= input_array2(i);
+        wait for clock_period;
+    end loop;
+    
+    wait for clock_period * 8;
+    SRLOAD <= '0';
+    wait for clock_period;
+    SRLOAD <= '1';
+        
+        
+    wait for clock_period * 10;
+    SRLOAD <= '0';
+    wait for clock_period;
+    SRLOAD <= '1';
+        
+        
+    
+    -- Put test bench stimulus code here
     wait;
   end process;
 
 
+--  clocking: process
+--  begin
+--    while not stop_the_clock loop
+--      SRCK <= '0', '1' after clock_period / 2;
+--      wait for clock_period;
+--    end loop;
+--    wait;
+--  end process;
+
 end;
-  
