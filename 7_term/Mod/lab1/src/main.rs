@@ -4,7 +4,7 @@ use eframe::egui::{
     Grid,
 };
 
-use nistrs::{freq::frequency_test, BitsData};
+use nistrs::{freq::frequency_test, prelude::{block_frequency_test, cumulative_sums_test, longest_run_of_ones_test, fft_test, non_overlapping_template_test, overlapping_template_test}, BitsData, runs::runs_test, rank::rank_test};
 
 enum States {
     Nothing,
@@ -23,6 +23,14 @@ struct MyApp {
     average: u64,
     tested_vec: Vec<bool>,
     freq_result: String,
+    block_freq_result: String,
+    cusum_result: String,
+    run_ones_result: String,
+    run_result: String,
+    rank_result: String,
+    fft_result: String,
+    non_over_result: String,
+    over_result: String,
 }
 
 impl Default for MyApp {
@@ -37,6 +45,14 @@ impl Default for MyApp {
             average: 0,
             tested_vec: Vec::new(),
             freq_result: String::new(),
+            block_freq_result: String::new(),
+            cusum_result: String::new(),
+            run_ones_result: String::new(),
+            run_result: String::new(),
+            rank_result: String::new(),
+            fft_result: String::new(),
+            non_over_result: String::new(),
+            over_result: String::new(),
         }
     }
 }
@@ -78,27 +94,127 @@ impl MyApp {
 
     fn initialize_tested_vector(&mut self) {
         let mut total = 0;
-        
+
         for i in 0..self.random_numbers.len() {
-            total+= self.random_numbers[i];
+            total += self.random_numbers[i];
         }
 
-        self.average = total / self.random_numbers.len() as u64; 
+        self.average = total / self.random_numbers.len() as u64;
 
-        self.tested_vec = self.random_numbers.iter().map(|x| -> bool {
-            x > &self.average
-        }).collect();        
+        self.tested_vec = self
+            .random_numbers
+            .iter()
+            .map(|x| -> bool { x > &self.average })
+            .collect();
     }
-
 
     fn freq_test(&self) -> String {
-        let str = self.tested_vec.iter().map(|x|{
-            (*x as u8).to_string()
-        }).collect();
+        let str: String = self
+            .tested_vec
+            .iter()
+            .map(|x| (*x as u8).to_string())
+            .collect();
         let data = BitsData::from_text(str);
         let result = frequency_test(&data);
-        format!("Test passed: {}, P-value: {}", result.0, result.1)
+        format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
+
+    fn block_freq_test(&self) -> String {
+        // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
+        let str: String = self
+            .tested_vec
+            .iter()
+            .map(|x| (*x as u8).to_string())
+            .collect();
+        let data = BitsData::from_text(str);
+        let result = block_frequency_test(&data, 20).unwrap();
+        format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
+    }
+
+    fn cusum_test(&self) -> String {
+        // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
+        let str: String = self
+            .tested_vec
+            .iter()
+            .map(|x| (*x as u8).to_string())
+            .collect();
+        let data = BitsData::from_text(str);
+        let result = cumulative_sums_test(&data);
+        format!("Test passed: {}, P-value: {:.6}", result[0].0, result[0].1)
+    }
+
+    fn run_ones_test(&self) -> String {
+        // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
+        let str: String = self
+            .tested_vec
+            .iter()
+            .map(|x| (*x as u8).to_string())
+            .collect();
+        let data = BitsData::from_text(str);
+        let result = longest_run_of_ones_test(&data).unwrap();
+        format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
+    }
+
+    fn run_test(&self) -> String {
+        // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
+        let str: String = self
+            .tested_vec
+            .iter()
+            .map(|x| (*x as u8).to_string())
+            .collect();
+        let data = BitsData::from_text(str);
+        let result = runs_test(&data);
+        format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
+    }
+
+    fn rank_test(&self) -> String {
+        // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
+        let str: String = self
+            .tested_vec
+            .iter()
+            .map(|x| (*x as u8).to_string())
+            .collect();
+        let data = BitsData::from_text(str);
+        let result = rank_test(&data).unwrap();
+        format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
+    }
+
+    fn fft_test(&self) -> String {
+        // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
+        let str: String = self
+            .tested_vec
+            .iter()
+            .map(|x| (*x as u8).to_string())
+            .collect();
+        let data = BitsData::from_text(str);
+        let result = fft_test(&data);
+        format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
+    }
+
+    fn non_over_test(&self) -> String {
+        // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
+        let str: String = self
+            .tested_vec
+            .iter()
+            .map(|x| (*x as u8).to_string())
+            .collect();
+        let data = BitsData::from_text(str);
+        let result = non_overlapping_template_test(&data, 10).unwrap();
+        format!("Test passed: {}, P-value: {:.6}", result[0].0, result[0].1)
+    }
+
+    fn over_test(&self) -> String {
+        // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
+        let str: String = self
+            .tested_vec
+            .iter()
+            .map(|x| (*x as u8).to_string())
+            .collect();
+        let data = BitsData::from_text(str);
+        let result = overlapping_template_test(&data, 10);
+        format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
+    }
+    
 }
 
 impl eframe::App for MyApp {
@@ -139,7 +255,15 @@ impl eframe::App for MyApp {
             if ui.button("Test!").clicked() {
                 self.initialize_tested_vector();
                 self.freq_result = self.freq_test();
-                
+                self.block_freq_result = self.block_freq_test();
+                self.cusum_result = self.cusum_test();
+                self.run_ones_result = self.run_ones_test();
+                self.run_result = self.run_test();
+                self.rank_result = self.rank_test();
+                self.fft_result = self.fft_test();
+                self.non_over_result = self.non_over_test();
+                self.over_result = self.over_test();
+
                 self.state = States::ShowTestResults;
             }
 
@@ -158,8 +282,24 @@ impl eframe::App for MyApp {
                         .striped(true)
                         .show(ui, |ui| {
                             ui.set_width(100.);
+
                             ui.label(format!("Frequency test: {}", self.freq_result));
+                            ui.end_row();
+                            ui.label(format!("Cumulative sum test: {}", self.cusum_result));
+                            ui.end_row();
+                            ui.label(format!("Run test: {}", self.run_result));
+                            ui.end_row();
+                            ui.label(format!("Run ones test: {}", self.run_ones_result));
+                            ui.end_row();
+                            ui.label(format!("Matrix rank test: {}", self.rank_result));
+                            ui.end_row();
+                            ui.label(format!("FFT test: {}", self.fft_result));
+                            ui.end_row();
+                            ui.label(format!("Overlapping template test: {}", self.over_result));
+                            ui.end_row();
+                            ui.label(format!("Non overlapping template test: {}", self.non_over_result));
                         });
+
                 }
 
                 _ => (),
