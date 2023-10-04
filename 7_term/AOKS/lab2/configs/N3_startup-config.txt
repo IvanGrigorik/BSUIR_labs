@@ -1,0 +1,122 @@
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Switch
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+interface FastEthernet0/1
+ switchport trunk native vlan 100
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 10,20,100-101
+ channel-group 1 mode active
+ switchport mode trunk
+!
+interface FastEthernet0/6
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 10,20,100-101
+ channel-group 1 mode active
+ switchport mode trunk
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 10,20,100-101
+ switchport mode trunk
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Port-channel 1
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 10,20,100-101
+ switchport mode trunk
+!
+interface Port-channel 2
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 10,20,100-101
+ switchport mode trunk
+!
+interface Port-channel 3
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 10,20,100-101
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ ip address 196.2.204.100 255.255.255.0
+!
+interface Vlan20
+ ip address 154.7.160.100 255.255.240.0
+!
+interface Vlan100
+ ip address 131.118.0.100 255.255.0.0
+!
+interface Vlan101
+ ip address 123.32.0.100 255.240.0.0
+!
+!
+!
+!
+line con 0
+!
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+end
+
