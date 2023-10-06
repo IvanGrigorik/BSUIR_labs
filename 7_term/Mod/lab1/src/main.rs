@@ -106,6 +106,10 @@ impl MyApp {
         if let Ok(result) = tmp_value.parse() {
             *value = result;
         }
+        if *value <= 38912 || *value >= 100_000_000{
+            *value = 100000;
+        }
+
         res
     }
 
@@ -294,20 +298,17 @@ impl eframe::App for MyApp {
                         .striped(true)
                         .show(ui, |ui| {
                             let a_label = ui.label("a: ");
-                            MyApp::u64_edit_field(ui, &mut self.a_buffer)
-                                .labelled_by(a_label.id);
+                            MyApp::u64_edit_field(ui, &mut self.a_buffer).labelled_by(a_label.id);
                             ui.label(format!("a: {}", self.a_buffer));
                             ui.end_row();
 
                             let x1_label = ui.label("X1: ");
-                            MyApp::u64_edit_field(ui, &mut self.x1_buffer)
-                                .labelled_by(x1_label.id);
+                            MyApp::u64_edit_field(ui, &mut self.x1_buffer).labelled_by(x1_label.id);
                             ui.label(format!("X1: {}", self.x1_buffer));
                             ui.end_row();
 
                             let m_label = ui.label("Mod m: ");
-                            MyApp::u64_edit_field(ui, &mut self.m_buffer)
-                                .labelled_by(m_label.id);
+                            MyApp::u64_edit_field(ui, &mut self.m_buffer).labelled_by(m_label.id);
                             ui.label(format!("M: {}", self.m_buffer));
                             ui.end_row();
                         });
