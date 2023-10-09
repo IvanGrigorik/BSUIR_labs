@@ -4,21 +4,44 @@ use eframe::egui::{
     Grid,
 };
 
-use nistrs::{freq::frequency_test, prelude::{block_frequency_test, cumulative_sums_test, longest_run_of_ones_test, fft_test, non_overlapping_template_test, overlapping_template_test}, BitsData, runs::runs_test, rank::rank_test};
+use nistrs::{
+    freq::frequency_test,
+    prelude::{
+        block_frequency_test, cumulative_sums_test, fft_test, longest_run_of_ones_test,
+        non_overlapping_template_test, overlapping_template_test,
+    },
+    rank::rank_test,
+    runs::runs_test,
+    BitsData,
+};
 
-enum States {
+enum TestStates {
     Nothing,
     ShowChart,
     ShowTestResults,
 }
 
+enum TabsStates {
+    Lehmer,
+    MiddleMethod,
+    ShiftReg,
+}
+
 struct MyApp {
+    // For RNG's
     a_buffer: u64,
     x1_buffer: u64,
     m_buffer: u64,
     random_numbers: Vec<u64>,
     random_numbers_bar: Vec<plot::Bar>,
-    state: States,
+    r0_buffer: u64,
+    r1_buffer: u64,
+    shift_buffer: u64,
+    count: usize,
+
+    // For tests
+    test_state: TestStates,
+    tab_state: TabsStates,
 
     average: u64,
     tested_vec: Vec<bool>,
@@ -36,12 +59,22 @@ struct MyApp {
 impl Default for MyApp {
     fn default() -> Self {
         Self {
+            // Default values
             a_buffer: (16_807),
             x1_buffer: (18),
             m_buffer: (2_147_483_647),
             random_numbers: Vec::new(),
             random_numbers_bar: Vec::new(),
-            state: (States::Nothing),
+            r0_buffer: 121241445515252,
+            r1_buffer: 31231455523,
+            shift_buffer: 248432131643609289,
+            count: 100_000,
+
+            // Ui states
+            test_state: TestStates::Nothing,
+            tab_state: TabsStates::Lehmer,
+
+            // Tests results and AVG value of whole generated vector
             average: 0,
             tested_vec: Vec::new(),
             freq_result: String::new(),
@@ -58,12 +91,25 @@ impl Default for MyApp {
 }
 
 impl MyApp {
-    fn integer_edit_field(ui: &mut egui::Ui, value: &mut u64) -> egui::Response {
+    fn u64_edit_field(ui: &mut egui::Ui, value: &mut u64) -> egui::Response {
         let mut tmp_value = format!("{}", value);
         let res = ui.text_edit_singleline(&mut tmp_value);
         if let Ok(result) = tmp_value.parse() {
             *value = result;
         }
+        res
+    }
+
+    fn usize_edit_field(ui: &mut egui::Ui, value: &mut usize) -> egui::Response {
+        let mut tmp_value = format!("{}", value);
+        let res = ui.text_edit_singleline(&mut tmp_value);
+        if let Ok(result) = tmp_value.parse() {
+            *value = result;
+        }
+        if *value <= 38912 || *value >= 100_000_000{
+            *value = 100000;
+        }
+
         res
     }
 
@@ -79,27 +125,63 @@ impl MyApp {
         }
     }
 
+    // RNG's
     fn generate_lehmer(&mut self) {
         let a = self.a_buffer as u128;
         let x1 = self.x1_buffer as u128;
         let m = self.m_buffer as u128;
         self.random_numbers.push(x1 as u64);
 
-        for i in 1..100_000 {
+        for i in 1..self.count {
             let t = a * self.random_numbers[i - 1] as u128;
             let _tmp = t % m;
             self.random_numbers.push(_tmp as u64);
         }
     }
 
+    fn generate_middle(&mut self) {
+        let mut r0 = self.r0_buffer as u128;
+        let mut r1 = self.r1_buffer as u128;
+
+        let mask: u128 = 0xFFFFFFFFFFFFFFFF00000000; // mask to identify middle part of the number
+        for _ in 0..self.count {
+            let mut new_r = r0 * r1;
+
+            new_r &= mask;
+            new_r >>= 32;
+
+            self.random_numbers.push(new_r as u64);
+
+            r0 = r1;
+            r1 = new_r;
+        }
+    }
+
+    fn generate_shift(&mut self) {
+        let mut num = self.shift_buffer;
+        for _ in 0..self.count {
+            // Identify two last bits bit
+            let b_0 = num & 1;
+            let b_1 = (num & 2) >> 1;
+            // Generate new last bit
+            let n_bit = (b_0 ^ b_1) << 63;
+
+            // Shift our number and put the last bit
+            num >>= 1;
+            num |= n_bit;
+            self.random_numbers.push(num);
+        }
+    }
+
+    // Function that transform random vector to tested
     fn initialize_tested_vector(&mut self) {
-        let mut total = 0;
+        let mut total: u128 = 0;
 
         for i in 0..self.random_numbers.len() {
-            total += self.random_numbers[i];
+            total += self.random_numbers[i] as u128;
         }
 
-        self.average = total / self.random_numbers.len() as u64;
+        self.average = (total / self.random_numbers.len() as u128) as u64;
 
         self.tested_vec = self
             .random_numbers
@@ -108,174 +190,215 @@ impl MyApp {
             .collect();
     }
 
-    fn freq_test(&self) -> String {
-        let str: String = self
-            .tested_vec
-            .iter()
-            .map(|x| (*x as u8).to_string())
-            .collect();
+    // Nist tests
+
+    fn freq_test(&self, to_test: &Vec<bool>) -> String {
+        let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
         let result = frequency_test(&data);
         format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
 
-    fn block_freq_test(&self) -> String {
+    fn block_freq_test(&self, to_test: &Vec<bool>) -> String {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
-        let str: String = self
-            .tested_vec
-            .iter()
-            .map(|x| (*x as u8).to_string())
-            .collect();
+        let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
         let result = block_frequency_test(&data, 20).unwrap();
         format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
 
-    fn cusum_test(&self) -> String {
+    fn cusum_test(&self, to_test: &Vec<bool>) -> String {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
-        let str: String = self
-            .tested_vec
-            .iter()
-            .map(|x| (*x as u8).to_string())
-            .collect();
+        let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
         let result = cumulative_sums_test(&data);
         format!("Test passed: {}, P-value: {:.6}", result[0].0, result[0].1)
     }
 
-    fn run_ones_test(&self) -> String {
+    fn run_ones_test(&self, to_test: &Vec<bool>) -> String {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
-        let str: String = self
-            .tested_vec
-            .iter()
-            .map(|x| (*x as u8).to_string())
-            .collect();
+        let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
         let result = longest_run_of_ones_test(&data).unwrap();
         format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
 
-    fn run_test(&self) -> String {
+    fn run_test(&self, to_test: &Vec<bool>) -> String {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
-        let str: String = self
-            .tested_vec
-            .iter()
-            .map(|x| (*x as u8).to_string())
-            .collect();
+        let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
         let result = runs_test(&data);
         format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
 
-    fn rank_test(&self) -> String {
+    fn rank_test(&self, to_test: &Vec<bool>) -> String {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
-        let str: String = self
-            .tested_vec
-            .iter()
-            .map(|x| (*x as u8).to_string())
-            .collect();
+        let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
         let result = rank_test(&data).unwrap();
         format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
 
-    fn fft_test(&self) -> String {
+    fn fft_test(&self, to_test: &Vec<bool>) -> String {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
-        let str: String = self
-            .tested_vec
-            .iter()
-            .map(|x| (*x as u8).to_string())
-            .collect();
+        let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
         let result = fft_test(&data);
         format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
 
-    fn non_over_test(&self) -> String {
+    fn non_over_test(&self, to_test: &Vec<bool>) -> String {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
-        let str: String = self
-            .tested_vec
-            .iter()
-            .map(|x| (*x as u8).to_string())
-            .collect();
+        let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
         let result = non_overlapping_template_test(&data, 10).unwrap();
         format!("Test passed: {}, P-value: {:.6}", result[0].0, result[0].1)
     }
 
-    fn over_test(&self) -> String {
+    fn over_test(&self, to_test: &Vec<bool>) -> String {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
-        let str: String = self
-            .tested_vec
-            .iter()
-            .map(|x| (*x as u8).to_string())
-            .collect();
+        let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
         let result = overlapping_template_test(&data, 10);
         format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
-    
 }
 
 impl eframe::App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("Lehmer generator");
             ctx.set_pixels_per_point(1.5);
-            // Input grid
-            Grid::new("input_grid")
-                .min_col_width(20.0)
-                .max_col_width(180.0)
-                .striped(true)
+
+            // Pseudo-tabs
+            Grid::new("tab_grid")
+                .min_col_width(20.)
+                .max_col_width(100.)
                 .show(ui, |ui| {
-                    ui.set_width(20.0);
-                    let a_label = ui.label("a: ");
-                    MyApp::integer_edit_field(ui, &mut self.a_buffer).labelled_by(a_label.id);
-                    ui.label(format!("a: {}", self.a_buffer));
+                    if ui.button("Lehmer").clicked() {
+                        self.tab_state = TabsStates::Lehmer;
+                    } else if ui.button("Middle").clicked() {
+                        self.tab_state = TabsStates::MiddleMethod;
+                    } else if ui.button("LFSR").clicked() {
+                        self.tab_state = TabsStates::ShiftReg;
+                    }
                     ui.end_row();
-
-                    let x1_label = ui.label("X1: ");
-                    MyApp::integer_edit_field(ui, &mut self.x1_buffer).labelled_by(x1_label.id);
-                    ui.label(format!("X1: {}", self.x1_buffer));
-                    ui.end_row();
-
-                    let m_label = ui.label("Mod m: ");
-                    MyApp::integer_edit_field(ui, &mut self.m_buffer).labelled_by(m_label.id);
-                    ui.label(format!("M: {}", self.m_buffer));
-                    ui.end_row();
+                    let sample_size = ui.label("Sample size: ");
+                    MyApp::usize_edit_field(ui, &mut self.count).labelled_by(sample_size.id);
                 });
 
-            if ui.button("Generate!").clicked() {
-                self.clear_numbers();
-                self.generate_lehmer();
-                self.refresh_numbers();
-                self.state = States::ShowChart;
+            // Tabs internal logic
+            match self.tab_state {
+                TabsStates::Lehmer => {
+                    ui.heading("Lehmer generator");
+
+                    // Input grid
+                    Grid::new("lehmer_input_grid")
+                        .min_col_width(20.0)
+                        .max_col_width(180.0)
+                        .striped(true)
+                        .show(ui, |ui| {
+                            let a_label = ui.label("a: ");
+                            MyApp::u64_edit_field(ui, &mut self.a_buffer).labelled_by(a_label.id);
+                            ui.label(format!("a: {}", self.a_buffer));
+                            ui.end_row();
+
+                            let x1_label = ui.label("X1: ");
+                            MyApp::u64_edit_field(ui, &mut self.x1_buffer).labelled_by(x1_label.id);
+                            ui.label(format!("X1: {}", self.x1_buffer));
+                            ui.end_row();
+
+                            let m_label = ui.label("Mod m: ");
+                            MyApp::u64_edit_field(ui, &mut self.m_buffer).labelled_by(m_label.id);
+                            ui.label(format!("M: {}", self.m_buffer));
+                            ui.end_row();
+                        });
+
+                    if ui.button("Generate!").clicked() {
+                        self.clear_numbers();
+                        self.generate_lehmer();
+                        self.refresh_numbers();
+                        self.test_state = TestStates::ShowChart;
+                    }
+                }
+
+                TabsStates::MiddleMethod => {
+                    ui.heading("Middle multiply method generator");
+
+                    Grid::new("middle_input_grid")
+                        .min_col_width(20.0)
+                        .max_col_width(180.0)
+                        .striped(true)
+                        .show(ui, |ui| {
+                            let r0_buffer = ui.label("R0: ");
+                            MyApp::u64_edit_field(ui, &mut self.r0_buffer)
+                                .labelled_by(r0_buffer.id);
+                            ui.label(format!("R0: {}", self.r0_buffer));
+                            ui.end_row();
+
+                            let r1_buffer = ui.label("R1: ");
+                            MyApp::u64_edit_field(ui, &mut self.r1_buffer)
+                                .labelled_by(r1_buffer.id);
+                            ui.label(format!("R1: {}", self.r1_buffer));
+                            ui.end_row();
+                        });
+
+                    if ui.button("Generate!").clicked() {
+                        self.clear_numbers();
+                        self.generate_middle();
+                        self.refresh_numbers();
+                        self.test_state = TestStates::ShowChart;
+                    }
+                }
+
+                TabsStates::ShiftReg => {
+                    ui.heading("LFSR-based generator");
+
+                    Grid::new("lfsr_input_grid")
+                        .min_col_width(20.0)
+                        .max_col_width(180.0)
+                        .striped(true)
+                        .show(ui, |ui| {
+                            let first_num = ui.label("First number: ");
+                            MyApp::u64_edit_field(ui, &mut self.shift_buffer)
+                                .labelled_by(first_num.id);
+
+                            ui.label(format!("Init number: {}", self.shift_buffer));
+                            ui.end_row();
+                        });
+
+                    if ui.button("Generate!").clicked() {
+                        self.clear_numbers();
+                        self.generate_shift();
+                        self.refresh_numbers();
+                        self.test_state = TestStates::ShowChart;
+                    }
+                }
             }
 
             if ui.button("Test!").clicked() {
                 self.initialize_tested_vector();
-                self.freq_result = self.freq_test();
-                self.block_freq_result = self.block_freq_test();
-                self.cusum_result = self.cusum_test();
-                self.run_ones_result = self.run_ones_test();
-                self.run_result = self.run_test();
-                self.rank_result = self.rank_test();
-                self.fft_result = self.fft_test();
-                self.non_over_result = self.non_over_test();
-                self.over_result = self.over_test();
+                self.freq_result = self.freq_test(&self.tested_vec);
+                self.block_freq_result = self.block_freq_test(&self.tested_vec);
+                self.cusum_result = self.cusum_test(&self.tested_vec);
+                self.run_ones_result = self.run_ones_test(&self.tested_vec);
+                self.run_result = self.run_test(&self.tested_vec);
+                self.rank_result = self.rank_test(&self.tested_vec);
+                self.fft_result = self.fft_test(&self.tested_vec);
+                self.non_over_result = self.non_over_test(&self.tested_vec);
+                self.over_result = self.over_test(&self.tested_vec);
 
-                self.state = States::ShowTestResults;
+                self.test_state = TestStates::ShowTestResults;
             }
 
-            match self.state {
-                States::ShowChart => {
+            match self.test_state {
+                TestStates::ShowChart => {
                     let plot = plot::Plot::new("Histogram: ");
                     plot.show(ui, |plot_ui| {
                         plot_ui.bar_chart(BarChart::new(self.random_numbers_bar.clone()))
                     });
                 }
 
-                States::ShowTestResults => {
+                TestStates::ShowTestResults => {
                     Grid::new("tests")
                         .min_col_width(10.)
                         .max_col_width(500.)
@@ -297,14 +420,15 @@ impl eframe::App for MyApp {
                             ui.end_row();
                             ui.label(format!("Overlapping template test: {}", self.over_result));
                             ui.end_row();
-                            ui.label(format!("Non overlapping template test: {}", self.non_over_result));
+                            ui.label(format!(
+                                "Non overlapping template test: {}",
+                                self.non_over_result
+                            ));
                         });
-
                 }
 
                 _ => (),
             }
-            {}
         });
     }
 }
