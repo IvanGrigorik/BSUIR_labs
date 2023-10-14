@@ -3,6 +3,7 @@ use eframe::egui::{
     plot::{self, BarChart},
     Grid,
 };
+use rand::Rng;
 
 use nistrs::{
     freq::frequency_test,
@@ -25,6 +26,7 @@ enum TabsStates {
     Lehmer,
     MiddleMethod,
     ShiftReg,
+    BuildIn,
 }
 
 struct MyApp {
@@ -44,6 +46,8 @@ struct MyApp {
     tab_state: TabsStates,
 
     average: u64,
+    expected: f64,
+    correlation: f64,
     tested_vec: Vec<bool>,
     freq_result: String,
     block_freq_result: String,
@@ -76,6 +80,8 @@ impl Default for MyApp {
 
             // Tests results and AVG value of whole generated vector
             average: 0,
+            expected: 0.,
+            correlation: 0.,
             tested_vec: Vec::new(),
             freq_result: String::new(),
             block_freq_result: String::new(),
@@ -106,7 +112,7 @@ impl MyApp {
         if let Ok(result) = tmp_value.parse() {
             *value = result;
         }
-        if *value <= 38912 || *value >= 100_000_000{
+        if *value <= 39000 || *value > 100_000_000 {
             *value = 100000;
         }
 
@@ -119,9 +125,24 @@ impl MyApp {
     }
 
     fn refresh_numbers(&mut self) {
+        let max = self.random_numbers.iter().max().unwrap();
+        let min = self.random_numbers.iter().min().unwrap();
+
+        const BAR_CHART_MIN: f64 = 0.0;
+        const BAR_CHART_MAX: f64 = 255.0;
+
+        let slope = (BAR_CHART_MAX - BAR_CHART_MIN) / ((max - min) as f64);
+
+        let mut bar_chart_counter = [0usize; (u8::MAX as usize) + 1];
+        for n in 0..self.random_numbers.len() {
+            let mapped_value = BAR_CHART_MIN + slope * ((self.random_numbers[n] - min) as f64);
+            let index = mapped_value as usize;
+            bar_chart_counter[index] += 1;
+        }
+
         for i in 0..256 {
             self.random_numbers_bar
-                .push(plot::Bar::new(i as f64, self.random_numbers[i] as f64));
+                .push(plot::Bar::new(i as f64, bar_chart_counter[i] as f64));
         }
     }
 
@@ -171,6 +192,35 @@ impl MyApp {
             num |= n_bit;
             self.random_numbers.push(num);
         }
+    }
+
+    fn generate_build_in(&mut self) {
+        let mut rng = rand::thread_rng();
+        for _ in 0..self.count {
+            self.random_numbers.push(rng.gen::<u64>());
+        }
+    }
+    // Math functions
+    fn compute_expected_value(&self) -> f64 {
+        let sum = self.random_numbers.iter().sum::<u64>() as f64;
+        let count = self.random_numbers.len() as f64;
+        sum / count
+    }
+
+    fn compute_variance(&self) -> f64 {
+        let expected_value = self.compute_expected_value();
+        // let expected_value = self.compute_expected_value(numbers);
+
+        let sum: f64 = self
+            .random_numbers
+            .iter()
+            .map(|x| {
+                let diff = (*x as f64) - expected_value;
+                diff * diff
+            })
+            .sum();
+
+        sum / (self.count as f64)
     }
 
     // Function that transform random vector to tested
@@ -280,6 +330,8 @@ impl eframe::App for MyApp {
                         self.tab_state = TabsStates::MiddleMethod;
                     } else if ui.button("LFSR").clicked() {
                         self.tab_state = TabsStates::ShiftReg;
+                    } else if ui.button("Build-in").clicked() {
+                        self.tab_state = TabsStates::BuildIn;
                     }
                     ui.end_row();
                     let sample_size = ui.label("Sample size: ");
@@ -373,6 +425,17 @@ impl eframe::App for MyApp {
                         self.test_state = TestStates::ShowChart;
                     }
                 }
+
+                TabsStates::BuildIn => {
+                    ui.heading("Build-in random generator");
+
+                    if ui.button("Generate!").clicked() {
+                        self.clear_numbers();
+                        self.generate_build_in();
+                        self.refresh_numbers();
+                        self.test_state = TestStates::ShowChart;
+                    }
+                }
             }
 
             if ui.button("Test!").clicked() {
@@ -388,6 +451,9 @@ impl eframe::App for MyApp {
                 self.over_result = self.over_test(&self.tested_vec);
 
                 self.test_state = TestStates::ShowTestResults;
+
+                self.correlation = self.compute_variance();
+                self.expected = self.compute_expected_value();
             }
 
             match self.test_state {
@@ -424,6 +490,12 @@ impl eframe::App for MyApp {
                                 "Non overlapping template test: {}",
                                 self.non_over_result
                             ));
+
+                            ui.end_row();
+                            ui.end_row();
+                            ui.label(format!("Expected: {}", self.expected));
+                            ui.end_row();
+                            ui.label(format!("Correlation: {}", self.correlation));
                         });
                 }
 

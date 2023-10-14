@@ -1323,6 +1323,7 @@ dependencies = [
  "eframe",
  "egui_plot",
  "nistrs",
+ "rand",
 ]
 
 [[package]]
