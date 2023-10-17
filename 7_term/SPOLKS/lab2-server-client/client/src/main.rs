@@ -43,5 +43,8 @@ fn handle_connection(mut stream: TcpStream) {
 
         // Just write answer to the console
         println!("{}", message.as_str());
+
+        
+
     }
 }

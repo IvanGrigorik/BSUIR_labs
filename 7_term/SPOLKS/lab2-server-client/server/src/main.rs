@@ -1,12 +1,23 @@
 use chrono::prelude::*;
-use local_ip_address::local_ip; // To get own IPv4 addr
+use local_ip_address::local_ip;
+use std::char::from_digit;
+use std::fs;
+
 use std::{
     io::{prelude::*, BufReader},
     net::{SocketAddr, TcpListener, TcpStream},
 };
 
 const PORT: u16 = 1203;
+#[allow(dead_code)]
+struct BreakerBuff {
+    load_buff: Vec<String>,
+    pos: u32,
+    ip: SocketAddr,
+    is_pending: bool,
+}
 
+#[allow(unused_variables, unused_mut, unused_assignments)]
 fn main() {
     println!("Your address: {}:{}", local_ip().unwrap(), PORT);
     let addr = SocketAddr::new(local_ip().expect("You must have some IP"), PORT);
@@ -14,14 +25,30 @@ fn main() {
     let listener = TcpListener::bind(addr).unwrap();
 
     println!("Server is up!");
+    let mut buff = BreakerBuff {
+        load_buff: Vec::new(),
+        pos: 0,
+        ip: addr,
+        is_pending: false,
+    };
     for stream in listener.incoming() {
         let stream = stream.unwrap();
-        handle_connection(stream);
+        buff.ip = stream.peer_addr().unwrap().clone();
+
+        handle_connection(stream, &mut buff);
     }
 }
 
-fn handle_connection(mut stream: TcpStream) {
+// TODO: Delete permission
+#[allow(unused_variables, unused_mut, unused_assignments)]
+
+fn handle_connection(mut stream: TcpStream, buff: &mut BreakerBuff) {
     println!("New connection: {}", stream.peer_addr().unwrap());
+
+    if buff.ip.ip() != stream.peer_addr().unwrap().ip() {
+        buff.ip = stream.peer_addr().unwrap();
+        buff.is_pending = false;
+    }
 
     loop {
         let mut message = String::new();
@@ -57,6 +84,38 @@ fn handle_connection(mut stream: TcpStream) {
                 break;
             }
 
+            Some("upload") => {
+                let path = dirs::home_dir().unwrap().join("upload.txt");
+            }
+
+            // Download from server to client
+            Some("download") => {
+                let path = dirs::home_dir().unwrap().join("download.txt");
+
+                let content = String::from_utf8(fs::read(path.clone()).unwrap()).unwrap();
+                let chunks = content
+                    .chars()
+                    .collect::<Vec<char>>()
+                    .chunks(10)
+                    .map(|c| c.iter().collect::<String>())
+                    .collect::<Vec<String>>();
+                buff.load_buff = chunks;
+                buff.pos = 0;
+
+                for i in 0..buff.load_buff.len() {
+                    stream.write_all(buff.load_buff[i].as_bytes()).unwrap();
+
+                    // Wait for acknowledgment after transmitting
+                    let mut ack_message = String::new();
+                    let mut ack = BufReader::new(&mut stream);
+                    ack.read_line(&mut ack_message).expect("ACK not sended!");
+
+                    if ack_message == "ACK" {
+                        buff.pos += 1;
+                    }
+                }
+            }
+
             None => {
                 println!("Zero bytes message");
             }
@@ -68,5 +127,9 @@ fn handle_connection(mut stream: TcpStream) {
         }
     }
 
+    // If connection closed by client during file transmitting
+    if buff.pos != buff.load_buff.len() as u32 {
+        buff.is_pending = true;
+    }
     println!("Connection closed");
 }

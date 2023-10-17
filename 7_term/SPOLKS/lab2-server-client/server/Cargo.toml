@@ -8,3 +8,6 @@ edition = "2021"
 [dependencies]
 local-ip-address = { version = "0.5.5" }
 chrono = { version = "0.4.31"}
+dirs = "5.0.1"
+# pnet = "0.34.0"
+# network-interface = "0.1.6"
