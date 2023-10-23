@@ -1,7 +1,12 @@
-use eframe::egui::{
-    self,
-    plot::{self, BarChart},
-    Grid,
+use std::os::linux::fs::MetadataExt;
+
+use eframe::{
+    egui::{
+        self,
+        plot::{self, BarChart},
+        style, Grid,
+    },
+    epaint::{Color32, Stroke},
 };
 use rand::Rng;
 
@@ -48,6 +53,8 @@ struct MyApp {
     average: u64,
     expected: f64,
     correlation: f64,
+    reference_expected: f64,
+    reference_correlation: f64,
     tested_vec: Vec<bool>,
     freq_result: String,
     block_freq_result: String,
@@ -64,9 +71,10 @@ impl Default for MyApp {
     fn default() -> Self {
         Self {
             // Default values
-            a_buffer: (16_807),
-            x1_buffer: (18),
-            m_buffer: (2_147_483_647),
+            a_buffer: (16807100348768),
+            x1_buffer: (18312763567113),
+            m_buffer: (46744073740112),
+            
             random_numbers: Vec::new(),
             random_numbers_bar: Vec::new(),
             r0_buffer: 121241445515252,
@@ -82,6 +90,8 @@ impl Default for MyApp {
             average: 0,
             expected: 0.,
             correlation: 0.,
+            reference_expected: 0.,
+            reference_correlation: 0.,
             tested_vec: Vec::new(),
             freq_result: String::new(),
             block_freq_result: String::new(),
@@ -111,9 +121,6 @@ impl MyApp {
         let res = ui.text_edit_singleline(&mut tmp_value);
         if let Ok(result) = tmp_value.parse() {
             *value = result;
-        }
-        if *value <= 39000 || *value > 100_000_000 {
-            *value = 100000;
         }
 
         res
@@ -207,6 +214,28 @@ impl MyApp {
         sum / count
     }
 
+    fn compute_reference_expected_value(&self) -> f64 {
+        let sum = (self.random_numbers.iter().max().unwrap()
+            + self.random_numbers.iter().min().unwrap()) as f64;
+        sum / 2.0
+    }
+
+    fn compute_reference_variance(&self) -> f64 {
+        let expected_value = self.compute_reference_expected_value();
+        // let expected_value = self.compute_expected_value(numbers);
+
+        let sum: f64 = self
+            .random_numbers
+            .iter()
+            .map(|x| {
+                let diff = (*x as f64) - expected_value;
+                diff * diff
+            })
+            .sum();
+
+        sum / (self.count as f64)
+    }
+
     fn compute_variance(&self) -> f64 {
         let expected_value = self.compute_expected_value();
         // let expected_value = self.compute_expected_value(numbers);
@@ -253,7 +282,7 @@ impl MyApp {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
         let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
-        let result = block_frequency_test(&data, 20).unwrap();
+        let result = block_frequency_test(&data, 20).unwrap_or_default();
         format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
 
@@ -269,7 +298,7 @@ impl MyApp {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
         let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
-        let result = longest_run_of_ones_test(&data).unwrap();
+        let result = longest_run_of_ones_test(&data).unwrap_or_default();
         format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
 
@@ -285,7 +314,7 @@ impl MyApp {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
         let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
-        let result = rank_test(&data).unwrap();
+        let result = rank_test(&data).unwrap_or_default();
         format!("Test passed: {}, P-value: {:.6}", result.0, result.1)
     }
 
@@ -301,7 +330,7 @@ impl MyApp {
         // TODO: Somehow postpone "str" or "data" to "initialize_tested_vector" and class variables
         let str: String = to_test.iter().map(|x| (*x as u8).to_string()).collect();
         let data = BitsData::from_text(str);
-        let result = non_overlapping_template_test(&data, 10).unwrap();
+        let result = non_overlapping_template_test(&data, 10).unwrap_or_default();
         format!("Test passed: {}, P-value: {:.6}", result[0].0, result[0].1)
     }
 
@@ -316,12 +345,21 @@ impl MyApp {
 
 impl eframe::App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+        let mut style = (*ctx.style()).clone();
+
+        style.visuals.extreme_bg_color = egui::Color32::from_rgb(14, 21, 0x1D);
+        style.visuals.collapsing_header_frame = true;
+        style.visuals.widgets.noninteractive.fg_stroke =
+            Stroke::new(10.0, Color32::from_rgb(0xE5, 0xE5, 0xE5));
+
+        ctx.set_style(style);
+
         egui::CentralPanel::default().show(ctx, |ui| {
-            ctx.set_pixels_per_point(1.5);
+            ctx.set_pixels_per_point(2.45);
 
             // Pseudo-tabs
             Grid::new("tab_grid")
-                .min_col_width(20.)
+                .min_col_width(10.)
                 .max_col_width(100.)
                 .show(ui, |ui| {
                     if ui.button("Lehmer").clicked() {
@@ -454,13 +492,18 @@ impl eframe::App for MyApp {
 
                 self.correlation = self.compute_variance();
                 self.expected = self.compute_expected_value();
+                self.reference_correlation = self.compute_reference_variance();
+                self.reference_expected = self.compute_reference_expected_value();
             }
 
             match self.test_state {
                 TestStates::ShowChart => {
                     let plot = plot::Plot::new("Histogram: ");
                     plot.show(ui, |plot_ui| {
-                        plot_ui.bar_chart(BarChart::new(self.random_numbers_bar.clone()))
+                        plot_ui.bar_chart(
+                            BarChart::new(self.random_numbers_bar.clone())
+                                .color(Color32::from_rgb(0xFC, 0xA3, 0x11)),
+                        )
                     });
                 }
 
@@ -472,30 +515,29 @@ impl eframe::App for MyApp {
                         .show(ui, |ui| {
                             ui.set_width(100.);
 
-                            ui.label(format!("Frequency test: {}", self.freq_result));
+                            ui.label(format!("Test 1: {}", self.freq_result));
                             ui.end_row();
-                            ui.label(format!("Cumulative sum test: {}", self.cusum_result));
+                            ui.label(format!("Test 2: {}", self.cusum_result));
                             ui.end_row();
-                            ui.label(format!("Run test: {}", self.run_result));
+                            ui.label(format!("Test 3: {}", self.run_result));
                             ui.end_row();
-                            ui.label(format!("Run ones test: {}", self.run_ones_result));
+                            ui.label(format!("Test 4: {}", self.run_ones_result));
                             ui.end_row();
-                            ui.label(format!("Matrix rank test: {}", self.rank_result));
+                            ui.label(format!("Test 5: {}", self.rank_result));
                             ui.end_row();
-                            ui.label(format!("FFT test: {}", self.fft_result));
+                            ui.label(format!("Test 6: {}", self.fft_result));
                             ui.end_row();
-                            ui.label(format!("Overlapping template test: {}", self.over_result));
+                            ui.label(format!("Test 7: {}", self.over_result));
                             ui.end_row();
-                            ui.label(format!(
-                                "Non overlapping template test: {}",
-                                self.non_over_result
-                            ));
+                            ui.label(format!("Test 8: {}", self.non_over_result));
 
                             ui.end_row();
                             ui.end_row();
                             ui.label(format!("Expected: {}", self.expected));
+                            ui.label(format!("Reference expected: {}", self.reference_expected));
                             ui.end_row();
                             ui.label(format!("Correlation: {}", self.correlation));
+                            ui.label(format!("Reference correlation: {}", self.reference_correlation));
                         });
                 }
 
@@ -506,5 +548,5 @@ impl eframe::App for MyApp {
 }
 fn main() -> Result<(), eframe::Error> {
     let options = eframe::NativeOptions::default();
-    eframe::run_native("app_name", options, Box::new(|_cc| Box::<MyApp>::default()))
+    eframe::run_native("RNG's", options, Box::new(|_cc| Box::<MyApp>::default()))
 }

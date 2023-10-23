@@ -9,8 +9,5 @@ edition = "2021"
 eframe = "0.22.0"
 egui_plot = "0.23.0"
 nistrs = "0.1.2"
-<<<<<<< HEAD
-rand = "0.1.0"
-=======
+
 rand = "0.8.5"
->>>>>>> 2d77efc1171b6205f9b9f86ca3bdf5eb34c79e72
