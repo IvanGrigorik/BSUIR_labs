@@ -24,7 +24,7 @@ use std::io::{prelude::Write, BufReader, BufRead};
 pub fn write_stream(mut stream: std::net::TcpStream, msg: String) -> bool {
     match stream.write_all(msg.as_bytes()) {
         Err(error) => {
-            println!("Pipe is broken! Error: {}", error);
+            println!("Pipe is broken! Error: {}", error.to_string());
             return false;
         }
 
