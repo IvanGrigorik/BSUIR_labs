@@ -5,13 +5,15 @@ use std::fs;
 use std::ops::Deref;
 use std::path::PathBuf;
 use std::{
-    io::{prelude::*, BufReader},
+    io::{prelude::*},
     net::{SocketAddr, TcpListener, TcpStream},
 };
 
 mod stream_io;
 
 const PORT: u16 = 1203;
+const CHUNK_SIZE: usize = 1024;
+
 #[allow(dead_code)]
 struct BreakerBuff {
     // load_buff: Vec<String>,
@@ -124,50 +126,24 @@ fn handle_connection(mut stream: TcpStream, buff: &mut BreakerBuff) {
                     continue;
                 }
 
-                let chunk_size = 1024;
                 // Read content from file and divide it by chunks
                 let mut content = fs::read(path.clone()).unwrap();
-                // let padding_size = content.len() + (chunk_size - content.len() % 1024);
-                // content.resize(padding_size, 0);
-                let mut chunks: Vec<Vec<u8>> = content
-                    .chunks(chunk_size)
-                    .map(|mut s| s/*.len().to_be_bytes().as_ref()].concat()*/.into())
-                    .collect();
-                // From this moment our message structure looks like:
-                //
-                // | 1024 bytes |  10 bytes   |
-                // ----------------------------
-                // |  Payload   | Payload_len |
-                // ----------------------------
+                let mut chunks: Vec<Vec<u8>> =
+                    content.chunks(CHUNK_SIZE).map(|mut s| s.into()).collect();
 
                 buff.load_buff = chunks;
                 if !buff.is_pending {
                     buff.pos = 0;
                 }
 
-                // Send client our chunk size and wait for proper response
-                {
-                    let mut ack_size = String::new();
-                    if !stream_io::write_stream(
-                        stream.try_clone().unwrap(),
-                        format!("{}\n", chunk_size.to_string()),
-                    ) {
-                        return;
-                    }
-                    if !stream_io::read_stream(stream.try_clone().unwrap(), &mut ack_size) {
-                        return;
-                    }
-                }
-
                 // Start or resume downloading
                 while buff.pos != buff.load_buff.len() {
-                    let b: &[u8] = buff.load_buff[buff.pos].as_ref();
-                    match stream.write_all(b) {
+                    match stream.write_all(buff.load_buff[buff.pos].as_ref()) {
                         Err(error) => {
                             println!("Pipe is broken! Error: {}", error);
                             return;
                         }
-                        _ => ()
+                        _ => (),
                     }
 
                     // TODO: Check lines from 162 to 178

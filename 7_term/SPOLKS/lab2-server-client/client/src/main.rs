@@ -1,5 +1,6 @@
 use local_ip_address::local_ip;
 use std::fmt::format;
+use std::ops::Add;
 // To get own IPv4 addr
 use std::time::Duration;
 use std::{
@@ -46,9 +47,13 @@ fn handle_connection(mut stream: TcpStream) {
         match command.as_deref() {
             // Download from server
             Some("download") => {
-                let mut chunk = [0u8; CHUNK_SIZE];
-                let mut buf = BufReader::new(&mut stream);
+                let mut file_content = String::new();
 
+                let mut chunk = [0u8; CHUNK_SIZE];
+                let mut buf = BufReader::new(stream.try_clone().unwrap());
+
+                // TODO: change, according the file current size
+                let mut ack_number = 0;
                 loop {
                     match buf.read(&mut chunk) {
                         Err(error) => {
@@ -57,7 +62,20 @@ fn handle_connection(mut stream: TcpStream) {
 
                         _ => (),
                     };
+
+                    if chunk.len() != 0 {
+                        let a = String::from_utf8(chunk.to_vec()).unwrap();
+                        file_content += a.as_str();
+                    }
+
+                    if !stream_io::write_stream(stream.try_clone().unwrap(), format!("ACK{}\n", ack_number)){
+                        break;
+                    }
+                    // TODO: Add break statement, according special "end" message
+                    ack_number += 1;
                 }
+
+                println!("{}", file_content);
             }
 
             // Empty line
