@@ -2,6 +2,7 @@ use chrono::prelude::*;
 use local_ip_address::local_ip;
 use std::fs;
 
+use std::ops::Deref;
 use std::path::PathBuf;
 use std::{
     io::{prelude::*, BufReader},
@@ -13,7 +14,8 @@ mod stream_io;
 const PORT: u16 = 1203;
 #[allow(dead_code)]
 struct BreakerBuff {
-    load_buff: Vec<String>,
+    // load_buff: Vec<String>,
+    load_buff: Vec<Vec<u8>>,
     pos: usize,
     ip: SocketAddr,
     is_pending: bool,
@@ -64,7 +66,6 @@ fn handle_connection(mut stream: TcpStream, buff: &mut BreakerBuff) {
 
     loop {
         let mut message = String::new();
-
         if !stream_io::read_stream(stream.try_clone().unwrap(), &mut message) || message.is_empty()
         {
             break;
@@ -123,36 +124,55 @@ fn handle_connection(mut stream: TcpStream, buff: &mut BreakerBuff) {
                     continue;
                 }
 
+                let chunk_size = 1024;
                 // Read content from file and divide it by chunks
-                let content = String::from_utf8(fs::read(path.clone()).unwrap())
-                    .expect("File must have content!");
-                let chunks = content
-                    .chars()
-                    .collect::<Vec<char>>()
-                    .chunks(1024)
-                    .map(|c| c.iter().collect::<String>())
-                    .collect::<Vec<String>>();
+                let mut content = fs::read(path.clone()).unwrap();
+                // let padding_size = content.len() + (chunk_size - content.len() % 1024);
+                // content.resize(padding_size, 0);
+                let mut chunks: Vec<Vec<u8>> = content
+                    .chunks(chunk_size)
+                    .map(|mut s| s/*.len().to_be_bytes().as_ref()].concat()*/.into())
+                    .collect();
+                // From this moment our message structure looks like:
+                //
+                // | 1024 bytes |  10 bytes   |
+                // ----------------------------
+                // |  Payload   | Payload_len |
+                // ----------------------------
 
-                // Set up buffer
                 buff.load_buff = chunks;
                 if !buff.is_pending {
                     buff.pos = 0;
                 }
 
-                // Retry to download or initialize downloading
-                while buff.pos != buff.load_buff.len() {
-                    // Write one chink of the file
+                // Send client our chunk size and wait for proper response
+                {
+                    let mut ack_size = String::new();
                     if !stream_io::write_stream(
                         stream.try_clone().unwrap(),
-                        buff.load_buff[buff.pos as usize].clone(),
+                        format!("{}\n", chunk_size.to_string()),
                     ) {
-                        buff.is_pending = true;
                         return;
                     }
+                    if !stream_io::read_stream(stream.try_clone().unwrap(), &mut ack_size) {
+                        return;
+                    }
+                }
+
+                // Start or resume downloading
+                while buff.pos != buff.load_buff.len() {
+                    let b: &[u8] = buff.load_buff[buff.pos].as_ref();
+                    match stream.write_all(b) {
+                        Err(error) => {
+                            println!("Pipe is broken! Error: {}", error);
+                            return;
+                        }
+                        _ => ()
+                    }
+
+                    // TODO: Check lines from 162 to 178
                     // Wait for acknowledgment from client after transmitting
                     let mut ack_message = String::new();
-
-                    let mut ack = BufReader::new(&mut stream);
                     if !stream_io::read_stream(stream.try_clone().unwrap(), &mut ack_message) {
                         buff.is_pending = true;
                         return;
@@ -163,8 +183,53 @@ fn handle_connection(mut stream: TcpStream, buff: &mut BreakerBuff) {
                         buff.pos += 1;
                     }
                 }
+
                 stream.write_all("File sended!".as_bytes()).unwrap();
                 println!("File sended");
+
+                ////todo: delete this code, if the section above works fine
+                // let content = String::from_utf8(fs::read(path.clone()).unwrap())
+                //     .expect("File must have content!");
+                // let chunks = content
+                //     .chars()
+                //     .collect::<Vec<char>>()
+                //     .chunks(chunk_size)
+                //     .map(|c| c.iter().collect::<String>())
+                //     .collect::<Vec<String>>();
+
+                // Set up buffer
+                // buff.load_buff = chunks;
+                // if !buff.is_pending {
+                //     buff.pos = 0;
+                // }
+
+                // Retry to download or initialize downloading
+                // while buff.pos != buff.load_buff.len() {
+                //     // Write one chink of the file
+                //     if !stream_io::write_stream(
+                //         stream.try_clone().unwrap(),
+                //         buff.load_buff[buff.pos as usize].clone(),
+                //     ) {
+                //         buff.is_pending = true;
+                //         return;
+                //     }
+
+                //     // Wait for acknowledgment from client after transmitting
+                //     let mut ack_message = String::new();
+
+                //     let mut ack = BufReader::new(&mut stream);
+                //     if !stream_io::read_stream(stream.try_clone().unwrap(), &mut ack_message) {
+                //         buff.is_pending = true;
+                //         return;
+                //     }
+
+                //     // Check is it right ACK
+                //     if ack_message.trim() == format!("ACK{}", buff.pos) {
+                //         buff.pos += 1;
+                //     }
+                // }
+                // stream.write_all("File sended!".as_bytes()).unwrap();
+                // println!("File sended");
             }
 
             None => {

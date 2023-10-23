@@ -1,4 +1,4 @@
-use std::io::{prelude::Write, BufReader, BufRead};
+use std::io::{prelude::Write, BufRead, BufReader, Read};
 
 /// Attempt to write to TcpStream and return true, if there were no errors
 /// # Examples
@@ -39,6 +39,6 @@ pub fn read_stream(mut stream: std::net::TcpStream, mut msg: &mut String) -> boo
             println!("Reading from stream error! Err: {}", error.kind());
             return false;
         }
-        _ => return true
+        _ => return true,
     };
 }
