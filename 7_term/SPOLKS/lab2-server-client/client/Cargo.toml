@@ -7,4 +7,6 @@ edition = "2021"
 
 [dependencies]
 local-ip-address = { version = "0.5.5" }
-chrono = { version = "0.4.31"}
+chrono = { version = "0.4.31" }
+socket2 = { version = "0.5.4" }
+dirs = {version = "5.0.1"}

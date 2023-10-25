@@ -35,7 +35,6 @@ pub fn write_stream(mut stream: std::net::TcpStream, msg: String) -> bool {
     }
 }
 
-#[inline]
 pub fn read_stream(mut stream: std::net::TcpStream, mut msg: &mut String) -> bool {
     let mut buf: BufReader<&mut std::net::TcpStream> = BufReader::new(&mut stream);
     match buf.read_line(&mut msg) {
@@ -46,3 +45,38 @@ pub fn read_stream(mut stream: std::net::TcpStream, mut msg: &mut String) -> boo
         _ => return true,
     };
 }
+
+pub fn read_urg(mut stream: std::net::TcpStream, mut msg: &mut String) -> bool {
+    let mut buf: BufReader<&mut std::net::TcpStream> = BufReader::new(&mut stream);
+    match buf.read_line(&mut msg) {
+        Err(error) => {
+            println!("Urgent message reading error! Err: {}", error.kind());
+            return false;
+        }
+        _ => return true,
+    };
+}
+
+pub fn write_urg(mut stream: std::net::TcpStream, msg: String) -> bool {
+    match stream.write_all(msg.as_bytes()) {
+        Err(error) => {
+            println!("Urgent message writing error! Err: {}", error.kind());
+            return false;
+        }
+
+        Ok(_) => return true,
+    }
+}
+
+// pub fn read_socket(mut socket: socket2::Socket, mut msg: &mut String) -> bool {
+//     let mut buf = [MaybeUninit::new(1); 1024];
+//     match socket.recv(&mut buf) {
+//         Err(error) => {
+//             println!("Reading from stream error! Err: {}", error.kind());
+//             return false;
+//         }
+//         _ => {
+//             return true;
+//         }
+//     };
+// }

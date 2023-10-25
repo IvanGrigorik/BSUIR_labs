@@ -1,4 +1,4 @@
-use std::io::{prelude::Write, BufRead, BufReader, Read};
+use std::io::{prelude::Write, BufRead, BufReader};
 
 /// Attempt to write to TcpStream and return true, if there were no errors
 /// # Examples
@@ -42,3 +42,27 @@ pub fn read_stream(mut stream: std::net::TcpStream, mut msg: &mut String) -> boo
         _ => return true,
     };
 }
+
+pub fn write_urg(mut stream: std::net::TcpStream, msg: String) -> bool {
+    match stream.write_all(msg.as_bytes()) {
+        Err(error) => {
+            println!("Urgent message writing error! Err: {}", error.kind());
+            return false;
+        }
+
+        Ok(_) => return true,
+    }
+}
+
+pub fn read_urg(mut stream: std::net::TcpStream, mut msg: &mut String) -> bool {
+    let mut buf: BufReader<&mut std::net::TcpStream> = BufReader::new(&mut stream);
+    match buf.read_line(&mut msg) {
+        Err(error) => {
+            println!("Urgent message reading error! Err: {}", error.kind());
+            return false;
+        }
+        _ => return true,
+    };
+}
+
+

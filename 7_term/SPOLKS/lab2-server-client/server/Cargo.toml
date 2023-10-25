@@ -6,8 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+dirs = {version = "5.0.1"}
 local-ip-address = { version = "0.5.5" }
-chrono = { version = "0.4.31"}
-dirs = "5.0.1"
+chrono = { version = "0.4.31" }
+socket2 = { version = "0.5.4" }
 # pnet = "0.34.0"
 # network-interface = "0.1.6"
