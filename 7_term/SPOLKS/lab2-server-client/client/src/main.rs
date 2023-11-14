@@ -1,6 +1,8 @@
-use local_ip_address::local_ip;
-use std::fs::{File, OpenOptions};
+use std::fs::{self, File, OpenOptions};
+use std::io::stdout;
+use std::net::IpAddr;
 use std::path::PathBuf;
+use std::str::FromStr;
 use std::{
     io::{prelude::*, stdin, BufReader},
     net::{SocketAddr, TcpStream},
@@ -11,10 +13,25 @@ mod nets_io;
 const PORT: u16 = 1203;
 const CHUNK_SIZE: usize = 1024;
 fn main() {
-    let addr = SocketAddr::new(local_ip().expect("You must have some IP"), PORT);
+    // let mut server_ip_str = String::new();
+    // print!("Enter server ip address: ");
+    // stdout().flush().unwrap();
+    let server_ip_str = String::from("192.168.90.204");
+    // server_ip_str = "172.20.10.13".to_string();
+    // stdin().read_line(&mut server_ip_str).unwrap();
+    let server_ip = match IpAddr::from_str(&server_ip_str.trim()) {
+        Err(e) => {
+            println!("Error, invalid ip: {}", e.to_string());
+            return;
+        }
+
+        Ok(a) => a,
+    };
+    let addr = SocketAddr::new(server_ip, PORT);
 
     match TcpStream::connect(addr) {
         Ok(stream) => {
+            println!("Connection established!");
             handle_connection(stream);
         }
 
@@ -34,13 +51,13 @@ fn expand_home(dir: std::path::PathBuf, expand: String) -> std::path::PathBuf {
     x.into()
 }
 
-fn handle_connection(mut stream: TcpStream)  {
+fn handle_connection(mut stream: TcpStream) {
     stream
-        .set_read_timeout(Some(std::time::Duration::new(20, 0)))
+        .set_read_timeout(Some(std::time::Duration::new(60, 0)))
         .expect("set_read_timeout call failed");
     stream
-    .set_write_timeout(Some(std::time::Duration::new(20, 0)))
-    .expect("set_read_timeout call failed");
+        .set_write_timeout(Some(std::time::Duration::new(60, 0)))
+        .expect("set_read_timeout call failed");
 
     loop {
         // Read line and write it to the socket
@@ -202,6 +219,9 @@ fn handle_connection(mut stream: TcpStream)  {
 
                 // Previous acknowledgment (0, if new downloading)
                 let mut prev: usize = ack_number * CHUNK_SIZE;
+
+                let mut error_check: Vec<[u8; CHUNK_SIZE]> = Vec::with_capacity(3);
+                let mut error_i = 0;
                 loop {
                     match buf.read(&mut chunk) {
                         Err(error) => {
@@ -235,9 +255,10 @@ fn handle_connection(mut stream: TcpStream)  {
                         break;
                     }
 
+
                     // Check data
                     if chunk.len() != 0 {
-                        let message = String::from_utf8(chunk.to_vec()).unwrap();
+                        // let message = String::from_utf8(chunk.to_vec()).unwrap();
                         let mut idx: usize = CHUNK_SIZE;
                         if total.parse::<usize>().unwrap() < CHUNK_SIZE {
                             idx = total.parse().unwrap();
@@ -245,11 +266,31 @@ fn handle_connection(mut stream: TcpStream)  {
                         if current.parse::<usize>().unwrap() != 0 {
                             idx = current.parse::<usize>().unwrap() - prev;
                         }
+                        if idx > CHUNK_SIZE {
+                            idx = CHUNK_SIZE;
+                        }
+
+                        // println!("current: {} | prev: {} | idx: {}", current, prev, idx);
                         // Check if message already in file, if renew downloading
                         if file_len < current.parse().unwrap() {
-                            out_file.write(&message.as_bytes()[..idx]).unwrap();
+                            out_file.write(&chunk[..idx]).unwrap();
                         }
                         prev = current.parse().unwrap();
+                    }
+
+
+                    if error_i < 3 {
+                        error_check.push(chunk);
+
+                        if error_i == 2 && error_check.iter().all(|&x| x == error_check[0]) && prev == current.parse().unwrap() {
+                            println!("Path: {}", path.display());
+                            fs::remove_file(path.clone()).expect("file remove error");
+                            println!("Previous downloaded file deleted. Downloading is not pending now");
+                            let mut fictive = String::new();
+                            nets_io::read_stream(stream.try_clone().unwrap(), &mut fictive);
+                            break;
+                        }
+                        error_i += 1;
                     }
 
                     if total == current {

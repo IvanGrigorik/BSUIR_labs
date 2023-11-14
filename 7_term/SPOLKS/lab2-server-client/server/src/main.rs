@@ -15,7 +15,7 @@ mod nets_io;
 
 const PORT: u16 = 1203;
 const CHUNK_SIZE: usize = 1024;
-const TIMEOUT_SEC: u64 = 10;
+const TIMEOUT_SEC: u64 = 60;
 
 #[derive(PartialEq, Eq)]
 enum LoadingType {
@@ -35,11 +35,11 @@ struct BreakerBuff {
 }
 
 fn main() {
-    println!("Your address: {}:{}", local_ip().unwrap(), PORT);
+    println!("Server address: {}:{}", local_ip().unwrap(), PORT);
 
     let (socket, listener) = connect_tcp_listener(local_ip().unwrap(), PORT);
-
     println!("Server is up!");
+
     let mut buff = BreakerBuff {
         load_buff: Vec::new(),
         pos: 0,
@@ -95,12 +95,12 @@ fn set_pending(buff: &mut BreakerBuff, file_path: String) {
 // TODO: Delete permission
 fn handle_connection(_socket: socket2::Socket, mut stream: TcpStream, mut buff: &mut BreakerBuff) {
     println!("New connection: {}", stream.peer_addr().unwrap());
-    
+
     stream
-        .set_read_timeout(Some(std::time::Duration::new(20, 0)))
+        .set_read_timeout(Some(std::time::Duration::new(TIMEOUT_SEC, 0)))
         .expect("set_read_timeout call failed");
     stream
-        .set_write_timeout(Some(std::time::Duration::new(20, 0)))
+        .set_write_timeout(Some(std::time::Duration::new(TIMEOUT_SEC, 0)))
         .expect("set_read_timeout call failed");
 
     // If new client connect
@@ -154,6 +154,14 @@ fn handle_connection(_socket: socket2::Socket, mut stream: TcpStream, mut buff: 
             // Upload from client to server
             Some("upload") => {
                 if buff.kind == LoadingType::Download {
+                    let rm_path = PathBuf::from(
+                        "uploaded_files/".to_string()
+                            + buff.path.as_str().split('/').last().expect("msg"),
+                    );
+                    if rm_path.exists() {
+                        fs::remove_file(rm_path).expect("File must be");
+                        println!("Previous download flushed!");
+                    }
                     flush_breaker(buff);
                     buff.kind = LoadingType::Upload;
                 }
@@ -258,14 +266,15 @@ fn handle_connection(_socket: socket2::Socket, mut stream: TcpStream, mut buff: 
                     println!("{} / {}", current, total);
 
                     if chunk.len() != 0 {
-                        let message = String::from_utf8(chunk.to_vec()).unwrap();
+                        // let message = String::from_utf8(chunk.to_vec()).unwrap();
                         let mut idx: usize = CHUNK_SIZE;
                         if current.parse::<usize>().unwrap() != 0 {
                             idx = current.parse::<usize>().unwrap() - prev;
                         }
                         // Check if message already in file, if renew downloading
                         if file_len < current.parse().unwrap() {
-                            out_file.write(&message.as_bytes()[..idx]).unwrap();
+                            out_file.write(&chunk[..idx]).expect("File write error");
+                            // out_file.write(&message.as_bytes()[..idx]).unwrap();
                         }
                         prev = current.parse().unwrap();
                     }
@@ -362,6 +371,11 @@ fn handle_connection(_socket: socket2::Socket, mut stream: TcpStream, mut buff: 
                     }
 
                     // Check is it right ACK
+                    // println!(
+                    //     "ACK needed: ACK{} | received: {}",
+                    //     buff.pos,
+                    //     ack_message.trim()
+                    // );
                     if ack_message.trim() == format!("ACK{}", buff.pos) {
                         buff.pos += 1;
                         if buff.pos != 0 {
