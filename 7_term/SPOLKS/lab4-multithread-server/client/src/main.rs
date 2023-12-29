@@ -1,0 +1,332 @@
+use std::fs::{self, File, OpenOptions};
+use std::io::stdout;
+use std::net::IpAddr;
+use std::path::PathBuf;
+use std::str::FromStr;
+use std::{
+    io::{prelude::*, stdin, BufReader},
+    net::{SocketAddr, TcpStream},
+};
+
+mod nets_io;
+
+const PORT: u16 = 1203;
+const CHUNK_SIZE: usize = 1024;
+fn main() {
+    let server_ip_str = String::from("192.168.1.35");
+    let server_ip = match IpAddr::from_str(&server_ip_str.trim()) {
+        Err(e) => {
+            println!("Error, invalid ip: {}", e.to_string());
+            return;
+        }
+
+        Ok(a) => a,
+    };
+    let addr = SocketAddr::new(server_ip, PORT);
+
+    match TcpStream::connect(addr) {
+        Ok(stream) => {
+            println!("Connection established!");
+            handle_connection(stream);
+        }
+
+        Err(e) => {
+            println!("Failed to connect: {}", e);
+        }
+    }
+    println!("Terminated.");
+}
+
+fn expand_home(dir: std::path::PathBuf, expand: String) -> std::path::PathBuf {
+    let mut path = dir.clone();
+    path.clear();
+    path = dirs::home_dir().unwrap();
+    let mut x = path.into_os_string();
+    x.push(expand.trim());
+    x.into()
+}
+
+fn handle_connection(mut stream: TcpStream) {
+    stream
+        .set_read_timeout(Some(std::time::Duration::new(60, 0)))
+        .expect("set_read_timeout call failed");
+    stream
+        .set_write_timeout(Some(std::time::Duration::new(60, 0)))
+        .expect("set_read_timeout call failed");
+
+    loop {
+        // Read line and write it to the socket
+        let mut line = String::new();
+        stdin().read_line(&mut line).unwrap();
+        let mut line = line.trim().to_string();
+        line.push('\n');
+        if !nets_io::write_stream(stream.try_clone().unwrap(), line.clone()) {
+            println!("Server error!");
+            return;
+        }
+
+        let msg_words: Vec<_> = line.trim_end().trim_start().split_whitespace().collect();
+        let cmd = msg_words.first().copied();
+
+        // Same thing in server
+        if msg_words.len() < 2 && (cmd == Some("download") || cmd == Some("upload")) {
+            continue;
+        }
+
+        match cmd.as_deref() {
+            // Upload to the server
+            Some("upload") => {
+                let path_str = msg_words[1];
+
+                let mut path = PathBuf::from(path_str.trim());
+                if path.starts_with("~") {
+                    path = expand_home(path, path_str[1..].to_string())
+                }
+
+                if !path.exists() {
+                    if !nets_io::write_stream(
+                        stream.try_clone().unwrap(),
+                        "File does not exist\n".to_string(),
+                    ) {
+                        return;
+                    }
+                    println!("File does no exist!");
+                    continue;
+                } else {
+                    if !nets_io::write_stream(
+                        stream.try_clone().unwrap(),
+                        "Initiate file transfer\n".to_string(),
+                    ) {
+                        return;
+                    }
+                }
+
+                // Get file length at server
+                let mut pos_msg = String::new();
+                if !nets_io::read_stream(stream.try_clone().unwrap(), &mut pos_msg) {
+                    continue;
+                }
+
+                let content = std::fs::read(path.clone()).unwrap();
+                let chunks: Vec<Vec<u8>> = content.chunks(CHUNK_SIZE).map(|s| s.into()).collect();
+
+                // Calculate how much bytes we need to upload and how much at the server rn
+                let mut pos = pos_msg.trim().parse::<usize>().unwrap() / 1024; // <---------------------------
+                let total_bytes = content.len();
+                let mut transferred_bytes = pos * CHUNK_SIZE;
+
+                // Send file status: uploaded or not
+                if pos_msg.trim().parse::<usize>().unwrap() == total_bytes {
+                    if !nets_io::write_stream(stream.try_clone().unwrap(), "SENDED\n".to_string()) {
+                        return;
+                    }
+                    println!("File already on the server!");
+                    continue;
+                } else {
+                    if !nets_io::write_stream(
+                        stream.try_clone().unwrap(),
+                        "NOT_SENDED\n".to_string(),
+                    ) {
+                        return;
+                    }
+                }
+
+                while transferred_bytes < total_bytes {
+                    match stream.write_all(chunks[pos].as_ref()) {
+                        Err(error) => {
+                            println!("Pipe is broken! Error: {}", error);
+                            return;
+                        }
+                        _ => (),
+                    }
+                    stream.flush().unwrap();
+
+                    // Wait for acknowledgment from server after transmitting
+                    let mut ack_message = String::new();
+                    if !nets_io::read_stream(stream.try_clone().unwrap(), &mut ack_message) {
+                        return;
+                    }
+
+                    // Check is it right ACK
+                    if ack_message.trim() == format!("ACK{}", pos) {
+                        transferred_bytes += chunks[pos].len();
+                    } else {
+                        continue;
+                    }
+
+                    if !nets_io::write_urg(
+                        stream.try_clone().unwrap(),
+                        format!("{:0>10}{:0>10}\n", transferred_bytes, total_bytes),
+                    ) {
+                        continue;
+                    }
+
+                    pos += 1;
+                }
+
+                // Get "uploaded" message from the server
+                let mut uploaded_msg = String::new();
+                if !nets_io::read_stream(stream.try_clone().unwrap(), &mut uploaded_msg) {
+                    continue;
+                }
+                println!("{}", uploaded_msg);
+            }
+
+            // Download from server
+            Some("download") => {
+                // Check for file existence on the server
+                let mut file_exist = String::new();
+                if !nets_io::read_stream(stream.try_clone().unwrap(), &mut file_exist) {
+                    continue;
+                }
+
+                println!("{}", file_exist);
+                if file_exist.trim() == "File does not exist" {
+                    continue;
+                }
+
+                let path_str = msg_words[1];
+                let file = path_str.split('/').last().unwrap();
+                let path = PathBuf::from("downloaded_files/".to_string() + file.trim());
+
+                // Ack to send ack message
+                let mut ack_number = 0;
+                if !path.exists() {
+                    // If file not created - create it
+                    File::create(path.clone()).unwrap();
+                }
+                let file_len = std::fs::read(path.clone()).unwrap().len();
+
+                if file_len != 0 {
+                    // Else - check last known position to send right ACK
+                    ack_number = file_len / CHUNK_SIZE - 1;
+                }
+
+                // Create file to write our data
+                let mut out_file = OpenOptions::new()
+                    .write(true)
+                    .append(true)
+                    .open(path.clone())
+                    .unwrap();
+
+                let mut chunk = [0u8; CHUNK_SIZE];
+                let mut buf = BufReader::new(stream.try_clone().unwrap());
+
+                // Previous acknowledgment (0, if new downloading)
+                let mut prev: usize = ack_number * CHUNK_SIZE;
+
+                let mut error_check: Vec<[u8; CHUNK_SIZE]> = Vec::with_capacity(3);
+                let mut error_idx = 0;
+                loop {
+                    match buf.read(&mut chunk) {
+                        Err(error) => {
+                            println!("Server error: {}", error);
+                        }
+                        _ => {}
+                    };
+
+                    if !nets_io::write_stream(
+                        stream.try_clone().unwrap(),
+                        format!("ACK{}\n", ack_number),
+                    ) {
+                        return;
+                    }
+
+                    // Get "urgent" data
+                    let mut urg_str = String::new();
+                    if !nets_io::read_urg(stream.try_clone().unwrap(), &mut urg_str) {
+                        return;
+                    }
+
+                    let (current, total) = urg_str.trim().split_at(10);
+                    println!("{} / {}", current, total);
+
+                    if file_len == total.parse().unwrap() {
+                        println!("File is already downloaded!");
+                        let mut fictive_msg = String::new();
+                        if !nets_io::read_stream(stream.try_clone().unwrap(), &mut fictive_msg) {
+                            return;
+                        }
+                        break;
+                    }
+
+                    // Check data
+                    if chunk.len() != 0 {
+                        let mut idx: usize = CHUNK_SIZE;
+                        if total.parse::<usize>().unwrap() < CHUNK_SIZE {
+                            idx = total.parse().unwrap();
+                        }
+                        if current.parse::<usize>().unwrap() != 0 {
+                            idx = current.parse::<usize>().unwrap() - prev;
+                        }
+                        if idx > CHUNK_SIZE {
+                            idx = CHUNK_SIZE;
+                        }
+
+                        // println!("current: {} | prev: {} | idx: {}", current, prev, idx);
+                        // Check if message already in file, if renew downloading
+                        if file_len < current.parse().unwrap() {
+                            out_file.write(&chunk[..idx]).unwrap();
+                        }
+                        prev = current.parse().unwrap();
+                    }
+
+
+                    if error_idx < 3 {
+                        error_check.push(chunk);
+
+                        if error_idx == 2 && error_check.iter().all(|&x| x == error_check[0]) && prev == current.parse().unwrap() {
+                            println!("Path: {}", path.display());
+                            fs::remove_file(path.clone()).expect("file remove error");
+                            println!("Previous downloaded file deleted. Downloading is not pending now");
+                            let mut fictive = String::new();
+                            nets_io::read_stream(stream.try_clone().unwrap(), &mut fictive);
+                            break;
+                        }
+                        error_idx += 1;
+                    }
+
+                    if total == current {
+                        break;
+                    }
+
+                    ack_number += 1;
+                }
+
+                // Send ACK that file downloaded
+                if !nets_io::write_stream(stream.try_clone().unwrap(), "ACKSEND\n".to_string()) {
+                    return;
+                }
+
+                // File send msg
+                let mut sended_msg = String::new();
+                if !nets_io::read_stream(stream.try_clone().unwrap(), &mut sended_msg) {
+                    return;
+                }
+
+                println!("\n{}", sended_msg.trim());
+            }
+
+            // Empty line
+            None => continue,
+
+            Some("exit") => {
+                stream.shutdown(std::net::Shutdown::Both).unwrap();
+                println!("Session closed!");
+                return;
+            }
+
+            // All other commands
+            _ => {
+                let mut message = String::new();
+
+                if !nets_io::read_stream(stream.try_clone().unwrap(), &mut message) {
+                    println!("Server error!");
+                    return;
+                }
+
+                println!("{}", message.as_str().trim());
+            }
+        }
+    }
+}
