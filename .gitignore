@@ -7,6 +7,7 @@
 *.o
 *.obj
 *.tmp
+*.lock
 
 # Precompiled Headers
 *.gch
@@ -33,6 +34,38 @@
 *.app
 *.bin
 
+<<<<<<< HEAD
+# Except labs and src folders
+!src/
+.fleet/
+target/
+
+# Vivado files
+.jobs/
+synth_*/
+*.runs/
+*cache*/
+*.hw/
+*sim/
+*.ip_user*/
+bd/
+constrs_1/*
+*.wcfg
+*.log
+
+lab1.runs/
+
+# IDEs files
+.vscode/
+*build*/
+build*/
+.fleet/
+.idea/
+.metadata/
+OracleDDM/
+
+
+=======
 # Ignore any folder
 *cmake-build-debug/
 *cmake-build-release/
@@ -42,3 +75,4 @@
 # Except labs and src folders
 !src/
 .fleet/
+>>>>>>> main
