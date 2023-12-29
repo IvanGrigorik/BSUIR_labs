@@ -6,10 +6,7 @@ use eframe::{
     },
     epaint::{Color32, Stroke},
 };
-use rand::thread_rng;
-use rand_distr::{
-    num_traits::float, Beta, Distribution, Gamma, LogNormal, Normal, StandardNormal, Triangular,
-};
+use rand_distr::{Distribution, Gamma, StandardNormal, Triangular};
 
 enum TestStates {
     None,
@@ -127,9 +124,6 @@ impl MyApp {
             self.random_numbers.push(_tmp as f64);
         }
     }
-
-    // TODO: DELETE allow
-    #[allow(dead_code, unused_variables, unused_mut)]
 
     fn generate_gaussian(&mut self) {
         let mut random = rand::thread_rng();
@@ -297,13 +291,13 @@ impl eframe::App for MyApp {
             // Values group
             ui.group(|ui| {
                 Grid::new("tabs").show(ui, |ui| {
-                    ui.label(format!("Expected: {}", self.expected));
-                    ui.label(format!("Correlation: {}", self.correlation));
+                    ui.label(format!("Мат. ожидание: {}", self.expected));
+                    ui.label(format!("Дисперсия: {}", self.correlation));
                     ui.end_row();
 
-                    ui.label(format!("Reference expected: {}", self.reference_expected));
+                    ui.label(format!("Теор. мат. ожидание: {}", self.reference_expected));
                     ui.label(format!(
-                        "Reference correlation: {}",
+                        "Теор. дисперсия: {}",
                         self.reference_correlation
                     ));
                 });
@@ -388,26 +382,43 @@ impl eframe::App for MyApp {
                                 ui.label("Distribution option:");
                                 ui.end_row();
 
+                                let mut need_to_refresh = false;
+
                                 if ui.button("Uniform").clicked() {
                                     self.clear_numbers();
                                     self.generate_lehmer();
                                     self.refresh_numbers();
+                                    need_to_refresh = true;
                                 }
                                 if ui.button("Gaussian").clicked() {
                                     self.generate_gaussian();
+                                    need_to_refresh = true;
                                 }
                                 if ui.button("Exponential").clicked() {
                                     self.generate_exponential();
+                                    need_to_refresh = true;
                                 }
                                 if ui.button("Gamma").clicked() {
                                     self.generate_gamma();
+                                    need_to_refresh = true;
                                 }
                                 if ui.button("Triangular").clicked() {
                                     self.generate_triangular();
+                                    need_to_refresh = true;
                                 }
                                 if ui.button("Simpson's").clicked() {
                                     self.generate_simpson();
+                                    need_to_refresh = true;
                                 }
+
+                                if need_to_refresh == true {
+                                    self.correlation = self.compute_variance();
+                                    self.expected = self.compute_expected_value();
+                                    self.reference_correlation = self.compute_reference_variance();
+                                    self.reference_expected =
+                                        self.compute_reference_expected_value();
+                                }
+
                             })
 
                             // ui.vertical(|ui| {
