@@ -226,12 +226,12 @@ int main() {
 
     cudaEventRecord(start_event);
 
-    kernel<<<numBlocks, threadsPerBlock, 1024>>>(r_min, r_max, d_planes_signs);
+    kernel<<<numBlocks, threadsPerBlock, /*Shared memory size*/1024>>>(r_min, r_max, d_planes_signs);
     cudaDeviceSynchronize();
-//    thrust::device_vector<unsigned> d_vec(shared_grid, shared_grid + numBlocks);
-//    auto gpu_hits = thrust::reduce(thrust::device,
-//                                   d_vec.begin(), d_vec.end(),
-//                                   0, thrust::plus<>());
+    thrust::device_vector<unsigned> d_vec(shared_grid, shared_grid + numBlocks);
+    auto gpu_hits = thrust::reduce(thrust::device,
+                                   d_vec.begin(), d_vec.end(),
+                                   0, thrust::plus<>());
 
     cudaEventRecord(stop_event);
     cudaEventSynchronize(start_event);
@@ -241,10 +241,10 @@ int main() {
     cudaEventElapsedTime(&milliseconds, start_event, stop_event);
     cout << "GPU time: " << milliseconds << endl;
 
-//    auto gpu_precision = threadsPerBlock * numBlocks;
-//    cout << "GPU volume: " << static_cast<float>(gpu_hits) * main_volume /
-//                              static_cast<float>(gpu_precision) << endl;
-//    cout << "GPU hits: " << gpu_hits;
-//    cout << gpu_hits;
+    auto gpu_precision = threadsPerBlock * numBlocks;
+    cout << "GPU volume: " << static_cast<float>(gpu_hits) * main_volume /
+                              static_cast<float>(gpu_precision) << endl;
+    cout << "GPU hits: " << gpu_hits;
+    cout << gpu_hits;
     return 0;
 }

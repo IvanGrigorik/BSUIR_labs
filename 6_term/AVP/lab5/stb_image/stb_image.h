@@ -77,7 +77,7 @@ RECENT REVISION HISTORY:
 
  ============================    Contributors    =========================
 
- Image formats                          Extensions, features
+ ImageCPU formats                          Extensions, features
     Sean Barrett (jpeg, png, bmp)          Jetro Lauha (stbi_info)
     Nicolas Schulz (hdr, psd)              Martin "SpartanJ" Golini (stbi_info)
     Jonathan Dummer (tga)                  James "moose2000" Brown (iPhone PNG)
@@ -264,7 +264,7 @@ RECENT REVISION HISTORY:
 //
 // On x86, SSE2 will automatically be used when available based on a run-time
 // test; if not, the generic C versions are used as a fall-back. On ARM targets,
-// the typical imagePath is to have separate builds for NEON and non-NEON devices
+// the typical imageName is to have separate builds for NEON and non-NEON devices
 // (at least this is true for iOS and Android). Therefore, the NEON support is
 // toggled by a build flag: define STBI_NEON to get NEON loops.
 //
@@ -1182,7 +1182,7 @@ static void *stbi__load_main(stbi__context *s, int *x, int *y, int *comp, int re
       return stbi__tga_load(s,x,y,comp,req_comp, ri);
    #endif
 
-   return stbi__errpuc("unknown image type", "Image not of any known type, or corrupt");
+   return stbi__errpuc("unknown image type", "ImageCPU not of any known type, or corrupt");
 }
 
 static stbi_uc *stbi__convert_16_to_8(stbi__uint16 *orig, int w, int h, int channels)
@@ -1470,7 +1470,7 @@ static float *stbi__loadf_main(stbi__context *s, int *x, int *y, int *comp, int 
    data = stbi__load_and_postprocess_8bit(s, x, y, comp, req_comp);
    if (data)
       return stbi__ldr_to_hdr(data, *x, *y, req_comp ? req_comp : *comp);
-   return stbi__errpf("unknown image type", "Image not of any known type, or corrupt");
+   return stbi__errpf("unknown image type", "ImageCPU not of any known type, or corrupt");
 }
 
 STBIDEF float *stbi_loadf_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)
@@ -1976,8 +1976,8 @@ typedef struct
 
    stbi__uint32   code_buffer; // jpeg entropy-coded buffer
    int            code_bits;   // number of valid bits
-   unsigned char  marker;      // marker seen while filling entropy buffer
-   int            nomore;      // flag if we saw a marker so must stop
+   unsigned char  marker;      // markerCPU seen while filling entropy buffer
+   int            nomore;      // flag if we saw a markerCPU so must stop
 
    int            progressive;
    int            spec_start;
@@ -2232,7 +2232,7 @@ static int stbi__jpeg_decode_block(stbi__jpeg *j, short data[64], stbi__huffman 
       if (j->code_bits < 16) stbi__grow_buffer_unsafe(j);
       c = (j->code_buffer >> (32 - FAST_BITS)) & ((1 << FAST_BITS)-1);
       r = fac[c];
-      if (r) { // fast-AC imagePath
+      if (r) { // fast-AC imageName
          k += (r >> 4) & 15; // run
          s = r & 15; // combined length
          if (s > j->code_bits) return stbi__err("bad huffman code", "Combined length longer than code bits available");
@@ -2310,7 +2310,7 @@ static int stbi__jpeg_decode_block_prog_ac(stbi__jpeg *j, short data[64], stbi__
          if (j->code_bits < 16) stbi__grow_buffer_unsafe(j);
          c = (j->code_buffer >> (32 - FAST_BITS)) & ((1 << FAST_BITS)-1);
          r = fac[c];
-         if (r) { // fast-AC imagePath
+         if (r) { // fast-AC imageName
             k += (r >> 4) & 15; // run
             s = r & 15; // combined length
             if (s > j->code_bits) return stbi__err("bad huffman code", "Combined length longer than code bits available");
@@ -2361,7 +2361,7 @@ static int stbi__jpeg_decode_block_prog_ac(stbi__jpeg *j, short data[64], stbi__
          k = j->spec_start;
          do {
             int r,s;
-            int rs = stbi__jpeg_huff_decode(j, hac); // @OPTIMIZE see if we can use the fast imagePath here, advance-by-r is so slow, eh
+            int rs = stbi__jpeg_huff_decode(j, hac); // @OPTIMIZE see if we can use the fast imageName here, advance-by-r is so slow, eh
             if (rs < 0) return stbi__err("bad huffman code","Corrupt JPEG");
             s = rs & 15;
             r = rs >> 4;
@@ -2911,9 +2911,9 @@ static void stbi__idct_simd(stbi_uc *out, int out_stride, short data[64])
 #endif // STBI_NEON
 
 #define STBI__MARKER_none  0xff
-// if there's a pending marker from the entropy stream, return that
-// otherwise, fetch from the stream and get a marker. if there's no
-// marker, return 0xff, which is never a valid marker value
+// if there's a pending markerCPU from the entropy stream, return that
+// otherwise, fetch from the stream and get a markerCPU. if there's no
+// markerCPU, return 0xff, which is never a valid markerCPU value
 static stbi_uc stbi__get_marker(stbi__jpeg *j)
 {
    stbi_uc x;
@@ -3098,8 +3098,8 @@ static int stbi__process_marker(stbi__jpeg *z, int m)
 {
    int L;
    switch (m) {
-      case STBI__MARKER_none: // no marker found
-         return stbi__err("expected marker","Corrupt JPEG");
+      case STBI__MARKER_none: // no markerCPU found
+         return stbi__err("expected markerCPU","Corrupt JPEG");
 
       case 0xDD: // DRI - specify restart interval
          if (stbi__get16be(z->s) != 4) return stbi__err("bad DRI len","Corrupt JPEG");
@@ -3194,7 +3194,7 @@ static int stbi__process_marker(stbi__jpeg *z, int m)
       return 1;
    }
 
-   return stbi__err("unknown marker","Corrupt JPEG");
+   return stbi__err("unknown markerCPU","Corrupt JPEG");
 }
 
 // after we see SOS
@@ -3293,7 +3293,7 @@ static int stbi__process_frame_header(stbi__jpeg *z, int scan)
 
    if (scan != STBI__SCAN_load) return 1;
 
-   if (!stbi__mad3sizes_valid(s->img_x, s->img_y, s->img_n, 0)) return stbi__err("too large", "Image too large to decode");
+   if (!stbi__mad3sizes_valid(s->img_x, s->img_y, s->img_n, 0)) return stbi__err("too large", "ImageCPU too large to decode");
 
    for (i=0; i < s->img_n; ++i) {
       if (z->img_comp[i].h > h_max) h_max = z->img_comp[i].h;
@@ -3365,7 +3365,7 @@ static int stbi__decode_jpeg_header(stbi__jpeg *z, int scan)
    int m;
    z->jfif = 0;
    z->app14_color_transform = -1; // valid values are 0,1,2
-   z->marker = STBI__MARKER_none; // initialize cached marker to empty
+   z->marker = STBI__MARKER_none; // initialize cached markerCPU to empty
    m = stbi__get_marker(z);
    if (!stbi__SOI(m)) return stbi__err("no SOI","Corrupt JPEG");
    if (scan == STBI__SCAN_type) return 1;
@@ -3387,20 +3387,20 @@ static int stbi__decode_jpeg_header(stbi__jpeg *z, int scan)
 static int stbi__skip_jpeg_junk_at_end(stbi__jpeg *j)
 {
    // some JPEGs have junk at end, skip over it but if we find what looks
-   // like a valid marker, resume there
+   // like a valid markerCPU, resume there
    while (!stbi__at_eof(j->s)) {
       int x = stbi__get8(j->s);
-      while (x == 255) { // might be a marker
+      while (x == 255) { // might be a markerCPU
          if (stbi__at_eof(j->s)) return STBI__MARKER_none;
          x = stbi__get8(j->s);
          if (x != 0x00 && x != 0xff) {
-            // not a stuffed zero or lead-in to another marker, looks
-            // like an actual marker, return it
+            // not a stuffed zero or lead-in to another markerCPU, looks
+            // like an actual markerCPU, return it
             return x;
          }
          // stuffed zero has x=0 now which ends the loop, meaning we go
          // back to regular scan loop.
-         // repeated 0xff keeps trying to read the next byte of the marker.
+         // repeated 0xff keeps trying to read the next byte of the markerCPU.
       }
    }
    return STBI__MARKER_none;
@@ -3423,7 +3423,7 @@ static int stbi__decode_jpeg_image(stbi__jpeg *j)
          if (!stbi__parse_entropy_coded_data(j)) return 0;
          if (j->marker == STBI__MARKER_none ) {
          j->marker = stbi__skip_jpeg_junk_at_end(j);
-            // if we reach eof without hitting a marker, stbi__get_marker() below will fail and we'll eventually return 0
+            // if we reach eof without hitting a markerCPU, stbi__get_marker() below will fail and we'll eventually return 0
          }
          m = stbi__get_marker(j);
          if (STBI__RESTART(m))
@@ -4778,7 +4778,7 @@ static int stbi__create_png_image_raw(stbi__png *a, stbi_uc *raw, stbi__uint32 r
       for (j=0; j < y; ++j) {
          stbi_uc *cur = a->out + stride*j;
          stbi_uc *in  = a->out + stride*j + x*out_n - img_width_bytes;
-         // unpack 1/2/4-bit into a 8-bit buffer. allows us to keep the common 8-bit imagePath optimal at minimal cost for 1/2/4-bit
+         // unpack 1/2/4-bit into a 8-bit buffer. allows us to keep the common 8-bit imageName optimal at minimal cost for 1/2/4-bit
          // png guarante byte alignment, if width is not multiple of 8/4/2 we'll decode dummy trailing data that will be skipped in the later loop
          stbi_uc scale = (color == 0) ? stbi__depth_scale_table[depth] : 1; // scale grayscale values to 0..255 range
 
@@ -5119,7 +5119,7 @@ static int stbi__parse_png_file(stbi__png *z, int scan, int req_comp)
             if (!s->img_x || !s->img_y) return stbi__err("0-pixel image","Corrupt PNG");
             if (!pal_img_n) {
                s->img_n = (color & 2 ? 3 : 1) + (color & 4 ? 1 : 0);
-               if ((1 << 30) / s->img_x / s->img_n < s->img_y) return stbi__err("too large", "Image too large to decode");
+               if ((1 << 30) / s->img_x / s->img_n < s->img_y) return stbi__err("too large", "ImageCPU too large to decode");
             } else {
                // if paletted, then pal_n is our final components, and
                // img_n is # components to decompress/filter.
@@ -6728,7 +6728,7 @@ static stbi_uc *stbi__process_gif_raster(stbi__context *s, stbi__gif *g)
          stbi__int32 code = bits & codemask;
          bits >>= codesize;
          valid_bits -= codesize;
-         // @OPTIMIZE: is there some way we can accelerate the non-clear imagePath?
+         // @OPTIMIZE: is there some way we can accelerate the non-clear imageName?
          if (code == clear) {  // clear code
             codesize = lzw_cs + 1;
             codemask = (1 << codesize) - 1;
@@ -6841,7 +6841,7 @@ static stbi_uc *stbi__gif_load_next(stbi__context *s, stbi__gif *g, int *comp, i
    for (;;) {
       int tag = stbi__get8(s);
       switch (tag) {
-         case 0x2C: /* Image Descriptor */
+         case 0x2C: /* ImageCPU Descriptor */
          {
             stbi__int32 x, y, w, h;
             stbi_uc *o;
@@ -6851,7 +6851,7 @@ static stbi_uc *stbi__gif_load_next(stbi__context *s, stbi__gif *g, int *comp, i
             w = stbi__get16le(s);
             h = stbi__get16le(s);
             if (((x + w) > (g->w)) || ((y + h) > (g->h)))
-               return stbi__errpuc("bad Image Descriptor", "Corrupt GIF");
+               return stbi__errpuc("bad ImageCPU Descriptor", "Corrupt GIF");
 
             g->line_size = g->w * 4;
             g->start_x = x * 4;
@@ -6981,7 +6981,7 @@ static void *stbi__load_gif_main(stbi__context *s, int **delays, int *x, int *y,
 
       do {
          u = stbi__gif_load_next(s, &g, comp, req_comp, two_back);
-         if (u == (stbi_uc *) s) u = 0;  // end of animated gif marker
+         if (u == (stbi_uc *) s) u = 0;  // end of animated gif markerCPU
 
          if (u) {
             *x = g.w;
@@ -7040,7 +7040,7 @@ static void *stbi__load_gif_main(stbi__context *s, int **delays, int *x, int *y,
       *z = layers;
       return out;
    } else {
-      return stbi__errpuc("not GIF", "Image was not as a gif type.");
+      return stbi__errpuc("not GIF", "ImageCPU was not as a gif type.");
    }
 }
 
@@ -7052,7 +7052,7 @@ static void *stbi__gif_load(stbi__context *s, int *x, int *y, int *comp, int req
    STBI_NOTUSED(ri);
 
    u = stbi__gif_load_next(s, &g, comp, req_comp, 0);
-   if (u == (stbi_uc *) s) u = 0;  // end of animated gif marker
+   if (u == (stbi_uc *) s) u = 0;  // end of animated gif markerCPU
    if (u) {
       *x = g.w;
       *y = g.h;
@@ -7667,7 +7667,7 @@ static int stbi__info_main(stbi__context *s, int *x, int *y, int *comp)
    if (stbi__tga_info(s, x, y, comp))
        return 1;
    #endif
-   return stbi__err("unknown image type", "Image not of any known type, or corrupt");
+   return stbi__err("unknown image type", "ImageCPU not of any known type, or corrupt");
 }
 
 static int stbi__is_16_main(stbi__context *s)
@@ -7831,7 +7831,7 @@ STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user
               fix MSVC-only compiler problem in code changed in 1.42
       1.42  (2014-07-09)
               don't define _CRT_SECURE_NO_WARNINGS (affects user code)
-              fixes to stbi__cleanup_jpeg imagePath
+              fixes to stbi__cleanup_jpeg imageName
               added STBI_ASSERT to avoid requiring assert.h
       1.41  (2014-06-25)
               fix search&replace from 1.36 that messed up comments/error messages
@@ -7851,9 +7851,9 @@ STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user
               if de-iphone isn't set, load iphone images color-swapped instead of returning NULL
       1.35  (2014-05-27)
               various warnings
-              fix broken STBI_SIMD imagePath
+              fix broken STBI_SIMD imageName
               fix bug where stbi_load_from_file no longer left file pointer in correct place
-              fix broken non-easy imagePath for 32-bit BMP (possibly never used)
+              fix broken non-easy imageName for 32-bit BMP (possibly never used)
               TGA optimization by Arseny Kapoulkine
       1.34  (unknown)
               use STBI_NOTUSED in stbi__resample_row_generic(), fix one more leak in tga failure case
@@ -7931,7 +7931,7 @@ STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user
       0.60    fix compiling as c++
       0.59    fix warnings: merge Dave Moore's -Wall fixes
       0.58    fix bug: zlib uncompressed mode len/nlen was wrong endian
-      0.57    fix bug: jpg last huffman symbol before marker was >9 bits but less than 16 available
+      0.57    fix bug: jpg last huffman symbol before markerCPU was >9 bits but less than 16 available
       0.56    fix bug: zlib uncompressed mode len vs. nlen
       0.55    fix bug: restart_interval not initialized to 0
       0.54    allow NULL for 'int *comp'
