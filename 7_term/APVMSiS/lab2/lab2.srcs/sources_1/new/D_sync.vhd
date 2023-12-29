@@ -13,7 +13,7 @@ architecture Behavioral of D_sync is
 begin
     process (C, D)
     begin
-        if (falling_edge(C) or rising_edge(C)) then
+        if (rising_edge(C)) then
             Q <= D;
             nQ <= not D;
         end if;

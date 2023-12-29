@@ -18,10 +18,11 @@ entity SHFT_REG is
 end SHFT_REG;
 
 
- --
- -- arch
- --
-architecture Behavioral of SHFT_REG is
+--
+-- arch
+--
+architecture SomeArch of SHFT_REG is
+    
     
     -- store buffers (redundant for schematic matching)
     signal DC_Q : std_logic_vector(7 downto 0) := "00000000";
@@ -59,7 +60,6 @@ architecture Behavioral of SHFT_REG is
     end component;
     
     begin
-
     ---------------------------------------- Start of arch
     nRCK <= not RCK;
     nSRLOAD <= not SRLOAD;
@@ -98,76 +98,6 @@ architecture Behavioral of SHFT_REG is
     resetAnd(7) <= not DC_Q(7) and not SRLOAD;
     resetOr(7)  <= resetAnd(7) or not SRCLR;
     
-    ---------------------------------------- Start of process 
---    proc: process
---    begin
---        for i in 0 to 7 loop
---            setAnd(i)   <= (DC_Q(i) and nSRLOAD);
---            resetAnd(i) <= not (nDC_Q(i) and nSRLOAD);
---            resetOr(i)  <= (not resetAnd(i) or not SRCLR);
---        end loop;
---    end process;
-    ---------------------------------------- End of the process
-    
-    ---------------------------------------- Generate RS triggers 
---    RS1: RS_sync port map (C  => SRCK, 
---                           S  => setAnd(0),
---                           R  => resetOr(0),
---                           D  => SER,
---                           Q  => RS_Q(0),
---                           nQ => nRS_Q(0));
-    
---    RS2: RS_sync port map (C  => SRCK, 
---                           S  => setAnd(1),
---                           R  => resetOr(1),
---                           D  => RS_Q(0),
---                           Q  => RS_Q(1),
---                           nQ => nRS_Q(1));
-                            
-          
---     RS3: RS_sync port map (C  => SRCK, 
---                            S  => setAnd(2),
---                            R  => resetOr(2),
---                            D  => RS_Q(1),
---                            Q  => RS_Q(2),
---                            nQ => nRS_Q(2));                
-    
---    RS4: RS_sync port map (C  => SRCK, 
---                           S  => setAnd(3),
---                           R  => resetOr(3),
---                           D  => RS_Q(2),
---                           Q  => RS_Q(3),
---                           nQ => nRS_Q(3)); 
-                           
---    RS5: RS_sync port map (C  => SRCK, 
---                           S  => setAnd(4),
---                           R  => resetOr(4),
---                           D  => RS_Q(3),
---                           Q  => RS_Q(4),
---                           nQ => nRS_Q(4)); 
-                           
-                           
---   RS6: RS_sync port map (C  => SRCK, 
---                          S  => setAnd(5),
---                          R  => resetOr(5),
---                          D  => RS_Q(4),
---                          Q  => RS_Q(5),
---                          nQ => nRS_Q(5)); 
-                          
---    RS7: RS_sync port map (C  => SRCK, 
---                           S  => setAnd(6),
---                           R  => resetOr(6),
---                           D  => RS_Q(5),
---                           Q  => RS_Q(6),
---                           nQ => nRS_Q(6)); 
-                           
---    RS8: RS_sync port map (C  => SRCK, 
---                           S  => setAnd(7),
---                           R  => resetOr(7),
---                           D  => RS_Q(6),
---                           Q  => RS_Q(7),
---                           nQ => nRS_Q(7)); 
-    
     Rs_shifter: for i in 0 to 7 generate
         rs_shift_0: if (i = 0) generate
             shifter:    
@@ -205,4 +135,4 @@ architecture Behavioral of SHFT_REG is
     
     REG_OUT <= RS_Q(7);
 
-end Behavioral;
+end SomeArch;

@@ -16,19 +16,17 @@ architecture Behavioral of RS_sync is
 begin
     process (C, S, R, D) is 
     begin
-    -- ???? ?????? ???????? ? R ? S. ????????? (? ?? ??????? ?????? ??? ??????????)
-
-        if (C'event and C = '1') then
-            if (R = '1') then
-                Q <= '0';
-                nQ  <= '1';    
-            elsif (S = '1') then
-                Q   <= '1';
-                nQ  <= '0';
-            else
-                Q <= D;
-                nQ <= not D;
-            end if;
+        if (R = '1') then
+            Q <= '0';
+            nQ  <= '1';    
+        elsif (S = '1') then
+            Q   <= '1';
+            nQ  <= '0';
+    
+        
+        elsif (C'event and C = '1') then
+            Q <= D;
+            nQ <= not D;
         end if;
     end process;
 
