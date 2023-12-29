@@ -34,6 +34,7 @@
 *.app
 *.bin
 
+<<<<<<< HEAD
 # Except labs and src folders
 !src/
 .fleet/
@@ -64,3 +65,14 @@ build*/
 OracleDDM/
 
 
+=======
+# Ignore any folder
+*cmake-build-debug/
+*cmake-build-release/
+.idea/
+.fleet/
+
+# Except labs and src folders
+!src/
+.fleet/
+>>>>>>> main
