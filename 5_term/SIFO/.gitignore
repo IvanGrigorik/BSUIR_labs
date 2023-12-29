@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 462d18914906cd841da43a5a38f62983d0dcaea1
 # .gitignore for Quartus 
 
 # Debugging
@@ -32,39 +28,3 @@ output_files/
 *.pof
 *.sof
 *.txt
-*.html
-<<<<<<< HEAD
-=======
-# .gitignore for Quartus 
-
-# Debugging
-incremental_db/
-db/
-
-# Builders
-.sopc_builder/
-
-# Simulations
-simulation/
-output_files/
-
-# Additional files
-*_dump.txt
-*.qws
-*.rpt
-*.summary
-
-
-# I dont know what it is
-# *.bsf // block schematic file? 
-*.jpg
-*.html
-*.bak
-*.rpt
-*.pin
-*.pof
-*.sof
-*.txt
->>>>>>> 6_term
-=======
->>>>>>> 462d18914906cd841da43a5a38f62983d0dcaea1
