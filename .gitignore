@@ -45,9 +45,12 @@ synth_*/
 *.runs/
 *cache*/
 *.hw/
-sim_*/
 *sim/
 *.ip_user*/
+bd/
+constrs_1/*
+*.wcfg
+*.log
 
 lab1.runs/
 
