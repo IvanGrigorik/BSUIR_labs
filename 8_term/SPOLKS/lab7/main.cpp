@@ -58,7 +58,6 @@ constexpr double PerformMatrixMultiplication(const Matrix<Size>& A, const Matrix
     // Measure the total time and print the result only in process 0
     if (rank == 0) {
         totalTime = MPI_Wtime() - start;
-        std::cout << "Result:\n";
         // C.Print();
     }
 
