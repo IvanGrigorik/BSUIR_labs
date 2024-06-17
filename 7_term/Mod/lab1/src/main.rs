@@ -392,7 +392,7 @@ impl eframe::App for MyApp {
                             ui.label(format!("a: {}", self.a_buffer));
                             ui.end_row();
 
-                            let x1_label = ui.label("X1: ");
+                            let x1_label: egui::Response = ui.label("X1: ");
                             MyApp::u64_edit_field(ui, &mut self.x1_buffer).labelled_by(x1_label.id);
                             ui.label(format!("X1: {}", self.x1_buffer));
                             ui.end_row();
