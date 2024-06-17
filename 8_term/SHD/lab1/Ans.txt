@@ -1,0 +1,49 @@
+"Исследование меню System"
+Текущая версия VNXe 	VNXe3200 						(расположено в System Health -> System Info -> Model)
+Версия ПО: 		3.0.0.2585212						(расположено в System Health -> System Info -> Software Version)
+Общий объём памяти: 	10.3 TB							(расположено в System Capacity -> Current -> System Utilization -> Total Space)
+Всего памяти занято:	1.0 TB							(расположено в System Capacity -> Current -> System Utilization -> Used Space)
+Памяти занято файловыми системами: 			307.1 GB		(расположено в System Capacity -> Current -> На диаграмме)
+Типы системных оповещений: 				Warnings и Infos	(расположено в System Alerts -> Status (Колонка с восклицательным знаком))
+Какой тип накопителей использует DPE Disk 21:		Flash			(расположено в System Health -> System Components -> DPE -> DPE Disk 21)
+Перечислите доступные порты модуля SP A I/O Module 0:	Fiber Channel Port 0..3 (расположено в System Health -> System Components -> DPE -> SP A -> SP A I/O Module 0)
+
+
+
+
+
+"Исследование меню Storage"
+Представленные файловые системы: 
+Имя:		Протокол:	Размер:
+FileSystem00	CIFS		2.0 TB
+FileSystem01	NFS		1.0 TB
+
+Предствленные LUN:
+Имя:		Протокол:	Размер:
+LUN00		iSCSI, File	250.0 GB
+LUNGroup-FC	iSCSI, FC, File	300.0 GB
+LUNGroup-iSCSI	iSCSI, File	2.0 GB
+
+Какой тип пула устройств хранения данных (Storage Pool) доступен?	MultiTier
+Поддерживает ли пул технологию Fast VP?					Да
+Сколько запасных дисков доступно в этом пуле?				10
+
+
+
+
+
+"Исследование меню Hosts" 
+Какие варианты доступны в категории Hosts?		Hosts, VMware Hosts, Initiators
+Доступные хосты: 
+-----------------------------------------------------------------------------------
+Имя:				Протокол:			ОС:
+10.244.214.222			FC, iSCSI			VMware ESXi 5.1.0
+10.244.238.55			iSCSI				VMware ESXi 5.0.0
+Win7				iSCSI				Windows 7
+Windows 2k8			iSCSI				Windows Server 2008
+-----------------------------------------------------------------------------------
+
+Перечислите инициаторов, не связанных с хостом.
+20:00:00:90:FA:14:3F:10:10:00:00:90:FA:14:3F:10
+20:00:00:90:FA:14:3F:11:10:00:00:90:FA:14:3F:11
+
