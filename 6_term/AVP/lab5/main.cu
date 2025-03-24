@@ -292,8 +292,12 @@ void rotateLine(const std::string &imagePath) {
     interpolated.writeImage();
 }
 
-int main() {
-    auto imagePath = "../images/saoriLine.png";
+int main(int argc, char* argv[]) {
+    if (argc < 1) {
+        std::cout << "Usage: ./lab5 [PATH]\n";
+        exit(1);
+    }
+    auto imagePath = argv[1];
 
     // GPU part
     cudaEvent_t start_event, stop_event;
@@ -310,6 +314,7 @@ int main() {
 
     float timeGPU = 0;
     cudaEventElapsedTime(&timeGPU, start_event, stop_event);
+    cudaDeviceSynchronize();
     cout << "GPU elapsed time: " << timeGPU << " ms" << endl << endl;
 
     // CPU part
